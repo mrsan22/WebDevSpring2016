@@ -9,7 +9,7 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 //app.get('/', function (req, res){
 //   //res.send("Hi..I am Sanjiv, This is the landing page for Web Development 2016!. Append the URL with '/hello' to see the " +
 //   //    " 'Hello World' message.")
-//    res.sendfile('index.html');
+//    res.sendfile('home.html');
 //});
 
 app.get('/hello', function(req, res){
