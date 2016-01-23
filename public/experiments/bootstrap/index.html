@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- Bootstrap CSS local fallback -->
+    <script>
+        $(document).ready(function() {
+            var bodyColor = $('body').css('color');
+            if(bodyColor != 'rgb(51, 51, 51)') {
+                $("head").prepend('<link rel="stylesheet" href="css/bootstrap.min.css">');}});
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Bootstrap</title>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Welcome</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">About Me</a></li>
+                <li><a href="#">Work</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid bg-1 text-center">
+    <h3>Sanjiv Kumar</h3>
+    <img src="images/me.jpeg" class="img-circle img-responsive" style="display:inline" alt="Myself" width="250" height="250">
+    <h3>Computer Science Graduate Student | Northeastern University</h3>
+</div>
+
+<div class="container-fluid bg-2 text-center">
+    <h3>About Me</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+</div>
+
+<div class="container-fluid bg-3 text-center">
+    <h3>My Work</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <!--<a href="#" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-search"></span>Search</a>-->
+    <div class="row">
+        <div class="col-sm-4">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna</p>
+            <img src="images/me.jpeg" class="img-responsive" style="display:inline" alt="Myself" width="250" height="250">
+        </div>
+        <div class="col-sm-4">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna</p>
+            <img src="images/me.jpeg" class="img-responsive" style="display:inline" alt="Myself" width="250" height="250">
+        </div>
+        <div class="col-sm-4">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna</p>
+            <img src="images/me.jpeg" class="img-responsive" style="display:inline" alt="Myself" width="250" height="250">
+        </div>
+    </div>
+</div>
+
+<footer class="container-fluid bg-4 text-center">
+    <p>Sanjiv Kumar 2016 | All Rights Reserved</p>
+</footer>
+
+<!--JavaScript files-->
+<!--jQuery CDN-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- jQuery local fallback -->
+<script>window.jQuery || document.write('<script src="js/jquery-2.1.4.min.js"><\/script>')</script>
+<!--bootstrap js CDN-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS local fallback -->
+<script>if(typeof($.fn.modal) === 'undefined') {document.write('<script src="js/bootstrap.min.js"><\/script>')}</script>
+<script src="js/script.js"></script>
+</body>
+</html>
