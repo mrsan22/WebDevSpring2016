@@ -123,3 +123,7 @@ body {
 .edit-icon-lt{
     padding-right: 8px;
 }
+
+.form-fields{
+    margin : 20px;
+}
