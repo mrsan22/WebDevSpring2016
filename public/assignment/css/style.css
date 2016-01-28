@@ -125,10 +125,41 @@ body {
     font-size: 20px;
 }
 
+.glyphicon.glyphicon-align-justify{
+    font-size: 20px;
+}
+
 .edit-icon-lt {
     padding-right: 8px;
 }
 
 .form-fields {
     margin: 20px;
+}
+
+.chkbox1{
+    /*padding-left: 15px;*/
+    margin-top:0px;
+}
+
+.rad1{
+    margin-top: 0px;
+}
+
+.gly1{
+    margin-top: -20px;
+}
+
+.gly2{
+    margin-top: -45px;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    /*width: 90%;*/
+    /*float: left;*/
+    /* Set the hr color */
+    color: #333; /* old IE */
+    background-color: #333; /* Modern Browsers */
 }
