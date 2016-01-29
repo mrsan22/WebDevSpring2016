@@ -111,6 +111,7 @@ body {
 
 .glyphicon.glyphicon-plus {
     font-size: 20px;
+    color: green;
 }
 
 .glyphicon.glyphicon-ok {
@@ -119,10 +120,12 @@ body {
 
 .glyphicon.glyphicon-remove {
     font-size: 20px;
+    color: red;
 }
 
 .glyphicon.glyphicon-pencil {
     font-size: 20px;
+    color: #5e5e5e;
 }
 
 .glyphicon.glyphicon-align-justify{
