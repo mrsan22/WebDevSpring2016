@@ -1,3 +1,7 @@
+.p-left{
+    padding-left: 0px;
+}
+
 .glyphicon.glyphicon-plus {
     font-size: 20px;
     color: green;
@@ -42,13 +46,13 @@
     margin-top: 0px;
 }
 
-.gly1{
-    margin-top: -20px;
-}
+/*.gly1{*/
+    /*margin-top: -20px;*/
+/*}*/
 
-.gly2{
-    margin-top: -45px;
-}
+/*.gly2{*/
+    /*margin-top: -45px;*/
+/*}*/
 
 hr {
     border: none;
