@@ -19,6 +19,10 @@
     padding-bottom: 70px;
 }
 
+.pad-top{
+    padding-top: 10px;
+}
+
 .navbar {
     padding-top: 15px;
     padding-bottom: 15px;
