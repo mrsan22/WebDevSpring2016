@@ -15,8 +15,8 @@
     color: #5cb85c;
 }
 
-.pad-left{
-    padding-left: 22px;
+.pad-right{
+    padding-right: 28px;
 }
 
 .glyphicon.glyphicon-ok {
@@ -55,14 +55,9 @@
     margin-top: 0px;
 }
 
-/*.gly1{*/
-    /*margin-top: -20px;*/
-/*}*/
-
-/*.gly2{*/
-    /*margin-top: -45px;*/
-/*}*/
-
+.gly_center{
+    text-align: center;
+}
 hr {
     border: none;
     height: 1px;
