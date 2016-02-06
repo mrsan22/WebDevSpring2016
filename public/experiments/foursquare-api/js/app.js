@@ -7,6 +7,7 @@
   $(init);
 
     function init(){
-
+        alert("hello from foursquare api")
+        
     }
 })();
