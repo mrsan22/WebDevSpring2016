@@ -22,10 +22,10 @@
     <h1> Demo Search Yelp API</h1>
     <div class="row">
         <div class="col-xs-6">
-            <input id="restNametxt" class="form-control" placeholder="Dosa Factory, Qdoba...(optional)" value="Sushi">
+            <input id="restNametxt" class="form-control" placeholder="Dosa Factory, Qdoba...(optional)">
         </div>
         <div class="col-xs-6">
-            <input id="locationtxt" class="form-control" placeholder="Boston" value="Boston">
+            <input id="locationtxt" class="form-control" placeholder="Boston">
         </div>
     </div>
     <div class="row">
@@ -33,6 +33,23 @@
             <button id="searchRestbtn" class="btn btn-primary btn-block">Search</button>
         </div>
     </div>
+    <div class="row">
+        <div class="col-xs-12 top-margin">
+            <table id="searchResults" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Restaurant ID</th>
+                        <th>Name</th>
+                        <th>Ratings</th>
+                        <th>Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>
 <!-- FOOTER SECTION - Before closing </body> tag -->
 

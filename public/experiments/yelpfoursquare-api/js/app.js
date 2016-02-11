@@ -7,6 +7,7 @@
   var $restNametxt;
   var $locationtxt;
   var $searchRestbtn;
+  var $tbody;
   //var loc, food_item, lim;
 
   ////Foursquare API details
@@ -22,6 +23,7 @@
     $restNametxt = $("#restNametxt");
     $locationtxt = $("#locationtxt");
     $searchRestbtn = $("#searchRestbtn");
+    $tbody = $("#searchResults tbody");
 
     $searchRestbtn.click(searchYelpApi);
 
@@ -37,7 +39,7 @@
       parameters = [];
       parameters.push(['term', terms]);
       parameters.push(['location', near]);
-      parameters.push(['limit', 2]);
+      parameters.push(['limit', 10]);
       parameters.push(['category_filter', 'restaurants']);
       parameters.push(['callback', 'cb']);
       parameters.push(['oauth_consumer_key', auth.consumerKey]);
@@ -65,8 +67,67 @@
 
     }
     function renderRestList(response, textStats, XMLHttpRequest){
+      $tbody.empty();
       console.log(response);
-      console.log(textStats); //prints success
+      //console.log(textStats); //prints success
+
+      var totalResult = response.total;
+      var foodPlaces = response.businesses
+
+      for (var r=0; r<foodPlaces.length; r++){
+        var rest = foodPlaces[r];
+        //console.log(rest)
+
+        var rest_id = rest.id;
+        var rest_name = rest.name;
+        var image = rest.image_url;
+        var rating_img = rest.rating_img_url;
+
+        var $tr = $("<tr>");
+        var $td = $("<td>");
+        var $img = $("<img>")
+            .attr("src", image)
+            .attr("id", rest_id)
+            .click(restaurantDetails);
+
+        var $img_rating = $("<img>").attr("src", rating_img)
+
+        $td.append(rest_id);
+        $tr.append($td);
+
+        var $td = $("<td>");
+        $td.append(rest_name)
+            .attr("id", rest_id)
+            .click(restaurantDetails)
+        $tr.append($td);
+
+        var $td = $("<td>");
+        $td.append($img_rating);
+        $tr.append($td);
+
+        var $td = $("<td>");
+        $td.append($img);
+        $tr.append($td);
+
+        $tbody.append($tr)
+
+
+      }
+
+    }
+
+    function restaurantDetails(event){
+      //alert("Restaurant Details")
+      //console.log(event);
+
+      var img = $(event.currentTarget);
+      var restid = img.attr("id")
+      //alert(restid)
+
+      //Write Bussiness Yelp Ajax call here using restid
+
+
+
     }
   }
   //    //alert("hello from foursquare api")
