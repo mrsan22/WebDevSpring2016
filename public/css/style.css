@@ -426,9 +426,9 @@ header {
 
 }
 
-.navbar .nav > li > a:focus,
+/*.navbar .nav > li > a:focus,*/
 .navbar .nav > li > a:hover {
-    background: #080808 !important;
+    background: #414141 !important;
     color: #fff;
 }
 
