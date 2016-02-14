@@ -1,0 +1,14 @@
+<html lang="en" ng-app="HelloWorldApp">
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script src="js/app.js"></script>
+
+<!--When you assign ng-controller, the div or any HTML becomes view of MVC and is controlled by that controller-->
+<!--The controller will be responsible for processing that data and providing it and notifying the view, then view will
+render the data. This controller has this div as its scope and it cannot access anything outside this scope.-->
+
+    <div class="container" ng-controller="HelloWorldController">
+        {{hello}}
+    </div>
+
+</html>
