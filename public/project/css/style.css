@@ -1,0 +1,14 @@
+@media (min-width: 1200px) {
+    .col-lg-12 {
+        width: 90%;
+    }
+}
+
+#fpswd{
+    float: right;
+    margin: 4px 0 10px;
+}
+
+.top-margin{
+    margin-top: -22px;
+}
