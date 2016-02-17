@@ -17,22 +17,56 @@
     <title>Search Results</title>
 </head>
 <body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header nav-margin">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand margin-set" href="home.html">Eat'n'Review</a>
+        </div>
+                <div class="hidden-sm hidden-xs">
+                        <div class="col-sm-3 col-sm-offset-2">
+                        <input id="restNametxt" class="form-control navsearch-margin margin-lft-searchbox" placeholder="Dosa Factory, Qdoba...(optional)">
+                    </div>
+                    <div class="col-sm-3 margin-lft-searchbox">
+                        <div class="input-group">
+                            <input type="text" class="form-control navsearch-margin" placeholder="Boston" name="srch-term" id="locationtxt">
+                            <div class="input-group-btn">
+                                <button id="searchRestbtn" class="btn btn-primary navsearch-margin" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right margin-set1">
+                <li><a href="register.html" class="margin-set2">Sign Up</a></li>
+                <li><a href="login.html" class="margin-set2">Login</a></li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
 
 <div class="container">
-    <h1>Search Results</h1>
-    <div class="row">
-        <div class="col-xs-6">
-            <input id="restNametxt" class="form-control" placeholder="Dosa Factory, Qdoba...(optional)">
-        </div>
-        <div class="col-xs-6">
-            <input id="locationtxt" class="form-control" placeholder="Boston">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 top-margin">
-            <button id="searchRestbtn" class="btn btn-primary btn-block">Search</button>
-        </div>
-    </div>
+    <p class="page-header lead top-spacing">Search Results</p>
+    <!--<div class="row">-->
+        <!--<div class="col-xs-6">-->
+            <!--<input id="restNametxt" class="form-control" placeholder="Dosa Factory, Qdoba...(optional)">-->
+        <!--</div>-->
+        <!--<div class="col-xs-6">-->
+            <!--<input id="locationtxt" class="form-control" placeholder="Boston">-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+        <!--<div class="col-xs-12 top-margin">-->
+            <!--<button id="searchRestbtn" class="btn btn-primary btn-block">Search</button>-->
+        <!--</div>-->
+    <!--</div>-->
     <div class="row">
         <div class="col-xs-12 top-margin">
             <table id="searchResults" class="table table-striped">

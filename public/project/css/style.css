@@ -111,6 +111,19 @@ footer {
 .txtonimg{
     z-index: 1;
 }
+
+.top-spacing{
+    margin-top : 50px;
+    padding-top : 10px;
+}
+
+.navsearch-margin{
+    margin-top: 8px;
+}
+
+.margin-lft-searchbox{
+    margin-left: -23px;
+}
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
