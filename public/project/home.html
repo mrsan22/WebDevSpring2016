@@ -41,17 +41,20 @@
     <!-- Carousel================================================== -->
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6">
-            <div class="row col-xs-12 searchbox width-colxs12 widthxsscreen">
-                <div class="col-sm-5 col-md-5">
-                    <input type="text" class="form-control margin-searchbox" placeholder="Burger...Sushi(optional)">
-                </div>
-                <div class="col-sm-4 col-md-4">
-                    <input type="text" class="form-control margin-searchbox" placeholder="Boston">
-                </div>
-                <div class="col-sm-3 col-md-3">
-                    <button type="button" class="btn btn-primary btn-block">Find Food</button>
-                </div>
+            <form action="searchdetails.html" method="GET">
+                <div class="row col-xs-12 searchbox width-colxs12 widthxsscreen">
+                    <div class="col-sm-5 col-md-5">
+                        <input id="restNametxt" type="text" class="form-control margin-searchbox" name="restName" placeholder="Burger...Sushi(optional)">
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <input id="locationtxt" type="text" class="form-control margin-searchbox" name="location" placeholder="Boston">
+                    </div>
+                    <div class="col-sm-3 col-md-3">
+                        <button id="searchRestbtn" type="submit" class="btn btn-primary btn-block">Find Food</button>
+                    </div>
+
             </div>
+            </form>
         </div>
 
         <!-- Indicators -->
@@ -213,6 +216,10 @@
 
     <!-- Minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src = "../../js/script.js"></script>
+    <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+    <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+    <script src = "js/oauth.js"></script>
+    <script src = "js/homepage_controller.js"></script>
+    <script src = "js/script.js"></script>
 </body>
 </html>
