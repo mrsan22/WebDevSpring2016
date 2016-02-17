@@ -18,7 +18,7 @@
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
-        <div class="navbar-header">
+        <div class="navbar-header nav-margin">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                     aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
@@ -26,29 +26,193 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="home.html">Eat'n'Review</a>
+            <a class="navbar-brand margin-set" href="home.html">Eat'n'Review</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="register.html">Sign Up</a></li>
-                <li><a href="login.html">Login</a></li>
+            <ul class="nav navbar-nav navbar-right margin-set1">
+                <li><a href="register.html" class="margin-set2">Sign Up</a></li>
+                <li><a href="login.html" class="margin-set2">Login</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
 <div class="container-fluid">
+    <!-- Carousel================================================== -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6">
+            <div class="row col-xs-12 searchbox width-colxs12 widthxsscreen">
+                <div class="col-sm-5 col-md-5">
+                    <input type="text" class="form-control margin-searchbox" placeholder="Burger...Sushi(optional)">
+                </div>
+                <div class="col-sm-4 col-md-4">
+                    <input type="text" class="form-control margin-searchbox" placeholder="Boston">
+                </div>
+                <div class="col-sm-3 col-md-3">
+                    <button type="button" class="btn btn-primary btn-block">Find Food</button>
+                </div>
+            </div>
+        </div>
 
-</div>
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="images/test.jpg" alt="">
+                <div class="container">
+                    <div class="carousel-caption">
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="http://lorempixel.com/1500/800/abstract/1">
+                <div class="container">
+                    <div class="carousel-caption">
+
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="http://lorempixel.com/1500/800/abstract/2">
+                <div class="container">
+                    <div class="carousel-caption">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="carousel-caption">See favorite food place in your neighborhood</h3>
+    </div>
+    <!-- /.carousel -->
+
+    <div class="row">
+
+        <div class="container">
+                <div class="col-lg-12">
+                <h3 class="page-header">Browse by popular cuisine</h3>
+            </div>
+
+            <div class="col-sm-3 col-xs-6 img-hover">
+                <a href="#">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                    <div class="carousel-caption">
+                        <h4>Thai</h4>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6 img-hover">
+                <a href="#">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                    <div class="carousel-caption">
+                        <h4>Chinese</h4>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6 img-hover">
+                <a href="#">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                    <div class="carousel-caption">
+                        <h4>Mexican</h4>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6 img-hover">
+                <a href="#">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                    <div class="carousel-caption">
+                        <h4>Indian</h4>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.row -->
 
 
-<!-- FOOTER SECTION - Before closing </body> tag -->
 
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <div class="row">
 
-<!-- Minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src = "../../js/script.js"></script>
+        <div class="container">
+                <div class="col-lg-12 img-hover">
+                <h3 class="page-header">Browse by famous location</h3>
+            </div>
+
+            <div class="col-sm-3 col-xs-6 img-hover">
+                <a href="#">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                    <div class="carousel-caption">
+                        <h4>San Fransisco</h4>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6 img-hover">
+                <a href="#">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                    <div class="carousel-caption">
+                        <h4>New York</h4>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6 img-hover">
+                <a href="#">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                    <div class="carousel-caption">
+                        <h4>Las Angeles</h4>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6 img-hover">
+                <a href="#">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                    <div class="carousel-caption">
+                        <h4>Chicago</h4>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+
+
+
+    <!-- FOOTER SECTION - Before closing </body> tag -->
+    <!--<div class="container">-->
+
+    <!--&lt;!&ndash; FOOTER &ndash;&gt;-->
+    <!--<footer>-->
+    <!--<p class="pull-right"><a href="#">Back to top</a></p>-->
+    <!--<p>This Bootstrap layout is compliments of Bootply. · <a href="http://www.bootply.com/108847">Edit on Bootply.com</a></p>-->
+    <!--</footer>-->
+
+    <!--</div>&lt;!&ndash; /.container &ndash;&gt;-->
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <p class="navbar-text pull-left">© 2016 | Sanjiv Kumar
+                <a href="" target="_blank" >Some Link</a>
+            </p>
+
+            <a href="#" class="navbar-btn btn-danger btn pull-right">
+                <span class="glyphicon glyphicon-star"></span>Eat'n'Review</a>
+        </div>
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src = "../../js/script.js"></script>
 </body>
 </html>
