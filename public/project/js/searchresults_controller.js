@@ -39,26 +39,26 @@
         var restName = getUrlVars()["restName"];
         var location = getUrlVars()["location"];
 
-        //alert($restNametxt.val());
-        //alert($locationtxt.val());
 
-        if ($restNametxt.val() != "" && $locationtxt.val() != ""){
-            var terms = $restNametxt.val();
-            var near = $locationtxt.val();
-            alert("from search page")
+
+        if ( restName == "" && location == ""){
+            $searchRestbtn.click(searchYelpApi);
         }
         else{
             var terms = restName;
             var near = location;
             searchYelpApi();
             //alert("from home page")
-        }
+        };
 
-        //$searchRestbtn.click(searchYelpApi);
 
         function searchYelpApi() {
-            //alert($restNametxt.val());
-            //alert($locationtxt.val())
+            if ( restName == "" && location == ""){
+                terms = $restNametxt.val();
+                near = $locationtxt.val();
+            }
+            alert(terms);
+            alert(near);
             var limit = 2;
             var category_filter = "restaurants";
             var accessor = {
