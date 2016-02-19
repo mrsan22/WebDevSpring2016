@@ -1,0 +1,21 @@
+<h2>Search</h2>
+
+<!--<input  ng-model="title"-->
+        <!--class="form-control"/>-->
+<!--<button ng-click="search(title)"-->
+        <!--class="btn btn-primary btn-block">-->
+    <!--Search-->
+<!--</button>-->
+<div class="row">
+    <div class="col-xs-6">
+        <input ng-model="restname" class="form-control" placeholder="Dosa Factory, Qdoba...(optional)"/>
+    </div>
+    <div class="col-xs-6">
+        <input ng-model="location" class="form-control" placeholder="Boston"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <button ng-click="search(restname, location)" class="btn btn-primary btn-block">Search</button>
+    </div>
+</div>
