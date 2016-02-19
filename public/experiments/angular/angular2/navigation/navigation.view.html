@@ -1,0 +1,10 @@
+<nav ng-controller="NavController">
+    <ul class="nav nav-tabs">
+        <li ng-class="{'active': $location.url() == '/home'}">
+            <a href="#/home">Home</a></li>
+        <li ng-class="{'active': $location.url() == '/courselist'}">
+            <a href="#/courselist">Course List</a></li>
+        <li ng-class="{'active': $location.url() == '/courseoverview'}">
+            <a href="#/courseoverview">Course Overview</a></li>
+    </ul>
+</nav>

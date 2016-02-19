@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="angularApp">
+<head>
+    <meta charset="UTF-8">
+    <!-- IE Edge Meta Tag -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Viewport : This is for the display on smaller devices such as mobile, tab etc.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- Minified CSS through CDN-->
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/config.js"></script>
+    <script src="navigation/navigation.controller.js"></script>
+    <script src="home/home_controller.js"></script>
+    <script src="courseList/courselist_controller.js"></script>
+    <script src="courseOverview/courseoverview_controller.js"></script>
+
+
+    <title>Angular Learning</title>
+</head>
+<body>
+    <div class="container">
+        <h3>Angular App</h3>
+
+        <div ng-include = "'navigation/navigation.view.html'"></div>
+        <!--<div ng-include = "'home/home.view.html'"></div>-->
+        <!--<div ng-include = "'courseList/courseList.view.html'"></div>-->
+        <!--<div ng-include = "'courseOverview/courseoverview.view.html'"></div>-->
+
+        <div ng-view></div>
+
+    </div>
+</body>
+</html>

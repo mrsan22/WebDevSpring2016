@@ -1,25 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="FormBuilderApp">
 <head>
     <meta charset="UTF-8">
     <!-- IE Edge Meta Tag -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Viewport : This is for the display on smaller devices such as mobile, tab etc.-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- Minified CSS through CDN-->
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <link rel = "stylesheet" href = "css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <script src="views/main/main.controller.js"></script>
+    <script src="views/header/header.controller.js"></script>
 
-    <!-- Optional Theme
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    -->
-    <title>Web Development CS5610 Spring 2016</title>
+
+    <title> Form Builder App</title>
 </head>
-<body>
+<body ng-controller="MainController">
+<div class="container-fluid">
+    <div ng-include = "'views/header/header.view.html'"></div>
+    <div ng-view></div>
 
-<h3>Experiments</h3>
-
+</div>
 <!-- FOOTER SECTION - Before closing </body> tag -->
 
 <!-- jQuery -->
@@ -27,6 +34,5 @@
 
 <!-- Minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src = "js/script.js"></script>
 </body>
 </html>

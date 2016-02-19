@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="HeaderController">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -8,22 +8,22 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="../home/home.view.html">Form Maker</a>
+            <a class="navbar-brand" href="#/home">Form Maker</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <!--<li><a href="register.view.html">Register</a></li>-->
-                <!--<li><a href="login.view.html">Login</a></li>-->
+                <li ng-class="{'active': $location.url() == '/register'}"><a href="#/register">Register</a></li>
+                <li ng-class="{'active': $location.url() == '/login'}"><a href="#/login">Login</a></li>
                 <li><a href="#">Username</a></li>
                 <li><a href="#">Logout</a></li>
-                <li class="visible-xs"><a href="../home/home.view.html">Home <span class="sr-only">(current)</span></a></li>
-                <li class="visible-xs"><a href="../users/profile.view.html">profile</a></li>
-                <li class="active visible-xs"><a href="../admin/admin.view.html">Admin</a></li>
-                <li class="visible-xs"><a href="../forms/forms.view.html">Forms</a></li>
+                <li class="visible-xs" ng-class="{'active': $location.url() == '/home'}">
+                    <a href="#/home">Home <span class="sr-only">(current)</span></a></li>
+                <li class="visible-xs" ng-class="{'active': $location.url() == '/profile'}">
+                    <a href="#/profile">profile</a></li>
+                <li class="visible-xs" ng-class="{'active': $location.url() == '/admin'}">
+                    <a href="#/admin">Admin</a></li>
+                <!--<li class="visible-xs"><a href="../forms/forms.view.html">Forms</a></li>-->
             </ul>
-            <!--<form class="navbar-form navbar-right">-->
-            <!--<input type="text" class="form-control" placeholder="Search...">-->
-            <!--</form>-->
         </div>
     </div>
 </nav>
