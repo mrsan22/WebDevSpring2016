@@ -17,6 +17,7 @@
     <script src="config.js"></script>
     <script src="views/main/main.controller.js"></script>
     <script src="views/header/header.controller.js"></script>
+    <script src="views/sidebar/sidebar.controller.js"></script>
 
 
     <title> Form Builder App</title>
@@ -24,8 +25,8 @@
 <body ng-controller="MainController">
 <div class="container-fluid">
     <div ng-include = "'views/header/header.view.html'"></div>
+    <div ng-include = "'views/sidebar/sidebar.view.html'"></div>
     <div ng-view></div>
-
 </div>
 <!-- FOOTER SECTION - Before closing </body> tag -->
 
