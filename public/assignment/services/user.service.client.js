@@ -36,6 +36,7 @@
                 if(users[each].username == username && users[each].password == password){
                     //console.log(users[each]);
                     callback(users[each]);
+                    return;
                 }
                 else{
                     callback(null);
