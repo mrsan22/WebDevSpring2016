@@ -70,9 +70,10 @@
             for (each in users){
                 if (users[each]._id == userId){
                     users[each] = user;
+                    callback(users[each]);
                 }
             }
-            callback(users[each]);
+
         }
 
 
