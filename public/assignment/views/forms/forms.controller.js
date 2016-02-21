@@ -14,7 +14,6 @@
                 userId,
                 function(form){
                     $scope.forms = form;
-                    console.log($scope.forms);
                 }
             );
         }
