@@ -50,9 +50,13 @@
             for(each in forms){
                 if(forms[each]._id == formId){
                     forms.splice(each, 1);
+                    console.log(forms);
+                    callback(forms);
+                    return;
                 }
             }
-            callback(forms);
+
+
         }
 
         function updateFormById(formId, newForm, callback){

@@ -73,7 +73,12 @@
             FormService.deleteFormById(
                 $scope.forms[formIndex]._id,
                 function(forms){
-                    $scope.forms = forms;
+                    FormService.findAllFormsForUser(
+                        userId,
+                        function(form){
+                            $scope.forms = form;
+                        }
+                    )
                 }
             )
         }
