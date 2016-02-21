@@ -4,16 +4,20 @@
         .module("FormBuilderApp")
         .controller("FormController", FormController);
 
+
     function FormController($scope, $rootScope, FormService){
-        var userId;
-        userId = $rootScope.user._id;
-        FormService.findAllFormsForUser(
-            userId,
-            function(form){
-                $scope.forms = form;
-                console.log($scope.forms);
-            }
-        );
+        if($rootScope.user != undefined){
+            var userId;
+            userId = $rootScope.user._id;
+
+            FormService.findAllFormsForUser(
+                userId,
+                function(form){
+                    $scope.forms = form;
+                    console.log($scope.forms);
+                }
+            );
+        }
 
         //Event handler declaration
         $scope.addForm = addForm;
