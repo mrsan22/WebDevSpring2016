@@ -26,6 +26,9 @@
 
         //Implementation of event handler
         function addForm(formObj){
+            if (!formObj || !formObj.title){
+                return;
+            }
             FormService.createFormForUser(
                 userId,
                 formObj,
