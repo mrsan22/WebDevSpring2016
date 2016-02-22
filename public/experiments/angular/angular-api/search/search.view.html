@@ -1,11 +1,4 @@
 <h2>Search</h2>
-
-<!--<input  ng-model="title"-->
-        <!--class="form-control"/>-->
-<!--<button ng-click="search(title)"-->
-        <!--class="btn btn-primary btn-block">-->
-    <!--Search-->
-<!--</button>-->
 <div class="row">
     <div class="col-xs-6">
         <input ng-model="restname" class="form-control" placeholder="Dosa Factory, Qdoba...(optional)"/>
@@ -18,4 +11,29 @@
     <div class="col-xs-12">
         <button ng-click="search(restname, location)" class="btn btn-primary btn-block">Search</button>
     </div>
+</div>
+
+<h3>Search Results</h3>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Restaurant ID</th>
+                <th>Name</th>
+                <th>Ratings</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="rest in data.businesses">
+                <td>{{rest.id}}</td>
+                <td>
+                    <a href="#/detail/{{rest.id}}">{{rest.name}}</a>
+                </td>
+                <td><img ng-src="{{rest.rating_img_url}}"/></td>
+                <td><img ng-src="{{rest.image_url}}"/></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
