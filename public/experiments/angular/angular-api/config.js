@@ -12,10 +12,14 @@
                 templateUrl: "search/search.view.html",
                 controller: "SearchController"
             })
-            //.when("/search:term=restname&location=location", {
-            //    templateUrl: "search/search.view.html",
-            //    controller: "SearchController"
-            //})
+            .when("/search/restname=:restname&location=:location", {
+                templateUrl: "search/search.view.html",
+                controller: "SearchController"
+            })
+            .when("/search/location=:location", {
+                templateUrl: "search/search.view.html",
+                controller: "SearchController"
+            })
             //.when("/search/:title", {
             //    templateUrl: "search/search.view.html",
             //    controller: "SearchController"
