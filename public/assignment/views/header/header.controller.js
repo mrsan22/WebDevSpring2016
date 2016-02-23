@@ -5,6 +5,13 @@
         .controller("HeaderController", HeaderController);
 
     function HeaderController($scope, $location,$rootScope){
-        //$scope.location = $location;
+
+        $scope.logOut = logOut;
+
+        function logOut(){
+            delete $rootScope.user;
+            $location.url('/home')
+
+        }
     }
 })();

@@ -13,7 +13,6 @@
                 user.password,
                 function(user){
                     $rootScope.user = user;
-                    console.log($rootScope.user);
                     $location.url('/profile');
                 }
             )

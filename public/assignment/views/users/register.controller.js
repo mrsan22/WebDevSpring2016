@@ -15,7 +15,6 @@
                 userObj,
                 // user object comes from the user services as a callback response.
                 function(user){
-                    //console.log(user);
                     $rootScope.user = user;
                     $location.url('/profile');
 
