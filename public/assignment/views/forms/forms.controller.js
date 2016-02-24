@@ -49,7 +49,7 @@
         }
         var selectedFormIndex;
         function updateForm(formObj){
-            if(!formObj.title){
+            if(!formObj || !formObj.title){
                 return;
             }
             FormService.updateFormById(

@@ -20,7 +20,7 @@
 
         // Declaration of Interface
         var userServiceApi = {
-            findUserByUsernameAndPassword : findUserByUsernameAndPassword,
+            findUserByCredentials : findUserByCredentials,
             findAllUsers : findAllUsers,
             createUser : createUser,
             deleteUserById : deleteUserById,
@@ -30,7 +30,7 @@
         return userServiceApi;
 
         //Implementation of Interfaces
-        function findUserByUsernameAndPassword(username, password, callback){
+        function findUserByCredentials(username, password, callback){
             var each = "";
             for (each in users){
                 if(users[each].username == username && users[each].password == password){

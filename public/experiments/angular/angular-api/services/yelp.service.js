@@ -42,9 +42,16 @@
             $http.jsonp(message.action, {params: parameterMap}).success(callback);
 
         }
+        function randomString(length) {
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            for(var i = 0; i < length; i++) {
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            return text;
+        };
 
         function findRestDetailsbyId(restId, callback){
-            console.log("findRestDetailsbyId:", restId)
             var accessor = {
                 consumerSecret: auth.consumerSecret,
                 tokenSecret: auth.accessTokenSecret
@@ -64,14 +71,12 @@
             OAuth.SignatureMethod.sign(message, accessor);
             var parameterMap = OAuth.getParameterMap(message.parameters);
             parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
-            console.log("findRestDetailsbyId:", restId)
 
             $http.jsonp(message.action, {params: parameterMap})
                 .success(callback)
-                .error(function(error){
-                    console.log("Error findRestDetailsbyId: ", error)
+                .catch(function(data, status, headers, config){
+                    console.log(data);
                 });
-
         }
 
     }
