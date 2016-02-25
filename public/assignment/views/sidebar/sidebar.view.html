@@ -7,7 +7,7 @@
             <a href="#/profile">Profile</a>
         </li>
         <li ng-class="{'active': location.url() == '/admin'}"
-            ng-show="user">
+            ng-show="user.roles.indexOf('admin') >= 0">
             <a href="#/admin">Admin</a>
         </li>
         <li ng-class="{'active': location.url() == '/forms'}"

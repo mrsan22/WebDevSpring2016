@@ -5,7 +5,11 @@
         .controller("FormController", FormController);
 
 
-    function FormController($scope, $rootScope, FormService){
+    function FormController($scope, $rootScope, $location, FormService){
+        $scope.user = $rootScope.user;
+        if (!$scope.user) {
+            $location.url("/home");
+        }
         if($rootScope.user != undefined){
             var userId;
             userId = $rootScope.user._id;
@@ -17,6 +21,7 @@
                 }
             );
         }
+
 
         //Event handler declaration
         $scope.addForm = addForm;

@@ -12,6 +12,7 @@
             function(response){
                 console.log(response);
                 $scope.rest = response;
+                $scope.$apply();
             }
         )
     }

@@ -4,8 +4,11 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, $rootScope, UserService){
+    function ProfileController($scope, $rootScope, $location, UserService){
         $scope.user = $rootScope.user;
+        if (!$scope.user) {
+            $location.url("/home");
+        }
         //console.log($scope.user);
         if($rootScope.user != undefined){
             $scope.readonly = true;

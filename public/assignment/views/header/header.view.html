@@ -36,7 +36,7 @@
                     class="visible-xs">
                     <a href="#/profile">Profile</a>
                 </li>
-                <li ng-show="user"
+                <li ng-show="user.roles.indexOf('admin') >= 0"
                     ng-class="{'active': location.url() == '/admin'}"
                     class="visible-xs">
                     <a href="#/admin">Admin</a>

@@ -4,7 +4,7 @@
         .module("FormBuilderApp")
         .factory("UserService", UserService);
 
-    function UserService(){
+    function UserService($rootScope){
         var users = [
             {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
                 "username":"alice",  "password":"alice",   "roles": ["student"]		},
@@ -20,6 +20,7 @@
 
         // Declaration of Interface
         var userServiceApi = {
+            setCurrentUser : setCurrentUser,
             findUserByCredentials : findUserByCredentials,
             findAllUsers : findAllUsers,
             createUser : createUser,
@@ -30,6 +31,9 @@
         return userServiceApi;
 
         //Implementation of Interfaces
+        function setCurrentUser (user) {
+            $rootScope.user = user;
+        }
         function findUserByCredentials(username, password, callback){
             var each = "";
             for (each in users){
