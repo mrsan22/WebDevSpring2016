@@ -28,6 +28,7 @@
         $scope.updateForm = updateForm;
         $scope.deleteForm = deleteForm;
         $scope.selectForm = selectForm;
+        var selectedFormIndex = -1;
 
         //Implementation of event handler
         function addForm(formObj){
@@ -42,8 +43,8 @@
                     FormService.findAllFormsForUser(
                         userId,
                         function(forms){
-                            var newforms = forms;
-                            $scope.forms = newforms;
+                            //var newforms = forms;
+                            $scope.forms = forms;
                             $scope.form = {};
                             console.log("Forms object after adding new form",$scope.forms);
                         }
@@ -52,7 +53,7 @@
             )
 
         }
-        var selectedFormIndex;
+        //var selectedFormIndex;
         function updateForm(formObj){
             if(!formObj || !formObj.title){
                 return;
@@ -64,6 +65,7 @@
                     if (selectedFormIndex >= 0) {
                         $scope.forms[selectedFormIndex] = form;
                         $scope.form = {};
+                        selectedFormIndex = -1;
                     }
 
                 }
@@ -71,6 +73,7 @@
         }
 
         function selectForm(formIndex){
+            console.log(formIndex)
              selectedFormIndex = formIndex;
             var selectForm = {
                 "_id" : $scope.forms[formIndex]._id,

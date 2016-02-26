@@ -24,9 +24,9 @@
 
         //Implementation of Interfaces
         function createFormForUser(userId, form, callback){
-            form["_id"] = (new Date).getTime();
+             var id = (new Date).getTime();
             var newForm = {
-                "_id" : form["_id"],
+                "_id" : id,
                 "userId" : userId,
                 "title" : form["title"]
             };
@@ -40,6 +40,7 @@
             for (each in forms){
                 if(forms[each].userId == userId){
                     formsArray.push(forms[each]);
+                    console.log("find all forms",formsArray);
                 }
             }
             callback(formsArray);
@@ -65,11 +66,12 @@
                 if(forms[each]._id == formId){
                     var formnew = {
                         "_id" : newForm["_id"],
-                        "userid" : newForm["userId"],
+                        "userId" : newForm["userId"],
                         "title" : newForm["title"]
                     };
                     forms[each] = formnew;
                     callback(forms[each]);
+                    return;
                 }
             }
         }
