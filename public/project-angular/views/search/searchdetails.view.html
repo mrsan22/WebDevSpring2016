@@ -1,11 +1,32 @@
-<h2>{{rest.name}}</h2>
-<p>{{restId}}</p>
-<img ng-src="{{rest.image_url}}" class="pull-left"/>
-<p>
-    {{rest.snippet_text}}
-</p>
-<br/>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4 col-xs-6 img-hover pad-left-right">
+            <a href="#">
+                <img class="img-responsive portfolio-item margin-bottom-zero" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
 
-<p>{{rest.categories[0][0]}}  {{rest.categories[1][0]}}</p>
+        <div class="col-sm-4 col-xs-6 img-hover pad-left-right">
+            <a href="#">
+                <img class="img-responsive portfolio-item margin-bottom-zero" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
 
-<p>{{rest.location.display_address[0]}} {{rest.location.display_address[1]}}</p>
+        <div class="col-sm-4 col-xs-6 img-hover pad-left-right hidden-xs">
+            <a href="#">
+                <img class="img-responsive portfolio-item margin-bottom-zero" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
+
+    </div>
+            <h2>{{rest.name}}</h2>
+            <img ng-src="{{rest.image_url}}" class="pull-left"/>
+            <p>
+                {{rest.snippet_text}}
+            </p>
+            <br/>
+
+            <p>{{rest.categories[0][0]}}  {{rest.categories[1][0]}}</p>
+
+            <p>{{rest.location.display_address[0]}} {{rest.location.display_address[1]}}</p>
+</div>

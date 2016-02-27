@@ -10,6 +10,19 @@
             </button>
             <a class="navbar-brand margin-set" href="#/home">Eat'n'Review</a>
         </div>
+        <div ng-show ="location.url() == '/search'"class="hidden-sm hidden-xs">
+            <div class="col-sm-3 col-sm-offset-2">
+                <input id="restNametxt" class="form-control navsearch-margin margin-lft-searchbox" placeholder="Dosa Factory, Qdoba...(optional)">
+            </div>
+            <div class="col-sm-3 margin-lft-searchbox">
+                <div class="input-group">
+                    <input type="text" class="form-control navsearch-margin" placeholder="Boston" name="srch-term" id="locationtxt">
+                    <div class="input-group-btn">
+                        <button id="searchRestbtn" class="btn btn-primary navsearch-margin" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right margin-set1">
                 <li><a href="#/register" class="margin-set2">Sign Up</a></li>

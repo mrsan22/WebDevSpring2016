@@ -18,7 +18,8 @@ body {
 #slides_control > div{
     height: 200px;
 }
-img{
+
+.img-carousel{
     margin:auto;
     width: 400px;
 }
@@ -47,7 +48,7 @@ img{
     background-color:#bbb;
     overflow:hidden;
 }
-.carousel img {
+.carousel .img-carousel {
     position: absolute;
     top: 0;
     left: 0;
@@ -138,6 +139,14 @@ footer {
 .margin-lft-searchbox{
     margin-left: -23px;
 }
+
+.pad-left-right{
+    padding-left:5px;
+    padding-right:5px;
+}
+.margin-bottom-zero{
+    margin-bottom: 0;
+}
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
@@ -166,7 +175,7 @@ footer {
 
 @media (max-width: 768px) {
 
-    .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    .carousel-inner>.item>.img-carousel, .carousel-inner>.item>a>.img-carousel {
         max-width:inherit;
     }
 
