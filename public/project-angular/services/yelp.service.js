@@ -42,14 +42,6 @@
             $http.jsonp(message.action, {params: parameterMap}).success(callback);
 
         }
-        function randomString(length) {
-            var text = "";
-            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            for(var i = 0; i < length; i++) {
-                text += possible.charAt(Math.floor(Math.random() * possible.length));
-            }
-            return text;
-        };
 
         function findRestDetailsbyId(restId, callback){
             var accessor = {
@@ -72,11 +64,19 @@
             var parameterMap = OAuth.getParameterMap(message.parameters);
             parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
 
-            $http.jsonp(message.action, {params: parameterMap})
-                .success(callback)
-                .catch(function(data, status, headers, config){
-                    console.log(data);
-                });
+            //$http.jsonp(message.action, {params: parameterMap})
+            //    .success(callback)
+            //    .catch(function(data, status, headers, config){
+            //        console.log(data);
+            //    });
+            $.ajax({
+                'url': message.action,
+                'data': parameterMap,
+                'cache': true,
+                'dataType': 'jsonp',
+                'jsonpCallback': 'cb',
+                success: callback
+            });
         }
 
     }

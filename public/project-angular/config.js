@@ -26,6 +26,11 @@
             })
             .when("/search", {
                 templateUrl : "views/search/search.view.html"
+
+            })
+            .when("/detail/:restId", {
+                templateUrl: "views/search/searchdetails.view.html",
+                controller: "DetailController"
             })
             .otherwise({
                 redirectTo: "/home"
