@@ -29,8 +29,17 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right margin-set1">
-                <li><a href="#/register" class="margin-set2">Sign Up</a></li>
-                <li><a href="#/login" class="margin-set2">Login</a></li>
+                <li ng-hide="user">
+                    <a href="#/register" class="margin-set2">Sign Up</a>
+                </li>
+                <li ng-hide="user">
+                    <a href="#/login" class="margin-set2">Login</a>
+                </li>
+                <li ng-show="user">
+                    <a href="#/profile">{{user.username}}</a>
+                <li ng-hide="!user"
+                    ng-click="logOut()">
+                    <a>Logout</a>
             </ul>
         </div>
     </div>

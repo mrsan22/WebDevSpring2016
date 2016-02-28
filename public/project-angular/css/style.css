@@ -67,7 +67,7 @@ body {
     top: 200px;
     z-index: 1
 }
-.container-fluid {
+.container-fluid-carousel {
     padding-left: 0px;
     padding-right: 0px;
 }
