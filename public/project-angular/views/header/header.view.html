@@ -10,15 +10,19 @@
             </button>
             <a class="navbar-brand margin-set" href="#/home">Eat'n'Review</a>
         </div>
-        <div ng-show ="location.url() == '/search'"class="hidden-sm hidden-xs">
+        <div ng-hide ="location.url() == '/home'"
+             class="hidden-sm hidden-xs">
             <div class="col-sm-3 col-sm-offset-2">
-                <input id="restNametxt" class="form-control navsearch-margin margin-lft-searchbox" placeholder="Dosa Factory, Qdoba...(optional)">
+                <input ng-model="restname_header" class="form-control navsearch-margin margin-lft-searchbox"
+                       placeholder="Dosa Factory, Qdoba...(optional)">
             </div>
             <div class="col-sm-3 margin-lft-searchbox">
                 <div class="input-group">
-                    <input type="text" class="form-control navsearch-margin" placeholder="Boston" name="srch-term" id="locationtxt">
+                    <input type="text" ng-model="location_header" class="form-control navsearch-margin" placeholder="Boston">
                     <div class="input-group-btn">
-                        <button id="searchRestbtn" class="btn btn-primary navsearch-margin" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                        <button ng-click="callToSearch(restname_header,location_header) "
+                                class="btn btn-primary navsearch-margin" type="button">
+                            <i class="glyphicon glyphicon-search"></i></button>
                     </div>
                 </div>
             </div>

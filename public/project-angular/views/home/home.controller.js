@@ -21,25 +21,17 @@
         //];
 
         //Register event handler
-        $scope.search = search;
-
-
-        //if(($scope.restname || !$scope.restname) && $scope.location){
-        //    search($scope.restname, $scope.location);
-        //}
+        $scope.callSearch = callSearch;
 
         //Implement event handler
-        function search(restname, location){
-            console.log(restname, location);
-            //$location.url("/search/restname="+$scope.restname+"&location="+$scope.location);
+        function callSearch(restname, location){
             YelpService.findRestbyNameLocation(
                 restname,
                 location,
                 function(response){
                     console.log(response);
                     $rootScope.data = response;
-                    //console.log("Data", data);
-                    $location.url('/search');
+                    $location.url('/search/restname='+restname+'&location='+location);
                 }
             )
         }

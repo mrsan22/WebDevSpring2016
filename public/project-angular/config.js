@@ -28,6 +28,13 @@
                 templateUrl : "views/search/search.view.html"
 
             })
+            .when("/search/restname=:restname&location=:location", {
+                templateUrl : "views/search/search.view.html"
+
+            })
+            .when("/search/location=:location", {
+                templateUrl: "views/search/search.view.html"
+            })
             .when("/detail/:restId", {
                 templateUrl: "views/search/searchdetails.view.html",
                 controller: "DetailController"

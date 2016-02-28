@@ -4,14 +4,18 @@
         .module("Eat'n'Review")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($scope, $location,$rootScope){
+    function HeaderController($scope, $location){
+        $scope.callToSearch = callToSearch;
 
-        //$scope.logOut = logOut;
-        //
-        //function logOut(){
-        //    delete $rootScope.user;
-        //    $location.url('/home')
-        //
-        //}
+        //Implement event handler
+        function callToSearch(restname, location){
+            if(!restname){
+                $location.url('/search/location='+location);
+            }
+            else{
+            $location.url('/search/restname='+restname+'&location='+location);
+            }
+
+        }
     }
 })();
