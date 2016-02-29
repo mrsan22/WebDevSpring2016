@@ -159,6 +159,8 @@ footer {
     margin-left : 15px;
     margin-right:15px;
 }
+.txtcolor{
+}
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
@@ -231,6 +233,10 @@ footer {
 @media (min-width: 1200px) {
     .col-lg-12 {
         width: 90%;
+    }
+
+    .home-pad{
+        padding-left: 160px;
     }
 }
 
