@@ -3,6 +3,8 @@
 <html lang="en" ng-app="RestApp">
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/half-slider.css"/>
+    <link rel="stylesheet" href="css/4-col-portfolio.css"/>
     <script src="../../js/jquery.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
@@ -15,7 +17,9 @@
     <script src="navigation/navigation.controller.js"></script>
     <script src="search/search.controller.js"></script>
     <script src="search/searchdetails.controller.js"></script>
+    <script src="search/searchhome.controller.js"></script>
     <script src="services/yelp.service.js"></script>
+    <script src="services/foursquare.service.js"></script>
 
 
     <meta charset="UTF-8">
@@ -29,6 +33,7 @@
         <ul class="nav nav-tabs">
             <li ng-class="{'active': $location.url() == '/home'}"><a href="#/home">Home</a></li>
             <li ng-class="{'active': $location.url() == '/search'}"><a href="#/search">Search</a></li>
+            <li ng-class="{'active': $location.url() == '/searchhome'}"><a href="#/searchhome">SearchHome</a></li>
         </ul>
     </nav>
 
