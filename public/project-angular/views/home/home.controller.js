@@ -32,6 +32,7 @@
                     console.log(response);
                     $rootScope.data = response;
                     $location.url('/search/restname='+restname+'&location='+location);
+                    $scope.$apply();
                 }
             )
         }

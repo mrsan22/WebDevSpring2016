@@ -39,7 +39,21 @@
             var parameterMap = OAuth.getParameterMap(message.parameters);
             parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
 
-            $http.jsonp(message.action, {params: parameterMap}).success(callback);
+            //$http.jsonp(message.action, {params: parameterMap}).success(callback)
+            //    .error(function(){
+            //        console.log("error")
+            //    });
+            $.ajax({
+                'url': message.action,
+                'data': parameterMap,
+                'cache': true,
+                'dataType': 'jsonp',
+                'jsonpCallback': 'cb',
+                success: callback,
+                error:function(){
+                    console.log("Error when search");
+                }
+            });
 
         }
 

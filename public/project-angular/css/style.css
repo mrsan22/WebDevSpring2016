@@ -147,6 +147,18 @@ footer {
 .margin-bottom-zero{
     margin-bottom: 0;
 }
+
+.tmargin{
+    margin-top: 1px;
+}
+
+.margin-panel{
+    margin-top: 20px;
+}
+.margin-well{
+    margin-left : 15px;
+    margin-right:15px;
+}
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
