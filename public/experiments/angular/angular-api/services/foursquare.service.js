@@ -18,7 +18,7 @@
 
         function findPopularRestByLocation(callback){
             var apiUrl = "https://api.foursquare.com/v2/venues/explore?client_id="+client_id+"&client_secret="+client_secret+"" +
-                "&v=20130815&ll=40.7,-74&section=food&limit=10&venuePhotos=1";
+                "&v=20130815&ll=40.7,-74&section=food&limit=6&venuePhotos=1";
 
             $http.get(apiUrl)
                 .success(callback)
