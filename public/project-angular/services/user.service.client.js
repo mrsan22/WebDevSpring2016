@@ -77,7 +77,6 @@
         }
 
         function updateUser(userId, user, callback){
-            console.log(userId, user);
             var each = "";
             for (each in users){
                 if (users[each]._id == userId){
@@ -88,7 +87,6 @@
                         "roles" : user["roles"]
                     };
                     users[each] = newUser;
-                    console.log(users[each]);
                     callback(users[each]);
                     return;
                 }

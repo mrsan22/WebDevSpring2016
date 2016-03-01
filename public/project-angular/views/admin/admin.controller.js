@@ -42,7 +42,6 @@
                 userObj._id,
                 userObj,
                 function(user){
-                    console.log(user);
                     if (selectedUserIndex >= 0) {
                         $scope.users[selectedUserIndex] = user;
                         $scope.user = {};
@@ -54,9 +53,9 @@
         }
 
         function selectUser(userIndex){
-            console.log(userIndex);
             selectedUserIndex = userIndex;
             var selectUser = {
+                "_id" : $scope.users[userIndex]._id,
                 "username" : $scope.users[userIndex].username,
                 "password" : $scope.users[userIndex].password,
                 "roles" : $scope.users[userIndex].roles
