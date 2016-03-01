@@ -14,7 +14,7 @@
         //Event handler declaration
         $scope.addUser = addUser;
         $scope.updateUser = updateUser;
-        //$scope.deleteUser = deleteUser;
+        $scope.deleteUser = deleteUser;
         $scope.selectUser = selectUser;
         var selectedUserIndex = -1;
 
@@ -61,6 +61,19 @@
                 "roles" : $scope.users[userIndex].roles
             };
             $scope.user = selectUser;
+        }
+
+        function deleteUser(userIndex){
+            UserService.deleteUserById(
+                $scope.users[userIndex]._id,
+                function(users){
+                    UserService.findAllUsers(
+                        function(users){
+                            $scope.users = users;
+                        }
+                    )
+                }
+            )
         }
     }
 })();
