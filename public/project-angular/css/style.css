@@ -165,6 +165,29 @@ footer {
 }
 .txtcolor{
 }
+
+.glyphicon.glyphicon-remove {
+    font-size: 20px;
+    color: #d9534f;
+}
+
+.glyphicon.glyphicon-pencil {
+    font-size: 20px;
+    color: #5e5e5e;
+}
+
+.glyphicon.glyphicon-align-justify{
+    font-size: 20px;
+    color: #337ab7;
+}
+
+.glyphicon.glyphicon-plus {
+    font-size: 20px;
+    color: #5cb85c;
+}
+.glyphicon.glyphicon-ok {
+    font-size: 20px;
+}
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 @media only screen and (min-width: 480px) and (max-width: 767px) {

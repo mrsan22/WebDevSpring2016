@@ -25,7 +25,8 @@
                 controller : "ProfileController"
             })
             .when("/admin", {
-                templateUrl : "views/admin/admin.view.html"
+                templateUrl : "views/admin/admin.view.html",
+                controller : "AdminController"
             })
             .when("/search", {
                 templateUrl : "views/search/search.view.html"

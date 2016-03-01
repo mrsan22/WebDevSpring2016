@@ -7,15 +7,15 @@
     function UserService($rootScope){
         var users = [
             {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
-                "username":"alice",  "password":"alice",   "roles": ["student"]		},
+                "username":"alice",  "password":"alice",   "roles": "user"		},
             {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
-                "username":"bob",    "password":"bob",     "roles": ["admin"]		},
+                "username":"bob",    "password":"bob",     "roles": "admin"		},
             {	"_id":345, "firstName":"Charlie",          "lastName":"Brown",
-                "username":"charlie","password":"charlie", "roles": ["faculty"]		},
+                "username":"charlie","password":"charlie", "roles": "user"		},
             {	"_id":456, "firstName":"Dan",              "lastName":"Craig",
-                "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"]},
+                "username":"dan",    "password":"dan",     "roles": "admin"},
             {	"_id":567, "firstName":"Edward",           "lastName":"Norton",
-                "username":"ed",     "password":"ed",      "roles": ["student"]		}
+                "username":"ed",     "password":"ed",      "roles": "user"		}
         ];
 
         // Declaration of Interface
@@ -53,9 +53,16 @@
         }
 
         function createUser(user, callback){
-            user["_id"] = (new Date).getTime();
-            users.push(user);
-            callback(user);
+            var id = (new Date).getTime();
+            var newUser = {
+                "_id" : id,
+                "username" : user.username,
+                "password" : user.password,
+                "roles" : user.roles
+            };
+
+            users.push(newUser);
+            callback(newUser);
             //console.log(users)
         }
 
@@ -70,11 +77,20 @@
         }
 
         function updateUser(userId, user, callback){
+            console.log(userId, user);
             var each = "";
             for (each in users){
                 if (users[each]._id == userId){
-                    users[each] = user;
+                    var newUser = {
+                        "_id" : user["_id"],
+                        "username" : user["username"],
+                        "password" : user["password"],
+                        "roles" : user["roles"]
+                    };
+                    users[each] = newUser;
+                    console.log(users[each]);
                     callback(users[each]);
+                    return;
                 }
             }
 

@@ -10,7 +10,7 @@
             </button>
             <a class="navbar-brand margin-set" href="#/home">Eat'n'Review</a>
         </div>
-        <div ng-hide ="location.url() == '/home'"
+        <div ng-hide ="location.url() == '/home' || location.url() == '/admin'"
              class="hidden-sm hidden-xs">
             <div class="col-sm-3 col-sm-offset-2">
                 <input ng-model="restname_header" class="form-control navsearch-margin margin-lft-searchbox"
