@@ -1,6 +1,6 @@
 
 .carousel {
-    height: 500px;
+    height: 100%;
     margin-bottom: 60px;
 }
 /* Since positioning the image, we need to help out the caption */
@@ -18,7 +18,9 @@
     top: 0;
     left: 0;
     min-width: 100%;
-    height: 500px;
+    height: 100%;
+    /*background-position: center;*/
+    /*background-size: cover;*/
 }
 @media (min-width: 768px) {
     .carousel-caption p {
@@ -48,7 +50,29 @@ img {
 @media only screen and (max-width: 959px) {}
 
 /* Tablet Portrait size to standard 960 (devices and browsers) */
-@media only screen and (min-width: 768px) and (max-width: 959px) {}
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+    .carousel-inner > .item > img.banner3 {
+        content: url("/experiments/angular/angular-api/images/food_1280x660.jpg");
+        min-width: 100%;
+        height: 100%;
+        /*background-position: center;*/
+        /*background-size: cover;*/
+    }
+    .carousel-inner > .item > img.banner2 {
+        content: url("/experiments/angular/angular-api/images/food_1280x660.jpg");
+        min-width: 100%;
+        height: 100%;
+        /*background-position: center;*/
+        /*background-size: cover;*/
+    }
+    .carousel-inner > .item > img.banner1 {
+        content: url("/experiments/angular/angular-api/images/food_1280x660.jpg");
+        min-width: 100%;
+        height: 100%;
+        /*background-position: center;*/
+        /*background-size: cover;*/
+    }
+}
 
 /* All Mobile Sizes (devices and browser) */
 @media only screen and (max-width: 767px) {
@@ -58,7 +82,29 @@ img {
 }
 
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
-@media only screen and (min-width: 480px) and (max-width: 767px) {}
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    .carousel-inner > .item > img.banner3 {
+        content: url("/experiments/angular/angular-api/images/food_1280x660.jpg");
+        min-width: 100%;
+        height: 100%;
+        /*background-position: center;*/
+        /*background-size: cover;*/
+    }
+    .carousel-inner > .item > img.banner2 {
+        content: url("/experiments/angular/angular-api/images/food_1280x660.jpg");
+        min-width: 100%;
+        height: 100%;
+        /*background-position: center;*/
+        /*background-size: cover;*/
+    }
+    .carousel-inner > .item > img.banner1 {
+        content: url("/experiments/angular/angular-api/images/food_1280x660.jpg");
+        min-width: 100%;
+        height: 100%;
+        /*background-position: center;*/
+        /*background-size: cover;*/
+    }
+}
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 479px) {
@@ -68,5 +114,53 @@ img {
 
     .margin-set1{
         margin-right: 15px;
+    }
+
+    .carousel-inner > .item > img.banner3 {
+        content: url("/experiments/angular/angular-api/images/food_640x660.jpg");
+        min-width: 100%;
+        height: 100%;
+        /*background-position: center;*/
+        /*background-size: cover;*/
+    }
+
+    .carousel-inner > .item > img.banner2 {
+        content: url("/experiments/angular/angular-api/images/food_640x660.jpg");
+        min-width: 100%;
+        height: 100%;
+        /*background-position: center;*/
+        /*background-size: cover;*/
+    }
+    .carousel-inner > .item > img.banner1 {
+        content: url("/experiments/angular/angular-api/images/food_640x660.jpg");
+        min-width: 100%;
+        height: 100%;
+        /*background-position: center;*/
+        /*background-size: cover;*/
+    }
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .carousel-inner > .item > img.banner3 {
+        content: url("/experiments/angular/angular-api/images/food_640x660.jpg");
+        min-width: 100%;
+        height: 100%;
+        /*background-position: center;*/
+        /*background-size: cover;*/
+    }
+
+    .carousel-inner > .item > img.banner2 {
+        content: url("/experiments/angular/angular-api/images/food_640x660.jpg");
+        min-width: 100%;
+        height: 100%;
+        /*background-position: center;*/
+        /*background-size: cover;*/
+    }
+    .carousel-inner > .item > img.banner1 {
+        content: url("/experiments/angular/angular-api/images/food_640x660.jpg");
+        min-width: 100%;
+        height: 100%;
+        /*background-position: center;*/
+        /*background-size: cover;*/
     }
 }
