@@ -1,0 +1,25 @@
+<div class="container">
+    <h3>Search Results</h3>
+    <div class="table-responsive" ng-controller="SearchController">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Restaurant ID</th>
+                <th>Name</th>
+                <th>Ratings</th>
+                <th>Image</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="rest in data.businesses">
+                <td>{{rest.id}}</td>
+                <td>
+                    <a href="#/detail/{{rest.id}}">{{rest.name}}</a>
+                </td>
+                <td><img ng-src="{{rest.rating_img_url}}"/></td>
+                <td><img ng-src="{{rest.image_url}}"/></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
