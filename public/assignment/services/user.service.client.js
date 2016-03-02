@@ -53,6 +53,12 @@
         }
 
         function createUser(user, callback){
+            for(var i=0;i<users.length;i++){
+                if (users[i].username == user.username){
+                    alert("username already exist. Please choose a different username!!");
+                    return;
+                }
+            }
             user["_id"] = (new Date).getTime();
             users.push(user);
             callback(user);

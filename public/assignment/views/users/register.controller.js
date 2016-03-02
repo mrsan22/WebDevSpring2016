@@ -18,7 +18,7 @@
                     $rootScope.user = user;
                     $location.url('/profile');
 
-                })
+                });
         }
     }
 })();

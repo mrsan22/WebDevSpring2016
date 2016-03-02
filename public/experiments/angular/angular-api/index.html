@@ -5,7 +5,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="css/half-slider.css"/>
     <link rel="stylesheet" href="css/4-col-portfolio.css"/>
-    <script src="../../js/jquery.js"></script>
+    <!-- jQuery -->
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
     <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
@@ -26,19 +27,25 @@
     <title>Yelp API</title>
 </head>
 <body>
-<div class="container">
     <!--<h1>Movie App</h1>-->
-
-    <nav ng-controller="NavController">
-        <ul class="nav nav-tabs">
-            <li ng-class="{'active': $location.url() == '/home'}"><a href="#/home">Home</a></li>
-            <li ng-class="{'active': $location.url() == '/search'}"><a href="#/search">Search</a></li>
-            <li ng-class="{'active': $location.url() == '/searchhome'}"><a href="#/searchhome">SearchHome</a></li>
-        </ul>
-    </nav>
-
-    <div ng-view></div>
+    <div class="container-fluid">
+        <div class="row">
+            <nav ng-controller="NavController">
+                <ul class="nav nav-tabs">
+                    <li ng-class="{'active': $location.url() == '/home'}"><a href="#/home">Home</a></li>
+                    <li ng-class="{'active': $location.url() == '/search'}"><a href="#/search">Search</a></li>
+                    <li ng-class="{'active': $location.url() == '/searchhome'}"><a href="#/searchhome">SearchHome</a></li>
+                </ul>
+            </nav>
+            <div ng-view></div>
+        </div>
+    </div>
 
 </div>
 </body>
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- Minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </html>
