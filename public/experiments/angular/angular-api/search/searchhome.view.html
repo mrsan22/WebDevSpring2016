@@ -34,12 +34,12 @@
             <img class="banner3" src="/experiments/angular/angular-api/images/food_1920x800.jpg" alt="Slide 3" />
         </div>
     </div>
-    <a href="#carousel" class="left carousel-control" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-    </a>
-    <a href="#carousel" class="right carousel-control" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-    </a>
+    <!--<a href="#carousel" class="left carousel-control" data-slide="prev">-->
+        <!--<span class="glyphicon glyphicon-chevron-left"></span>-->
+    <!--</a>-->
+    <!--<a href="#carousel" class="right carousel-control" data-slide="next">-->
+        <!--<span class="glyphicon glyphicon-chevron-right"></span>-->
+    <!--</a>-->
 </div>
 <!-- Page Content -->
 <div class="container">
@@ -53,14 +53,14 @@
     </div>
     <!-- /.row -->
     <div class="row">
-        <div ng-repeat="imgUrl in popularRestImages">
+        <div ng-repeat="rest in popularRestImages">
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
-                    <a href="#">
-                        <img class="img-responsive" ng-src="{{imgUrl}}"/>
+                    <a href ng-click="search(popularRestaurants.names[$index],'New York')">
+                        <img class="img-responsive" ng-src="{{popularRestaurants.images[$index]}}"/>
                     </a>
                     <div class="caption">
-                        <p class="lead">Restaurant name</p>
+                        <p class="lead">{{popularRestaurants.names[$index]}}</p>
                     </div>
                 </div>
             </div>
