@@ -59,7 +59,7 @@ img {
         /*background-size: cover;*/
     }
     .carousel-inner > .item > img.banner2 {
-        content: url("/experiments/angular/angular-api/images/food_1280x660.jpg");
+        content: url("/experiments/angular/angular-api/images/taco_1280x660.jpg");
         min-width: 100%;
         height: 100%;
         /*background-position: center;*/
@@ -91,7 +91,7 @@ img {
         /*background-size: cover;*/
     }
     .carousel-inner > .item > img.banner2 {
-        content: url("/experiments/angular/angular-api/images/food_1280x660.jpg");
+        content: url("/experiments/angular/angular-api/images/taco_1280x660.jpg");
         min-width: 100%;
         height: 100%;
         /*background-position: center;*/
@@ -125,7 +125,7 @@ img {
     }
 
     .carousel-inner > .item > img.banner2 {
-        content: url("/experiments/angular/angular-api/images/food_640x660.jpg");
+        content: url("/experiments/angular/angular-api/images/taco_640x660.jpg");
         min-width: 100%;
         height: 100%;
         /*background-position: center;*/
@@ -150,7 +150,7 @@ img {
     }
 
     .carousel-inner > .item > img.banner2 {
-        content: url("/experiments/angular/angular-api/images/food_640x660.jpg");
+        content: url("/experiments/angular/angular-api/images/taco_640x660.jpg");
         min-width: 100%;
         height: 100%;
         /*background-position: center;*/
