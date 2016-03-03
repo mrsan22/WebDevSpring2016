@@ -18,7 +18,7 @@ module.exports = function() {
             }
         }
         // user not found
-        console.log("user does not exist, returning null")
+        console.log("user does not exist, returning null");
         return null;
     }
 };

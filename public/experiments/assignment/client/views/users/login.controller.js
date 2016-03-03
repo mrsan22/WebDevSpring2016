@@ -24,7 +24,7 @@
         .module("FormBuilderApp")
         .controller("LoginController", LoginController);
 
-    function LoginController(UserService){
+    function LoginController(UserService, $location){
         var vm = this;
 
         vm.login = login;
