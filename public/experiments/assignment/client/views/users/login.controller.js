@@ -37,14 +37,22 @@
 
         //Calling the client user service
         function login(user){
-            UserService.findUserByCredentials(
-                user.username,
-                user.password,
-                function(user){
-                    $rootScope.user = user;
-                    $location.url('/profile');
-                }
-            )
+            if(!user){
+                return;
+            }
+            // creating a user object and sending it to client user service
+            UserService.findUserByCredentials({
+                username: user.username,
+                password: user.password
+            })
+                //response is a promise returned by the client user service
+                .then(function (response){
+                    if(response.data){
+                        // Store current user in rootScope using client service
+                        UserService.setCurrentUser(response.data);
+                    }
+
+            });
         }
     }
 })();
