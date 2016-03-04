@@ -25,15 +25,24 @@
                 username: user.username,
                 password: user.password
             })
-                //response is a promise returned by the client user service
+            //response is a promise returned by the client user service. promise is fullfilled,
+            // regardless of the outcome
                 .then(function (response){
                     if(response.data){
                         // Store current user object in rootScope using user client service
                         UserService.setCurrentUser(response.data);
                         $location.url('/profile');
                     }
+                    else{
+                        //promise fullfilled, inpsite of getting a null response.
+                        vm.showAlert = true;
+                    }
 
-            });
+            },      //called if promise fails
+                    function (error) {
+                        //handle error here
+                        console.log(error.statusText);
+                    });
         }
     }
 })();
