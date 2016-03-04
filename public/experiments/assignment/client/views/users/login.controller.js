@@ -48,8 +48,9 @@
                 //response is a promise returned by the client user service
                 .then(function (response){
                     if(response.data){
-                        // Store current user in rootScope using client service
+                        // Store current user object in rootScope using user client service
                         UserService.setCurrentUser(response.data);
+                        $location.url('/profile');
                     }
 
             });

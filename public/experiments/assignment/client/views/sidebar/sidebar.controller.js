@@ -4,7 +4,12 @@
         .module("FormBuilderApp")
         .controller("SidebarController", SidebarController);
 
-    function SidebarController($scope){
+    function SidebarController($location){
+        var vm = this;
 
+        function init(){
+            vm.$location = $location;
+        }
+        init();
     }
 })();
