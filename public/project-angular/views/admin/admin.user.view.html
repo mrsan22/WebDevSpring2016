@@ -32,12 +32,14 @@
                                 </select>
                             </td>
                             <td>
-                                <a ng-click="addUser(user)">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                </a>
-                                <a ng-click="updateUser(user)">
-                                    <span class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>
-                                </a>
+                                <!--<a ng-click="addUser(user)">-->
+                                    <!--<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>-->
+                                <!--</a>-->
+                                <!--<a ng-click="updateUser(user)">-->
+                                    <!--<span class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>-->
+                                <!--</a>-->
+                                <button ng-click="addUser(user)" class="btn btn-sm btn-success">Add</button>
+                                <button ng-click="updateUser(user)" class="btn btn-sm btn-primary">Update</button>
                             </td>
                         </tr>
                         <tr ng-repeat="user in users">
@@ -45,12 +47,14 @@
                             <td>*****</td>
                             <td>{{user.roles}}</td>
                             <td>
-                                <a ng-click="deleteUser($index)">
-                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                </a>
-                                <a ng-click="selectUser($index)">
-                                    <span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"></span>
-                                </a>
+                                <!--<a ng-click="deleteUser($index)">-->
+                                    <!--<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>-->
+                                <!--</a>-->
+                                <!--<a ng-click="selectUser($index)">-->
+                                    <!--<span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"></span>-->
+                                <!--</a>-->
+                                <button ng-click="deleteUser($index)" class="btn btn-sm btn-danger">Delete</button>
+                                <button ng-click="selectUser($index)" class="btn btn-sm btn-info">Select</button>
                             </td>
                         </tr>
                     </tbody>
