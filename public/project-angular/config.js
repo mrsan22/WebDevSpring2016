@@ -28,8 +28,8 @@
                 templateUrl : "views/users/reviews.view.html",
                 controller : "ReviewController"
             })
-            .when("/admin", {
-                templateUrl : "views/admin/admin.view.html",
+            .when("/admin/user", {
+                templateUrl : "views/admin/admin.user.view.html",
                 controller : "AdminController"
             })
             .when("/search", {
