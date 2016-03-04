@@ -4,17 +4,21 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, $rootScope, $location, UserService){
-        $scope.user = $rootScope.user;
-        if (!$scope.user) {
-            $location.url("/home");
-        }
-        //console.log($scope.user);
-        if($rootScope.user != undefined){
-            $scope.readonly = true;
-        }
+    function ProfileController(UserService, $location) {
+        var vm = this;
+        vm.update = update;
 
-        $scope.update = update;
+        function init() {
+            vm.currentUser = UserService.getCurrentUser();
+            if(vm.currentUser == null) {
+                $location.url("/home");
+            }
+
+            if(vm.currentUser != undefined){
+                vm.readonly = true;
+            }
+        }
+        init();
 
         function update(user){
             UserService.updateUser(
@@ -25,5 +29,6 @@
                 }
             )
         }
+
     }
 })();

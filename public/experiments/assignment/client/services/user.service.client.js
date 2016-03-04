@@ -101,6 +101,7 @@
 
         // Declaration of Interface
         var userServiceApi = {
+            getCurrentUser : getCurrentUser,
             setCurrentUser : setCurrentUser,
             findUserByCredentials : findUserByCredentials,
             findUserByUsername : findUserByUsername
@@ -109,6 +110,10 @@
         return userServiceApi;
 
         //Implementation of Interfaces
+        function getCurrentUser(){
+            return $rootScope.currentUser;
+        }
+
         function setCurrentUser (user) {
             $rootScope.currentUser = user;
             console.log($rootScope.currentUser);

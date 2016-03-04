@@ -1,5 +1,5 @@
 
-<div class="container-fluid" ng-controller="ProfileController">
+<div class="container-fluid" ng-controller="ProfileController as model">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Profile</h1>
@@ -8,42 +8,44 @@
                     <label for="username" class="col-sm-2">Username:</label>
                     <div class="col-sm-10">
                         <input type="text"
-                               ng-model="user.username" class="form-control" id="username"
-                               placeholder="Username" ng-readonly="readonly">
+                               ng-model="model.currentUser.username"
+                               class="form-control" id="username"
+                               placeholder="Username" ng-readonly="model.readonly">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password" class="col-sm-2">Password:</label>
                     <div class="col-sm-10">
                         <input type="password"
-                               ng-model="user.password" class="form-control"
+                               ng-model="model.currentUser.password" class="form-control"
                                id="password" placeholder="Password">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="fname" class="col-sm-2">First Name:</label>
                     <div class="col-sm-10">
-                        <input type="text" ng-model="user.firstname"
+                        <input type="text" ng-model="model.currentUser.firstname"
                                class="form-control" id="fname" placeholder="First Name">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="lname" class="col-sm-2">Last Name:</label>
                     <div class="col-sm-10">
-                        <input type="text" ng-model="user.lastname"
+                        <input type="text" ng-model="model.currentUser.lastname"
                                class="form-control" id="lname" placeholder="Last Name">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="email" class="col-sm-2">Email:</label>
                     <div class="col-sm-10">
-                        <input type="email" ng-model="user.emailId"
+                        <input type="email" ng-model="model.currentUser.emailId"
                                class="form-control" id="email" placeholder="Email">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <a href="" ng-click="update(user)" class="btn btn-primary btn-block">Update</a>
+                        <a href="" ng-click="model.update(model.currentUser)"
+                           class="btn btn-primary btn-block">Update</a>
                     </div>
 
                 </div>
