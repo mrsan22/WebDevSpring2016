@@ -103,10 +103,7 @@
         var userServiceApi = {
             setCurrentUser : setCurrentUser,
             findUserByCredentials : findUserByCredentials,
-            //findAllUsers : findAllUsers,
-            //createUser : createUser,
-            //deleteUserById : deleteUserById,
-            //updateUser : updateUser
+            findUserByUsername : findUserByUsername
         };
 
         return userServiceApi;
@@ -119,18 +116,11 @@
         function findUserByCredentials(credentials){
             console.log(credentials);
             // Sending a post request to user service on the server. This returns a promise to login controller.
-            return $http.post('/api/assignment/user', credentials);
-            //var each = "";
-            //for (each in users){
-            //    if(users[each].username == username && users[each].password == password){
-            //        //console.log(users[each]);
-            //        callback(users[each]);
-            //        return;
-            //    }
-            //    else{
-            //        callback(null);
-            //    }
-            //}
+            return $http.post('/api/assignment/login', credentials);
+        }
+
+        function findUserByUsername(username){
+            return $http.post('/api/assignment/user', username);
         }
 
         //function findAllUsers(callback){

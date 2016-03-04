@@ -5,7 +5,8 @@ var mock_users = require("./user.mock.json");
 
 module.exports = function() {
     var api = {
-        findUserByCredentials: findUserByCredentials
+        findUserByCredentials: findUserByCredentials,
+        findUserByUsername : findUserByUsername
     };
     return api;
 
@@ -19,6 +20,17 @@ module.exports = function() {
         }
         // user not found
         console.log("user does not exist, returning null");
+        return null;
+    }
+
+    function findUserByUsername(username){
+        for(var u in mock_users){
+            if(mock_users[u].username == username){
+                return mock_users[u];
+            }
+        }
+        // user not found
+        console.log("user not found by username, returning null");
         return null;
     }
 };
