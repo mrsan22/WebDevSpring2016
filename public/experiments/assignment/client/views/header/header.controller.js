@@ -16,8 +16,17 @@
 
         function logOut(){
             //delete $rootScope.user;
-            UserService.setCurrentUser(null);
-            $location.url('/home');
+            //UserService.setCurrentUser(null);
+            //$location.url('/home');
+            UserService
+                .logOut()
+                .then(function () {
+                    UserService.setCurrentUser(null);
+                    $location.url('/home');
+                },
+                    function (error) {
+                        console.log(error.statusText);
+                    });
 
         }
     }

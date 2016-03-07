@@ -4,6 +4,7 @@ module.exports = function(app, model) {
     app.post("/api/assignment/login", findUserByCredentials);
     app.post("/api/assignment/user", findUserByUsername);
     app.get("/api/assignment/loggedin", loggedin);
+    app.post("/api/assignment/logout", logout);
 
     //Implementation
     function findUserByCredentials(req, res) {
@@ -21,5 +22,10 @@ module.exports = function(app, model) {
 
     function loggedin(req, res){
         res.json(req.session.currentUser);
+    }
+
+    function logout(req, res){
+        req.session.destroy();
+        res.send(200);
     }
 };
