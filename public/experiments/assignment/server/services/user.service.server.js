@@ -3,11 +3,13 @@ module.exports = function(app, model) {
     //Declaration
     app.post("/api/assignment/login", findUserByCredentials);
     app.post("/api/assignment/user", findUserByUsername);
+    app.get("/api/assignment/loggedin", loggedin);
 
     //Implementation
     function findUserByCredentials(req, res) {
         var credentials = req.body;
         var user = model.findUserByCredentials(credentials);
+        req.session.currentUser = user;
         res.json(user);
     }
 
@@ -15,5 +17,9 @@ module.exports = function(app, model) {
         var username  = req.body;
         var user = model.findUserByUsername(username);
         res.json(user);
+    }
+
+    function loggedin(req, res){
+        res.json(req.session.currentUser);
     }
 };

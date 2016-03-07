@@ -111,12 +111,13 @@
 
         //Implementation of Interfaces
         function getCurrentUser(){
-            return $rootScope.currentUser;
+            //return $rootScope.currentUser;
+            return $http.get("/api/assignment/loggedin");
         }
 
         function setCurrentUser (user) {
             $rootScope.currentUser = user;
-            console.log($rootScope.currentUser);
+            //console.log($rootScope.currentUser);
         }
         function findUserByCredentials(credentials){
             console.log(credentials);
