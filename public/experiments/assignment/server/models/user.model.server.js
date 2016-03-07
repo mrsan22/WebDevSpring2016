@@ -6,7 +6,8 @@ var mock_users = require("./user.mock.json");
 module.exports = function() {
     var api = {
         findUserByCredentials: findUserByCredentials,
-        findUserByUsername : findUserByUsername
+        findUserByUsername : findUserByUsername,
+        createUser : createUser
     };
     return api;
 
@@ -32,5 +33,16 @@ module.exports = function() {
         // user not found
         console.log("user not found by username, returning null");
         return null;
+    }
+
+    function createUser(user){
+        for(var i=0;i<mock_users.length;i++){
+            if (mock_users[i].username == user.username){
+                return null;
+            }
+        }
+        user["_id"] = (new Date).getTime();
+        mock_users.push(user);
+        return user;
     }
 };

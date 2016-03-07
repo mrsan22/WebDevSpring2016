@@ -5,6 +5,7 @@ module.exports = function(app, model) {
     app.post("/api/assignment/user", findUserByUsername);
     app.get("/api/assignment/loggedin", loggedin);
     app.post("/api/assignment/logout", logout);
+    app.post("/api/assignment/register", register);
 
     //Implementation
     function findUserByCredentials(req, res) {
@@ -27,5 +28,12 @@ module.exports = function(app, model) {
     function logout(req, res){
         req.session.destroy();
         res.send(200);
+    }
+
+    function register(req, res){
+        var user = req.body;
+        user = model.createUser(user);
+        req.session.currentUser = user;
+        res.json(user);
     }
 };
