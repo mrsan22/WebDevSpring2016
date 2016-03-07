@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.use(multer());
 app.use(session({secret: 'ThisisSparta', resave: false, saveUninitialized: true}));
 app.use(cookieParser());
-console.log(process.env.PASSPORT_SECRET);
+//console.log(process.env.PASSPORT_SECRET);
 // With below syntax for ipaddress and port, the application can run both locally and on openshift.
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
