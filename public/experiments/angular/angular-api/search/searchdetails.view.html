@@ -54,7 +54,7 @@
                         <small>Follow</small>
                     </h4>
                     {{content.description}}
-                    <i class="fa fa-flag pull-right"></i>
+                    <a class="btn btn-sm" href="#"><i title="Report Review" class="fa fa-flag pull-right"></i></a>
                     <div class="row">
                         <div class="col-xs-8">
                             <!--<i class="fa fa-star fa-lg"></i>-->
@@ -69,8 +69,18 @@
                                        based-on="content.basedOn"
                                        show-grade="content.showGrade">
                             </ng-rating>
+                            {{content.createdOn | date}}
                         </div>
-
+                        <!--<i class="fa fa-pencil-square-o fa-lg"></i>-->
+                        <!--<i class="fa fa-trash-o fa-lg"></i>-->
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="btn-group pull-right">
+                                <a class="btn btn-default" href="#"><i title="Edit Review" class="fa fa-pencil-square-o"></i></a>
+                                <a class="btn btn-default" href="#"><i title="Delete Review" class="fa fa-trash-o"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <hr>

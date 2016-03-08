@@ -29,7 +29,8 @@
                 starsCount : 5,
                 iconClass : 'fa fa-star',
                 editableRating : false,
-                showGrade : false
+                showGrade : false,
+                createdOn: 1397490980837
             }, {
                 title : 'Rating 2',
                 description : 'Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ' +
@@ -39,7 +40,8 @@
                 starsCount : 5,
                 iconClass : 'fa fa-star',
                 editableRating : false,
-                showGrade : false
+                showGrade : false,
+                createdOn: 1397490980837
             }, {
                 title : 'Rating 2',
                 description : 'Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque' +
@@ -49,7 +51,8 @@
                 starsCount : 5,
                 iconClass : 'fa fa-star',
                 editableRating : false,
-                showGrade : false
+                showGrade : false,
+                createdOn: 1397490980837
             }, {
                 title : 'Rating 2',
                 description : 'Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque' +
@@ -59,7 +62,8 @@
                 starsCount : 5,
                 iconClass : 'fa fa-star',
                 editableRating : false,
-                showGrade : false
+                showGrade : false,
+                createdOn: 1397490980837
             }];
             //$interval(function() {
             //    $scope.ratings[0].rating = Math.round(Math.random()*5*100) / 100;
@@ -79,7 +83,8 @@
                 starsCount : 5,
                 iconClass : 'fa fa-star',
                 editableRating : false,
-                showGrade : false
+                showGrade : false,
+                createdOn: Date.now()
             });
         }
 
