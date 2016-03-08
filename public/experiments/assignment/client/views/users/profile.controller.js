@@ -29,13 +29,16 @@
 
         function update(user){
             console.log(user);
-            UserService.updateUser(
-                user._id,
-                user,
-                function(user){
-                    console.log(user)
-                }
-            )
+            UserService
+                .updateUserById(user._id,user)
+                .then(function (response) {
+                    //vm.currentUser  =response.data;
+                    //console.log(response.data);
+                },
+                    function (error) {
+                        console.log(error.statusText);
+                    });
+
         }
 
     }

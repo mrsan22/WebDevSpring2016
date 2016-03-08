@@ -6,6 +6,10 @@ module.exports = function(app, model) {
     app.get("/api/assignment/loggedin", loggedin);
     app.post("/api/assignment/logout", logout);
     app.post("/api/assignment/register", register);
+    app.get("/api/assignment/users", findAllUsers);
+    app.post("/api/assignment/userById", findUserById);
+    app.post("/api/assignment/deleteuser", deleteUserById);
+    app.post("/api/assignment/updateuser", updateUserById);
 
     //Implementation
     function findUserByCredentials(req, res) {
@@ -35,5 +39,28 @@ module.exports = function(app, model) {
         user = model.createUser(user);
         req.session.currentUser = user;
         res.json(user);
+    }
+
+    function findAllUsers(req, res){
+        var allUsers = model.findAllUsers();
+        res.send(allUsers);
+    }
+
+    function findUserById(req, res){
+        var userId = req.body;
+        var user = model.findUserById(userId);
+        res.json(user);
+    }
+
+    function deleteUserById(req, res){
+        var userId = req.body;
+        var users = model.deleteUserById(userId);
+        res.send(users);
+    }
+
+    function updateUserById(req, res){
+        var userObj = req.body;
+        var updatedUser = model.updateUserById(userObj);
+        res.json(updatedUser);
     }
 };

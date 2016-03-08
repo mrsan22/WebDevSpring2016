@@ -13,6 +13,10 @@
             findUserByCredentials : findUserByCredentials,
             findUserByUsername : findUserByUsername,
             createUser : createUser,
+            findAllUsers : findAllUsers,
+            findUserById : findUserById,
+            deleteUserById : deleteUserById,
+            updateUserById : updateUserById,
             logOut : logOut
         };
 
@@ -42,34 +46,31 @@
             return $http.post("/api/assignment/logout");
         }
 
-        //function findAllUsers(callback){
-        //    callback(users);
-        //}
-        //
+        function findAllUsers(){
+            return $http.get("/api/assignment/users");
+        }
+
         function createUser(user){
             return $http.post("/api/assignment/register", user);
         }
 
-        //function deleteUserById(userId, callback){
-        //    var each = "";
-        //    for (each in users){
-        //        if (users[each]._id == userId){
-        //            users.splice(each,1);
-        //        }
-        //    }
-        //    callback(users);
-        //}
-        //
-        //function updateUser(userId, user, callback){
-        //    var each = "";
-        //    for (each in users){
-        //        if (users[each]._id == userId){
-        //            users[each] = user;
-        //            callback(users[each]);
-        //        }
-        //    }
-        //
-        //}
+        function findUserById(userid){
+            return $http.post("/api/assignment/userById", userid);
+        }
+
+        function deleteUserById(userId){
+            return $http.post("/api/assignment/deleteuser", userId);
+        }
+
+        function updateUserById(userId, user){
+            var params = {
+                userId : userId,
+                user : user
+            };
+            console.log(params);
+            return $http.post("/api/assignment/updateuser", params);
+
+        }
 
 
 

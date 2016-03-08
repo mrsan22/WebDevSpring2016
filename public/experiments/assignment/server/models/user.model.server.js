@@ -7,7 +7,11 @@ module.exports = function() {
     var api = {
         findUserByCredentials: findUserByCredentials,
         findUserByUsername : findUserByUsername,
-        createUser : createUser
+        createUser : createUser,
+        findAllUsers : findAllUsers,
+        findUserById : findUserById,
+        updateUserById : updateUserById,
+        deleteUserById : deleteUserById
     };
     return api;
 
@@ -45,4 +49,41 @@ module.exports = function() {
         mock_users.push(user);
         return user;
     }
+
+    function findAllUsers(){
+        return mock_users;
+    }
+
+    function findUserById(userid){
+        for(var u in mock_users){
+            if(mock_users[u]._id == userid){
+                return mock_users[u];
+            }
+        }
+        // user not found
+        console.log("user not found by Id, returning null");
+        return null;
+    }
+
+    function deleteUserById(userId){
+        for (var each in mock_users){
+            if (mock_users[each]._id == userId){
+                mock_users.splice(each,1);
+            }
+        }
+        return mock_users;
+    }
+
+    function updateUserById(userObj){
+        var id = userObj.userId;
+        var user = userObj.user;
+        for (var each in mock_users){
+            if (mock_users[each]._id == id){
+                mock_users[each] = user;
+                return (mock_users[each]);
+            }
+        }
+    }
+
+
 };
