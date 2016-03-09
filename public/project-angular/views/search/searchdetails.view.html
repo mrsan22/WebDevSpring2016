@@ -65,25 +65,32 @@
                     <!-- Blog Comments -->
 
                     <!-- Comments Form -->
-                    <div class="well margin-well">
+                    <div class="well margin-well" ng-repeat="rate in defaultRating">
                         <h4>Start your review!</h4>
-                        <i class="fa fa-star-o fa-lg"></i>
-                        <i class="fa fa-star-o fa-lg"></i>
-                        <i class="fa fa-star-o fa-lg"></i>
-                        <i class="fa fa-star-o fa-lg"></i>
-                        <i class="fa fa-star-o fa-lg"></i>
+                        <!--<i class="fa fa-star-o fa-lg"></i>-->
+                        <!--<i class="fa fa-star-o fa-lg"></i>-->
+                        <!--<i class="fa fa-star-o fa-lg"></i>-->
+                        <!--<i class="fa fa-star-o fa-lg"></i>-->
+                        <!--<i class="fa fa-star-o fa-lg"></i>-->
+                        <ng-rating ng-model="rate.rating"
+                                   icon-class="rate.iconClass"
+                                   editable="rate.editableRating"
+                                   stars-count="rate.starsCount"
+                                   based-on="rate.basedOn"
+                                   show-grade="rate.showGrade">
+                        </ng-rating>
                         <form role="form">
                             <div class="form-group">
-                                <textarea class="form-control" rows="3"></textarea>
+                                <textarea class="form-control" ng-model="review" rows="3"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button ng-click="addReview(rate.rating, review)" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
 
                     <!-- Posted Comments -->
 
                     <!-- Comment -->
-                    <div class="media margin-well" ng-repeat="review in reviews">
+                    <div class="media margin-well" ng-repeat="review in ratings">
                         <a class="pull-left" href="#">
                             <img class="media-object" src="http://placehold.it/64x64" alt="">
                         </a>
@@ -98,14 +105,32 @@
                             <i class="fa fa-flag pull-right"></i>
                             <div class="row">
                                 <div class="col-xs-8">
-                                    <i class="fa fa-star fa-lg"></i>
-                                    <i class="fa fa-star fa-lg"></i>
-                                    <i class="fa fa-star fa-lg"></i>
-                                    <i class="fa fa-star-o fa-lg"></i>
-                                    <i class="fa fa-star-o fa-lg"></i>
+                                    <!--<i class="fa fa-star fa-lg"></i>-->
+                                    <!--<i class="fa fa-star fa-lg"></i>-->
+                                    <!--<i class="fa fa-star fa-lg"></i>-->
+                                    <!--<i class="fa fa-star-o fa-lg"></i>-->
+                                    <!--<i class="fa fa-star-o fa-lg"></i>-->
+                                    <ng-rating ng-model="review.rating"
+                                               icon-class="review.iconClass"
+                                               editable="review.editableRating"
+                                               stars-count="review.starsCount"
+                                               based-on="review.basedOn"
+                                               show-grade="review.showGrade">
+                                    </ng-rating>
+                                    {{review.createdOn | date}}
                                 </div>
-                                {{review.createdOn | date}}
-
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="btn-group pull-right">
+                                        <a class="btn btn-default" href="#">
+                                            <i title="Edit Review" class="fa fa-pencil-square-o"></i>
+                                        </a>
+                                        <a class="btn btn-default" href="#">
+                                            <i title="Delete Review" class="fa fa-trash-o"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

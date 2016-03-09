@@ -7,11 +7,19 @@
     function DetailController($scope, $routeParams, YelpService, ReviewService){
 
         function init(){
+            $scope.addReview = addReview;
             $scope.restId = $routeParams.restId;
+
             ReviewService.findAllReviewsForRest(
                 $scope.restId,
                 function(response){
-                    $scope.reviews = response;
+                    $scope.ratings = response;
+                }
+            );
+
+            ReviewService.loadDefaultRating(
+                function(response){
+                    $scope.defaultRating = response;
                 }
             );
         }
@@ -28,7 +36,23 @@
                 $scope.rest = response;
                 $scope.$apply();
             }
-        )
+        );
+
+        function addReview(rating, review){
+            ReviewService.addReview(
+                rating,
+                review,
+                function (response) {
+                    console.log(response);
+                    ReviewService.findAllReviewsForRest(
+                        $scope.restId,
+                        function(response){
+                            $scope.ratings = response;
+                        }
+                    );
+                }
+            )
+        }
     }
 
 })();
