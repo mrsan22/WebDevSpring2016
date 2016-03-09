@@ -106,10 +106,10 @@
             callback(defaultRating);
         }
 
-        function addReview(rating, review, callback){
+        function addReview(restId, rating, review, callback){
             ratings.unshift({
                 title : 'Rating',
-                restId:"avana-sushi-boston",
+                restId:restId,
                 description : review,
                 rating : rating,
                 basedOn : 5,

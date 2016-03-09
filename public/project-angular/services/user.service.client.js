@@ -23,6 +23,7 @@
             setCurrentUser : setCurrentUser,
             findUserByCredentials : findUserByCredentials,
             findAllUsers : findAllUsers,
+            findUserById : findUserById,
             createUser : createUser,
             deleteUserById : deleteUserById,
             updateUser : updateUser
@@ -50,6 +51,17 @@
 
         function findAllUsers(callback){
             callback(users);
+        }
+
+        function findUserById(userid){
+            for(var u in users){
+                if(users[u]._id == userid){
+                    return users[u];
+                }
+            }
+            // user not found
+            console.log("user not found by Id, returning null");
+            return null;
         }
 
         function createUser(user, callback){

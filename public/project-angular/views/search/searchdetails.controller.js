@@ -4,7 +4,7 @@
         .module("Eat'n'Review")
         .controller("DetailController", DetailController);
 
-    function DetailController($scope, $routeParams, YelpService, ReviewService){
+    function DetailController($scope, $routeParams, YelpService, ReviewService, UserService){
 
         function init(){
             $scope.addReview = addReview;
@@ -40,6 +40,7 @@
 
         function addReview(rating, review){
             ReviewService.addReview(
+                $scope.restId,
                 rating,
                 review,
                 function (response) {
