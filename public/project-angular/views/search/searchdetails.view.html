@@ -83,7 +83,7 @@
                     <!-- Posted Comments -->
 
                     <!-- Comment -->
-                    <div class="media margin-well">
+                    <div class="media margin-well" ng-repeat="review in reviews">
                         <a class="pull-left" href="#">
                             <img class="media-object" src="http://placehold.it/64x64" alt="">
                         </a>
@@ -92,8 +92,9 @@
                                 <i class="fa fa-check-circle"></i>
                                 <small>Follow</small>
                             </h4>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-                            sollicitudin commodo.
+                            <!--Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante-->
+                            <!--sollicitudin commodo.-->
+                            {{review.description}}
                             <i class="fa fa-flag pull-right"></i>
                             <div class="row">
                                 <div class="col-xs-8">
@@ -103,6 +104,7 @@
                                     <i class="fa fa-star-o fa-lg"></i>
                                     <i class="fa fa-star-o fa-lg"></i>
                                 </div>
+                                {{review.createdOn | date}}
 
                             </div>
                         </div>

@@ -4,8 +4,18 @@
         .module("Eat'n'Review")
         .controller("DetailController", DetailController);
 
-    function DetailController($scope, $routeParams, YelpService){
-        $scope.restId = $routeParams.restId;
+    function DetailController($scope, $routeParams, YelpService, ReviewService){
+
+        function init(){
+            $scope.restId = $routeParams.restId;
+            ReviewService.findAllReviewsForRest(
+                $scope.restId,
+                function(response){
+                    $scope.reviews = response;
+                }
+            );
+        }
+        init();
 
         YelpService.findRestDetailsbyId(
             $scope.restId,
