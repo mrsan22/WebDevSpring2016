@@ -89,7 +89,8 @@
 
         function save(reviewToEdit, ratingIndex){
             $scope.ratings[ratingIndex].description = reviewToEdit;
-            $scope.disableEditor(ratingIndex);
+            //$scope.disableEditor();
+            $scope.selectedreview = -1;
         }
 
         function disableEditor(ratingIndex){
