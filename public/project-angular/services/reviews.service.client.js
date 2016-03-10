@@ -85,7 +85,9 @@
           //findAllReviewsForUser : findAllReviewsForUser
             findAllReviewsForRest : findAllReviewsForRest,
             loadDefaultRating : loadDefaultRating,
-            addReview : addReview
+            addReview : addReview,
+            deleteReviewById : deleteReviewById,
+            editReviewById : editReviewById
         };
 
         return reviewsServiceApi;
@@ -120,6 +122,21 @@
                 createdOn: Date.now()
             });
             callback(ratings);
+        }
+
+        function deleteReviewById(reviewId, callback){
+            for(var each in ratings){
+                if(ratings[each]._id == reviewId){
+                    ratings.splice(each, 1);
+                    console.log(ratings);
+                    callback(ratings);
+                    return;
+                }
+            }
+        }
+
+        function editReviewById(reviewId, callback){
+
         }
 
     }
