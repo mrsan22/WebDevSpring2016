@@ -76,22 +76,26 @@
         
         function editReview(ratingIndex){
             //ReviewService.editReviewById(
-            //    $scope.ratings[ratingIndex]._id,
+            //    ratingIndex,
             //    function (response) {
             //
             //    }
-            //)
+            //);
             $scope.selectedreview = ratingIndex;
             $scope.editablereview = $scope.ratings[ratingIndex].description;
+            $scope.temp_rating = $scope.ratings[ratingIndex].rating;
         }
 
-        function disableEditor(){
-            $scope.selectedreview = -1;
-        }
 
         function save(reviewToEdit, ratingIndex){
             $scope.ratings[ratingIndex].description = reviewToEdit;
-            $scope.disableEditor();
+            $scope.disableEditor(ratingIndex);
+        }
+
+        function disableEditor(ratingIndex){
+            $scope.selectedreview = -1;
+            $scope.ratings[ratingIndex].rating = $scope.temp_rating;
+
         }
     }
 

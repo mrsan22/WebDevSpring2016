@@ -71,18 +71,18 @@
                     <!-- Comments Form -->
                     <div class="well margin-well" ng-repeat="rate in defaultRating">
                         <h4>Start your review!</h4>
-                        <i class="fa fa-star-o fa-lg"></i>
-                        <i class="fa fa-star-o fa-lg"></i>
-                        <i class="fa fa-star-o fa-lg"></i>
-                        <i class="fa fa-star-o fa-lg"></i>
-                        <i class="fa fa-star-o fa-lg"></i>
-                        <!--<ng-rating ng-model="rate.rating"-->
-                                   <!--icon-class="rate.iconClass"-->
-                                   <!--editable="rate.editableRating"-->
-                                   <!--stars-count="rate.starsCount"-->
-                                   <!--based-on="rate.basedOn"-->
-                                   <!--show-grade="rate.showGrade">-->
-                        <!--</ng-rating>-->
+                        <!--<i class="fa fa-star-o fa-lg"></i>-->
+                        <!--<i class="fa fa-star-o fa-lg"></i>-->
+                        <!--<i class="fa fa-star-o fa-lg"></i>-->
+                        <!--<i class="fa fa-star-o fa-lg"></i>-->
+                        <!--<i class="fa fa-star-o fa-lg"></i>-->
+                        <ng-rating ng-model="rate.rating"
+                                   icon-class="rate.iconClass"
+                                   editable="rate.editableRating"
+                                   stars-count="rate.starsCount"
+                                   based-on="rate.basedOn"
+                                   show-grade="rate.showGrade">
+                        </ng-rating>
                         <form role="form">
                             <div class="form-group">
                                 <textarea class="form-control" ng-model="review" rows="3"></textarea>
@@ -110,23 +110,38 @@
                                 <textarea class="form-control" rows="2" type="text" ng-model="editablereview"></textarea>
                                 <button class="btn btn-success" ng-click="save(editablereview,$index)">Save</button>
 
-                                <button class="btn btn-danger" ng-click="disableEditor()">Cancel</button>
+                                <button class="btn btn-danger" ng-click="disableEditor($index)">Cancel</button>
                             </div>
                             <i class="fa fa-flag pull-right"></i>
                             <div class="row">
-                                <div class="col-xs-8">
-                                    <i class="fa fa-star fa-lg"></i>
-                                    <i class="fa fa-star fa-lg"></i>
-                                    <i class="fa fa-star fa-lg"></i>
-                                    <i class="fa fa-star-o fa-lg"></i>
-                                    <i class="fa fa-star-o fa-lg"></i>
-                                    <!--<ng-rating ng-model="review.rating"-->
-                                               <!--icon-class="review.iconClass"-->
-                                               <!--editable="review.editableRating"-->
-                                               <!--stars-count="review.starsCount"-->
-                                               <!--based-on="review.basedOn"-->
-                                               <!--show-grade="review.showGrade">-->
-                                    <!--</ng-rating>-->
+                                <div class="col-xs-8" ng-hide="selectedreview == $index">
+                                    <!--<i class="fa fa-star fa-lg"></i>-->
+                                    <!--<i class="fa fa-star fa-lg"></i>-->
+                                    <!--<i class="fa fa-star fa-lg"></i>-->
+                                    <!--<i class="fa fa-star-o fa-lg"></i>-->
+                                    <!--<i class="fa fa-star-o fa-lg"></i>-->
+                                        <ng-rating ng-model="review.rating"
+                                               icon-class="review.iconClass"
+                                               editable="review.editableRating"
+                                               stars-count="review.starsCount"
+                                               based-on="review.basedOn"
+                                               show-grade="review.showGrade">
+                                        </ng-rating>
+                                    {{review.createdOn | date}}
+                                </div>
+                                <div class="col-xs-8" ng-show="selectedreview == $index">
+                                    <!--<i class="fa fa-star fa-lg"></i>-->
+                                    <!--<i class="fa fa-star fa-lg"></i>-->
+                                    <!--<i class="fa fa-star fa-lg"></i>-->
+                                    <!--<i class="fa fa-star-o fa-lg"></i>-->
+                                    <!--<i class="fa fa-star-o fa-lg"></i>-->
+                                        <ng-rating ng-model="review.rating"
+                                               icon-class="review.iconClass"
+                                               editable="true"
+                                               stars-count="review.starsCount"
+                                               based-on="review.basedOn"
+                                               show-grade="review.showGrade">
+                                        </ng-rating>
                                     {{review.createdOn | date}}
                                 </div>
                             </div>
