@@ -85,9 +85,9 @@
                         <!--</ng-rating>-->
                         <form role="form">
                             <div class="form-group">
-                                <textarea class="form-control" ng-model="review" rows="3"></textarea>
+                                <textarea ng-readonly="readonly" class="form-control" ng-model="review" rows="3"></textarea>
                             </div>
-                            <button ng-click="addReview(rate.rating, review)" class="btn btn-primary">Submit</button>
+                            <button ng-disabled="readonly" ng-click="addReview(rate.rating, review, user)" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
 
@@ -99,7 +99,7 @@
                             <img class="media-object" src="http://placehold.it/64x64" alt="">
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading">Sanjiv Kumar
+                            <h4 class="media-heading">{{review.firstName}} {{review.lastName}}
                                 <i class="fa fa-check-circle"></i>
                                 <small>Follow</small>
                             </h4>
@@ -147,8 +147,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="btn-group pull-right">
-                                        <a ng-hide="selectedreview == $index" class="btn btn-default" ng-click="editReview($index)">
+                                    <div ng-hide="selectedreview == $index" class="btn-group pull-right">
+                                        <a class="btn btn-default" ng-click="editReview($index)">
                                             <i title="Edit Review" class="fa fa-pencil-square-o"></i>
                                         </a>
                                         <a class="btn btn-default" ng-click="deleteReview($index)">

@@ -12,6 +12,7 @@
             $scope.editReview  = editReview;
             $scope.disableEditor = disableEditor;
             $scope.save = save;
+
             
             $scope.restId = $routeParams.restId;
 
@@ -19,14 +20,32 @@
                 $scope.restId,
                 function(response){
                     $scope.ratings = response;
+                    if($scope.user) {
+                        for (var i in $scope.ratings) {
+                            var userObj = UserService.findUserById($scope.ratings[i].userId);
+                            $scope.ratings[i]["firstName"] = userObj.firstName;
+                            $scope.ratings[i]["lastName"] = userObj.lastName;
+                        }
+                    }
+                    else{
+                        for (var i in $scope.ratings) {
+                            var userObj = UserService.findUserById($scope.ratings[i].userId);
+                            $scope.ratings[i]["firstName"] = userObj.firstName;
+                            $scope.ratings[i]["lastName"] = userObj.lastName;
+                        }
+                        $scope.readonly = true;
+                    }
                 }
             );
+
+
 
             ReviewService.loadDefaultRating(
                 function(response){
                     $scope.defaultRating = response;
                 }
             );
+
         }
         init();
 
@@ -43,9 +62,14 @@
             }
         );
 
-        function addReview(rating, review){
+        function addReview(rating, review, user){
+            if(!user){
+                user={};
+                user.userId = 123;
+            }
             ReviewService.addReview(
                 $scope.restId,
+                user.userId,
                 rating,
                 review,
                 function (response) {
@@ -53,7 +77,11 @@
                     ReviewService.findAllReviewsForRest(
                         $scope.restId,
                         function(response){
+                            $scope.user = user;
                             $scope.ratings = response;
+                                $scope.ratings[0]["firstName"] = user.firstName;
+                                $scope.ratings[0]["lastName"] = user.lastName;
+
                         }
                     );
                 }

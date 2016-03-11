@@ -39,7 +39,7 @@
                 description : 'avana-sushi-boston Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque' +
                                 ' ante sollicitudin commodo.',
                 restId:"avana-sushi-boston",
-                "userId":123,
+                "userId":456,
                 rating : 2.5,
                 basedOn : 5,
                 starsCount : 5,
@@ -108,10 +108,11 @@
             callback(defaultRating);
         }
 
-        function addReview(restId, rating, review, callback){
+        function addReview(restId,userId, rating, review, callback){
             ratings.unshift({
                 title : 'Rating',
                 restId:restId,
+                userId: userId,
                 description : review,
                 rating : rating,
                 basedOn : 5,
