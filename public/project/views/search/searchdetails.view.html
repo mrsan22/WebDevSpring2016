@@ -148,7 +148,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="btn-group pull-right">
-                                        <a class="btn btn-default" ng-click="editReview($index)">
+                                        <a ng-hide="selectedreview == $index" class="btn btn-default" ng-click="editReview($index)">
                                             <i title="Edit Review" class="fa fa-pencil-square-o"></i>
                                         </a>
                                         <a class="btn btn-default" ng-click="deleteReview($index)">
