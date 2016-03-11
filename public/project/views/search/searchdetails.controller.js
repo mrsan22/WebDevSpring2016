@@ -111,19 +111,19 @@
             //);
             $scope.selectedreview = ratingIndex;
             $scope.editablereview = $scope.ratings[ratingIndex].description;
-            //$scope.temp_rating = $scope.ratings[ratingIndex].rating;
+            $scope.temp_rating = $scope.ratings[ratingIndex].rating;
         }
 
 
         function save(reviewToEdit, ratingIndex){
             $scope.ratings[ratingIndex].description = reviewToEdit;
-            $scope.disableEditor();
-            //$scope.selectedreview = -1;
+            //$scope.disableEditor();
+            $scope.selectedreview = -1;
         }
 
         function disableEditor(ratingIndex){
             $scope.selectedreview = -1;
-            //$scope.ratings[ratingIndex].rating = $scope.temp_rating;
+            $scope.ratings[ratingIndex].rating = $scope.temp_rating;
 
         }
     }
