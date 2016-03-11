@@ -24,12 +24,8 @@
                 templateUrl : "views/users/profile.view.html",
                 controller : "ProfileController"
             })
-            .when("/profile/reviews", {
-                templateUrl : "views/users/reviews.view.html",
-                controller : "ReviewController"
-            })
-            .when("/admin/user", {
-                templateUrl : "views/admin/admin.user.view.html",
+            .when("/admin", {
+                templateUrl : "views/admin/admin.view.html",
                 controller : "AdminController"
             })
             .when("/search", {

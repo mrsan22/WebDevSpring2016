@@ -1,0 +1,116 @@
+
+    <!--<div class="row">-->
+        <!--<div class="col-sm-4 col-xs-6 img-hover pad-left-right tmargin">-->
+            <!--<a href="#">-->
+                <!--<img class="img-responsive portfolio-item margin-bottom-zero" src="http://placehold.it/500x300" alt="">-->
+            <!--</a>-->
+        <!--</div>-->
+
+        <!--<div class="col-sm-4 col-xs-6 img-hover pad-left-right tmargin">-->
+            <!--<a href="#">-->
+                <!--<img class="img-responsive portfolio-item margin-bottom-zero" src="http://placehold.it/500x300" alt="">-->
+            <!--</a>-->
+        <!--</div>-->
+
+        <!--<div class="col-sm-4 col-xs-6 img-hover pad-left-right hidden-xs tmargin">-->
+            <!--<a href="#">-->
+                <!--<img class="img-responsive portfolio-item margin-bottom-zero" src="http://placehold.it/500x300" alt="">-->
+            <!--</a>-->
+        <!--</div>-->
+
+    <!--</div>-->
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>{{rest.name}}</h2>
+            </div>
+
+        </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <img src={{imageurl}} class="img-responsive"/>
+            <img src={{rest.rating_img_url}} class="img-responsive"/>
+
+        </div>
+        <div class="col-sm-5">
+            <p>
+                {{rest.snippet_text}}
+            </p>
+            <p>{{rest.categories[0][0]}} , {{rest.categories[1][0]}}</p>
+
+            <p>{{rest.location.display_address[0]}}, {{rest.location.display_address[1]}}
+                {{rest.location.display_address[2]}}</p>
+
+            <p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+                 {{rest.display_phone}}</p>
+            <hr>
+
+            <i class="fa fa-thumbs-o-up fa-lg"></i>Like &nbsp
+            <i class="fa fa-thumbs-o-down fa-lg"></i>Dislike &nbsp
+            <i class="fa fa-bookmark fa-lg"></i>Save
+            <hr>
+        </div>
+        <div class="col-sm-4">
+            <img src="/project/images/staticmap.png" class="img-responsive"/>
+        </div>
+
+    </div>
+
+        <div class="panel panel-default margin-panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Reviews for {{rest.name}}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <!-- Blog Comments -->
+
+                    <!-- Comments Form -->
+                    <div class="well margin-well">
+                        <h4>Start your review!</h4>
+                        <i class="fa fa-star-o fa-lg"></i>
+                        <i class="fa fa-star-o fa-lg"></i>
+                        <i class="fa fa-star-o fa-lg"></i>
+                        <i class="fa fa-star-o fa-lg"></i>
+                        <i class="fa fa-star-o fa-lg"></i>
+                        <form role="form">
+                            <div class="form-group">
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+
+                    <!-- Posted Comments -->
+
+                    <!-- Comment -->
+                    <div class="media margin-well">
+                        <a class="pull-left" href="#">
+                            <img class="media-object" src="http://placehold.it/64x64" alt="">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading">Sanjiv Kumar
+                                <i class="fa fa-check-circle"></i>
+                                <small>Follow</small>
+                            </h4>
+                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
+                            sollicitudin commodo.
+                            <i class="fa fa-flag pull-right"></i>
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <i class="fa fa-star fa-lg"></i>
+                                    <i class="fa fa-star fa-lg"></i>
+                                    <i class="fa fa-star fa-lg"></i>
+                                    <i class="fa fa-star-o fa-lg"></i>
+                                    <i class="fa fa-star-o fa-lg"></i>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+
