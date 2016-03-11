@@ -97,7 +97,7 @@
                             </div>
                             <button ng-disabled="readonly"
                                     ng-click="addReview(rate.rating, review, user)"
-                                    class="btn btn-primary">Submit</button>
+                                    class="btn btn-primary">Post Review</button>
                         </form>
                     </div>
 
@@ -116,13 +116,13 @@
                             <!--Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante-->
                             <!--sollicitudin commodo.-->
                             <p ng-hide="selectedreview == $index">{{review.description}}</p>
-                            <div ng-if="selectedreview == $index">
-                                <textarea class="form-control" rows="2" type="text" ng-model="editablereview"></textarea>
-                                <button class="btn btn-success" ng-click="save(editablereview,$index)">Save</button>
+                            <div ng-show="selectedreview == $index">
+                                <textarea class="form-control" rows="3" type="text" ng-model="editablereview"></textarea>
+                                <!--<button class="btn btn-success" ng-click="save(editablereview,$index)">Save</button>-->
 
-                                <button class="btn btn-danger" ng-click="disableEditor($index)">Cancel</button>
+                                <!--<button class="btn btn-danger" ng-click="disableEditor($index)">Cancel</button>-->
                             </div>
-                            <i class="fa fa-flag pull-right"></i>
+                            <a href="" ><i title="Report Review" class="fa fa-flag pull-right flag-hover"></i></a>
                             <div class="row">
                                 <div class="col-xs-8" ng-hide="selectedreview == $index">
                                     <!--<i class="fa fa-star fa-lg"></i>-->
@@ -139,6 +139,7 @@
                                         </ng-rating>
                                     {{review.createdOn | date}}
                                 </div>
+                                <!--Below div shows up in edit mode for star rating-->
                                 <div class="col-xs-8" ng-show="selectedreview == $index">
                                     <!--<i class="fa fa-star fa-lg"></i>-->
                                     <!--<i class="fa fa-star fa-lg"></i>-->
@@ -158,11 +159,20 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div ng-hide="selectedreview == $index" class="btn-group pull-right">
-                                        <a class="btn btn-default" ng-click="editReview($index)">
+                                        <a class="btn btn-default" ng-click="editReview($index)"> Edit
                                             <i title="Edit Review" class="fa fa-pencil-square-o"></i>
                                         </a>
-                                        <a class="btn btn-default" ng-click="deleteReview($index)">
+                                        <a class="btn btn-default" ng-click="deleteReview($index)">Delete
                                             <i title="Delete Review" class="fa fa-trash-o"></i>
+                                        </a>
+                                    </div>
+                                    <div ng-if="selectedreview == $index" class="btn-group pull-right">
+                                        <a class="btn btn-default" ng-click="save(editablereview, $index)">Save
+                                            <i title="Save Review" class="fa fa-floppy-o"></i>
+                                        </a>
+
+                                        <a class="btn btn-default" ng-click="disableEditor($index)">Cancel
+                                            <i title="Cancel" class="fa fa-times-circle"></i>
                                         </a>
                                     </div>
                                 </div>

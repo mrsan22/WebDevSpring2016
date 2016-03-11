@@ -12,7 +12,6 @@
             $scope.editReview  = editReview;
             $scope.disableEditor = disableEditor;
             $scope.save = save;
-
             
             $scope.restId = $routeParams.restId;
 
@@ -119,11 +118,14 @@
             $scope.ratings[ratingIndex].description = reviewToEdit;
             //$scope.disableEditor();
             $scope.selectedreview = -1;
+            //$scope.createdOn = Date.now();
+            //$scope.latestDate = true;
         }
 
         function disableEditor(ratingIndex){
             $scope.selectedreview = -1;
             $scope.ratings[ratingIndex].rating = $scope.temp_rating;
+            $scope.sameDate = true;
 
         }
     }
