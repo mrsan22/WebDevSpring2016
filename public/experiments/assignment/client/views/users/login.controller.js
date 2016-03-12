@@ -9,7 +9,7 @@
 
         vm.login = login;
 
-        //Contains code that we want to executen as soon as the controller loads
+        //Contains code that we want to execute as soon as the controller loads
         function init(){
 
         }
