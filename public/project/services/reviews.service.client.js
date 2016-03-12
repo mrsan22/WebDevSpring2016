@@ -55,7 +55,7 @@
                                 ' ante sollicitudin commodo.',
                 restId:"pho-basil-boston",
                 "userId":123,
-                rating : 3,
+                rating : 2.4,
                 basedOn : 5,
                 starsCount : 5,
                 iconClass : 'fa fa-star',
