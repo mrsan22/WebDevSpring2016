@@ -64,7 +64,7 @@
         }
 
         function deleteUserById(userId){
-            return $http.post("/api/assignment/deleteuser", userId);
+            return $http.delete("/api/assignment/user/"+userId);
         }
 
         function updateUserById(userId, user){

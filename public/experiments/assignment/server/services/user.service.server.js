@@ -9,7 +9,7 @@ module.exports = function(app, model) {
     app.post("/api/assignment/register", register);
     app.get("/api/assignment/users", findAllUsers);
     app.get("/api/assignment/user/:userid", findUserById);
-    app.post("/api/assignment/deleteuser", deleteUserById);
+    app.delete("/api/assignment/user/:userid", deleteUserById);
     app.put("/api/assignment/user/:userId", updateUserById);
 
     //new declaration
@@ -55,11 +55,12 @@ module.exports = function(app, model) {
     function findUserById(req, res){
         var userId = req.params.userid;
         var user = model.findUserById(userId);
+        req.session.currentUser = user;
         res.json(user);
     }
 
     function deleteUserById(req, res){
-        var userId = req.body;
+        var userId = req.params.userid;
         var users = model.deleteUserById(userId);
         res.send(users);
     }
@@ -67,8 +68,8 @@ module.exports = function(app, model) {
     function updateUserById(req, res){
         var userid = req.params.userId;
         var userObj = req.body;
-        var updatedUser = model.updateUserById(userid, userObj);
-        res.json(updatedUser);
+        var updatedUsers = model.updateUserById(userid, userObj);
+        res.send(updatedUsers);
     }
 
     function createUser(req, res){

@@ -32,8 +32,17 @@
             UserService
                 .updateUserById(user._id,user)
                 .then(function (response) {
+                    //console.log(response.data);
                     //vm.currentUser  =response.data;
                     //console.log(response.data);
+                    UserService
+                        .findUserById(user._id)
+                        .then(function (response) {
+                            console.log(response.data);
+                        },
+                            function (error) {
+                                console.log(error.statusText);
+                            })
                 },
                     function (error) {
                         console.log(error.statusText);

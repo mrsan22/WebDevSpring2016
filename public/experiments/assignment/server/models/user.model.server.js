@@ -79,7 +79,7 @@ module.exports = function() {
         for (var each in mock_users){
             if (mock_users[each]._id == userid){
                 mock_users[each] = userObj;
-                return (mock_users[each]);
+                return (mock_users);
             }
         }
     }
