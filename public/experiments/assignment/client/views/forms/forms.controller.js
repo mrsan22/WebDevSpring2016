@@ -64,10 +64,13 @@
                     }
                     else{
                         console.log("Form with same title cannot be added!!");
+                        vm.show = true;
+                        vm.form = {};
                     }
                 },
                 function(error){
                     console.log("Failed to retrieve newly created form",error.statusText);
+
                 });
 
         }

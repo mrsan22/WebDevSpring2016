@@ -41,6 +41,11 @@
                     </tr>
                     <tr>
                 </table>
+                <div ng-if="model.show" class="alert alert-info alert-dismissable">
+                    <a class="panel-close close" data-dismiss="alert">×</a>
+                    <i class="fa fa-info-circle"></i>
+                    <strong>Form with same name already exist.</strong> Please create form with different name.
+                </div>
             </div>
         </div>
     </div>
