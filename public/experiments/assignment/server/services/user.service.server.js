@@ -3,7 +3,7 @@ module.exports = function(app, model) {
 
     //Declaration
     app.post("/api/assignment/login", findUserByCredentials);
-    app.get("/api/assignment/user?[username=usernameg&password=password]", loginUser);
+    app.get("/api/assignment/user?[username=username&password=password]", loginUser);
     app.get("/api/assignment/user?[username=username]", findUserByUsername);
     app.get("/api/assignment/loggedin", loggedin);
     app.post("/api/assignment/logout", logout);
