@@ -7,23 +7,24 @@ module.exports = function(){
     var api = {
         createFormForUser : createFormForUser,
         findAllFormsForUser : findAllFormsForUser,
-        updateFormById : updateFormById
-
+        updateFormById : updateFormById,
+        findFormById : findFormById,
+        deleteFormById : deleteFormById
     };
 
     return api;
 
-    function createFormForUser(formObj){
+    function createFormForUser(userid, formObj){
         for(var i=0;i<mock_forms.length;i++){
-            if (mock_forms[i].title == formObj.formObj.title){
+            if (mock_forms[i].title == formObj.title){
                 return null;
             }
         }
          var id = (new Date).getTime();
         var newForm = {
             "_id" : id,
-            "userId" : formObj.userId,
-            "title" : formObj.formObj["title"]
+            "userId" : userid,
+            "title" : formObj["title"]
         };
         mock_forms.push(newForm);
         return newForm;
@@ -49,6 +50,26 @@ module.exports = function(){
                 };
                 mock_forms[each] = formnew;
                 return (mock_forms[each]);
+            }
+        }
+    }
+
+    function findFormById(formid){
+        for(var f in mock_forms){
+            if(mock_forms[f]._id == formid){
+                return mock_forms[f];
+            }
+        }
+        // form not found
+        console.log("form not found by Id, returning null");
+        return null;
+    }
+
+    function deleteFormById(formid){
+        for(var each in mock_forms){
+            if(mock_forms[each]._id == formid){
+                mock_forms.splice(each, 1);
+                return mock_forms;
             }
         }
     }

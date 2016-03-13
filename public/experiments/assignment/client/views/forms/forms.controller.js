@@ -44,10 +44,10 @@
                 return;
             }
 
-            FormService.createFormForUser({
-                "userId" : vm.userId,
-                "formObj" : formObj
-        })
+            FormService
+                .createFormForUser(
+                vm.userId,
+                formObj)
                 .then(function(response){
                     console.log(response);
                     if(response.data) {
@@ -79,18 +79,6 @@
             if(!formObj || !formObj.title){
                 return;
             }
-            //FormService.updateFormById(
-            //    formObj._id,
-            //    formObj,
-            //    function(form){
-            //        if (selectedFormIndex >= 0) {
-            //            vm.forms[selectedFormIndex] = form;
-            //            vm.form = {};
-            //            selectedFormIndex = -1;
-            //        }
-            //
-            //    }
-            //)
             FormService
                 .updateFormById(
                 formObj._id,
@@ -105,7 +93,6 @@
         }
 
         function selectForm(formIndex){
-            console.log(formIndex);
              selectedFormIndex = formIndex;
             var selectForm = {
                 "_id" : vm.forms[formIndex]._id,
@@ -116,17 +103,22 @@
         }
 
         function deleteForm(formIndex){
-            FormService.deleteFormById(
-                vm.forms[formIndex]._id,
-                function(forms){
-                    FormService.findAllFormsForUser(
-                        vm.userId,
-                        function(form){
-                            vm.forms = form;
-                        }
-                    )
-                }
-            )
+            FormService
+                .deleteFormById(vm.forms[formIndex]._id)
+                .then(function(forms){
+                    FormService
+                        .findAllFormsForUser(vm.userId)
+                        .then(function(form){
+                            vm.forms = form.data;
+                        },
+                        function(error){
+                            console.log("Failed to update forms for particular user after deletion",error.statusText);
+                        });
+                },
+                    function (error) {
+                        console.log("Failed to retrieve form arrays after deletion",error.statusText);
+                    });
+
         }
     }
 

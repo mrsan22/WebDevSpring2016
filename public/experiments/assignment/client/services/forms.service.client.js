@@ -5,17 +5,12 @@
         .factory("FormService", FormService);
 
     function FormService($http){
-        var forms = [];
-        forms = [
-            {"_id": "000", "title": "Contacts", "userId": 123},
-            {"_id": "010", "title": "ToDo",     "userId": 123},
-            {"_id": "020", "title": "CDs",      "userId": 234}
-        ];
 
         //Declaration of interface
         var formServiceApi = {
             createFormForUser : createFormForUser,
             findAllFormsForUser : findAllFormsForUser,
+            findFormById : findFormById,
             deleteFormById : deleteFormById,
             updateFormById : updateFormById
         };
@@ -23,58 +18,26 @@
         return formServiceApi;
 
         //Implementation of Interfaces
-        function createFormForUser(FormObj){
-            console.log(FormObj);
-            return $http.post("/api/assignment/createForm", FormObj);
+        function createFormForUser(userid, FormObj){
+            return $http.post("/api/assignment/user/" + userid+"/form", FormObj);
         }
 
         function findAllFormsForUser(userId){
-            return $http.get("/api/assignment/findAllForms/" + userId);
+            return $http.get("/api/assignment/user/" + userId+"/form");
         }
 
-        function deleteFormById(formId, callback){
-            var each = "";
-            for(each in forms){
-                if(forms[each]._id == formId){
-                    forms.splice(each, 1);
-                    console.log(forms);
-                    callback(forms);
-                    return;
-                }
-            }
+        function findFormById(formId){
+            return $http.get("/api/assignment/form/" + formId);
+        }
+
+        function deleteFormById(formId){
+            return $http.delete("/api/assignment/form/" + formId);
 
 
         }
         function updateFormById(formId, formObj){
-            //for(var each in forms){
-            //    if(forms[each]._id == formId){
-            //        var formnew = {
-            //            "_id" : newForm["_id"],
-            //            "userId" : newForm["userId"],
-            //            "title" : newForm["title"]
-            //        };
-            //        forms[each] = formnew;
-            //        callback(forms[each]);
-            //        return;
-            //    }
-            //}
             return $http.put("/api/assignment/updateformbyid/"+ formId, formObj);
         }
-
-        //function updateFormById(formId, newForm, callback){
-        //    for(var each in forms){
-        //        if(forms[each]._id == formId){
-        //            var formnew = {
-        //                "_id" : newForm["_id"],
-        //                "userId" : newForm["userId"],
-        //                "title" : newForm["title"]
-        //            };
-        //            forms[each] = formnew;
-        //            callback(forms[each]);
-        //            return;
-        //        }
-        //    }
-        //}
     }
 
 })();
