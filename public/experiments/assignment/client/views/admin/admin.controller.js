@@ -5,11 +5,6 @@
         .controller("AdminController", AdminController);
 
     function AdminController(UserService){
-        //$scope.user = $rootScope.user;
-        //if (!$scope.user) {
-        //    $location.url("/home");
-        //}
-
         var vm =this;
         function init(){
             UserService.getCurrentUser()

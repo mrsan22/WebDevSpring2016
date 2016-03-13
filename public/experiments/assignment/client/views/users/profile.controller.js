@@ -9,11 +9,6 @@
         vm.update = update;
 
         function init() {
-            //vm.currentUser = UserService.getCurrentUser();
-            //console.log(vm.currentUser);
-            //if(vm.currentUser == null) {
-            //    $location.url("/home");
-            //}
             UserService.getCurrentUser()
                 .then(function(response){
                     vm.currentUser = response.data;
