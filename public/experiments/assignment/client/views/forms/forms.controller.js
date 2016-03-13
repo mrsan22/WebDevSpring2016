@@ -33,7 +33,7 @@
         var vm = this;
 
         //Event handler declaration
-        //vm.addForm = addForm;
+        vm.addForm = addForm;
         vm.updateForm = updateForm;
         vm.deleteForm = deleteForm;
         vm.selectForm = selectForm;
@@ -86,7 +86,7 @@
             //)
             FormService.createFormForUser({
                 "userId" : vm.userId,
-                "FormObj" : formObj
+                "formObj" : formObj
         })
                 .then(function(response){
                     console.log(response);

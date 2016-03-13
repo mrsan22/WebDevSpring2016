@@ -14,7 +14,7 @@ module.exports = function(){
 
     function createFormForUser(formObj){
         for(var i=0;i<mock_forms.length;i++){
-            if (mock_forms[i].title == formObj.title){
+            if (mock_forms[i].title == formObj.formObj.title){
                 return null;
             }
         }
@@ -22,7 +22,7 @@ module.exports = function(){
         var newForm = {
             "_id" : id,
             "userId" : formObj.userId,
-            "title" : formObj["title"]
+            "title" : formObj.formObj["title"]
         };
         mock_forms.push(newForm);
         return newForm;
