@@ -4,7 +4,7 @@
         .module("FormBuilderApp")
         .factory("FormService", FormService);
 
-    function FormService(){
+    function FormService($http){
         var forms = [];
         forms = [
             {"_id": "000", "title": "Contacts", "userId": 123},
