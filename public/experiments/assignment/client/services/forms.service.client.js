@@ -23,27 +23,13 @@
         return formServiceApi;
 
         //Implementation of Interfaces
-        function createFormForUser(userId, form, callback){
-             var id = (new Date).getTime();
-            var newForm = {
-                "_id" : id,
-                "userId" : userId,
-                "title" : form["title"]
-            };
-            forms.push(newForm);
-            callback(newForm);
+        function createFormForUser(FormObj){
+            console.log(FormObj);
+            return $http.post("/api/assignment/createForm", FormObj);
         }
 
-        function findAllFormsForUser(userId, callback){
-            var formsArray = [];
-            var each = "";
-            for (each in forms){
-                if(forms[each].userId == userId){
-                    formsArray.push(forms[each]);
-                    console.log("find all forms",formsArray);
-                }
-            }
-            callback(formsArray);
+        function findAllFormsForUser(userId){
+            return $http.get("/api/assignment/findAllForms" + userId);
         }
 
         function deleteFormById(formId, callback){
