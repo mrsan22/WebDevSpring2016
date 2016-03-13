@@ -29,7 +29,7 @@
         }
 
         function findAllFormsForUser(userId){
-            return $http.get("/api/assignment/findAllForms" + userId);
+            return $http.get("/api/assignment/findAllForms/" + userId);
         }
 
         function deleteFormById(formId, callback){
@@ -45,22 +45,36 @@
 
 
         }
-
-        function updateFormById(formId, newForm, callback){
-            var each="";
-            for(each in forms){
-                if(forms[each]._id == formId){
-                    var formnew = {
-                        "_id" : newForm["_id"],
-                        "userId" : newForm["userId"],
-                        "title" : newForm["title"]
-                    };
-                    forms[each] = formnew;
-                    callback(forms[each]);
-                    return;
-                }
-            }
+        function updateFormById(formId, formObj){
+            //for(var each in forms){
+            //    if(forms[each]._id == formId){
+            //        var formnew = {
+            //            "_id" : newForm["_id"],
+            //            "userId" : newForm["userId"],
+            //            "title" : newForm["title"]
+            //        };
+            //        forms[each] = formnew;
+            //        callback(forms[each]);
+            //        return;
+            //    }
+            //}
+            return $http.put("/api/assignment/updateformbyid/"+ formId, formObj);
         }
+
+        //function updateFormById(formId, newForm, callback){
+        //    for(var each in forms){
+        //        if(forms[each]._id == formId){
+        //            var formnew = {
+        //                "_id" : newForm["_id"],
+        //                "userId" : newForm["userId"],
+        //                "title" : newForm["title"]
+        //            };
+        //            forms[each] = formnew;
+        //            callback(forms[each]);
+        //            return;
+        //        }
+        //    }
+        //}
     }
 
 })();

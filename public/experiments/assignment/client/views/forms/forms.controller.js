@@ -63,7 +63,7 @@
                                 })
                     }
                     else{
-                        console.log("Form with same title cannot be added!!");
+                        //console.log("Form with same title cannot be added!!");
                         vm.show = true;
                         vm.form = {};
                     }
@@ -79,18 +79,29 @@
             if(!formObj || !formObj.title){
                 return;
             }
-            FormService.updateFormById(
+            //FormService.updateFormById(
+            //    formObj._id,
+            //    formObj,
+            //    function(form){
+            //        if (selectedFormIndex >= 0) {
+            //            vm.forms[selectedFormIndex] = form;
+            //            vm.form = {};
+            //            selectedFormIndex = -1;
+            //        }
+            //
+            //    }
+            //)
+            FormService
+                .updateFormById(
                 formObj._id,
-                formObj,
-                function(form){
+                formObj)
+                .then(function(response){
                     if (selectedFormIndex >= 0) {
-                        vm.forms[selectedFormIndex] = form;
+                        vm.forms[selectedFormIndex] = response.data;
                         vm.form = {};
                         selectedFormIndex = -1;
                     }
-
-                }
-            )
+                });
         }
 
         function selectForm(formIndex){

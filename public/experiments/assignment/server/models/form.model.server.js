@@ -6,7 +6,8 @@ var mock_forms = require("./forms.mock.json");
 module.exports = function(){
     var api = {
         createFormForUser : createFormForUser,
-        findAllFormsForUser : findAllFormsForUser
+        findAllFormsForUser : findAllFormsForUser,
+        updateFormById : updateFormById
 
     };
 
@@ -36,5 +37,19 @@ module.exports = function(){
                 }
             }
         return formsArray;
+    }
+
+    function updateFormById(formid, formObj){
+        for(var each in mock_forms){
+            if(mock_forms[each]._id == formid){
+                var formnew = {
+                    "_id" : formObj["_id"],
+                    "userId" : formObj["userId"],
+                    "title" : formObj["title"]
+                };
+                mock_forms[each] = formnew;
+                return (mock_forms[each]);
+            }
+        }
     }
 };
