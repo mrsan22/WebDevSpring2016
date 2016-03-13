@@ -6,30 +6,6 @@
 
 
     function FormController($location, FormService, UserService){
-    //    $scope.user = $rootScope.user;
-    //    if (!$scope.user) {
-    //        $location.url("/home");
-    //    }
-    //    if($rootScope.user != undefined){
-    //        var userId;
-    //        userId = $rootScope.user._id;
-    //
-    //        FormService.findAllFormsForUser(
-    //            userId,
-    //            function(form){
-    //                $scope.forms = form;
-    //            }
-    //        );
-    //    }
-    //
-    //
-    //    //Event handler declaration
-    //    $scope.addForm = addForm;
-    //    $scope.updateForm = updateForm;
-    //    $scope.deleteForm = deleteForm;
-    //    $scope.selectForm = selectForm;
-    //    var selectedFormIndex = -1;
-    //
         var vm = this;
 
         //Event handler declaration
@@ -68,53 +44,31 @@
                 return;
             }
 
-            //FormService.createFormForUser(
-            //    vm.userId,
-            //    formObj,
-            //    function(form){
-            //        console.log("New Form added",form);
-            //        FormService.findAllFormsForUser(
-            //            vm.userId,
-            //            function(forms){
-            //                //var newforms = forms;
-            //                vm.forms = forms;
-            //                vm.form = {};
-            //                console.log("Forms object after adding new form",vm.forms);
-            //            }
-            //        )
-            //    }
-            //)
             FormService.createFormForUser({
                 "userId" : vm.userId,
                 "formObj" : formObj
         })
                 .then(function(response){
                     console.log(response);
-                    FormService.findAllFormsForUser(
-                        vm.userId)
-                        .then(function(response){
-                            vm.forms = response.data;
-                            vm.form = {};
-                            console.log("Forms object after adding new form",vm.forms);
-                        },
-                            function (error) {
-                                console.log("Failed to retrieve updated forms array",error.statusText);
-                            })
+                    if(response.data) {
+                        FormService.findAllFormsForUser(
+                            vm.userId)
+                            .then(function (response) {
+                                    vm.forms = response.data;
+                                    vm.form = {};
+                                    console.log("Forms object after adding new form", vm.forms);
+                                },
+                                function (error) {
+                                    console.log("Failed to retrieve updated forms array", error.statusText);
+                                })
+                    }
+                    else{
+                        console.log("Form with same title cannot be added!!");
+                    }
                 },
                 function(error){
                     console.log("Failed to retrieve newly created form",error.statusText);
                 });
-            //FormService.findAllFormsForUser(
-            //    vm.userId)
-            //    .then(function(response){
-            //            vm.forms = forms;
-            //            vm.form = {};
-            //            console.log("Forms object after adding new form",vm.forms);
-            //        },
-            //        function (error) {
-            //            console.log("Failed to retrieve updated forms array",error.statusText);
-            //        });
-
 
         }
 
