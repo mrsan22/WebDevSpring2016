@@ -11,6 +11,7 @@
             getCurrentUser : getCurrentUser,
             setCurrentUser : setCurrentUser,
             findUserByCredentials : findUserByCredentials,
+            loginUser : loginUser,
             findUserByUsername : findUserByUsername,
             createUser : createUser,
             createAndFindAllUsers : createAndFindAllUsers,
@@ -37,6 +38,10 @@
             console.log(credentials);
             // Sending a post request to user service on the server. This returns a promise to login controller.
             return $http.post('/api/assignment/login', credentials);
+        }
+
+        function loginUser(username, password){
+            return $http.get('/api/assignment/user?username='+username+'&password='+password);
         }
 
         function findUserByUsername(username){

@@ -6,6 +6,7 @@ var mock_users = require("./user.mock.json");
 module.exports = function() {
     var api = {
         findUserByCredentials: findUserByCredentials,
+        loginUser : loginUser,
         findUserByUsername : findUserByUsername,
         createUser : createUser,
         findAllUsers : findAllUsers,
@@ -28,6 +29,21 @@ module.exports = function() {
         console.log("user does not exist, returning null");
         return null;
     }
+
+    function loginUser(username, password) {
+        for(var u in mock_users){
+            if(mock_users[u].username == username &&
+                mock_users[u].password == password){
+                console.log("User exists, returning found user");
+                return mock_users[u];
+            }
+        }
+        // user not found
+        console.log("user does not exist, returning null");
+        return null;
+    }
+
+
 
     function findUserByUsername(username){
         for(var u in mock_users){

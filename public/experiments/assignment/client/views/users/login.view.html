@@ -25,7 +25,9 @@
                     </div>
 
                 </div>
-                <div ng-show="model.showAlert" class="alert alert-info">
+                <div ng-show="model.showAlert" class="alert alert-info alert-dismissable">
+                        <a class="panel-close close" data-dismiss="alert">×</a>
+                        <i class="fa fa-info-circle"></i>
                     <strong>User does not exist!</strong> Entered wrong username or password.
                 </div>
             </form>
