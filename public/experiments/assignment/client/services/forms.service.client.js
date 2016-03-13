@@ -36,7 +36,7 @@
 
         }
         function updateFormById(formId, formObj){
-            return $http.put("/api/assignment/updateformbyid/"+ formId, formObj);
+            return $http.put("/api/assignment/form/"+ formId, formObj);
         }
     }
 
