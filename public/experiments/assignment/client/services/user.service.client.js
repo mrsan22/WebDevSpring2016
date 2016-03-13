@@ -13,6 +13,7 @@
             findUserByCredentials : findUserByCredentials,
             findUserByUsername : findUserByUsername,
             createUser : createUser,
+            createAndFindAllUsers : createAndFindAllUsers,
             findAllUsers : findAllUsers,
             findUserById : findUserById,
             deleteUserById : deleteUserById,
@@ -39,7 +40,7 @@
         }
 
         function findUserByUsername(username){
-            return $http.post('/api/assignment/user', username);
+            return $http.get('/api/assignment/user?username='+username);
         }
 
         function logOut(){
@@ -54,8 +55,12 @@
             return $http.post("/api/assignment/register", user);
         }
 
+        function createAndFindAllUsers(user){
+            return $http.post("/api/assignment/user", user);
+        }
+
         function findUserById(userid){
-            return $http.post("/api/assignment/userById", userid);
+            return $http.get("/api/assignment/user/" + userid);
         }
 
         function deleteUserById(userId){
@@ -63,12 +68,7 @@
         }
 
         function updateUserById(userId, user){
-            var params = {
-                userId : userId,
-                user : user
-            };
-            console.log(params);
-            return $http.post("/api/assignment/updateuser", params);
+            return $http.put("/api/assignment/user/"+userId, user);
 
         }
 

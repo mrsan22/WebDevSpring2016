@@ -3,14 +3,18 @@ module.exports = function(app, model) {
 
     //Declaration
     app.post("/api/assignment/login", findUserByCredentials);
-    app.post("/api/assignment/user", findUserByUsername);
+    app.get("/api/assignment/user?username=username", findUserByUsername);
     app.get("/api/assignment/loggedin", loggedin);
     app.post("/api/assignment/logout", logout);
     app.post("/api/assignment/register", register);
     app.get("/api/assignment/users", findAllUsers);
-    app.post("/api/assignment/userById", findUserById);
+    app.get("/api/assignment/user/:userid", findUserById);
     app.post("/api/assignment/deleteuser", deleteUserById);
-    app.post("/api/assignment/updateuser", updateUserById);
+    app.put("/api/assignment/user/:userId", updateUserById);
+
+    //new declaration
+    // creates a new user and returns array of all users
+    app.post("/api/assignment/user", createUser);
 
     //Implementation
     function findUserByCredentials(req, res) {
@@ -21,7 +25,8 @@ module.exports = function(app, model) {
     }
 
     function findUserByUsername(req, res){
-        var username  = req.body;
+        var username  = req.query.username;
+        console.log(username);
         var user = model.findUserByUsername(username);
         res.json(user);
     }
@@ -48,7 +53,7 @@ module.exports = function(app, model) {
     }
 
     function findUserById(req, res){
-        var userId = req.body;
+        var userId = req.params.userid;
         var user = model.findUserById(userId);
         res.json(user);
     }
@@ -60,8 +65,15 @@ module.exports = function(app, model) {
     }
 
     function updateUserById(req, res){
+        var userid = req.params.userId;
         var userObj = req.body;
-        var updatedUser = model.updateUserById(userObj);
+        var updatedUser = model.updateUserById(userid, userObj);
         res.json(updatedUser);
+    }
+
+    function createUser(req, res){
+        var user = req.body;
+        users = model.createAndFindAllUsers(user);
+        res.send(users);
     }
 };

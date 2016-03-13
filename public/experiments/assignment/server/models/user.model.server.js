@@ -11,7 +11,8 @@ module.exports = function() {
         findAllUsers : findAllUsers,
         findUserById : findUserById,
         updateUserById : updateUserById,
-        deleteUserById : deleteUserById
+        deleteUserById : deleteUserById,
+        createAndFindAllUsers : createAndFindAllUsers
     };
     return api;
 
@@ -74,15 +75,24 @@ module.exports = function() {
         return mock_users;
     }
 
-    function updateUserById(userObj){
-        var id = userObj.userId;
-        var user = userObj.user;
+    function updateUserById(userid, userObj){
         for (var each in mock_users){
-            if (mock_users[each]._id == id){
-                mock_users[each] = user;
+            if (mock_users[each]._id == userid){
+                mock_users[each] = userObj;
                 return (mock_users[each]);
             }
         }
+    }
+
+    function createAndFindAllUsers(user){
+        for(var i=0;i<mock_users.length;i++){
+            if (mock_users[i].username == user.username){
+                return null;
+            }
+        }
+        user["_id"] = (new Date).getTime();
+        mock_users.push(user);
+        return mock_users;
     }
 
 
