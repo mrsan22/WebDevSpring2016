@@ -47,6 +47,14 @@
                     checkLoggedIn : checkLoggedIn
                 }
             })
+            .when("/form-field", {
+                templateUrl : "views/forms/field.view.html",
+                controller : "FieldController",
+                controllerAs : "model",
+                resolve : {
+                    checkLoggedIn : checkLoggedIn
+                }
+            })
             .otherwise({
                 redirectTo: "/home"
             });
