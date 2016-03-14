@@ -84,10 +84,14 @@
                 formObj._id,
                 formObj)
                 .then(function(response){
-                    if (selectedFormIndex >= 0) {
+                    if (selectedFormIndex >= 0 && response.data) {
                         vm.forms[selectedFormIndex] = response.data;
                         vm.form = {};
                         selectedFormIndex = -1;
+                    }
+                    else{
+                        vm.showUpdate = true;
+                        vm.form = {};
                     }
                 });
         }

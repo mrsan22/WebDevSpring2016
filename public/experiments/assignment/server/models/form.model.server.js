@@ -15,12 +15,15 @@ module.exports = function(){
     return api;
 
     function createFormForUser(userid, formObj){
-        for(var i=0;i<mock_forms.length;i++){
-            if (mock_forms[i].title == formObj.title){
-                return null;
+        var userForms = findAllFormsForUser(userid);
+        if (userForms) {
+            for (var i = 0; i < userForms.length; i++) {
+                if (userForms[i].title == formObj.title) {
+                    return null;
+                }
             }
         }
-         var id = (new Date).getTime();
+        var id = (new Date).getTime();
         var newForm = {
             "_id" : id,
             "userId" : userid,
@@ -41,6 +44,12 @@ module.exports = function(){
     }
 
     function updateFormById(formid, formObj){
+        var userForms = findAllFormsForUser(formObj.userId);
+        for (var i = 0; i < userForms.length; i++) {
+            if (userForms[i].title == formObj.title) {
+                return null;
+            }
+        }
         for(var each in mock_forms){
             if(mock_forms[each]._id == formid){
                 var formnew = {

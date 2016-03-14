@@ -44,7 +44,12 @@
                 <div ng-if="model.show" class="alert alert-info alert-dismissable">
                     <a class="panel-close close" data-dismiss="alert">×</a>
                     <i class="fa fa-info-circle"></i>
-                    <strong>Form with same name already exist.</strong> Please create form with different name.
+                    <strong>Form with same title already exist.</strong> Please create form with different title.
+                </div>
+                <div ng-if="model.showUpdate" class="alert alert-info alert-dismissable">
+                    <a class="panel-close close" data-dismiss="alert">×</a>
+                    <i class="fa fa-info-circle"></i>
+                    <strong>Form with same title already exist.</strong> Please update form with different title.
                 </div>
             </div>
         </div>
