@@ -9,7 +9,13 @@ module.exports = function(){
         findAllFormsForUser : findAllFormsForUser,
         updateFormById : updateFormById,
         findFormById : findFormById,
-        deleteFormById : deleteFormById
+        deleteFormById : deleteFormById,
+        //field model functions
+        getFieldsForForm : getFieldsForForm,
+        getFieldForForm: getFieldForForm,
+        createFieldForForm : createFieldForForm,
+        updateField : updateField,
+        deleteFieldFromForm : deleteFieldFromForm
     };
 
     return api;
@@ -82,4 +88,80 @@ module.exports = function(){
             }
         }
     }
+
+    //field model functions
+    function getFieldsForForm(formId){
+        for(var each in mock_forms){
+            if(mock_forms[each]._id == formId){
+                return mock_forms["fields"];
+            }
+        }
+    }
+
+    function getFieldForForm(formId, fieldId){
+        for(var each in mock_forms){
+            if(mock_forms[each]._id == formId){
+                for(var field in mock_forms[each].fields){
+                    if(mock_forms[each].fields._id == fieldId){
+                        return mock_forms[each].fields[field];
+                    }
+                    else{
+                        return null;
+                    }
+                }
+            }
+            else{
+                return null;
+            }
+        }
+    }
+
+    function createFieldForForm(formId, field){
+        for(var each in mock_forms){
+            if(mock_forms[each]._id == formId){
+                var id = (new Date).getTime();
+                var newField = {
+                  "_id" : id,
+                    "type" : field["type"],
+                    "label" : field["label"]
+                };
+                return newField;
+            }
+        }
+    }
+
+    function updateField(formId, fieldId, field){
+        for(var each in mock_forms){
+            if (mock_forms[each]._id == formId){
+                for(var f in mock_forms[each].fields){
+                    if(mock_forms[each].fields._id == fieldId){
+                        var id = (new Date).getTime();
+                        var newField = {
+                            "_id" : id,
+                            "type" : field["type"],
+                            "label" : field["label"]
+                        };
+                        mock_forms[each].fields[f] = newField;
+                        return mock_forms[each].fields[f];
+                     }
+                }
+            }
+
+        }
+    }
+
+    function deleteFieldFromForm(formid, fieldid){
+        for(var each in mock_forms){
+            if(mock_forms[each]._id == formid){
+                for(var f in mock_forms[each].fields){
+                    if(mock_forms[each].fields._id == fieldid){
+                        mock_forms[each].fields.splice(f,1);
+                        return mock_forms;
+                    }
+                }
+            }
+        }
+    }
+
+
 };
