@@ -17,9 +17,7 @@
             FieldService
                 .getFieldsForForm(vm.formId)
                 .then(function (response) {
-                    console.log(response);
                     vm.fields = response.data;
-                    console.log(vm.fields);
 
                 }, function (error) {
                     console.log(error.statusText);
@@ -32,7 +30,7 @@
             if(!fieldType){
                 return;
             }
-            //console.log(fieldType);
+            console.log(fieldType);
 
         }
     }
