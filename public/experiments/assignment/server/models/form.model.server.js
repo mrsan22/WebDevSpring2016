@@ -120,13 +120,8 @@ module.exports = function(){
         for(var each in mock_forms){
             if(mock_forms[each]._id == formId){
                 var id = (new Date).getTime();
-                var newField = {
-                  "_id" : id,
-                    "type" : field["type"],
-                    "label" : field["label"],
-                    "placeholder" : field["placeholder"]
-                };
-                return newField;
+                mock_forms[each].fields.push(field);
+                return;
             }
         }
     }
@@ -137,13 +132,13 @@ module.exports = function(){
                 for(var f in mock_forms[each].fields){
                     if(mock_forms[each].fields._id == fieldId){
                         var id = (new Date).getTime();
-                        var newField = {
-                            "_id" : id,
-                            "type" : field["type"],
-                            "label" : field["label"],
-                            "placeholder" : field["placeholder"]
-                        };
-                        mock_forms[each].fields[f] = newField;
+                        //var newField = {
+                        //    "_id" : id,
+                        //    "type" : field["type"],
+                        //    "label" : field["label"],
+                        //    "placeholder" : field["placeholder"]
+                        //};
+                        mock_forms[each].fields[f] = field;
                         return mock_forms[each].fields[f];
                      }
                 }
