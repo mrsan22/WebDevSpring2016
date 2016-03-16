@@ -181,7 +181,7 @@
                         <div class="col-xs-5 col-sm-7 form-group p-left">
                             <div class="radio" ng-repeat="option in field.options">
                                 <label>
-                                    <input type="radio" value="{{option.value}}" name="optradio">{{option.label}}
+                                    <input type="radio" value="{{option.value}}">{{option.label}}
                                 </label>
                             </div>
                         </div>
@@ -224,7 +224,7 @@
                             </select>
                         </div>
                         <div class="col-xs-7 col-sm-5 gly_center">
-                            <a ng-click="addField(model.fieldType)">
+                            <a ng-click="model.addField(model.fieldType)">
                                 <span class="glyphicon glyphicon-plus pad-right" aria-hidden="true"></span>
                             </a>
                         </div>
