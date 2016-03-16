@@ -93,7 +93,7 @@ module.exports = function(){
     function getFieldsForForm(formId){
         for(var each in mock_forms){
             if(mock_forms[each]._id == formId){
-                return mock_forms["fields"];
+                return mock_forms[each]["fields"];
             }
         }
     }
@@ -123,7 +123,8 @@ module.exports = function(){
                 var newField = {
                   "_id" : id,
                     "type" : field["type"],
-                    "label" : field["label"]
+                    "label" : field["label"],
+                    "placeholder" : field["placeholder"]
                 };
                 return newField;
             }
@@ -139,7 +140,8 @@ module.exports = function(){
                         var newField = {
                             "_id" : id,
                             "type" : field["type"],
-                            "label" : field["label"]
+                            "label" : field["label"],
+                            "placeholder" : field["placeholder"]
                         };
                         mock_forms[each].fields[f] = newField;
                         return mock_forms[each].fields[f];

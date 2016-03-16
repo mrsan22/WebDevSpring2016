@@ -6,7 +6,7 @@
 
             <ul class="nav nav-tabs">
                 <li role="presentation" class="active"><a href="#/forms">Forms</a></li>
-                <li role="presentation"><a href="#/form-field">Fields</a></li>
+                <li role="presentation"><a href="">Fields</a></li>
             </ul>
 
             <div class="table-responsive">
@@ -29,7 +29,7 @@
                         </td>
                     </tr>
                     <tr ng-repeat="form in model.forms">
-                        <td>{{form.title}}</td>
+                        <td><a href="#/form/{{form._id}}/fields">{{form.title}}</a></td>
                             <td>
                                 <a ng-click="model.deleteForm($index)">
                                     <span class="edit-icon-lt glyphicon glyphicon-remove" aria-hidden="true"></span>
