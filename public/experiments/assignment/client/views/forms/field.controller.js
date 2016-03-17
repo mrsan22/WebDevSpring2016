@@ -11,6 +11,8 @@
         vm.addField = addField;
         vm.removeField = removeField;
         vm.cloneField = cloneField;
+        vm.editField  = editField;
+        vm.updateField = updateField;
 
 
         function init(){
@@ -96,6 +98,48 @@
                     });
 
 
+        }
+
+        function editField(field){
+            console.log(field);
+            vm.modalField = {
+                "_id": field._id,
+                "label" : field.label,
+                "type" : field.type,
+                "placeholder" : field.placeholder
+            };
+            vm.fieldName = field.type;
+            //vm.fieldLabel = field.label;
+            vm.fieldOptions = field.options;
+            //vm.fieldPlaceholder = field.placeholder;
+            var options = [];
+
+            if(field.type == 'TEXT' || field.type == 'TEXTAREA'){
+                vm.showPlaceholder = true;
+                vm.showOptions = false;
+                vm.modalField.placeholder = field.placeholder;
+            }
+
+            else if(field.type == 'CHECKBOXES' || field.type == 'RADIOS' || field.type == 'OPTIONS'){
+                vm.showPlaceholder = false;
+                vm.showOptions = true;
+                //setting of options on modal view
+                for (var each in vm.fieldOptions){
+                    var option = vm.fieldOptions[each].label +":"+ vm.fieldOptions[each].value+"\n";
+                    options.push(option);
+                }
+                vm.modalField.options = options.join("");
+            }
+            else{
+             //For other forms
+                vm.showPlaceholder = false;
+            }
+
+
+        }
+
+        function updateField(modalFieldObj){
+            console.log(modalFieldObj);
         }
 
 

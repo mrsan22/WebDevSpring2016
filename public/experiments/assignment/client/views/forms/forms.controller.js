@@ -24,7 +24,7 @@
                         FormService
                             .findAllFormsForUser(vm.userId)
                             .then(function (forms){
-                                console.log("Forms",forms);
+                                //console.log("Forms",forms);
                                 vm.forms = forms.data;
                             },
                             function(error){
