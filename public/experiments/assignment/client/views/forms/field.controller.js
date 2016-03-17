@@ -9,6 +9,8 @@
 
         //Event handler Declaration
         vm.addField = addField;
+        vm.removeField = removeField;
+        vm.cloneField = cloneField;
 
 
         function init(){
@@ -65,9 +67,37 @@
                 },
                     function (error) {
                         console.log(error.statusText);
-                    })
+                    });
 
 
         }
+
+        function removeField(field){
+            FieldService
+                .deleteFieldFromForm(vm.formId, field._id)
+                .then(function (response) {
+                    vm.fields = response.data;
+                }, function (error) {
+                    console.log(error.statusText);
+                });
+        }
+
+        function cloneField(field){
+            if(!field){
+                return;
+            }
+            FieldService
+                .createFieldForForm(vm.formId, field)
+                .then(function (response) {
+                        vm.fields = response.data;
+                    },
+                    function (error) {
+                        console.log(error.statusText);
+                    });
+
+
+        }
+
+
     }
 })();

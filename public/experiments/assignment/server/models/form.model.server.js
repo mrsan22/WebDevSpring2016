@@ -15,7 +15,8 @@ module.exports = function(){
         getFieldForForm: getFieldForForm,
         createFieldForForm : createFieldForForm,
         updateField : updateField,
-        deleteFieldFromForm : deleteFieldFromForm
+        deleteFieldFromForm : deleteFieldFromForm,
+        swapIndexOfFields : swapIndexOfFields
     };
 
     return api;
@@ -119,7 +120,7 @@ module.exports = function(){
     function createFieldForForm(formId, field){
         for(var each in mock_forms){
             if(mock_forms[each]._id == formId){
-                var id = (new Date).getTime();
+                field._id = (new Date).getTime();
                 mock_forms[each].fields.push(field);
                 return;
             }
@@ -131,7 +132,7 @@ module.exports = function(){
             if (mock_forms[each]._id == formId){
                 for(var f in mock_forms[each].fields){
                     if(mock_forms[each].fields._id == fieldId){
-                        var id = (new Date).getTime();
+                        field._id = (new Date).getTime();
                         //var newField = {
                         //    "_id" : id,
                         //    "type" : field["type"],
@@ -151,10 +152,22 @@ module.exports = function(){
         for(var each in mock_forms){
             if(mock_forms[each]._id == formid){
                 for(var f in mock_forms[each].fields){
-                    if(mock_forms[each].fields._id == fieldid){
+                    if(mock_forms[each].fields[f]._id == fieldid){
                         mock_forms[each].fields.splice(f,1);
-                        return mock_forms;
+                        return;
                     }
+                }
+            }
+        }
+    }
+
+    function swapIndexOfFields(formId, start, end) {
+        for (var each in mock_forms){
+            if(mock_forms[each]._id == formId){
+                for(var f in mock_forms[each].fields){
+                    var temp = mock_forms[each].fields[start];
+                    mock_forms[each].fields[start] = mock_forms[each].fields[end]
+                    mock_forms[each].fields[end] = temp
                 }
             }
         }

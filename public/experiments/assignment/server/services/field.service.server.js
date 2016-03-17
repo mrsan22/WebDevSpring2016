@@ -7,6 +7,7 @@ module.exports = function(app, model) {
     app.delete("/api/assignment/form/:formId/field/:fieldId", deleteFieldFromForm);
     app.post("/api/assignment/form/:formId/field", createFieldForForm);
     app.put("/api/assignment/form/:formId/field/:fieldId", updateField);
+    app.put("/api/assignment/form/:formId/field/startIndex/:start/endIndex/:end", swapIndexOfFields);
 
     //Implementation
     function getFieldsForForm(req, res){
@@ -43,8 +44,18 @@ module.exports = function(app, model) {
     function deleteFieldFromForm(req, res){
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        var forms = model.deleteFieldFromForm(formId, fieldId);
-        res.send(forms);
+        model.deleteFieldFromForm(formId, fieldId);
+        var fields = model.getFieldsForForm(formId);
+        res.send(fields);
+    }
+
+    function swapIndexOfFields(req, res){
+        var formId = req.params.formId;
+        var start = req.params.start;
+        var end = req.params.end;
+        model.swapIndexOfFields(formId, start, end)
+
+
     }
 
 };

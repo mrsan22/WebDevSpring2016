@@ -1,13 +1,12 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+ <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Forms: Registration Form</h1>
             <ul class="nav nav-tabs">
 
                 <li role="presentation"><a href="#/forms">Forms</a></li>
                 <li role="presentation" class="active"><a href="">Fields</a></li>
             </ul>
-
+     <div class="container-fluid">
+         <div class="row" sortable-field field-axis="y">
             <div class="form-fields container-fluid" ng-repeat="field in model.fields" ng-switch on= field.type>
                 <div class="row">
                     <div class="col-xs-8 p-left">
@@ -25,13 +24,13 @@
                             <a href="#">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" ng-click="model.cloneField(field)">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" ng-click="model.removeField(field)">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" class="dragButton">
                                 <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
                             </a>
 
@@ -50,13 +49,13 @@
                             <a href="#">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" ng-click="model.cloneField(field)">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" ng-click="model.removeField(field)">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" class="dragButton">
                                 <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
                             </a>
 
@@ -74,13 +73,13 @@
                             <a href="#">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" ng-click="model.cloneField(field)">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" ng-click="model.removeField(field)">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" class="dragButton">
                                 <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
                             </a>
 
@@ -98,13 +97,13 @@
                             <a href="#">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" ng-click="model.cloneField(field)">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" ng-click="model.removeField(field)">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" class="dragButton">
                                 <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
                             </a>
 
@@ -125,24 +124,19 @@
                             <a href="#">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" ng-click="model.cloneField(field)">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" ng-click="model.removeField(field)">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" class="dragButton">
                                 <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
                             </a>
 
                         </div>
                     </form>
                 </div>
-                <!--<div class="row">-->
-                    <!--<div class="col-xs-8 p-left">-->
-                        <!--<label for="chkbox1">Roles:</label>-->
-                    <!--</div>-->
-                <!--</div>-->
                 <div class="row" ng-switch-when="CHECKBOXES">
                     <form>
                         <div class="form-group col-xs-5 col-sm-7 p-left">
@@ -158,24 +152,19 @@
                             <a href="#">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" ng-click="model.cloneField(field)">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" ng-click="model.removeField(field)">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" class="dragButton">
                                 <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
                             </a>
 
                         </div>
                     </form>
                 </div>
-                <!--<div class="row">-->
-                    <!--<div class="col-xs-8 p-left">-->
-                        <!--<label for="radio1">License Agreement:</label>-->
-                    <!--</div>-->
-                <!--</div>-->
                 <div class="row" ng-switch-when="RADIOS">
                     <form>
                         <div class="col-xs-5 col-sm-7 form-group p-left">
@@ -187,16 +176,16 @@
                         </div>
 
                         <div class="col-xs-7 col-sm-5 gly_center">
-                            <a href="#">
+                            <a href="">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" ng-click="model.cloneField(field)">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" ng-click="model.removeField(field)">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </a>
-                            <a href="#">
+                            <a href="" class="dragButton">
                                 <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
                             </a>
 
@@ -224,7 +213,7 @@
                             </select>
                         </div>
                         <div class="col-xs-7 col-sm-5 gly_center">
-                            <a ng-click="model.addField(model.fieldType)">
+                            <a href="" ng-click="model.addField(model.fieldType)">
                                 <span class="glyphicon glyphicon-plus pad-right" aria-hidden="true"></span>
                             </a>
                         </div>

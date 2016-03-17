@@ -12,7 +12,8 @@
             getFieldsForForm : getFieldsForForm,
             getFieldForForm : getFieldForForm,
             deleteFieldFromForm : deleteFieldFromForm,
-            updateField : updateField
+            updateField : updateField,
+            swapIndexOfFields : swapIndexOfFields
         };
 
         return formServiceApi;
@@ -36,6 +37,10 @@
 
         function updateField(formId, fieldId, field){
             return $http.put("/api/assignment/form/"+formId+"/field/"+fieldId, field);
+        }
+
+        function swapIndexOfFields(formId, start, end){
+            return $http.put("/api/assignment/form/"+formId+"/field/startIndex/"+start+"/endIndex/"+end);
         }
     }
 })();
