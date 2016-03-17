@@ -164,11 +164,11 @@ module.exports = function(){
     function swapIndexOfFields(formId, start, end) {
         for (var each in mock_forms){
             if(mock_forms[each]._id == formId){
-                for(var f in mock_forms[each].fields){
-                    var temp = mock_forms[each].fields[start];
-                    mock_forms[each].fields[start] = mock_forms[each].fields[end]
-                    mock_forms[each].fields[end] = temp
-                }
+                    //var temp = mock_forms[each].fields[start];
+                    //mock_forms[each].fields[start] = mock_forms[each].fields[end]
+                    //mock_forms[each].fields[end] = temp
+                    var field = mock_forms[each].fields.splice(start, 1)[0];
+                    mock_forms[each].fields.splice(end, 0, field);
             }
         }
     }

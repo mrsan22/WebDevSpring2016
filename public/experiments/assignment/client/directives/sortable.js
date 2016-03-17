@@ -30,7 +30,7 @@
                             function (error) {
                                 console.log(error.statusText);
                             });
-                    scope.$apply();
+                    //scope.$apply();
                 }
             });
         }
