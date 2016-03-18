@@ -3,8 +3,9 @@ module.exports = function(app, model) {
 
     //Declaration
     app.post("/api/assignment/login", findUserByCredentials);
-    app.get("/api/assignment/user?[username=username&password=password]", loginUser);
-    app.get("/api/assignment/user?[username=username]", findUserByUsername);
+    //app.get("/api/assignment/user?[username=username&password=password]", loginUser);
+    //app.get("/api/assignment/user?[username=username]", findUserByUsername);
+    app.get("/api/assignment/user",user);
     app.get("/api/assignment/loggedin", loggedin);
     app.post("/api/assignment/logout", logout);
     app.post("/api/assignment/register", register);
@@ -18,6 +19,22 @@ module.exports = function(app, model) {
     app.post("/api/assignment/user", createUser);
 
     //Implementation
+
+    //function to redirect call coming to '/api/assignment/user' path
+    function user(req, res){
+        var username = req.query.username;
+        var password = req.query.password;
+        if(username && password){
+            loginUser(req, res);
+        }
+        else{
+            if(username){
+                findUserByUsername(req);
+            }
+        }
+
+    }
+
     function findUserByCredentials(req, res) {
         var credentials = req.body;
         var user = model.findUserByCredentials(credentials);
