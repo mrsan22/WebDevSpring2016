@@ -111,7 +111,6 @@
         }
 
         function editField(field){
-            console.log(field);
             vm.modalField = {
                 "_id": field._id,
                 "label" : field.label,
