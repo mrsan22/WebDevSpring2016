@@ -180,7 +180,7 @@
                         <div class="col-xs-5 col-sm-7 form-group p-left">
                             <div class="radio" ng-repeat="option in field.options">
                                 <label>
-                                    <input type="radio" value="{{option.value}}">{{option.label}}
+                                    <input type="radio" name="fieldRadio" value="{{option.value}}">{{option.label}}
                                 </label>
                             </div>
                         </div>
@@ -243,7 +243,7 @@
              <div class="modal-header">
                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span></button>
-                 <h4 class="modal-title" id="myModalLabel">EDIT {{model.fieldName}} FIELD</h4>
+                 <h4 class="modal-title" id="myModalLabel">EDIT {{model.fieldName}}</h4>
              </div>
              <div class="modal-body">
                 <form>

@@ -9,7 +9,7 @@ module.exports = function(app, model) {
     app.get("/api/assignment/loggedin", loggedin);
     app.post("/api/assignment/logout", logout);
     app.post("/api/assignment/register", register);
-    app.get("/api/assignment/users", findAllUsers);
+    //app.get("/api/assignment/user", findAllUsers);
     app.get("/api/assignment/user/:userid", findUserById);
     app.delete("/api/assignment/user/:userid", deleteUserById);
     app.put("/api/assignment/user/:userId", updateUserById);
@@ -21,17 +21,19 @@ module.exports = function(app, model) {
     //Implementation
 
     //function to redirect call coming to '/api/assignment/user' path
-    function user(req, res){
+    function user(req, res) {
         var username = req.query.username;
         var password = req.query.password;
-        if(username && password){
+        if (username && password) {
             loginUser(req, res);
         }
-        else{
-            if(username){
-                findUserByUsername(req);
-            }
+        else if (username) {
+            findUserByUsername(req);
         }
+        else {
+            findAllUsers(req, res);
+        }
+
 
     }
 

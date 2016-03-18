@@ -132,9 +132,14 @@
             else if(field.type == 'CHECKBOXES' || field.type == 'RADIOS' || field.type == 'OPTIONS'){
                 vm.showPlaceholder = false;
                 vm.showOptions = true;
+                var count = 0;
                 //setting of options on modal view
                 for (var each in vm.fieldOptions){
-                    var option = vm.fieldOptions[each].label +":"+ vm.fieldOptions[each].value+"\n";
+                    var option = vm.fieldOptions[each].label +":"+ vm.fieldOptions[each].value;
+                    if(count < vm.fieldOptions.length - 1) {
+                        option += "\n"
+                    }
+                    count++;
                     options.push(option);
                 }
                 vm.modalField.options = options.join("");
@@ -148,11 +153,17 @@
         }
 
         function updateField(modalFieldObj){
+            if(!modalFieldObj.label || modalFieldObj.label === ''){
+                return;
+            }
             var options = [];
             if(modalFieldObj.type == 'CHECKBOXES' || modalFieldObj.type == 'RADIOS' || modalFieldObj.type == 'OPTIONS'){
                 var optionsArray = modalFieldObj.options.split("\n");
                 for(var i=0;i<optionsArray.length;i++){
                     var tempArray = optionsArray[i].split(":");
+                    if(tempArray[0] === '' || tempArray[1] === ''){
+                        return;
+                    }
                     options.push({
                         "label" : tempArray[0],
                         "value" : tempArray[1]
@@ -160,6 +171,8 @@
                 }
                 modalFieldObj["options"] = options;
             }
+
+            console.log(modalFieldObj);
             FieldService
                 .updateField(vm.formId, modalFieldObj._id, modalFieldObj)
                 .then(function (response) {
