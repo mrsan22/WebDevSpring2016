@@ -3,7 +3,7 @@
 //Making the mock data available in server side user model
 var mock_users = require("./user.mock.json");
 
-module.exports = function() {
+module.exports = function(uuid) {
     var api = {
         findUserByCredentials: findUserByCredentials,
         loginUser : loginUser,
@@ -62,7 +62,7 @@ module.exports = function() {
                 return null;
             }
         }
-        user["_id"] = (new Date).getTime();
+        user["_id"] = uuid.v1();
         mock_users.push(user);
         return user;
     }
@@ -106,7 +106,7 @@ module.exports = function() {
                 return null;
             }
         }
-        user["_id"] = (new Date).getTime();
+        user["_id"] = uuid.v1();
         mock_users.push(user);
         return mock_users;
     }

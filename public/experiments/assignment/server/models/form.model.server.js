@@ -34,7 +34,8 @@ module.exports = function(uuid){
         var newForm = {
             "_id" : id,
             "userId" : userid,
-            "title" : formObj["title"]
+            "title" : formObj["title"],
+            "fields" : []
         };
         mock_forms.push(newForm);
         return newForm;
