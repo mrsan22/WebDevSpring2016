@@ -3,7 +3,7 @@
 //Making the mock data available in server side form model
 var mock_forms = require("./forms.mock.json");
 
-module.exports = function(){
+module.exports = function(uuid){
     var api = {
         createFormForUser : createFormForUser,
         findAllFormsForUser : findAllFormsForUser,
@@ -30,7 +30,7 @@ module.exports = function(){
                 }
             }
         }
-        var id = (new Date).getTime();
+        var id = uuid.v1();
         var newForm = {
             "_id" : id,
             "userId" : userid,
@@ -120,7 +120,7 @@ module.exports = function(){
     function createFieldForForm(formId, field){
         for(var each in mock_forms){
             if(mock_forms[each]._id == formId){
-                field._id = (new Date).getTime();
+                field._id = uuid.v1();
                 mock_forms[each].fields.push(field);
                 return;
             }

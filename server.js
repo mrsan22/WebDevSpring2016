@@ -5,6 +5,7 @@ var bodyParser    = require('body-parser'); // for parsing req.body
 var multer = require('multer'); //for parsing JSON
 var cookieParser = require('cookie-parser'); //Parsing cookies for session
 var session = require('express-session'); //For maintaining sessions
+var uuid = require('node-uuid'); //For generating _id
 
 
 app.use(express.static(__dirname + '/public'));
@@ -30,6 +31,6 @@ app.get('/hello', function(req, res){
 });
 
 //Define require for other modules
-require("./public/experiments/assignment/server/app.js")(app);
+require("./public/experiments/assignment/server/app.js")(app, uuid);
 
 app.listen(port, ipaddress);
