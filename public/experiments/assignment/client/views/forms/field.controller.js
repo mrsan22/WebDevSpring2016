@@ -4,7 +4,7 @@
             .module("FormBuilderApp")
             .controller("FieldController", FieldController);
 
-    function FieldController($routeParams, FieldService){
+    function FieldController($routeParams, FieldService, FormService){
         var vm =this;
 
         //Event handler Declaration
@@ -26,6 +26,16 @@
                 }, function (error) {
                     console.log(error.statusText);
                 });
+
+            FormService
+                .findFormById(vm.formId)
+                .then(function (response) {
+                    vm.formName = response.data.title;
+                },
+                    function (error) {
+                        console.log(error.statusText);
+
+                    })
         }
         init();
 
@@ -139,9 +149,29 @@
         }
 
         function updateField(modalFieldObj){
-            console.log(modalFieldObj);
-        }
+            var options = [];
+            if(modalFieldObj.type == 'CHECKBOXES' || modalFieldObj.type == 'RADIOS' || modalFieldObj.type == 'OPTIONS'){
+                var optionsArray = modalFieldObj.options.split("\n");
+                for(var i=0;i<optionsArray.length;i++){
+                    var tempArray = optionsArray[i].split(":");
+                    options.push({
+                        "label" : tempArray[0],
+                        "value" : tempArray[1]
+                    });
+                }
+                modalFieldObj["options"] = options;
+            }
+            FieldService
+                .updateField(vm.formId, modalFieldObj._id, modalFieldObj)
+                .then(function (response) {
+                    console.log(response);
+                    vm.fields = response.data;
+                },
+                    function (error) {
+                        console.log(error.statusText);
+                    });
 
+        }
 
     }
 })();

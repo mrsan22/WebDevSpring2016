@@ -37,8 +37,9 @@ module.exports = function(app, model) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
         var field = req.body;
-        var updatedField = model.updateField(formId, fieldId, field);
-        res.json(updatedField);
+        model.updateField(formId, fieldId, field);
+        var fields = model.getFieldsForForm(formId);
+        res.send(fields);
     }
 
     function deleteFieldFromForm(req, res){
