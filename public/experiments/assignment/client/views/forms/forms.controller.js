@@ -90,7 +90,7 @@
                         selectedFormIndex = -1;
                     }
                     else{
-                        vm.showUpdate = true;
+                        //vm.showUpdate = true;
                         vm.form = {};
                     }
                 });
@@ -101,7 +101,8 @@
             var selectForm = {
                 "_id" : vm.forms[formIndex]._id,
                 "title" : vm.forms[formIndex].title,
-                "userId" : vm.forms[formIndex].userId
+                "userId" : vm.forms[formIndex].userId,
+                "fields" : vm.forms[formIndex].fields
             };
             vm.form = selectForm;
         }

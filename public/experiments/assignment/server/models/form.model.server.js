@@ -63,7 +63,8 @@ module.exports = function(uuid){
                 var formnew = {
                     "_id" : formObj["_id"],
                     "userId" : formObj["userId"],
-                    "title" : formObj["title"]
+                    "title" : formObj["title"],
+                    "fields" : formObj["fields"]
                 };
                 mock_forms[each] = formnew;
                 return (mock_forms[each]);
