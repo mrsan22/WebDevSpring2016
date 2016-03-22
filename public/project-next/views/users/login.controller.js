@@ -13,7 +13,7 @@
                 user.password,
                 function(user){
                     $rootScope.user = user;
-                    $location.url('/home');
+                    $location.url('/searchhome');
                 }
             )
         }

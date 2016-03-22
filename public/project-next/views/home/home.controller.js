@@ -4,25 +4,16 @@
         .controller("HomeController",homeController);
 
     function homeController($scope, $location, $routeParams, $rootScope, YelpService){
-        //$scope.myInterval = 3000;
-        //$scope.slides = [
-        //    {
-        //        image: 'http://lorempixel.com/1500/800/food/2/'
-        //    },
-        //    {
-        //        image: 'http://lorempixel.com/1500/800/food/3/'
-        //    },
-        //    {
-        //        image: 'http://lorempixel.com/1500/800/food/4/'
-        //    },
-        //    {
-        //        image: 'http://lorempixel.com/1500/800/food/5/'
-        //    }
-        //];
 
         //Register event handler
         $scope.callSearch = callSearch;
 
+        function init(){
+            $('#myCarousel').carousel({
+                interval: 5000 //changes the speed
+            })
+        }
+        init();
         //Implement event handler
         function callSearch(restname, location){
             YelpService.findRestbyNameLocation(

@@ -1,0 +1,63 @@
+<div id="carousel" class="carousel slide" data-ride="carousel">
+    <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6">
+        <div class="row col-xs-12 searchbox width-colxs12 widthxsscreen">
+            <div class="col-sm-5 col-md-5">
+                <input ng-model="restname" type="text" class="form-control margin-searchbox"
+                       placeholder="Burger...Sushi(optional)"/>
+            </div>
+            <div class="col-sm-4 col-md-4">
+                <input ng-model="loc" class="form-control margin-searchbox" placeholder="Boston"/>
+            </div>
+            <div class="col-sm-3 col-md-3">
+                <button ng-click="callSearch(restname,loc)" class="btn btn-primary btn-block">Find Food</button>
+            </div>
+
+        </div>
+    </div>
+    <!-- Menu -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel" data-slide-to="1"></li>
+        <li data-target="#carousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Items -->
+    <div class="carousel-inner">
+
+        <div class="item active">
+            <img class="banner1" src="/project-next/images/food_1920x800.jpg" alt="Slide 1" />
+        </div>
+        <div class="item">
+            <img class="banner2" src="/project-next/images/taco_1920x800.jpg" alt="Slide 2" />
+        </div>
+        <div class="item">
+            <img class="banner3" src="/project-next/images/breakfast_1920x1080.jpg" alt="Slide 3" />
+        </div>
+    </div>
+</div>
+<!-- Page Content -->
+<div class="container">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="lead page-header">Popular Food Places near you
+                <small>Secondary Text</small>
+            </h1>
+        </div>
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div ng-repeat="rest in popularRestImages">
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <a href ng-click="search(popularRestaurants.names[$index],'New York')">
+                        <img class="img-responsive" ng-src="{{popularRestaurants.images[$index]}}"/>
+                    </a>
+                    <div class="caption">
+                        <p class="lead">{{popularRestaurants.names[$index]}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
