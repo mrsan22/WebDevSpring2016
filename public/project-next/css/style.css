@@ -41,6 +41,9 @@ body {
 
 .carousel-caption {
     z-index: 10;
+    top:40px;
+    bottom: auto;
+    margin-left: 60px;
 }
 
 .carousel .item {
