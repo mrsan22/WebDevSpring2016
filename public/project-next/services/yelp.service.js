@@ -51,7 +51,7 @@
                 'jsonpCallback': 'cb',
                 success: callback,
                 error:function(){
-                    console.log("Error when search");
+                    console.log("Error when search with YelpService");
                 }
             });
 

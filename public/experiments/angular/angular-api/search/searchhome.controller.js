@@ -6,6 +6,7 @@
 
     function SearchHomeController($scope, FourSquareService, YelpService, $location){
         $scope.search = search;
+
         function init(){
             $('#carousel').carousel({
                 interval: 5000 //changes the speed
