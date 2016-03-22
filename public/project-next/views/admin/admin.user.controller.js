@@ -5,11 +5,23 @@
         .controller("AdminController", adminController);
 
     function adminController($scope, UserService){
-        UserService.findAllUsers(
-            function(usersArray){
-                $scope.users = usersArray;
-            }
-        );
+
+        //Run this part as soon as controller loads
+        function init(){
+            $scope.roles = [
+                {name: "user", value: "user"},
+                {name: "admin", value: "admin"}
+            ];
+
+
+            UserService.findAllUsers(
+                function(usersArray){
+                    $scope.users = usersArray;
+                }
+            );
+        }
+
+        init();
 
         //Event handler declaration
         $scope.addUser = addUser;
