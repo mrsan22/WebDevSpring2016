@@ -5,14 +5,13 @@
         .controller("DetailController", DetailController);
 
     function DetailController($scope, $routeParams, YelpService, ReviewService, UserService){
+        $scope.addReview = addReview;
+        $scope.deleteReview = deleteReview;
+        $scope.editReview  = editReview;
+        $scope.disableEditor = disableEditor;
+        $scope.save = save;
 
         function init(){
-            $scope.addReview = addReview;
-            $scope.deleteReview = deleteReview;
-            $scope.editReview  = editReview;
-            $scope.disableEditor = disableEditor;
-            $scope.save = save;
-            
             $scope.restId = $routeParams.restId;
 
             YelpService.findRestDetailsbyId(
@@ -61,7 +60,6 @@
 
         }
         init();
-
 
         function addReview(rating, review, user){
             if(!user){

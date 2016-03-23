@@ -1,4 +1,4 @@
 (function(){
     angular
-        .module("RestApp", ["ngRoute","ngRating"]);
+        .module("RestApp", ["ngRoute","ngRating","ngMap"]);
 })();
