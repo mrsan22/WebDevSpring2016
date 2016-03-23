@@ -4,14 +4,18 @@
         .module("Eat'n'Review")
         .controller("SearchHomeController", SearchHomeController);
 
-    function SearchHomeController($scope, FourSquareService, YelpService, $location, $rootScope){
-        $scope.search = search;
-        $scope.callSearch = callSearch;
+    function SearchHomeController($scope, FourSquareService, YelpService, $location){
+        var vm = this;
+
+        vm.search = search;
+        vm.callSearch = callSearch;
 
         function init(){
             $('#carousel').carousel({
                 interval: 5000 //changes the speed
-            })
+            });
+
+            vm.$location = $location;
 
             FourSquareService.findPopularRestByLocation(
                 function(response){
@@ -36,9 +40,8 @@
                         "images" : imageurl_lst
                     };
                     //console.log(nameImgObj);
-                    $scope.popularRestImages  = imageurl_lst;
-                    $scope.popularRestaurants = nameImgObj;
-                    //console.log($scope.popularRestaurants);
+                    vm.popularRestImages  = imageurl_lst;
+                    vm.popularRestaurants = nameImgObj;
                 }
             );
         }
@@ -47,15 +50,13 @@
 
         function search(restname, location){
             //$location.url("/search/restname="+$scope.restname+"&location="+$scope.location);
-            console.log(restname, location);
             YelpService.findRestbyNameLocation(
                 restname,
                 location,
                 function(response){
                     //Take out of id from this response and pass it to below URL
-                    console.log(response);
                     var rest_id = response.businesses[0].id;
-                    $location.url('/detail/'+rest_id);
+                    vm.$location.url('/detail/'+rest_id);
                     $scope.$apply();
                 }
             )
@@ -66,9 +67,8 @@
                 restname,
                 location,
                 function(response){
-                    console.log(response);
-                    $rootScope.data = response;
-                    $location.url('/search/restname='+restname+'&location='+location);
+                    vm.data = response;
+                    vm.$location.url('/search/restname='+restname+'&location='+location);
                     $scope.$apply();
                 }
             )

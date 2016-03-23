@@ -2,7 +2,8 @@
     <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6">
         <div class="row col-xs-12 searchbox width-colxs12 widthxsscreen">
             <div class="col-sm-5 col-md-5">
-                <input ng-model="restname" type="text" class="form-control margin-searchbox"
+                <input ng-model="searchControllerModel.restname"
+                       type="text" class="form-control margin-searchbox"
                        placeholder="Food (optional)"/>
             </div>
             <div class="col-sm-5 col-md-5">
@@ -10,11 +11,14 @@
                             <span class="input-group-addon">
                                 <a ><i class="fa fa-location-arrow"></i></a>
                             </span>
-                    <input ng-model="loc" class="form-control margin-searchbox" placeholder="Boston"/>
+                    <input ng-model="searchControllerModel.loc"
+                           class="form-control margin-searchbox"
+                           placeholder="Boston"/>
                 </div>
             </div>
             <div class="col-sm-2 col-md-2">
-                <button ng-click="callSearch(restname,loc)" class="btn btn-info btn-block">Find</button>
+                <button ng-click="searchControllerModel.callSearch(searchControllerModel.restname,searchControllerModel.loc)"
+                        class="btn btn-info btn-block">Find</button>
             </div>
 
         </div>
@@ -62,14 +66,15 @@
     </div>
     <!-- /.row -->
     <div class="row">
-        <div ng-repeat="rest in popularRestImages">
+        <div ng-repeat="rest in searchControllerModel.popularRestImages">
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
-                    <a href ng-click="search(popularRestaurants.names[$index],'New York')">
-                        <img class="img-responsive" ng-src="{{popularRestaurants.images[$index]}}"/>
+                    <a href=""
+                       ng-click="searchControllerModel.search(searchControllerModel.popularRestaurants.names[$index],'New York')">
+                        <img class="img-responsive" ng-src="{{searchControllerModel.popularRestaurants.images[$index]}}"/>
                     </a>
                     <div class="caption">
-                        <p class="lead">{{popularRestaurants.names[$index]}}</p>
+                        <p class="lead">{{searchControllerModel.popularRestaurants.names[$index]}}</p>
                     </div>
                 </div>
             </div>

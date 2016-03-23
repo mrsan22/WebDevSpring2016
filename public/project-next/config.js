@@ -13,7 +13,8 @@
             })
             .when("/searchhome", {
                 templateUrl: "views/search/searchhome.view.html",
-                controller: "SearchHomeController"
+                controller: "SearchHomeController",
+                controllerAs: "searchControllerModel"
             })
             .when("/register", {
                 templateUrl : "views/users/register.view.html",
