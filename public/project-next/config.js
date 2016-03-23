@@ -38,7 +38,8 @@
             })
             .when("/profile/reviews", {
                 templateUrl : "views/users/reviews.view.html",
-                controller : "ReviewController"
+                controller : "ReviewController",
+                controllerAs:"reviewsControllerModel"
             })
             .when("/admin/user", {
                 templateUrl : "views/admin/admin.user.view.html",

@@ -3,8 +3,14 @@
         .module("Eat'n'Review")
         .controller("ReviewController", reviewController);
 
-    function reviewController($scope){
-        $scope.toggleMenu = toggleMenu;
+    function reviewController(){
+        var vm = this;
+        vm.toggleMenu = toggleMenu;
+
+        function init(){
+
+        }
+        init();
 
         function toggleMenu(){
             //preventDefault();
