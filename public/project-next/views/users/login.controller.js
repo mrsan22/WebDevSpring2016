@@ -4,8 +4,14 @@
         .module("Eat'n'Review")
         .controller("LoginController", LoginController);
 
-    function LoginController($scope, $location, $rootScope, UserService){
-        $scope.login = login;
+    function LoginController($location, UserService,$rootScope){
+        var vm = this;
+        vm.login = login;
+
+        function init(){
+            vm.$location = $location;
+        }
+        init();
 
         function login(user){
             UserService.findUserByCredentials(
@@ -13,7 +19,7 @@
                 user.password,
                 function(user){
                     $rootScope.user = user;
-                    $location.url('/searchhome');
+                    vm.$location.url('/searchhome');
                 }
             )
         }

@@ -23,10 +23,13 @@
             })
             .when("/login", {
                 templateUrl : "views/users/login.view.html",
-                controller : "LoginController"
+                controller : "LoginController",
+                controllerAs : "loginControllerModel"
             })
             .when("/forgotpassword", {
-                templateUrl : "views/users/forgotpassword.view.html"
+                templateUrl : "views/users/forgotpassword.view.html",
+                controller : "ForgotPasswordController",
+                controllerAs: "forgotPassModel"
             })
             .when("/profile", {
                 templateUrl : "views/users/profile.view.html",
