@@ -5,10 +5,18 @@
         .controller("AdminController", adminController);
 
     function adminController($scope, UserService){
+        var vm =this;
+
+        //Event handler declaration
+        vm.addUser = addUser;
+        vm.updateUser = updateUser;
+        vm.selectUser = selectUser;
+        vm.deleteUser = deleteUser;
+        var selectedUserIndex = -1;
 
         //Run this part as soon as controller loads
         function init(){
-            $scope.roles = [
+            vm.roles = [
                 {name: "user", value: "user"},
                 {name: "admin", value: "admin"}
             ];
@@ -16,19 +24,12 @@
 
             UserService.findAllUsers(
                 function(usersArray){
-                    $scope.users = usersArray;
+                    vm.users = usersArray;
                 }
             );
         }
 
         init();
-
-        //Event handler declaration
-        $scope.addUser = addUser;
-        $scope.updateUser = updateUser;
-        $scope.deleteUser = deleteUser;
-        $scope.selectUser = selectUser;
-        var selectedUserIndex = -1;
 
         //Implementation of event handler
         function addUser(userObj){
@@ -40,7 +41,7 @@
                 userObj,
                 function(user){
                     console.log("New user added",user);
-                    $scope.user = {};
+                    vm.user = {};
                 }
             )
         }
@@ -55,8 +56,8 @@
                 userObj,
                 function(user){
                     if (selectedUserIndex >= 0) {
-                        $scope.users[selectedUserIndex] = user;
-                        $scope.user = {};
+                        vm.users[selectedUserIndex] = user;
+                        vm.user = {};
                         selectedUserIndex = -1;
                     }
 
@@ -67,21 +68,21 @@
         function selectUser(userIndex){
             selectedUserIndex = userIndex;
             var selectUser = {
-                "_id" : $scope.users[userIndex]._id,
-                "username" : $scope.users[userIndex].username,
-                "password" : $scope.users[userIndex].password,
-                "roles" : $scope.users[userIndex].roles
+                "_id" : vm.users[userIndex]._id,
+                "username" : vm.users[userIndex].username,
+                "password" : vm.users[userIndex].password,
+                "roles" : vm.users[userIndex].roles
             };
-            $scope.user = selectUser;
+            vm.user = selectUser;
         }
 
         function deleteUser(userIndex){
             UserService.deleteUserById(
-                $scope.users[userIndex]._id,
+                vm.users[userIndex]._id,
                 function(users){
                     UserService.findAllUsers(
                         function(users){
-                            $scope.users = users;
+                            vm.users = users;
                         }
                     )
                 }

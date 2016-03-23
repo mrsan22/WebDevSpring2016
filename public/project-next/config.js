@@ -8,7 +8,8 @@
         $routeProvider
             .when("/home", {
                 templateUrl : "views/home/home.view.html",
-                controller : "HomeController"
+                controller : "HomeController",
+                controllerAs : "homeControllerModel"
             })
             .when("/searchhome", {
                 templateUrl: "views/search/searchhome.view.html",
@@ -35,18 +36,19 @@
             })
             .when("/admin/user", {
                 templateUrl : "views/admin/admin.user.view.html",
-                controller : "AdminController"
+                controller : "AdminController",
+                controllerAs : "adminUserModel"
             })
             .when("/search", {
-                templateUrl : "views/search/search.view.html"
+                templateUrl : "views/search/searchresult.view.html"
 
             })
             .when("/search/restname=:restname&location=:location", {
-                templateUrl : "views/search/search.view.html"
+                templateUrl : "views/search/searchresult.view.html"
 
             })
             .when("/search/location=:location", {
-                templateUrl: "views/search/search.view.html"
+                templateUrl: "views/search/searchresult.view.html"
             })
             .when("/detail/:restId", {
                 templateUrl: "views/search/searchdetails.view.html",

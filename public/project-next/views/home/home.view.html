@@ -2,21 +2,24 @@
     <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6">
             <div class="row col-xs-12 searchbox width-colxs12 widthxsscreen">
                 <div class="col-sm-5 col-md-5">
-                    <input ng-model="restname" type="text" class="form-control margin-searchbox"
+                    <input ng-model="homeControllerModel.restname" type="text"
+                           class="form-control margin-searchbox"
                            placeholder="Food (optional)"/>
                 </div>
                     <div class="col-sm-5 col-md-5">
                         <div class="input-group">
                             <span class="input-group-addon">
-                                <a href=""><i class="fa fa-location-arrow"></i></a>
+                                <a ><i class="fa fa-location-arrow"></i></a>
                             </span>
-                        <input ng-model="loc" class="form-control margin-searchbox" placeholder="Boston"/>
+                        <input ng-model="homeControllerModel.loc"
+                               class="form-control margin-searchbox"
+                               placeholder="Boston"/>
                         </div>
                     </div>
                 <div class="col-sm-2 col-md-2">
-                    <button ng-click="callSearch(restname,loc)" class="btn btn-info btn-block">Find</button>
+                    <button ng-click="homeControllerModel.callSearch(homeControllerModel.restname,homeControllerModel.loc)"
+                            class="btn btn-info btn-block">Find</button>
                 </div>
-
             </div>
     </div>
 
@@ -26,32 +29,6 @@
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
     </ol>
-
-    <!--<div class="carousel-inner" role="listbox">-->
-        <!--<div class="item active">-->
-            <!--<img class="banner1" src="/project-next/images/food_1920x800.jpg" alt="Slide 1" />-->
-            <!--<div class="container">-->
-                <!--<div class="carousel-caption">-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="item">-->
-            <!--<img class="banner2" src="/project-next/images/taco_1920x800.jpg" alt="Slide 2" />-->
-            <!--<div class="container">-->
-                <!--<div class="carousel-caption">-->
-
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="item">-->
-            <!--<img class="banner3" src="/project-next/images/breakfast_1920x1080.jpg" alt="Slide 3" />-->
-            <!--<div class="container">-->
-                <!--<div class="carousel-caption">-->
-
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
     <!-- Items -->
     <div class="carousel-inner">
         <div class="item active">
@@ -73,7 +50,6 @@
             </div>
         </div>
     </div>
-    <!--<h3 class="carousel-caption">See favorite food place in your neighborhood</h3>-->
 </div>
 
 <div class="container">
@@ -118,7 +94,6 @@
             </a>
         </div>
     </div>
-
 </div>
 <!-- /.row -->
 

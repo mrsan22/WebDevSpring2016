@@ -15,46 +15,38 @@
                         <tr>
                             <td>
                                 <input type="text"
-                                       ng-model = "user.username"
+                                       ng-model = "adminUserModel.user.username"
                                        class="form-control text"
                                        placeholder="username"/>
                             </td>
                             <td>
                                 <input type="password"
-                                       ng-model = "user.password"
+                                       ng-model = "adminUserModel.user.password"
                                        class="form-control"
                                        placeholder="password"/>
                             </td>
                             <td>
-                                <select ng-model="user.roles"
+                                <select ng-model="adminUserModel.user.roles"
                                         class="form-control"
-                                        ng-options="role.value as role.name for role in roles">
+                                        ng-options="role.value as role.name for role in adminUserModel.roles">
                                 </select>
                             </td>
                             <td>
-                                <!--<a ng-click="addUser(user)">-->
-                                    <!--<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>-->
-                                <!--</a>-->
-                                <!--<a ng-click="updateUser(user)">-->
-                                    <!--<span class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>-->
-                                <!--</a>-->
-                                <button ng-click="addUser(user)" class="btn btn-sm btn-success">Add</button>
-                                <button ng-click="updateUser(user)" class="btn btn-sm btn-primary">Update</button>
+                                <button ng-click="adminUserModel.addUser(adminUserModel.user)"
+                                        class="btn btn-sm btn-success">Add</button>
+                                <button ng-click="adminUserModel.updateUser(adminUserModel.user)"
+                                        class="btn btn-sm btn-primary">Update</button>
                             </td>
                         </tr>
-                        <tr ng-repeat="user in users">
+                        <tr ng-repeat="user in adminUserModel.users">
                             <td>{{user.username}}</td>
                             <td>*****</td>
                             <td>{{user.roles}}</td>
                             <td>
-                                <!--<a ng-click="deleteUser($index)">-->
-                                    <!--<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>-->
-                                <!--</a>-->
-                                <!--<a ng-click="selectUser($index)">-->
-                                    <!--<span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"></span>-->
-                                <!--</a>-->
-                                <button ng-click="deleteUser($index)" class="btn btn-sm btn-danger">Delete</button>
-                                <button ng-click="selectUser($index)" class="btn btn-sm btn-info">Select</button>
+                                <button ng-click="adminUserModel.deleteUser($index)"
+                                        class="btn btn-sm btn-danger">Delete</button>
+                                <button ng-click="adminUserModel.selectUser($index)"
+                                        class="btn btn-sm btn-info">Select</button>
                             </td>
                         </tr>
                     </tbody>

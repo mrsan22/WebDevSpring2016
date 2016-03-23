@@ -4,7 +4,7 @@
         .module("Eat'n'Review")
         .factory("YelpService",yelpService);
 
-    function yelpService($http){
+    function yelpService(){
         var api = {
             findRestbyNameLocation: findRestbyNameLocation,
             findRestDetailsbyId: findRestDetailsbyId
@@ -43,6 +43,7 @@
             //    .error(function(){
             //        console.log("error")
             //    });
+
             $.ajax({
                 'url': message.action,
                 'data': parameterMap,
@@ -51,7 +52,7 @@
                 'jsonpCallback': 'cb',
                 success: callback,
                 error:function(){
-                    console.log("Error when search with YelpService");
+                    console.log("Error when search with YelpService.findRestByLocation");
                 }
             });
 
@@ -89,7 +90,10 @@
                 'cache': true,
                 'dataType': 'jsonp',
                 'jsonpCallback': 'cb',
-                success: callback
+                success: callback,
+                error:function(){
+                    console.log("Error when search with YelpService.findRestDetailsById");
+                }
             });
         }
 
