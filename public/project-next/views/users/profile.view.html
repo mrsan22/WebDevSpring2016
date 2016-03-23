@@ -9,25 +9,27 @@
                 <a href="#/profile/reviews">Overview</a>
             </li>
             <li>
-                <a href="#">Favorite Places</a>
+                <a href="">Favorite Places</a>
             </li>
             <li>
-                <a href="#">Likes</a>
+                <a href="">Likes</a>
             </li>
             <li>
-                <a href="#">Dislikes</a>
+                <a href="">Dislikes</a>
             </li>
             <li>
-                <a href="#">Followers</a>
+                <a href="">Followers</a>
             </li>
             <li>
-                <a href="#">Following</a>
+                <a href="">Following</a>
             </li>
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
 
-    <button ng-click="toggleMenu()" class="btn btn-default" id="menu-toggle">
+    <button ng-click="profileControllerModel.toggleMenu()"
+            class="btn btn-default"
+            id="menu-toggle">
         <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
     </button>
     <!-- Page Content -->
@@ -58,77 +60,85 @@
                         <div class="form-group">
                             <div class="col-lg-8">
                                 <div class="input-group">
-                                    <input ng-model="user.username" type="text" ng-readonly="true"
-                                           class="form-control" placeholder="Username">
-                            <span class="input-group-addon">
-                            <i class="glyphicon glyphicon-user"></i>
-                            </span>
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                    </span>
+                                    <input ng-model="profileControllerModel.user.username"
+                                           type="text" ng-readonly="true"
+                                           class="form-control"
+                                           placeholder="Username"/>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-8">
                                 <div class="input-group">
-                                    <input ng-model="user.firstname" type="text"
-                                           class="form-control" placeholder="First name">
-                            <span class="input-group-addon">
-                            <i class="glyphicon glyphicon-user"></i>
-                            </span>
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                    </span>
+                                    <input ng-model="profileControllerModel.user.firstName" type="text"
+                                           class="form-control" placeholder="First name"/>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-8">
                                 <div class="input-group">
-                                    <input ng-model="user.lastname" type="text"
-                                           class="form-control"  placeholder="Last name">
-                                <span class="input-group-addon">
-                                <i class="glyphicon glyphicon-user"></i>
-                                </span>
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                    </span>
+                                    <input ng-model="profileControllerModel.user.lastName" type="text"
+                                           class="form-control"  placeholder="Last name"/>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-8">
                                 <div class="input-group">
-                                    <input ng-model="user.email "type="email"
-                                           class="form-control" placeholder="Email">
-                                <span class="input-group-addon">
-                                <i class="glyphicon glyphicon-envelope"></i>
-                                </span>
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-envelope"></i>
+                                    </span>
+                                    <input ng-model="profileControllerModel.user.email "
+                                           type="email"
+                                           class="form-control" placeholder="Email"/>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-8">
                                 <div class="input-group">
-                                    <input ng-model="user.city" type="text"
-                                           class="form-control" placeholder="City">
-                                <span class="input-group-addon">
-                                <i class="glyphicon glyphicon-map-marker"></i>
-                                </span>
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-map-marker"></i>
+                                    </span>
+                                    <input ng-model="profileControllerModeluser.user.city"
+                                           type="text"
+                                           class="form-control" placeholder="City"/>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-8">
                                 <div class="input-group">
-                                    <input ng-model="user.password" type="password"
-                                           class="form-control" id="password" placeholder="Password">
-                            <span class="input-group-addon">
-                                <i class="glyphicon glyphicon-lock"></i>
-                            </span>
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-lock"></i>
+                                    </span>
+                                    <input ng-model="profileControllerModeluser.user.password"
+                                           type="password"
+                                           class="form-control"
+                                           id="password" placeholder="Password"/>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-8">
                                 <div class="input-group">
-                                    <input ng-model="user.vpassword" type="password"
-                                           class="form-control" id="vpassword" placeholder="Verify Password">
-                            <span class="input-group-addon">
-                                <i class="glyphicon glyphicon-lock"></i>
-                            </span>
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-lock"></i>
+                                     </span>
+                                    <input ng-model="profileControllerModeluser.user.vpassword"
+                                           type="password"
+                                           class="form-control"
+                                           id="vpassword" placeholder="Verify Password"/>
                                 </div>
                             </div>
                         </div>

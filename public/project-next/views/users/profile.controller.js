@@ -4,7 +4,13 @@
         .controller("ProfileController", profileController);
 
     function profileController($scope){
-        $scope.toggleMenu = toggleMenu;
+        var vm = this;
+        vm.toggleMenu = toggleMenu;
+
+        function init(){
+
+        }
+        init();
 
         function toggleMenu(){
             //preventDefault();
