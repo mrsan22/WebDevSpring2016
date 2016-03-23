@@ -4,10 +4,15 @@
         .module("Eat'n'Review")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController($scope, $location, $rootScope, UserService) {
-
+    function RegisterController($location, UserService) {
+        var vm =  this;
         // Event handler declaration
-        $scope.register = register;
+        vm.register = register;
+
+        function init(){
+            vm.$location = $location;
+        }
+        init();
 
         //Implementation of event handler
         function register(userObj) {
@@ -16,8 +21,8 @@
                 // user object comes from the user services as a callback response.
                 function(user){
                     console.log(user);
-                    $rootScope.user = user;
-                    $location.url('/profile');
+                    vm.user = user;
+                    vm.$location.url('/profile');
 
                 })
         }
