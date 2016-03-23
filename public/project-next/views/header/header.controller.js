@@ -4,26 +4,32 @@
         .module("Eat'n'Review")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($scope, $location, UserService){
-        $scope.callToSearch = callToSearch;
-        $scope.logOut = logOut;
+    function HeaderController($location, UserService){
+        var vm =this;
 
+        //Declare Event handler
+        vm.callToSearch = callToSearch;
+        vm.logOut = logOut;
+
+        function init(){
+            vm.$location = $location;
+        }
+        init();
         //Implement event handler
         function callToSearch(restname, location){
             if(!restname){
-                $location.url('/search/location='+location);
+                vm.$location.url('/search/location='+location);
             }
             else{
-            $location.url('/search/restname='+restname+'&location='+location);
+            vm.$location.url('/search/restname='+restname+'&location='+location);
             }
 
 
         }
 
         function logOut(){
-            //delete $rootScope.user;
             UserService.setCurrentUser(null);
-            $location.url('/home')
+            vm.$location.url('/home')
 
         }
     }

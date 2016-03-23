@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="HeaderController">
+<nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="HeaderController as headerControllerModel">
     <div class="container-fluid">
         <div class="navbar-header nav-margin">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -10,17 +10,22 @@
             </button>
             <a class="navbar-brand margin-set" href="#/home">Eat'n'Review</a>
         </div>
-        <div ng-hide ="location.url() == '/home' || location.url() == '/admin' || location.url() == '/searchhome'"
+        <div ng-hide ="headerControllerModel.$location.url() == '/home' ||
+                       headerControllerModel.$location.url() == '/admin/user' ||
+                       headerControllerModel.$location.url() == '/searchhome'"
              class="hidden-sm hidden-xs">
             <div class="col-sm-3 col-sm-offset-2">
-                <input ng-model="restname_header" class="form-control navsearch-margin margin-lft-searchbox"
+                <input ng-model="headerControllerModel.restname_header"
+                       class="form-control navsearch-margin margin-lft-searchbox"
                        placeholder="Dosa Factory, Qdoba...(optional)">
             </div>
             <div class="col-sm-3 margin-lft-searchbox">
                 <div class="input-group">
-                    <input type="text" ng-model="location_header" class="form-control navsearch-margin" placeholder="Boston">
+                    <input type="text" ng-model="headerControllerModel.location_header"
+                           class="form-control navsearch-margin" placeholder="Boston">
                     <div class="input-group-btn">
-                        <button ng-click="callToSearch(restname_header,location_header) "
+                        <button ng-click="headerControllerModel.callToSearch(headerControllerModel.restname_header,
+                        headerControllerModel.location_header) "
                                 class="btn btn-primary navsearch-margin" type="button">
                             <i class="glyphicon glyphicon-search"></i></button>
                     </div>
@@ -29,7 +34,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right margin-set1">
-                <li ng-if="location.url() == '/home'">
+                <li ng-if="headerControllerModel.$location.url() == '/home'">
                    <a href="#/admin/user" class="margin-set2">Admin</a>
                 </li>
                 <li ng-hide="user">
@@ -41,8 +46,8 @@
                 <li ng-show="user">
                     <a href="">{{user.username}}</a>
                 <li ng-hide="!user"
-                    ng-click="logOut()">
-                    <a>Logout</a>
+                    ng-click="headerControllerModel.logOut()">
+                    <a href="">Logout</a>
             </ul>
         </div>
     </div>
