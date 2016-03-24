@@ -89,9 +89,7 @@
     }
 
     function checkLoggedIn(UserService, $q, $location) {
-
         var deferred = $q.defer();
-
         UserService
             .getCurrentUser()
             .then(function(response) {

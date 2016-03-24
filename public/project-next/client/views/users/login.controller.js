@@ -13,16 +13,6 @@
         }
         init();
 
-        //function login(user){
-        //    UserService.findUserByCredentials(
-        //        user.username,
-        //        user.password,
-        //        function(user){
-        //            $rootScope.user = user;
-        //            vm.$location.url('/searchhome');
-        //        }
-        //    )
-        //}
         function login(user){
             if(!user){
                 return;

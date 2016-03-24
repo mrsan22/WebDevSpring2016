@@ -77,20 +77,6 @@
             return null;
         }
 
-        //function createUser(user, callback){
-        //    var id = (new Date).getTime();
-        //    var newUser = {
-        //        "_id" : id,
-        //        "username" : user.username,
-        //        "password" : user.password,
-        //        "roles" : user.roles
-        //    };
-        //
-        //    users.push(newUser);
-        //    callback(newUser);
-        //    //console.log(users)
-        //}
-
         function createUser(user){
             return $http.post("/api/project/register", user);
         }
