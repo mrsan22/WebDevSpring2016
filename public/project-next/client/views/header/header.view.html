@@ -44,7 +44,7 @@
                     <a href="#/login" class="margin-set2">Login</a>
                 </li>
                 <li ng-show="currentUser">
-                    <a href="">{{currentUser.username}}</a>
+                    <a href="#/profile">{{currentUser.username}}</a>
                 <li ng-hide="!currentUser"
                     ng-click="headerControllerModel.logOut()">
                     <a href="">Logout</a>

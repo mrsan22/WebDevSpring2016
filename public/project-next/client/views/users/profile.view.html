@@ -63,8 +63,8 @@
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-user"></i>
                                     </span>
-                                    <input ng-model="profileControllerModel.user.username"
-                                           type="text" ng-readonly="true"
+                                    <input ng-model="profileControllerModel.currentUser.username"
+                                           type="text" ng-readonly="profileControllerModel.readonly"
                                            class="form-control"
                                            placeholder="Username"/>
                                 </div>
@@ -76,7 +76,7 @@
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-user"></i>
                                     </span>
-                                    <input ng-model="profileControllerModel.user.firstName" type="text"
+                                    <input ng-model="profileControllerModel.currentUser.firstName" type="text"
                                            class="form-control" placeholder="First name"/>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-user"></i>
                                     </span>
-                                    <input ng-model="profileControllerModel.user.lastName" type="text"
+                                    <input ng-model="profileControllerModel.currentUser.lastName" type="text"
                                            class="form-control"  placeholder="Last name"/>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-envelope"></i>
                                     </span>
-                                    <input ng-model="profileControllerModel.user.email "
+                                    <input ng-model="profileControllerModel.currentUser.email "
                                            type="email"
                                            class="form-control" placeholder="Email"/>
                                 </div>
@@ -110,7 +110,7 @@
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-map-marker"></i>
                                     </span>
-                                    <input ng-model="profileControllerModeluser.user.city"
+                                    <input ng-model="profileControllerModel.currentUser.city"
                                            type="text"
                                            class="form-control" placeholder="City"/>
                                 </div>
@@ -122,7 +122,7 @@
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-lock"></i>
                                     </span>
-                                    <input ng-model="profileControllerModeluser.user.password"
+                                    <input ng-model="profileControllerModel.currentUser.password"
                                            type="password"
                                            class="form-control"
                                            id="password" placeholder="Password"/>
@@ -135,7 +135,7 @@
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-lock"></i>
                                      </span>
-                                    <input ng-model="profileControllerModeluser.user.vpassword"
+                                    <input ng-model="profileControllerModel.currentUser.vpassword"
                                            type="password"
                                            class="form-control"
                                            id="vpassword" placeholder="Verify Password"/>
@@ -144,7 +144,8 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-8">
-                                <input type="button" class="btn btn-primary" value="Save Changes">
+                                <a href="" ng-click="profileControllerModel.update(profileControllerModel.currentUser)"
+                                   class="btn btn-primary">Save Changes</a>
                                 <span></span>
                                 <input type="reset" class="btn btn-default" value="Cancel">
                             </div>

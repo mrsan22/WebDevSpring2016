@@ -5,18 +5,6 @@
         .factory("UserService", UserService);
 
     function UserService($http, $rootScope){
-        var users = [
-            {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
-                "username":"alice",  "password":"alice",   "roles": "user"		},
-            {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
-                "username":"bob",    "password":"bob",     "roles": "admin"		},
-            {	"_id":345, "firstName":"Charlie",          "lastName":"Brown",
-                "username":"charlie","password":"charlie", "roles": "user"		},
-            {	"_id":456, "firstName":"Dan",              "lastName":"Craig",
-                "username":"dan",    "password":"dan",     "roles": "admin"},
-            {	"_id":567, "firstName":"Edward",           "lastName":"Norton",
-                "username":"ed",     "password":"ed",      "roles": "user"		}
-        ];
 
         // Declaration of Interface
         var userServiceApi = {
@@ -26,9 +14,10 @@
             findUserByCredentials : findUserByCredentials,
             findAllUsers : findAllUsers,
             findUserById : findUserById,
+            findUserByUsername : findUserByUsername,
             createUser : createUser,
             deleteUserById : deleteUserById,
-            updateUser : updateUser,
+            updateUserById : updateUserById,
             logOut : logOut
         };
 
@@ -43,76 +32,45 @@
             $rootScope.currentUser = user;
         }
 
-        function findUserByCredentials(username, password, callback){
-            var each = "";
-            for (each in users){
-                if(users[each].username == username && users[each].password == password){
-                    //console.log(users[each]);
-                    callback(users[each]);
-                    return;
-                }
-                else{
-                    callback(null);
-                }
-            }
+        function findUserByCredentials(credentials){
+            // Sending a post request to user service on the server. This returns a promise to whoever calls it.
+            return $http.post('/api/project/login', credentials);
         }
+
 
         function loginUser(username, password){
             console.log(username, password);
             return $http.get('/api/project/user?username='+username+'&password='+password);
         }
 
-        function findAllUsers(callback){
-            callback(users);
+        function findAllUsers(){
+            return $http.get("/api/project/user");
         }
 
         function findUserById(userid){
-            for(var u in users){
-                if(users[u]._id == userid){
-                    return users[u];
-                }
-            }
-            // user not found
-            console.log("user not found by Id, returning null");
-            return null;
+            return $http.get("/api/project/user/" + userid);
+        }
+
+        function findUserByUsername(username){
+            return $http.get('/api/project/user?username='+username);
         }
 
         function createUser(user){
             return $http.post("/api/project/register", user);
         }
 
-        function deleteUserById(userId, callback){
-            var each = "";
-            for (each in users){
-                if (users[each]._id == userId){
-                    users.splice(each,1);
-                }
-            }
-            callback(users);
+        function deleteUserById(userId){
+            return $http.delete("/api/project/user/"+userId);
         }
 
-        function updateUser(userId, user, callback){
-            var each = "";
-            for (each in users){
-                if (users[each]._id == userId){
-                    var newUser = {
-                        "_id" : user["_id"],
-                        "username" : user["username"],
-                        "password" : user["password"],
-                        "roles" : user["roles"]
-                    };
-                    users[each] = newUser;
-                    callback(users[each]);
-                    return;
-                }
-            }
+        function updateUserById(userId, user){
+            return $http.put("/api/project/user/"+userId, user);
 
         }
 
         function logOut(){
             return $http.post("/api/project/logout");
         }
-
 
 
     }

@@ -51,7 +51,7 @@
                 alert("Some field is missing value");
                 return;
             }
-            UserService.updateUser(
+            UserService.updateUserById(
                 userObj._id,
                 userObj,
                 function(user){
