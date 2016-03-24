@@ -22,12 +22,14 @@
         var userServiceApi = {
             getCurrentUser : getCurrentUser,
             setCurrentUser : setCurrentUser,
+            loginUser : loginUser,
             findUserByCredentials : findUserByCredentials,
             findAllUsers : findAllUsers,
             findUserById : findUserById,
             createUser : createUser,
             deleteUserById : deleteUserById,
-            updateUser : updateUser
+            updateUser : updateUser,
+            logOut : logOut
         };
 
         return userServiceApi;
@@ -53,6 +55,11 @@
                     callback(null);
                 }
             }
+        }
+
+        function loginUser(username, password){
+            console.log(username, password);
+            return $http.get('/api/project/user?username='+username+'&password='+password);
         }
 
         function findAllUsers(callback){
@@ -114,6 +121,10 @@
                 }
             }
 
+        }
+
+        function logOut(){
+            return $http.post("/api/project/logout");
         }
 
 

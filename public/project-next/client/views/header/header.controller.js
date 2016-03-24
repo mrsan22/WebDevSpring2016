@@ -28,8 +28,15 @@
         }
 
         function logOut(){
-            UserService.setCurrentUser(null);
-            vm.$location.url('/home')
+            UserService
+                .logOut()
+                .then(function () {
+                        UserService.setCurrentUser(null);
+                        $location.url('/home');
+                    },
+                    function (error) {
+                        console.log(error.statusText);
+                    });
 
         }
     }

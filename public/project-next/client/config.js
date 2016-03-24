@@ -9,12 +9,18 @@
             .when("/home", {
                 templateUrl : "views/home/home.view.html",
                 controller : "HomeController",
-                controllerAs : "homeControllerModel"
+                controllerAs : "homeControllerModel",
+                resolve : {
+                    getLoggedIn : getLoggedIn
+                }
             })
             .when("/searchhome", {
                 templateUrl: "views/search/searchhome.view.html",
                 controller: "SearchHomeController",
-                controllerAs: "searchControllerModel"
+                controllerAs: "searchControllerModel",
+                resolve : {
+                    getLoggedIn : getLoggedIn
+                }
             })
             .when("/register", {
                 templateUrl : "views/users/register.view.html",
@@ -34,7 +40,10 @@
             .when("/profile", {
                 templateUrl : "views/users/profile.view.html",
                 controller : "ProfileController",
-                controllerAs: "profileControllerModel"
+                controllerAs: "profileControllerModel",
+                resolve:{
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/profile/reviews", {
                 templateUrl : "views/users/reviews.view.html",
@@ -64,5 +73,38 @@
             .otherwise({
                 redirectTo: "/home"
             });
+    }
+
+    function getLoggedIn(UserService, $q){
+        var deferred = $q.defer();
+        UserService.
+            getCurrentUser()
+            .then(function(response){
+                var currentUser = response.data;
+                UserService.setCurrentUser(currentUser);
+                deferred.resolve();
+
+            });
+        return deferred.promise;
+    }
+
+    function checkLoggedIn(UserService, $q, $location) {
+
+        var deferred = $q.defer();
+
+        UserService
+            .getCurrentUser()
+            .then(function(response) {
+                var currentUser = response.data;
+                if(currentUser) {
+                    UserService.setCurrentUser(currentUser);
+                    deferred.resolve();
+                } else {
+                    deferred.reject();
+                    $location.url("/home");
+                }
+            });
+
+        return deferred.promise;
     }
 })();
