@@ -37,15 +37,15 @@
                 <li ng-if="headerControllerModel.$location.url() == '/home'">
                    <a href="#/admin/user" class="margin-set2">Admin</a>
                 </li>
-                <li ng-hide="user">
+                <li ng-hide="currentUser">
                     <a href="#/register" class="margin-set2">Sign Up</a>
                 </li>
-                <li ng-hide="user">
+                <li ng-hide="currentUser">
                     <a href="#/login" class="margin-set2">Login</a>
                 </li>
-                <li ng-show="user">
-                    <a href="">{{user.username}}</a>
-                <li ng-hide="!user"
+                <li ng-show="currentUser">
+                    <a href="">{{currentUser.username}}</a>
+                <li ng-hide="!currentUser"
                     ng-click="headerControllerModel.logOut()">
                     <a href="">Logout</a>
             </ul>

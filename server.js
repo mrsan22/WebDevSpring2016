@@ -32,5 +32,7 @@ app.get('/hello', function(req, res){
 
 //Define require for other modules
 require("./public/assignment/server/app.js")(app, uuid);
+//For Project
+require("./public/project-next/server/app.js")(app, uuid);
 
 app.listen(port, ipaddress);

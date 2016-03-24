@@ -4,7 +4,7 @@
         .module("Eat'n'Review")
         .factory("UserService", UserService);
 
-    function UserService($rootScope){
+    function UserService($http, $rootScope){
         var users = [
             {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
                 "username":"alice",  "password":"alice",   "roles": "user"		},
@@ -20,6 +20,7 @@
 
         // Declaration of Interface
         var userServiceApi = {
+            getCurrentUser : getCurrentUser,
             setCurrentUser : setCurrentUser,
             findUserByCredentials : findUserByCredentials,
             findAllUsers : findAllUsers,
@@ -32,9 +33,14 @@
         return userServiceApi;
 
         //Implementation of Interfaces
-        function setCurrentUser (user) {
-            $rootScope.user = user;
+        function getCurrentUser(){
+            return $http.get("/api/project/loggedin");
         }
+
+        function setCurrentUser (user) {
+            $rootScope.currentUser = user;
+        }
+
         function findUserByCredentials(username, password, callback){
             var each = "";
             for (each in users){
@@ -64,18 +70,22 @@
             return null;
         }
 
-        function createUser(user, callback){
-            var id = (new Date).getTime();
-            var newUser = {
-                "_id" : id,
-                "username" : user.username,
-                "password" : user.password,
-                "roles" : user.roles
-            };
+        //function createUser(user, callback){
+        //    var id = (new Date).getTime();
+        //    var newUser = {
+        //        "_id" : id,
+        //        "username" : user.username,
+        //        "password" : user.password,
+        //        "roles" : user.roles
+        //    };
+        //
+        //    users.push(newUser);
+        //    callback(newUser);
+        //    //console.log(users)
+        //}
 
-            users.push(newUser);
-            callback(newUser);
-            //console.log(users)
+        function createUser(user){
+            return $http.post("/api/project/register", user);
         }
 
         function deleteUserById(userId, callback){
