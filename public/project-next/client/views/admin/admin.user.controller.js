@@ -4,7 +4,7 @@
         .module("Eat'n'Review")
         .controller("AdminController", adminController);
 
-    function adminController($scope, UserService){
+    function adminController(UserService){
         var vm =this;
 
         //Event handler declaration
@@ -20,13 +20,14 @@
                 {name: "user", value: "user"},
                 {name: "admin", value: "admin"}
             ];
-
-
-            UserService.findAllUsers(
-                function(usersArray){
-                    vm.users = usersArray;
-                }
-            );
+            UserService
+                .findAllUsers()
+                .then(function (response) {
+                    vm.users = response.data;
+                },
+                    function (error) {
+                        console.log(error.statusText);
+                    });
         }
 
         init();
@@ -37,13 +38,16 @@
                 alert("Some field is missing value");
                 return;
             }
-            UserService.createUser(
-                userObj,
-                function(user){
-                    console.log("New user added",user);
+            UserService
+                .createAndFindAllUsers(userObj)
+                .then(function (response) {
+                    console.log("New user added",response.data);
+                    vm.users = response.data;
                     vm.user = {};
-                }
-            )
+
+                }, function (error) {
+                   console.log(error.statusText);
+                });
         }
 
         function updateUser(userObj){
@@ -51,18 +55,18 @@
                 alert("Some field is missing value");
                 return;
             }
-            UserService.updateUserById(
-                userObj._id,
-                userObj,
-                function(user){
+            UserService
+                .updateUserById(userObj._id, userObj)
+                .then(function (response) {
                     if (selectedUserIndex >= 0) {
-                        vm.users[selectedUserIndex] = user;
+                        vm.users[selectedUserIndex] = response.data;
                         vm.user = {};
                         selectedUserIndex = -1;
                     }
 
-                }
-            )
+                }, function (error) {
+                    console.log(error.statusText);
+                });
         }
 
         function selectUser(userIndex){
@@ -77,16 +81,14 @@
         }
 
         function deleteUser(userIndex){
-            UserService.deleteUserById(
-                vm.users[userIndex]._id,
-                function(users){
-                    UserService.findAllUsers(
-                        function(users){
-                            vm.users = users;
-                        }
-                    )
-                }
-            )
+            UserService
+                .deleteUserById(vm.users[userIndex]._id)
+                .then(function (response) {
+                    vm.users = response.data;
+
+                }, function (error) {
+                    console.log(error.statusText);
+                });
         }
     }
 })();

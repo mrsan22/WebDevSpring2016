@@ -13,7 +13,8 @@ module.exports = function(uuid) {
         findUserByCredentials: findUserByCredentials,
         findAllUsers : findAllUsers,
         findUserByUsername : findUserByUsername,
-        deleteUserById : deleteUserById
+        deleteUserById : deleteUserById,
+        createAndFindAllUsers : createAndFindAllUsers
     };
 
     return api;
@@ -94,8 +95,19 @@ module.exports = function(uuid) {
         for (var each in mock_users){
             if (mock_users[each]._id == userId){
                 mock_users.splice(each,1);
+                return;
             }
         }
+    }
+
+    function createAndFindAllUsers(user){
+        for(var i=0;i<mock_users.length;i++){
+            if (mock_users[i].username == user.username){
+                return null;
+            }
+        }
+        user["_id"] = uuid.v1();
+        mock_users.push(user);
         return mock_users;
     }
 

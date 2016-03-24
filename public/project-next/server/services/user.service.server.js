@@ -10,6 +10,7 @@ module.exports = function (app, model_user) {
     app.put("/api/project/user/:userId", updateUserById);
     app.get("/api/project/user/:userid", findUserById);
     app.delete("/api/project/user/:userid", deleteUserById);
+    app.post("/api/project/admin-user", createAndFindAllUsers);
 
     //Implementation
     //function to redirect call coming to '/api/project/user' path
@@ -72,7 +73,6 @@ module.exports = function (app, model_user) {
         res.json(user);
     }
 
-
     function logout(req, res){
         req.session.destroy();
         res.send(200);
@@ -83,14 +83,20 @@ module.exports = function (app, model_user) {
         var userObj = req.body;
         model_user.updateUserById(userid, userObj);
         var user = model_user.findUserById(userid);
-        req.session.currentUser = user;
+        //req.session.currentUser = user;
         res.send(user);
     }
 
     function deleteUserById(req, res){
         var userId = req.params.userid;
-        var users = model_user.deleteUserById(userId);
+        model_user.deleteUserById(userId);
+        var users = model_user.findAllUsers();
         res.send(users);
     }
 
+    function createAndFindAllUsers(req, res){
+        user = req.body;
+        var users = model_user.createAndFindAllUsers(user);
+        res.send(users);
+    }
 };

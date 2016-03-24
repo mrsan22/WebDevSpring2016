@@ -16,6 +16,7 @@
             findUserById : findUserById,
             findUserByUsername : findUserByUsername,
             createUser : createUser,
+            createAndFindAllUsers : createAndFindAllUsers,
             deleteUserById : deleteUserById,
             updateUserById : updateUserById,
             logOut : logOut
@@ -70,6 +71,10 @@
 
         function logOut(){
             return $http.post("/api/project/logout");
+        }
+
+        function createAndFindAllUsers(user){
+            return $http.post("/api/project/admin-user", user);
         }
 
 

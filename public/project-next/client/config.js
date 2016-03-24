@@ -19,7 +19,7 @@
                 controller: "SearchHomeController",
                 controllerAs: "searchControllerModel",
                 resolve : {
-                    getLoggedIn : getLoggedIn
+                    checkLoggedIn: checkLoggedIn
                 }
             })
             .when("/register", {
@@ -48,7 +48,10 @@
             .when("/profile/reviews", {
                 templateUrl : "views/users/reviews.view.html",
                 controller : "ReviewController",
-                controllerAs:"reviewsControllerModel"
+                controllerAs:"reviewsControllerModel",
+                resolve:{
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/admin/user", {
                 templateUrl : "views/admin/admin.user.view.html",
