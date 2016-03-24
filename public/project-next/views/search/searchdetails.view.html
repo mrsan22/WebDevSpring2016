@@ -52,8 +52,10 @@
         </div>
         <!--Map div-->
         <div class="col-sm-4">
-            <ng-map zoom="11" center="[40.74, -74.18]">
-                <marker position="[40.74, -74.18]" />
+            <ng-map zoom="16" center="[{{rest.location.coordinate.latitude}}, {{rest.location.coordinate.longitude}}]">
+                <marker position="[{{rest.location.coordinate.latitude}}, {{rest.location.coordinate.longitude}}]"
+                on-click = "markerClick()" title="{{rest.name}}"
+                        centered="true"/>
             </ng-map>
         </div>
         <!--End Map div-->

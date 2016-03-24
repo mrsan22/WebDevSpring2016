@@ -4,12 +4,13 @@
         .module("Eat'n'Review")
         .controller("DetailController", DetailController);
 
-    function DetailController($scope, $routeParams, YelpService, ReviewService, UserService){
+    function DetailController($scope, $routeParams, YelpService, ReviewService, UserService, NgMap){
         $scope.addReview = addReview;
         $scope.deleteReview = deleteReview;
         $scope.editReview  = editReview;
         $scope.disableEditor = disableEditor;
         $scope.save = save;
+        $scope.markerClick = markerClick;
 
         function init(){
             $scope.restId = $routeParams.restId;
@@ -17,7 +18,8 @@
             YelpService.findRestDetailsbyId(
                 $scope.restId,
                 function(response){
-                    console.log("I m in yelp service");
+                    //console.log(response);
+                    //console.log("I m in yelp service");
                     var imgurl_lst;
                     imgurl_lst = response.image_url.split("/");
                     imgurl_lst.splice(-1,1);
@@ -60,6 +62,27 @@
 
         }
         init();
+
+        function markerClick(){
+            NgMap.getMap().then(function(map) {
+                //console.log(map);
+                //var rodDee = {lat:42.34, lng:-71.09};
+                //var contentString = "I am here";
+                //var infowindow = new google.maps.InfoWindow({
+                //    content: contentString
+                //});
+                //
+                //var marker = new google.maps.Marker({
+                //    position: rodDee,
+                //    map:map,
+                //    title: 'Restaurant from Yelp'
+                //});
+                //
+                //google.maps.event.addListener(marker, 'click', function() {
+                //    infowindow.open(map, marker);
+                //});
+            });
+        }
 
         function addReview(rating, review, user){
             if(!user){
