@@ -4,19 +4,21 @@
         .module("Eat'n'Review")
         .controller("DetailController", DetailController);
 
-    function DetailController($scope, $routeParams, YelpService, ReviewService, UserService, NgMap){
+    function DetailController($scope, $routeParams, YelpService, ReviewService, UserService){
+        var vm = this;
         $scope.addReview = addReview;
         $scope.deleteReview = deleteReview;
         $scope.editReview  = editReview;
         $scope.disableEditor = disableEditor;
         $scope.save = save;
-        $scope.markerClick = markerClick;
+        //$scope.initMap = initMap;
+        //$scope.markerClick = markerClick;
 
         function init(){
-            $scope.restId = $routeParams.restId;
+            vm.restId = $routeParams.restId;
 
             YelpService.findRestDetailsbyId(
-                $scope.restId,
+                vm.restId,
                 function(response){
                     //console.log(response);
                     //console.log("I m in yelp service");
@@ -24,65 +26,111 @@
                     imgurl_lst = response.image_url.split("/");
                     imgurl_lst.splice(-1,1);
                     imgurl_lst.push('o.jpg');
-                    $scope.imageurl = imgurl_lst.join("/");
-                    $scope.rest = response;
+                    vm.imageurl = imgurl_lst.join("/");
+                    vm.rest = response;
                     $scope.$apply();
                 }
             );
 
-            ReviewService.findAllReviewsForRest(
-                $scope.restId,
-                function(response){
-                    $scope.ratings = response;
-                    if($scope.user) {
-                        for (var i in $scope.ratings) {
-                            var userObj = UserService.findUserById($scope.ratings[i].userId);
-                            $scope.ratings[i]["firstName"] = userObj.firstName;
-                            $scope.ratings[i]["lastName"] = userObj.lastName;
-                        }
-                    }
-                    else{
-                        for (var i in $scope.ratings) {
-                            var userObj = UserService.findUserById($scope.ratings[i].userId);
-                            $scope.ratings[i]["firstName"] = userObj.firstName;
-                            $scope.ratings[i]["lastName"] = userObj.lastName;
-                        }
-                        $scope.readonly = true;
-                    }
-                }
-            );
+            //ReviewService.findAllReviewsForRest(
+            //    vm.restId,
+            //    function(response){
+            //        console.log(response);
+            //        $scope.ratings = response;
+            //        if($scope.user) {
+            //            for (var i in $scope.ratings) {
+            //                var userObj = UserService.findUserById($scope.ratings[i].userId);
+            //                $scope.ratings[i]["firstName"] = userObj.firstName;
+            //                $scope.ratings[i]["lastName"] = userObj.lastName;
+            //            }
+            //        }
+            //        else{
+            //            for (var i in $scope.ratings) {
+            //                var userObj = UserService.findUserById($scope.ratings[i].userId);
+            //                $scope.ratings[i]["firstName"] = userObj.firstName;
+            //                $scope.ratings[i]["lastName"] = userObj.lastName;
+            //            }
+            //            //$scope.readonly = true;
+            //        }
+            //    }
+            //);
+            ReviewService
+                .findAllReviewsForRest(vm.restId)
+                .then(function (response) {
+                    console.log(response.data);
+                        vm.ratings = response.data;
+                },
+                    function (error) {
+                       console.log(error.statusText);
+                    });
+
+                    //    for (var i in vm.ratings) {
+                    //        console.log(vm.ratings[i].userId);
+                    //        var userObj = UserService.findUserById(vm.ratings[i].userId);
+                    //        vm.ratings[i]["firstName"] = userObj.firstName;
+                    //        vm.ratings[i]["lastName"] = userObj.lastName;
+                    //}
+                    //else{
+                    //    for (var i in $scope.ratings) {
+                    //        var userObj = UserService.findUserById($scope.ratings[i].userId);
+                    //        $scope.ratings[i]["firstName"] = userObj.firstName;
+                    //        $scope.ratings[i]["lastName"] = userObj.lastName;
+                    //    }
+                    //    //$scope.readonly = true;
+                    //}
 
 
 
-            ReviewService.loadDefaultRating(
-                function(response){
-                    $scope.defaultRating = response;
-                }
-            );
+
+            ReviewService
+                .loadDefaultRating()
+                .then(function (response) {
+                    vm.defaultRating = response.data;
+                },
+                    function (error) {
+                       console.log(error.statusText);
+                    });
 
         }
         init();
 
-        function markerClick(){
-            NgMap.getMap().then(function(map) {
-                //console.log(map);
-                //var rodDee = {lat:42.34, lng:-71.09};
-                //var contentString = "I am here";
-                //var infowindow = new google.maps.InfoWindow({
-                //    content: contentString
-                //});
-                //
-                //var marker = new google.maps.Marker({
-                //    position: rodDee,
-                //    map:map,
-                //    title: 'Restaurant from Yelp'
-                //});
-                //
-                //google.maps.event.addListener(marker, 'click', function() {
-                //    infowindow.open(map, marker);
-                //});
-            });
-        }
+        //function initMap() {
+        //    console.log("dsafds");
+        //    var myLatLng = {lat: -25.363, lng: 131.044};
+        //
+        //   var map = new google.maps.Map(document.getElementById('map'), {
+        //        zoom: 10,
+        //        center: myLatLng
+        //    });
+        //
+        //    var marker = new google.maps.Marker({
+        //        position: myLatLng,
+        //        map: map,
+        //        title: 'Hello World!'
+        //    });
+        //}
+
+
+        //function markerClick(){
+        //    NgMap.getMap().then(function(map) {
+        //        //console.log(map);
+        //        //var rodDee = {lat:42.34, lng:-71.09};
+        //        //var contentString = "I am here";
+        //        //var infowindow = new google.maps.InfoWindow({
+        //        //    content: contentString
+        //        //});
+        //        //
+        //        //var marker = new google.maps.Marker({
+        //        //    position: rodDee,
+        //        //    map:map,
+        //        //    title: 'Restaurant from Yelp'
+        //        //});
+        //        //
+        //        //google.maps.event.addListener(marker, 'click', function() {
+        //        //    infowindow.open(map, marker);
+        //        //});
+        //    });
+        //}
 
         function addReview(rating, review, user){
             if(!user){

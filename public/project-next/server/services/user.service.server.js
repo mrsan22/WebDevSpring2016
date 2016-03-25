@@ -69,7 +69,7 @@ module.exports = function (app, model_user) {
     function findUserById(req, res){
         var userId = req.params.userid;
         var user = model_user.findUserById(userId);
-        req.session.currentUser = user;
+        //req.session.currentUser = user;
         res.json(user);
     }
 

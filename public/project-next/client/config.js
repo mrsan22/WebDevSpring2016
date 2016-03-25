@@ -63,15 +63,24 @@
 
             })
             .when("/search/restname=:restname&location=:location", {
-                templateUrl : "views/search/searchresult.view.html"
-
+                templateUrl : "views/search/searchresult.view.html",
+                resolve : {
+                    getLoggedIn : getLoggedIn
+                }
             })
             .when("/search/location=:location", {
-                templateUrl: "views/search/searchresult.view.html"
+                templateUrl: "views/search/searchresult.view.html",
+                resolve : {
+                    getLoggedIn : getLoggedIn
+                }
             })
             .when("/detail/:restId", {
                 templateUrl: "views/search/searchdetails.view.html",
-                controller: "DetailController"
+                controller: "DetailController",
+                controllerAs: "detailsControllerModel",
+                resolve : {
+                    getLoggedIn : getLoggedIn
+                }
             })
             .otherwise({
                 redirectTo: "/home"

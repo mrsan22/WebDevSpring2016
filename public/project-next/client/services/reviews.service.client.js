@@ -4,7 +4,7 @@
         .module("Eat'n'Review")
         .factory("ReviewService", ReviewService);
 
-    function ReviewService(){
+    function ReviewService($http){
 
         var defaultRating = [{
             title : 'Rating 3',
@@ -85,60 +85,61 @@
           //findAllReviewsForUser : findAllReviewsForUser
             findAllReviewsForRest : findAllReviewsForRest,
             loadDefaultRating : loadDefaultRating,
-            addReview : addReview,
-            deleteReviewById : deleteReviewById,
-            editReviewById : editReviewById
+            //addReview : addReview,
+            //deleteReviewById : deleteReviewById,
+            //editReviewById : editReviewById
         };
 
         return reviewsServiceApi;
 
         //Implementation of interfaces
         function findAllReviewsForRest(restId, callback){
-            var reviewsArray = [];
-            for(var each in ratings){
-                if(ratings[each].restId == restId){
-                    reviewsArray.push(ratings[each]);
-                    //console.log("All reviews for this restaurant", reviewsArray);
-                }
-            }
-            callback(reviewsArray);
+            //var reviewsArray = [];
+            //for(var each in ratings){
+            //    if(ratings[each].restId == restId){
+            //        reviewsArray.push(ratings[each]);
+            //        //console.log("All reviews for this restaurant", reviewsArray);
+            //    }
+            //}
+            //callback(reviewsArray);
+            return $http.get("/api/project/getReviews"+restId);
         }
 
-        function loadDefaultRating(callback){
-            callback(defaultRating);
+        function loadDefaultRating(){
+            return $http.get("/api/project/defaultReview");
         }
 
-        function addReview(restId,userId, rating, review, callback){
-            ratings.unshift({
-                title : 'Rating',
-                restId:restId,
-                userId: userId,
-                description : review,
-                rating : rating,
-                basedOn : 5,
-                starsCount : 5,
-                iconClass : 'fa fa-star',
-                editableRating : false,
-                showGrade : false,
-                createdOn: Date.now()
-            });
-            callback(ratings);
-        }
+        //function addReview(restId,userId, rating, review, callback){
+        //    ratings.unshift({
+        //        title : 'Rating',
+        //        restId:restId,
+        //        userId: userId,
+        //        description : review,
+        //        rating : rating,
+        //        basedOn : 5,
+        //        starsCount : 5,
+        //        iconClass : 'fa fa-star',
+        //        editableRating : false,
+        //        showGrade : false,
+        //        createdOn: Date.now()
+        //    });
+        //    callback(ratings);
+        //}
 
-        function deleteReviewById(reviewId, callback){
-            for(var each in ratings){
-                if(ratings[each]._id == reviewId){
-                    ratings.splice(each, 1);
-                    console.log(ratings);
-                    callback(ratings);
-                    return;
-                }
-            }
-        }
-
-        function editReviewById(reviewId, callback){
-
-        }
+        //function deleteReviewById(reviewId, callback){
+        //    for(var each in ratings){
+        //        if(ratings[each]._id == reviewId){
+        //            ratings.splice(each, 1);
+        //            console.log(ratings);
+        //            callback(ratings);
+        //            return;
+        //        }
+        //    }
+        //}
+        //
+        //function editReviewById(reviewId, callback){
+        //
+        //}
 
     }
 

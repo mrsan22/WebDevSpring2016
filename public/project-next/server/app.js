@@ -3,4 +3,7 @@ module.exports = function (app, uuid) {
     //later on we will pass the db instance.
     var model_user = require("./models/user.model.server.js")(uuid);
     var service_user = require("./services/user.service.server.js")(app, model_user);
+
+    var model_reviews = require("./models/reviews.model.server.js")(uuid);
+    var service_reviews = require("./services/reviews.service.server.js")(app, model_reviews);
 };

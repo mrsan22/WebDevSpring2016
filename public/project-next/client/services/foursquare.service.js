@@ -2,7 +2,7 @@
 (function () {
     angular
         .module("Eat'n'Review")
-        .factory("FourSquareService", fourSquareService)
+        .factory("FourSquareService", fourSquareService);
 
     function fourSquareService($http){
         //Foursquare API details

@@ -11,6 +11,7 @@
         function init(){
             UserService.getCurrentUser()
                 .then(function(response){
+                    console.log(response.data);
                         vm.currentUser = response.data;
                         if(response.data != undefined){
                             vm.readonly = true;
