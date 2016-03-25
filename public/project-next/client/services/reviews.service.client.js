@@ -85,8 +85,8 @@
           //findAllReviewsForUser : findAllReviewsForUser
             findAllReviewsForRest : findAllReviewsForRest,
             addReview : addReview,
-            //deleteReviewById : deleteReviewById,
-            //editReviewById : editReviewById
+            deleteReviewById : deleteReviewById,
+            updateReviewById : updateReviewById
         };
 
         return reviewsServiceApi;
@@ -96,41 +96,17 @@
             return $http.get("/api/project/getReviews"+restId);
         }
 
-
-        //function addReview(restId,userId, rating, review, callback){
-        //    ratings.unshift({
-        //        title : 'Rating',
-        //        restId:restId,
-        //        userId: userId,
-        //        description : review,
-        //        rating : rating,
-        //        basedOn : 5,
-        //        starsCount : 5,
-        //        iconClass : 'fa fa-star',
-        //        editableRating : false,
-        //        showGrade : false,
-        //        createdOn: Date.now()
-        //    });
-        //    callback(ratings);
-        //}
         function addReview(restId, userId, review){
             return $http.post("/api/project/user/"+userId+"/rest/"+restId, review);
         }
 
-        //function deleteReviewById(reviewId, callback){
-        //    for(var each in ratings){
-        //        if(ratings[each]._id == reviewId){
-        //            ratings.splice(each, 1);
-        //            console.log(ratings);
-        //            callback(ratings);
-        //            return;
-        //        }
-        //    }
-        //}
-        //
-        //function editReviewById(reviewId, callback){
-        //
-        //}
+        function deleteReviewById(restId, reviewId){
+            return $http.delete("/api/project/rest/"+restId+"/review/"+reviewId);
+        }
+
+        function updateReviewById(restId, reviewId, review){
+            return $http.put("/api/project/rest/"+restId+"/review/"+reviewId, review);
+        }
 
     }
 

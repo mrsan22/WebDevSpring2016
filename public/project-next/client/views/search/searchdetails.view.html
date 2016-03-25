@@ -82,19 +82,14 @@
                     <!-- Comments Form -->
                     <div class="well margin-well" ng-repeat="review in detailsControllerModel.defaultReview">
                         <h4>Start your review!</h4>
-                        <!--<i class="fa fa-star-o fa-lg"></i>-->
-                        <!--<i class="fa fa-star-o fa-lg"></i>-->
-                        <!--<i class="fa fa-star-o fa-lg"></i>-->
-                        <!--<i class="fa fa-star-o fa-lg"></i>-->
-                        <!--<i class="fa fa-star-o fa-lg"></i>-->
-                        <div ng-hide="readonly"><ng-rating ng-model="review.rating"
+                        <div ng-hide="detailsControllerModel.readonly"><ng-rating ng-model="review.rating"
                                    icon-class="review.iconClass"
                                    editable="review.editableRating"
                                    stars-count="review.starsCount"
                                    based-on="review.basedOn"
                                    show-grade="review.showGrade">
                         </ng-rating></div>
-                        <div ng-if="readonly"><ng-rating ng-model="review.rating"
+                        <div ng-if="detailsControllerModel.readonly"><ng-rating ng-model="review.rating"
                                    icon-class="review.iconClass"
                                    editable=false
                                    stars-count="review.starsCount"
@@ -103,10 +98,10 @@
                         </ng-rating></div>
                         <form role="form">
                             <div class="form-group">
-                                <textarea ng-readonly="readonly" class="form-control"
+                                <textarea ng-readonly="detailsControllerModel.readonly" class="form-control"
                                           ng-model="review.review" rows="3"></textarea>
                             </div>
-                            <button ng-disabled="readonly"
+                            <button ng-disabled="detailsControllerModel.readonly"
                                     ng-click="detailsControllerModel.addReview(review)"
                                     class="btn btn-primary">Post Review</button>
                         </form>
@@ -126,22 +121,17 @@
                             </h4>
                             <!--Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante-->
                             <!--sollicitudin commodo.-->
-                            <p ng-hide="selectedreview == $index">{{review.review}}</p>
-                            <div ng-show="selectedreview == $index">
+                            <p ng-hide="detailsControllerModel.selectedreview == $index">{{review.review}}</p>
+                            <div ng-show="detailsControllerModel.selectedreview == $index">
                                 <textarea class="form-control" rows="3" type="text"
-                                          ng-model="detailsControllerModel.editablereview"></textarea>
+                                          ng-model="detailsControllerModel.editablereview.review"></textarea>
                                 <!--<button class="btn btn-success" ng-click="save(editablereview,$index)">Save</button>-->
 
                                 <!--<button class="btn btn-danger" ng-click="disableEditor($index)">Cancel</button>-->
                             </div>
                             <a href="" ><i title="Report Review" class="fa fa-flag pull-right flag-hover"></i></a>
                             <div class="row">
-                                <div class="col-xs-8" ng-hide="selectedreview == $index">
-                                    <!--<i class="fa fa-star fa-lg"></i>-->
-                                    <!--<i class="fa fa-star fa-lg"></i>-->
-                                    <!--<i class="fa fa-star fa-lg"></i>-->
-                                    <!--<i class="fa fa-star-o fa-lg"></i>-->
-                                    <!--<i class="fa fa-star-o fa-lg"></i>-->
+                                <div class="col-xs-8" ng-hide="detailsControllerModel.selectedreview == $index">
                                         <ng-rating ng-model="review.rating"
                                                icon-class="review.iconClass"
                                                editable="review.editableRating"
@@ -152,13 +142,8 @@
                                     {{review.createdOn | date}}
                                 </div>
                                 <!--Below div shows up in edit mode for star rating-->
-                                <div class="col-xs-8" ng-show="selectedreview == $index">
-                                    <!--<i class="fa fa-star fa-lg"></i>-->
-                                    <!--<i class="fa fa-star fa-lg"></i>-->
-                                    <!--<i class="fa fa-star fa-lg"></i>-->
-                                    <!--<i class="fa fa-star-o fa-lg"></i>-->
-                                    <!--<i class="fa fa-star-o fa-lg"></i>-->
-                                        <ng-rating ng-model="review.rating"
+                                <div class="col-xs-8" ng-show="detailsControllerModel.selectedreview == $index">
+                                        <ng-rating ng-model="detailsControllerModel.editablereview.rating"
                                                icon-class="review.iconClass"
                                                editable="true"
                                                stars-count="review.starsCount"
@@ -170,20 +155,25 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div ng-hide="selectedreview == $index" class="btn-group pull-right">
-                                        <a class="btn btn-default" ng-click="detailsControllerModeleditReview($index)"> Edit
+                                    <div ng-hide="detailsControllerModel.selectedreview == $index"
+                                         class="btn-group pull-right">
+                                        <a class="btn btn-default"
+                                           ng-click="detailsControllerModel.editReview($index)"> Edit
                                             <i title="Edit Review" class="fa fa-pencil-square-o"></i>
                                         </a>
-                                        <a class="btn btn-default" ng-click="detailsControllerModel.deleteReview($index)">Delete
+                                        <a class="btn btn-default"
+                                           ng-click="detailsControllerModel.deleteReview($index)">Delete
                                             <i title="Delete Review" class="fa fa-trash-o"></i>
                                         </a>
                                     </div>
-                                    <div ng-if="selectedreview == $index" class="btn-group pull-right">
-                                        <a class="btn btn-default" ng-click="detailsControllerModel.save(editablereview, $index)">Save
+                                    <div ng-if="detailsControllerModel.selectedreview == $index" class="btn-group pull-right">
+                                        <a class="btn btn-default"
+                                           ng-click="detailsControllerModel.save(detailsControllerModel.editablereview, $index)">Save
                                             <i title="Save Review" class="fa fa-floppy-o"></i>
                                         </a>
 
-                                        <a class="btn btn-default" ng-click="detailsControllerModel.disableEditor($index)">Cancel
+                                        <a class="btn btn-default"
+                                           ng-click="detailsControllerModel.disableEditor($index)">Cancel
                                             <i title="Cancel" class="fa fa-times-circle"></i>
                                         </a>
                                     </div>

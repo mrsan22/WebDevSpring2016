@@ -8,9 +8,9 @@
         var vm = this;
         vm.addReview = addReview;
         vm.deleteReview = deleteReview;
-        //$scope.editReview  = editReview;
-        //$scope.disableEditor = disableEditor;
-        //$scope.save = save;
+        vm.editReview  = editReview;
+        vm.disableEditor = disableEditor;
+        vm.save = save;
         vm.initMap = initMap;
 
         vm.defaultReview = [
@@ -77,7 +77,7 @@
                                             console.log("Error in retrieving username for all reviews",error.statusText);
                                         });
                                 }
-                                $scope.readonly = true;
+                                vm.readonly = true;
                             }
 
                         }, function (error) {
@@ -136,60 +136,56 @@
                     });
         }
 
-        //function deleteReview(ratingIndex){
-        //    ReviewService.deleteReviewById(
-        //        $scope.ratings[ratingIndex]._id,
-        //        function(response){
-        //            ReviewService.findAllReviewsForRest(
-        //                $scope.restId,
-        //                function(response){
-        //                    $scope.ratings = response;
-        //                }
-        //            );
-        //        }
-        //    )
-        //}
         function deleteReview(ratingIndex){
-            ReviewService.deleteReviewById(
-                $scope.ratings[ratingIndex]._id,
-                function(response){
-                    ReviewService.findAllReviewsForRest(
-                        $scope.restId,
-                        function(response){
-                            $scope.ratings = response;
-                        }
-                    );
-                }
-            )
+            ReviewService
+                .deleteReviewById( vm.restId, vm.reviews[ratingIndex]._id)
+                .then(function (response) {
+                    console.log(response.data);
+                        vm.reviews = response.data;
+                    },
+                    function (error) {
+                        console.log(error.statusText);
+                    });
         }
 
-        //function editReview(ratingIndex){
-        //    //ReviewService.editReviewById(
-        //    //    ratingIndex,
-        //    //    function (response) {
-        //    //
-        //    //    }
-        //    //);
-        //    $scope.selectedreview = ratingIndex;
-        //    $scope.editablereview = $scope.ratings[ratingIndex].description;
-        //    $scope.temp_rating = $scope.ratings[ratingIndex].rating;
-        //}
-        //
-        //
-        //function save(reviewToEdit, ratingIndex){
-        //    $scope.ratings[ratingIndex].description = reviewToEdit;
-        //    //$scope.disableEditor();
-        //    $scope.selectedreview = -1;
-        //    //$scope.createdOn = Date.now();
-        //    //$scope.latestDate = true;
-        //}
-        //
-        //function disableEditor(ratingIndex){
-        //    $scope.selectedreview = -1;
-        //    $scope.ratings[ratingIndex].rating = $scope.temp_rating;
-        //    $scope.sameDate = true;
-        //
-        //}
+        function editReview(ratingIndex){
+            vm.selectedreview = ratingIndex;
+            console.log(vm.selectedreview);
+            //vm.editablereview = vm.reviews[ratingIndex].review;
+            var editablereview = {
+                "_id": vm.reviews[ratingIndex]["_id"],
+                "title": vm.reviews[ratingIndex]["title"],
+                "review": vm.reviews[ratingIndex]["review"],
+                "createdOn": vm.reviews[ratingIndex]["createdOn"],
+                "restId": vm.reviews[ratingIndex]["restId"],
+                "userId": vm.reviews[ratingIndex]["userId"],
+                "rating": vm.reviews[ratingIndex]["rating"]
+            };
+            vm.editablereview = editablereview;
+            vm.temp_rating = vm.reviews[ratingIndex].rating;
+
+        }
+
+        function save(review, ratingIndex){
+            console.log(review);
+           ReviewService
+               .updateReviewById(vm.restId, vm.reviews[ratingIndex]._id, review)
+               .then(function (response) {
+                       console.log(response.data);
+                       vm.reviews = response.data;
+                       vm.selectedreview = -1;
+                   },
+                   function (error) {
+                       console.log(error.statusText);
+                   });
+        }
+
+        function disableEditor(ratingIndex){
+            vm.selectedreview = -1;
+            vm.reviews[ratingIndex].rating = vm.temp_rating;
+            vm.sameDate = true;
+
+        }
     }
 
 })();

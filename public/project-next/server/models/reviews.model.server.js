@@ -7,7 +7,9 @@ module.exports = function (uuid) {
 
     var api = {
         findAllReviewsForRest : findAllReviewsForRest,
-        addReview : addReview
+        addReview : addReview,
+        deleteReview: deleteReview,
+        updateReviewById : updateReviewById
     };
     return api;
 
@@ -38,6 +40,22 @@ module.exports = function (uuid) {
         return;
     }
 
+    function deleteReview(reviewId){
+        for (var each in mock_reviews){
+            if(mock_reviews[each]._id == reviewId){
+                mock_reviews.splice(each, 1);
+            }
+        }
+        return;
+    }
 
+    function updateReviewById(reviewId, review){
+        for(each in mock_reviews){
+            if(mock_reviews[each]._id == reviewId){
+                mock_reviews[each] = review;
+            }
+        }
+        return;
+    }
 
 };
