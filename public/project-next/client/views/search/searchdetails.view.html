@@ -54,14 +54,14 @@
         </div>
         <!--Map div-->
         <div class="col-sm-4">
-            <!--<div id="map"></div>-->
-            <ng-map zoom="16" center="[{{detailsControllerModel.rest.location.coordinate.latitude}},
-            {{detailsControllerModel.rest.location.coordinate.longitude}}]">
-                <marker position="[{{detailsControllerModel.rest.location.coordinate.latitude}},
-                 {{detailsControllerModel.rest.location.coordinate.longitude}}]"
-                on-click = "click()" title="{{detailsControllerModel.rest.name}}"
-                        centered="true"/>
-            </ng-map>
+            <div id="map" class="map"></div>
+            <!--<ng-map zoom="16" center="[{{detailsControllerModel.rest.location.coordinate.latitude}},-->
+            <!--{{detailsControllerModel.rest.location.coordinate.longitude}}]">-->
+                <!--<marker position="[{{detailsControllerModel.rest.location.coordinate.latitude}},-->
+                 <!--{{detailsControllerModel.rest.location.coordinate.longitude}}]"-->
+                <!--on-click = "click()" title="{{detailsControllerModel.rest.name}}"-->
+                        <!--centered="true"/>-->
+            <!--</ng-map>-->
         </div>
         <!--End Map div-->
 
@@ -195,6 +195,3 @@
             </div>
         </div>
     </div>
-
-
-

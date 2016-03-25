@@ -1,5 +1,5 @@
 "use strict";
 (function(){
     angular
-        .module("Eat'n'Review",["ngRoute","ngRating","ngMap"]);
+        .module("Eat'n'Review",["ngRoute","ngRating"]);
 })();

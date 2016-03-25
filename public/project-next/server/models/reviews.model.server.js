@@ -15,6 +15,8 @@ module.exports = function (uuid) {
     function findAllReviewsForRest(restId){
         var reviewsArray = [];
         for(var each in mock_reviews){
+            console.log(mock_reviews[each]);
+            console.log(mock_reviews[each].restId);
             if(mock_reviews[each].restId == restId){
                 reviewsArray.push(mock_reviews[each]);
                 return reviewsArray;

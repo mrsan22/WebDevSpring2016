@@ -203,6 +203,10 @@ footer {
 .flag-hover:hover{
     color: #d9534f;
 }
+
+.map{
+    height: 300px;
+}
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 @media only screen and (min-width: 480px) and (max-width: 767px) {

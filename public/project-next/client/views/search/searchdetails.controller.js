@@ -11,8 +11,7 @@
         $scope.editReview  = editReview;
         $scope.disableEditor = disableEditor;
         $scope.save = save;
-        //$scope.initMap = initMap;
-        //$scope.markerClick = markerClick;
+        vm.initMap = initMap;
 
         function init(){
             vm.restId = $routeParams.restId;
@@ -28,6 +27,7 @@
                     imgurl_lst.push('o.jpg');
                     vm.imageurl = imgurl_lst.join("/");
                     vm.rest = response;
+                    initMap(vm.rest);
                     $scope.$apply();
                 }
             );
@@ -94,43 +94,33 @@
         }
         init();
 
-        //function initMap() {
-        //    console.log("dsafds");
-        //    var myLatLng = {lat: -25.363, lng: 131.044};
-        //
-        //   var map = new google.maps.Map(document.getElementById('map'), {
-        //        zoom: 10,
-        //        center: myLatLng
-        //    });
-        //
-        //    var marker = new google.maps.Marker({
-        //        position: myLatLng,
-        //        map: map,
-        //        title: 'Hello World!'
-        //    });
-        //}
+        function initMap(rest) {
+            var bounds = new google.maps.LatLngBounds();
+            var myLatLng = {lat:rest.location.coordinate.latitude, lng:rest.location.coordinate.longitude};
 
+           var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 16,
+                center: myLatLng
+            });
 
-        //function markerClick(){
-        //    NgMap.getMap().then(function(map) {
-        //        //console.log(map);
-        //        //var rodDee = {lat:42.34, lng:-71.09};
-        //        //var contentString = "I am here";
-        //        //var infowindow = new google.maps.InfoWindow({
-        //        //    content: contentString
-        //        //});
-        //        //
-        //        //var marker = new google.maps.Marker({
-        //        //    position: rodDee,
-        //        //    map:map,
-        //        //    title: 'Restaurant from Yelp'
-        //        //});
-        //        //
-        //        //google.maps.event.addListener(marker, 'click', function() {
-        //        //    infowindow.open(map, marker);
-        //        //});
-        //    });
-        //}
+            var contentString = "Restaurant";
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'Hello World!'
+            });
+
+            bounds.extend(marker.getPosition());
+
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
+            });
+        }
+
 
         function addReview(rating, review, user){
             if(!user){
