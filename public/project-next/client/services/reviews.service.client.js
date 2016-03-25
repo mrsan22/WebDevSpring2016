@@ -12,7 +12,8 @@
             findAllReviewsForRest : findAllReviewsForRest,
             addReview : addReview,
             deleteReviewById : deleteReviewById,
-            updateReviewById : updateReviewById
+            updateReviewById : updateReviewById,
+            getAvgRatingRest : getAvgRatingRest
         };
 
         return reviewsServiceApi;
@@ -34,6 +35,9 @@
             return $http.put("/api/project/rest/"+restId+"/review/"+reviewId, review);
         }
 
+        function getAvgRatingRest(restId){
+            return $http.get("/api/project/restAvgRating/"+restId);
+        }
     }
 
 })();

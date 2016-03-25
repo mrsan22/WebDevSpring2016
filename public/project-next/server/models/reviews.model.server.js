@@ -9,7 +9,8 @@ module.exports = function (uuid) {
         findAllReviewsForRest : findAllReviewsForRest,
         addReview : addReview,
         deleteReview: deleteReview,
-        updateReviewById : updateReviewById
+        updateReviewById : updateReviewById,
+        getAvgRatingRest: getAvgRatingRest
     };
     return api;
 
@@ -58,4 +59,12 @@ module.exports = function (uuid) {
         return;
     }
 
+    function getAvgRatingRest(restId){
+        var avgRating = 0;
+        var reviews = findAllReviewsForRest(restId);
+        for(var each in reviews){
+            avgRating += reviews[each].rating;
+        }
+        return (avgRating / reviews.length);
+    }
 };

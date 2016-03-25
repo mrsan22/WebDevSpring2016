@@ -6,6 +6,7 @@ module.exports = function (app, model_review) {
     app.post("/api/project/user/:userId/rest/:restId", addReview);
     app.delete("/api/project/rest/:restId/review/:reviewId",deleteReview);
     app.put("/api/project/rest/:restId/review/:reviewId", updateReviewById);
+    app.get("/api/project/restAvgRating/:restId", getAvgRatingRest);
 
 
     //Implementation
@@ -40,5 +41,11 @@ module.exports = function (app, model_review) {
         var reviews = model_review.findAllReviewsForRest(restId);
         res.json(reviews);
 
+    }
+
+    function getAvgRatingRest(req, res){
+        var restId = req.params.restId;
+        var avgRating = model_review.getAvgRatingRest(restId);
+        res.json(avgRating);
     }
 };

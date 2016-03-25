@@ -12,6 +12,7 @@
         vm.disableEditor = disableEditor;
         vm.save = save;
         vm.initMap = initMap;
+        vm.restAvgRating = restAvgRating;
 
         vm.defaultReview = {
                 "title": "Rating 3",
@@ -88,6 +89,8 @@
                        console.log("Error in calling 'findAllReviewsForRest'",error.statusText);
                     });
 
+            restAvgRating();
+
         }
         init();
 
@@ -132,6 +135,7 @@
                     vm.selectedreview = -1;
                     vm.defaultReview.rating = '';
                     vm.defaultReview.review = '';
+                    restAvgRating();
 
                 },
                     function (error) {
@@ -144,6 +148,7 @@
                 .deleteReviewById( vm.restId, vm.reviews[ratingIndex]._id)
                 .then(function (response) {
                         vm.reviews = response.data;
+                        restAvgRating();
                     },
                     function (error) {
                         console.log(error.statusText);
@@ -176,6 +181,7 @@
                        console.log(response.data);
                        vm.reviews = response.data;
                        vm.selectedreview = -1;
+                       restAvgRating();
                    },
                    function (error) {
                        console.log(error.statusText);
@@ -187,6 +193,19 @@
             vm.reviews[ratingIndex].rating = vm.temp_rating;
             vm.sameDate = true;
 
+        }
+
+        function restAvgRating(){
+            ReviewService
+                .getAvgRatingRest(vm.restId)
+                .then(function (response) {
+                        console.log("dfasfsd",response);
+                        vm.avgRating = response.data;
+
+                    },
+                    function (error) {
+                        console.log(error.statusText);
+                    });
         }
     }
 

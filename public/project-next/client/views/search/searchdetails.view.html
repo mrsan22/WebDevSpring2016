@@ -29,7 +29,10 @@
     <div class="row">
         <div class="col-sm-3">
             <img src={{detailsControllerModel.imageurl}} class="img-responsive"/>
-            <img src={{detailsControllerModel.rest.rating_img_url}} class="img-responsive"/>
+            <!--<img src={{detailsControllerModel.rest.rating_img_url}} class="img-responsive"/>-->
+            <ng-rating ng-model="detailsControllerModel.avgRating"
+                       editable="false">
+            </ng-rating>
 
         </div>
         <div class="col-sm-5">
