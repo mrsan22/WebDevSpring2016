@@ -40,7 +40,6 @@
 
 
         function loginUser(username, password){
-            console.log(username, password);
             return $http.get('/api/project/user?username='+username+'&password='+password);
         }
 

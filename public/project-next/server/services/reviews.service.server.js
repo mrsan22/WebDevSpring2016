@@ -3,19 +3,23 @@ module.exports = function (app, model_review) {
 
     //Declaration
     app.get("/api/project/getReviews:restId", findAllReviewsForRest);
-    app.get("/api/project/defaultReview", loadDefaultRating);
+    app.post("/api/project/user/:userId/rest/:restId", addReview);
 
 
     //Implementation
     function findAllReviewsForRest(req, res){
         var restId = req.params.restId;
         var reviews = model_review.findAllReviewsForRest(restId);
-        res.send(reviews);
+        res.json(reviews);
     }
 
-    function loadDefaultRating(req, res){
-        var review = model_review.loadDefaultRating();
-        res.send(review);
+    function addReview(req, res){
+        var userId = req.params.userId;
+        var restId = req.params.restId;
+        var review = req.body;
+        model_review.addReview(userId, restId, review);
+        var reviews = model_review.findAllReviewsForRest(restId);
+        res.json(reviews);
     }
     
 };

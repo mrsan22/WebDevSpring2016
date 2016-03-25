@@ -84,8 +84,7 @@
         var reviewsServiceApi = {
           //findAllReviewsForUser : findAllReviewsForUser
             findAllReviewsForRest : findAllReviewsForRest,
-            loadDefaultRating : loadDefaultRating,
-            //addReview : addReview,
+            addReview : addReview,
             //deleteReviewById : deleteReviewById,
             //editReviewById : editReviewById
         };
@@ -93,21 +92,10 @@
         return reviewsServiceApi;
 
         //Implementation of interfaces
-        function findAllReviewsForRest(restId, callback){
-            //var reviewsArray = [];
-            //for(var each in ratings){
-            //    if(ratings[each].restId == restId){
-            //        reviewsArray.push(ratings[each]);
-            //        //console.log("All reviews for this restaurant", reviewsArray);
-            //    }
-            //}
-            //callback(reviewsArray);
+        function findAllReviewsForRest(restId){
             return $http.get("/api/project/getReviews"+restId);
         }
 
-        function loadDefaultRating(){
-            return $http.get("/api/project/defaultReview");
-        }
 
         //function addReview(restId,userId, rating, review, callback){
         //    ratings.unshift({
@@ -125,6 +113,9 @@
         //    });
         //    callback(ratings);
         //}
+        function addReview(restId, userId, review){
+            return $http.post("/api/project/user/"+userId+"/rest/"+restId, review);
+        }
 
         //function deleteReviewById(reviewId, callback){
         //    for(var each in ratings){

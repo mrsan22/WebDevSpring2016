@@ -80,34 +80,34 @@
                     <!-- Blog Comments -->
 
                     <!-- Comments Form -->
-                    <div class="well margin-well" ng-repeat="rate in detailsControllerModel.defaultRating">
+                    <div class="well margin-well" ng-repeat="review in detailsControllerModel.defaultReview">
                         <h4>Start your review!</h4>
                         <!--<i class="fa fa-star-o fa-lg"></i>-->
                         <!--<i class="fa fa-star-o fa-lg"></i>-->
                         <!--<i class="fa fa-star-o fa-lg"></i>-->
                         <!--<i class="fa fa-star-o fa-lg"></i>-->
                         <!--<i class="fa fa-star-o fa-lg"></i>-->
-                        <div ng-hide="readonly"><ng-rating ng-model="rate.rating"
-                                   icon-class="rate.iconClass"
-                                   editable="rate.editableRating"
-                                   stars-count="rate.starsCount"
-                                   based-on="rate.basedOn"
-                                   show-grade="rate.showGrade">
+                        <div ng-hide="readonly"><ng-rating ng-model="review.rating"
+                                   icon-class="review.iconClass"
+                                   editable="review.editableRating"
+                                   stars-count="review.starsCount"
+                                   based-on="review.basedOn"
+                                   show-grade="review.showGrade">
                         </ng-rating></div>
-                        <div ng-if="readonly"><ng-rating ng-model="rate.rating"
-                                   icon-class="rate.iconClass"
+                        <div ng-if="readonly"><ng-rating ng-model="review.rating"
+                                   icon-class="review.iconClass"
                                    editable=false
-                                   stars-count="rate.starsCount"
-                                   based-on="rate.basedOn"
-                                   show-grade="rate.showGrade">
+                                   stars-count="review.starsCount"
+                                   based-on="review.basedOn"
+                                   show-grade="review.showGrade">
                         </ng-rating></div>
                         <form role="form">
                             <div class="form-group">
                                 <textarea ng-readonly="readonly" class="form-control"
-                                          ng-model="review" rows="3"></textarea>
+                                          ng-model="review.review" rows="3"></textarea>
                             </div>
                             <button ng-disabled="readonly"
-                                    ng-click="addReview(rate.rating, review, user)"
+                                    ng-click="detailsControllerModel.addReview(review)"
                                     class="btn btn-primary">Post Review</button>
                         </form>
                     </div>
@@ -115,7 +115,7 @@
                     <!-- Posted Comments -->
 
                     <!-- Comment -->
-                    <div class="media margin-well" ng-repeat="review in detailsControllerModel.ratings">
+                    <div class="media margin-well" ng-repeat="review in detailsControllerModel.reviews">
                         <a class="pull-left" href="#">
                             <img class="media-object" src="http://placehold.it/64x64" alt="">
                         </a>
@@ -126,9 +126,10 @@
                             </h4>
                             <!--Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante-->
                             <!--sollicitudin commodo.-->
-                            <p ng-hide="selectedreview == $index">{{review.description}}</p>
+                            <p ng-hide="selectedreview == $index">{{review.review}}</p>
                             <div ng-show="selectedreview == $index">
-                                <textarea class="form-control" rows="3" type="text" ng-model="editablereview"></textarea>
+                                <textarea class="form-control" rows="3" type="text"
+                                          ng-model="detailsControllerModel.editablereview"></textarea>
                                 <!--<button class="btn btn-success" ng-click="save(editablereview,$index)">Save</button>-->
 
                                 <!--<button class="btn btn-danger" ng-click="disableEditor($index)">Cancel</button>-->
@@ -170,19 +171,19 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div ng-hide="selectedreview == $index" class="btn-group pull-right">
-                                        <a class="btn btn-default" ng-click="editReview($index)"> Edit
+                                        <a class="btn btn-default" ng-click="detailsControllerModeleditReview($index)"> Edit
                                             <i title="Edit Review" class="fa fa-pencil-square-o"></i>
                                         </a>
-                                        <a class="btn btn-default" ng-click="deleteReview($index)">Delete
+                                        <a class="btn btn-default" ng-click="detailsControllerModel.deleteReview($index)">Delete
                                             <i title="Delete Review" class="fa fa-trash-o"></i>
                                         </a>
                                     </div>
                                     <div ng-if="selectedreview == $index" class="btn-group pull-right">
-                                        <a class="btn btn-default" ng-click="save(editablereview, $index)">Save
+                                        <a class="btn btn-default" ng-click="detailsControllerModel.save(editablereview, $index)">Save
                                             <i title="Save Review" class="fa fa-floppy-o"></i>
                                         </a>
 
-                                        <a class="btn btn-default" ng-click="disableEditor($index)">Cancel
+                                        <a class="btn btn-default" ng-click="detailsControllerModel.disableEditor($index)">Cancel
                                             <i title="Cancel" class="fa fa-times-circle"></i>
                                         </a>
                                     </div>
