@@ -13,8 +13,7 @@
         vm.save = save;
         vm.initMap = initMap;
 
-        vm.defaultReview = [
-            {
+        vm.defaultReview = {
                 "title": "Rating 3",
                 "rating": 0,
                 "basedOn": 5,
@@ -22,8 +21,7 @@
                 "iconClass": "fa fa-star",
                 "editableRating": true,
                 "showGrade": false
-            }
-        ];
+            };
 
         function init(){
             vm.restId = $routeParams.restId;
@@ -127,9 +125,14 @@
                 .addReview(vm.restId, vm.currentUser._id, review)
                 .then(function (response) {
                     console.log(response.data);
+                    vm.selectedIndex = -1;
                     vm.reviews = response.data;
                     vm.reviews[0]["firstName"] = vm.currentUser.firstName;
                     vm.reviews[0]["lastName"] = vm.currentUser.lastName;
+                    vm.selectedreview = -1;
+                    vm.defaultReview.rating = '';
+                    vm.defaultReview.review = '';
+
                 },
                     function (error) {
                         console.log(error.statusText);
@@ -140,7 +143,6 @@
             ReviewService
                 .deleteReviewById( vm.restId, vm.reviews[ratingIndex]._id)
                 .then(function (response) {
-                    console.log(response.data);
                         vm.reviews = response.data;
                     },
                     function (error) {
