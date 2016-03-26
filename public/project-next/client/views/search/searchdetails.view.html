@@ -120,12 +120,11 @@
                             <img class="media-object" src="http://placehold.it/64x64" alt="">
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading">{{review.firstName}} {{review.lastName}}
+                            <h4 class="media-heading">{{review.userFirstName}}
                                 <i class="fa fa-check-circle"></i>
                                 <small>Follow</small>
                             </h4>
-                            <!--Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante-->
-                            <!--sollicitudin commodo.-->
+
                             <p ng-hide="detailsControllerModel.selectedreview == $index">{{review.review}}</p>
                             <div ng-show="detailsControllerModel.selectedreview == $index">
                                 <textarea class="form-control" rows="3" type="text"

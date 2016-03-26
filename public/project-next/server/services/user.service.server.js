@@ -11,6 +11,7 @@ module.exports = function (app, model_user) {
     app.get("/api/project/user/:userid", findUserById);
     app.delete("/api/project/user/:userid", deleteUserById);
     app.post("/api/project/admin-user", createAndFindAllUsers);
+    //app.put("/api/project/userupdate/:userId",updateUserByIdNoSession);
 
     //Implementation
     //function to redirect call coming to '/api/project/user' path
@@ -69,7 +70,6 @@ module.exports = function (app, model_user) {
     function findUserById(req, res){
         var userId = req.params.userid;
         var user = model_user.findUserById(userId);
-        //req.session.currentUser = user;
         res.json(user);
     }
 
@@ -83,9 +83,19 @@ module.exports = function (app, model_user) {
         var userObj = req.body;
         model_user.updateUserById(userid, userObj);
         var user = model_user.findUserById(userid);
-        //req.session.currentUser = user;
+        if(req.session.currentUser._id == userid) {
+            req.session.currentUser = user;
+        }
         res.send(user);
     }
+
+    //function updateUserByIdNoSession(req, res){
+    //    var userid = req.params.userId;
+    //    var userObj = req.body;
+    //    model_user.updateUserById(userid, userObj);
+    //    var user = model_user.findUserById(userid);
+    //    res.send(user);
+    //}
 
     function deleteUserById(req, res){
         var userId = req.params.userid;

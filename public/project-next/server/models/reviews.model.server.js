@@ -53,6 +53,7 @@ module.exports = function (uuid) {
     function updateReviewById(reviewId, review){
         for(each in mock_reviews){
             if(mock_reviews[each]._id == reviewId){
+                review.createdOn = Date.now();
                 mock_reviews[each] = review;
             }
         }

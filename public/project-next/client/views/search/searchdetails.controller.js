@@ -4,7 +4,7 @@
         .module("Eat'n'Review")
         .controller("DetailController", DetailController);
 
-    function DetailController($scope, $routeParams, YelpService, ReviewService, UserService){
+    function DetailController($scope, $routeParams, YelpService, ReviewService, UserService, $q){
         var vm = this;
         vm.addReview = addReview;
         vm.deleteReview = deleteReview;
@@ -13,6 +13,7 @@
         vm.save = save;
         vm.initMap = initMap;
         vm.restAvgRating = restAvgRating;
+        vm.findUserByReviewUserId = findUserByReviewUserId;
 
         vm.defaultReview = {
                 "title": "Rating 3",
@@ -21,7 +22,8 @@
                 "starsCount": 5,
                 "iconClass": "fa fa-star",
                 "editableRating": true,
-                "showGrade": false
+                "showGrade": false,
+                "createdOn" : Date.now()
             };
 
         function init(){
@@ -41,49 +43,26 @@
                 }
             );
 
+            UserService
+                .getCurrentUser()
+                .then(function (response) {
+                    if (response.data) {
+                        vm.currentUser = response.data;
+                    }
+                    else {
+                        vm.readonly = true;
+                    }
+                }, function (error) {
+                    console.log("Error in calling 'getCurrentUser'",error.statusText);
+                });
+
+
             ReviewService
                 .findAllReviewsForRest(vm.restId)
                 .then(function (response) {
                     console.log(response.data);
                     vm.reviews = response.data;
-                    UserService
-                        .getCurrentUser()
-                        .then(function (response) {
-                            if(response.data) {
-                                vm.currentUser = response.data;
-                                console.log(vm.currentUser);
-                                for (var i in vm.reviews) {
-                                    //var userObj = UserService.findUserById(vm.reviews[i].userId);
-                                    vm.reviews[i]["firstName"] = vm.currentUser.firstName;
-                                    vm.reviews[i]["lastName"] = vm.currentUser.lastName;
-                                }
-                            }
-                            else{
-                                console.log("No User logged in");
-                                for (var i in vm.reviews) {
-                                    console.log("i",i);
-                                    UserService
-                                        .findUserById(vm.reviews[i].userId)
-                                        .then(function (response) {
-                                            console.log(response.data);
-                                        if(response.data){
-                                            vm.reviews[i]["firstName"] = response.data.firstName;
-                                            vm.reviews[i]["lastName"] = response.data.lastName;
-                                        }
-                                            console.log(vm.reviews);
-                                    },
-                                        function (error) {
-                                            console.log("Error in retrieving username for all reviews",error.statusText);
-                                        });
-                                }
-                                vm.readonly = true;
-                            }
-
-                        }, function (error) {
-                            console.log("Error in calling 'getCurrentUser'",error.statusText);
-                        });
-
-
+                    vm.findUserByReviewUserId(vm.reviews);
                 },
                     function (error) {
                        console.log("Error in calling 'findAllReviewsForRest'",error.statusText);
@@ -130,8 +109,7 @@
                     console.log(response.data);
                     vm.selectedIndex = -1;
                     vm.reviews = response.data;
-                    vm.reviews[0]["firstName"] = vm.currentUser.firstName;
-                    vm.reviews[0]["lastName"] = vm.currentUser.lastName;
+                    vm.findUserByReviewUserId(vm.reviews);
                     vm.selectedreview = -1;
                     vm.defaultReview.rating = '';
                     vm.defaultReview.review = '';
@@ -180,6 +158,7 @@
                .then(function (response) {
                        console.log(response.data);
                        vm.reviews = response.data;
+                       vm.findUserByReviewUserId(vm.reviews);
                        vm.selectedreview = -1;
                        restAvgRating();
                    },
@@ -199,13 +178,34 @@
             ReviewService
                 .getAvgRatingRest(vm.restId)
                 .then(function (response) {
-                        console.log("dfasfsd",response);
                         vm.avgRating = response.data;
 
                     },
                     function (error) {
                         console.log(error.statusText);
                     });
+        }
+
+        function findUserByReviewUserId(reviews) {
+            var promiseArray = [];
+            var result = [];
+            for (var i = 0; i < reviews.length; i++) {
+                promiseArray
+                    .push(
+                        UserService.findUserById(reviews[i].userId)
+                            .then(function (response) {
+                                if (response.data) {
+                                    result.push(response.data);
+                                }
+                            }));
+            }
+
+            $q.all(promiseArray)
+                .then(function () {
+                    for (var i = 0; i < result.length; i++) {
+                        reviews[i].userFirstName = result[i].firstName;
+                    }
+                });
         }
     }
 

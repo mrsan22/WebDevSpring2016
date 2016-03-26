@@ -34,6 +34,7 @@
                 .updateUserById(user._id, user)
                 .then(function (response) {
                     console.log("User details updated", response.data)
+                    vm.currentUser = response.data;
                 },
                     function (error) {
                        console.log(error.statusText);
