@@ -59,17 +59,20 @@
                 controllerAs : "adminUserModel"
             })
             .when("/search", {
-                templateUrl : "views/search/searchresult.view.html"
+                templateUrl : "views/search/searchresult.view.html",
+                controller : "SearchController"
 
             })
             .when("/search/restname=:restname&location=:location", {
                 templateUrl : "views/search/searchresult.view.html",
+                controller : "SearchController",
                 resolve : {
                     getLoggedIn : getLoggedIn
                 }
             })
             .when("/search/location=:location", {
                 templateUrl: "views/search/searchresult.view.html",
+                controller : "SearchController",
                 resolve : {
                     getLoggedIn : getLoggedIn
                 }
