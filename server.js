@@ -6,7 +6,25 @@ var multer = require('multer'); //for parsing JSON
 var cookieParser = require('cookie-parser'); //Parsing cookies for session
 var session = require('express-session'); //For maintaining sessions
 var uuid = require('node-uuid'); //For generating _id
+var mongoose = require('mongoose'); //For accessing mongodb database
 
+//Create a default session string
+var connectionString = 'mongodb://127.0.0.1:27017/formbuilder';
+console.log(connectionString);
+
+//Use remote connection string if running in remote server
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+  connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+      process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+      process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+      process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+      process.env.OPENSHIFT_APP_NAME;
+
+  console.log(connectionString);
+}
+
+// connect to the database
+var db = mongoose.connect(connectionString);
 
 app.use(express.static(__dirname + '/public'));
 
