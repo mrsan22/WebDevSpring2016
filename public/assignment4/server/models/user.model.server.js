@@ -3,7 +3,11 @@
 //Making the mock data available in server side user model
 var mock_users = require("./user.mock.json");
 
-module.exports = function(uuid) {
+module.exports = function(uuid, db, mongoose) {
+
+    //load user schema
+    var UserSchema = require("./user.schema.server.js")(mongoose);
+
     var api = {
         findUserByCredentials: findUserByCredentials,
         loginUser : loginUser,
