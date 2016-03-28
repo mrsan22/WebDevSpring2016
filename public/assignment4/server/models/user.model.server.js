@@ -8,6 +8,8 @@ module.exports = function(uuid, db, mongoose) {
     //load user schema
     var UserSchema = require("./user.schema.server.js")(mongoose);
 
+    var UserModel = mongoose.model('User', UserSchema);
+
     var api = {
         findUserByCredentials: findUserByCredentials,
         loginUser : loginUser,
