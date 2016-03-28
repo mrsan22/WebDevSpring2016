@@ -68,11 +68,24 @@ module.exports = function(app, model) {
         res.send(200);
     }
 
+    //function register(req, res){
+    //    var user = req.body;
+    //    user = model.createUser(user);
+    //    req.session.currentUser = user;
+    //    res.json(user);
+    //}
+
     function register(req, res){
         var user = req.body;
-        user = model.createUser(user);
-        req.session.currentUser = user;
-        res.json(user);
+        model
+            .createUser(user)
+            .then(function (response) {
+                req.session.currentUser = response;
+                res.json(response);
+            },
+                function (error) {
+                    res.status (400).send ("Error inserting User Info in database", error.statusText);
+                });
     }
 
     function findAllUsers(req, res){

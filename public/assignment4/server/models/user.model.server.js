@@ -8,6 +8,7 @@ module.exports = function(uuid, db, mongoose) {
     //load user schema
     var UserSchema = require("./user.schema.server.js")(mongoose);
 
+    //create low level mongoose user model
     var UserModel = mongoose.model('User', UserSchema);
 
     var api = {
@@ -62,15 +63,19 @@ module.exports = function(uuid, db, mongoose) {
         return null;
     }
 
+    //function createUser(user){
+    //    for(var i=0;i<mock_users.length;i++){
+    //        if (mock_users[i].username == user.username){
+    //            return null;
+    //        }
+    //    }
+    //    user["_id"] = uuid.v1();
+    //    mock_users.push(user);
+    //    return user;
+    //}
+
     function createUser(user){
-        for(var i=0;i<mock_users.length;i++){
-            if (mock_users[i].username == user.username){
-                return null;
-            }
-        }
-        user["_id"] = uuid.v1();
-        mock_users.push(user);
-        return user;
+        return UserModel.create(user);
     }
 
     function findAllUsers(){

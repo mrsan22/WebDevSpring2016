@@ -6,7 +6,7 @@
 
     function RegisterController($location, UserService) {
         var vm  =this;
-
+        vm.emails = [];
         // Event handler declaration
         vm.register = register;
 
@@ -18,6 +18,8 @@
 
         //Implementation of event handler
         function register(userObj) {
+            vm.emails.push(userObj.emails);
+            userObj.emails = vm.emails;
             UserService
                 .createUser(userObj)
                 .then(function (response) {
