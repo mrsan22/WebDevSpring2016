@@ -25,29 +25,17 @@ module.exports = function(uuid, db, mongoose) {
     return api;
 
     function findUserByCredentials(credentials) {
-        for(var u in mock_users){
-            if(mock_users[u].username == credentials.username &&
-                mock_users[u].password == credentials.password){
-                console.log("User exists, returning found user");
-                return mock_users[u];
-            }
-        }
-        // user not found
-        console.log("user does not exist, returning null");
-        return null;
+        return UserModel.findOne(
+            {'username': credentials.username,
+                'password' : credentials.password}
+        );
     }
 
     function loginUser(username, password) {
-        for(var u in mock_users){
-            if(mock_users[u].username == username &&
-                mock_users[u].password == password){
-                console.log("User exists, returning found user");
-                return mock_users[u];
-            }
-        }
-        // user not found
-        console.log("user does not exist, returning null");
-        return null;
+        return UserModel.findOne(
+            {'username': username,
+                'password' : password}
+        );
     }
 
     function findUserByUsername(username){
@@ -59,18 +47,11 @@ module.exports = function(uuid, db, mongoose) {
     }
 
     function findAllUsers(){
-        return mock_users;
+        return UserModel.find();
     }
 
     function findUserById(userid){
-        for(var u in mock_users){
-            if(mock_users[u]._id == userid){
-                return mock_users[u];
-            }
-        }
-        // user not found
-        console.log("user not found by Id, returning null");
-        return null;
+        return UserModel.findById({'_id': userid});
     }
 
     function deleteUserById(userId){

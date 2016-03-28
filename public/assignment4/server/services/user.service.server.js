@@ -39,17 +39,43 @@ module.exports = function(app, model) {
 
     function findUserByCredentials(req, res) {
         var credentials = req.body;
-        var user = model.findUserByCredentials(credentials);
-        req.session.currentUser = user;
-        res.json(user);
+        model
+            .findUserByCredentials(credentials)
+            .then(function (response) {
+                if(response != null) {
+                    req.session.currentUser = response;
+                    res.json(response);
+                }
+                else{
+                    console.log("user does not exist, returning null");
+                    res.json(null);
+                }
+                },
+                function (error) {
+                    res.status (400).send ("Error in finding user by credentials", error.statusText);
+                });
     }
 
     function loginUser(req, res){
         var username = req.query.username;
         var password = req.query.password;
-        var user = model.loginUser(username, password);
-        req.session.currentUser = user;
-        res.json(user);
+        model
+            .loginUser(username, password)
+            .then(function (response) {
+                    if(response != null) {
+                        req.session.currentUser = response;
+                        console.log("User exists, returning found user");
+                        res.json(response);
+                    }
+                    else{
+                        console.log("user does not exist, returning null");
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.status (400).send ("Error in loginUser function", error.statusText);
+                });
+
     }
 
 
@@ -101,15 +127,39 @@ module.exports = function(app, model) {
     }
 
     function findAllUsers(req, res){
-        var allUsers = model.findAllUsers();
-        res.send(allUsers);
+        model
+            .findAllUsers()
+            .then(function (response) {
+                    if(response != null) {
+                        res.json(response);
+                    }
+                    else{
+                        console.log("User collection is empty");
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.status (400).send ("Error in findAllUsers function", error.statusText);
+                });
     }
 
     function findUserById(req, res){
         var userId = req.params.userid;
-        var user = model.findUserById(userId);
-        req.session.currentUser = user;
-        res.json(user);
+        model
+            .findUserById(userId)
+            .then(function (response) {
+                    if(response != null) {
+                        res.json(response);
+                    }
+                    else{
+                        console.log("User not found by Id, returning null");
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.status (400).send ("Error in findUserById function", error.statusText);
+                });
+
     }
 
     function deleteUserById(req, res){

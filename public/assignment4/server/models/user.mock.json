@@ -5,6 +5,8 @@
     "lastName": "Wonderland",
     "username": "alice",
     "password": "alice",
+    "phones": [],
+    "emails": ["alice@alice.com"],
     "roles": [
       "student"
     ]
@@ -15,6 +17,8 @@
     "lastName": "Hope",
     "username": "bob",
     "password": "bob",
+    "phones": [],
+    "emails": ["bob@bob.com"],
     "roles": [
       "admin"
     ]
@@ -25,6 +29,8 @@
     "lastName": "Brown",
     "username": "charlie",
     "password": "charlie",
+    "phones": [],
+    "emails": ["charlie@charlie.com"],
     "roles": [
       "faculty"
     ]
@@ -35,6 +41,8 @@
     "lastName": "Craig",
     "username": "dan",
     "password": "dan",
+    "phones": [],
+    "emails": ["dan@dan.com"],
     "roles": [
       "faculty",
       "admin"
@@ -46,6 +54,8 @@
     "lastName": "Norton",
     "username": "ed",
     "password": "ed",
+    "phones": [],
+    "emails": ["ed@ed.com"],
     "roles": [
       "student"
     ]
