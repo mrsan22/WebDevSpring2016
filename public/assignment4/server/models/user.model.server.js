@@ -19,8 +19,7 @@ module.exports = function(uuid, db, mongoose) {
         findAllUsers : findAllUsers,
         findUserById : findUserById,
         updateUserById : updateUserById,
-        deleteUserById : deleteUserById,
-        createAndFindAllUsers : createAndFindAllUsers
+        deleteUserById : deleteUserById
     };
     return api;
 
@@ -64,17 +63,5 @@ module.exports = function(uuid, db, mongoose) {
             {$set : userObj}
         );
     }
-
-    function createAndFindAllUsers(user){
-        for(var i=0;i<mock_users.length;i++){
-            if (mock_users[i].username == user.username){
-                return null;
-            }
-        }
-        user["_id"] = uuid.v1();
-        mock_users.push(user);
-        return mock_users;
-    }
-
 
 };

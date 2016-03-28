@@ -217,9 +217,44 @@ module.exports = function(app, model) {
                 });
     }
 
+    //For admin
     function createUser(req, res){
         var user = req.body;
-        users = model.createAndFindAllUsers(user);
-        res.send(users);
+        //users = model.createAndFindAllUsers(user);
+        //res.send(users);
+        model
+            .findUserByUsername(user.username)
+            .then(function (response) {
+                    if(response == null){
+                        return model.createUser(user);
+                    }
+                    else{
+                        console.log("username already exists");
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.send ("Error in finding user by username", error.statusText);
+                })
+            .then(function (response) {
+                    //req.session.currentUser = response;
+                    //res.json(response);
+                return model.findAllUsers();
+                },
+                function (error) {
+                    res.status (400).send ("Error inserting User Info in database", error.statusText);
+                })
+            .then(function (response) {
+                    if(response != null) {
+                        res.json(response);
+                    }
+                    else{
+                        console.log("User collection is empty");
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.status (400).send ("Error in findAllUsers function", error.statusText);
+                });
     }
 };
