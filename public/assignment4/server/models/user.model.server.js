@@ -52,15 +52,19 @@ module.exports = function(uuid, db, mongoose) {
 
 
 
+    //function findUserByUsername(username){
+    //    for(var u in mock_users){
+    //        if(mock_users[u].username == username){
+    //            return mock_users[u];
+    //        }
+    //    }
+    //    // user not found
+    //    console.log("user not found by username, returning null");
+    //    return null;
+    //}
+
     function findUserByUsername(username){
-        for(var u in mock_users){
-            if(mock_users[u].username == username){
-                return mock_users[u];
-            }
-        }
-        // user not found
-        console.log("user not found by username, returning null");
-        return null;
+        return UserModel.findOne({'username' : username});
     }
 
     //function createUser(user){

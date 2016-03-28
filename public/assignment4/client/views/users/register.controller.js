@@ -23,6 +23,7 @@
             UserService
                 .createUser(userObj)
                 .then(function (response) {
+                    console.log(response);
                    var currentUser = response.data;
                     if(currentUser != null){
                         UserService.setCurrentUser(currentUser);
@@ -30,6 +31,7 @@
                     }
                     else{
                         //promise fullfilled, inpsite of getting a null response.
+                        console.log("Username already exists");
                         vm.showAlert = true;
                     }
                 });
