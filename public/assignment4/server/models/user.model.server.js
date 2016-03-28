@@ -59,12 +59,10 @@ module.exports = function(uuid, db, mongoose) {
     }
 
     function updateUserById(userid, userObj){
-        for (var each in mock_users){
-            if (mock_users[each]._id == userid){
-                mock_users[each] = userObj;
-                return (mock_users);
-            }
-        }
+        return UserModel.update(
+            {'_id' : userid},
+            {$set : userObj}
+        );
     }
 
     function createAndFindAllUsers(user){

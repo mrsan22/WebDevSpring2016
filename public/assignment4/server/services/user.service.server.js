@@ -192,8 +192,29 @@ module.exports = function(app, model) {
     function updateUserById(req, res){
         var userid = req.params.userId;
         var userObj = req.body;
-        var updatedUsers = model.updateUserById(userid, userObj);
-        res.send(updatedUsers);
+        model
+            .updateUserById(userid, userObj)
+            .then(function (response) {
+                //console.log(response);
+                //res.send(200);
+                return model.findUserById(userid);
+            },
+                function (error) {
+                    res.status (400).send ("Error in updating user by Id", error.statusText);
+                })
+            .then(function (response) {
+                    if(response != null) {
+                        req.session.currentUser = response;
+                        res.json(response);
+                    }
+                    else{
+                        console.log("User not found by Id after updating the user, returning null");
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.status (400).send ("Error in findUserById function after updating the user", error.statusText);
+                });
     }
 
     function createUser(req, res){

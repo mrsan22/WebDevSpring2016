@@ -23,11 +23,10 @@
         init();
 
         function update(user){
-            console.log(user);
             UserService
                 .updateUserById(user._id,user)
                 .then(function (response) {
-                    //console.log(response.data);
+                    console.log(response.data);
                     //vm.currentUser  =response.data;
                     //console.log(response.data);
                     UserService
