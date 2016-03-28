@@ -52,12 +52,6 @@ module.exports = function(app, model) {
         res.json(user);
     }
 
-    //function findUserByUsername(req, res){
-    //    var username  = req.query.username;
-    //    console.log(username);
-    //    var user = model.findUserByUsername(username);
-    //    res.json(user);
-    //}
 
     function findUserByUsername(req, res){
         var username  = req.query.username;
@@ -80,38 +74,30 @@ module.exports = function(app, model) {
         res.send(200);
     }
 
-    //function register(req, res){
-    //    var user = req.body;
-    //    user = model.createUser(user);
-    //    req.session.currentUser = user;
-    //    res.json(user);
-    //}
 
     function register(req, res){
         var user = req.body;
         model
             .findUserByUsername(user.username)
             .then(function (response) {
-                var user = response;
-                if(!user){
-                    model
-                        .createUser(user)
-                        .then(function (response) {
-                                req.session.currentUser = response;
-                                res.json(response);
-                            },
-                            function (error) {
-                                res.status (400).send ("Error inserting User Info in database", error.statusText);
-                            });
-                }
-                else{
-                    console.log("username already exists");
-                    res.json(null);
-                }
-            },
+                    if(response == null){
+                        return model.createUser(user);
+                    }
+                    else{
+                        console.log("username already exists");
+                        res.json(null);
+                    }
+                },
                 function (error) {
                     res.send ("Error in finding user by username", error.statusText);
                 })
+            .then(function (response) {
+                    req.session.currentUser = response;
+                    res.json(response);
+                },
+                function (error) {
+                    res.status (400).send ("Error inserting User Info in database", error.statusText);
+                });
     }
 
     function findAllUsers(req, res){

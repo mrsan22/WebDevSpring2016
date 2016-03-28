@@ -50,33 +50,9 @@ module.exports = function(uuid, db, mongoose) {
         return null;
     }
 
-
-
-    //function findUserByUsername(username){
-    //    for(var u in mock_users){
-    //        if(mock_users[u].username == username){
-    //            return mock_users[u];
-    //        }
-    //    }
-    //    // user not found
-    //    console.log("user not found by username, returning null");
-    //    return null;
-    //}
-
     function findUserByUsername(username){
         return UserModel.findOne({'username' : username});
     }
-
-    //function createUser(user){
-    //    for(var i=0;i<mock_users.length;i++){
-    //        if (mock_users[i].username == user.username){
-    //            return null;
-    //        }
-    //    }
-    //    user["_id"] = uuid.v1();
-    //    mock_users.push(user);
-    //    return user;
-    //}
 
     function createUser(user){
         return UserModel.create(user);
