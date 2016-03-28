@@ -164,8 +164,29 @@ module.exports = function(app, model) {
 
     function deleteUserById(req, res){
         var userId = req.params.userid;
-        var users = model.deleteUserById(userId);
-        res.send(users);
+        model
+            .deleteUserById(userId)
+            .then(function (response) {
+                    //res.send(200);
+                    return model.findAllUsers();
+                },
+                function (error) {
+                    res.status (400).send ("Error in deleting user by Id", error.statusText);
+                })
+            //Accepting the response from model.findAllUsers to return remaining set of users.
+            .then(function (response) {
+                        if(response != null) {
+                            res.json(response);
+                        }
+                        else{
+                            console.log("User collection is empty");
+                            res.json(null);
+                        }
+                    },
+                    function (error) {
+                        res.status (400).send ("Error in findAllUsers function", error.statusText);
+                    });
+
     }
 
     function updateUserById(req, res){

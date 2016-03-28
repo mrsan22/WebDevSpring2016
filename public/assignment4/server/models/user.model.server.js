@@ -55,12 +55,7 @@ module.exports = function(uuid, db, mongoose) {
     }
 
     function deleteUserById(userId){
-        for (var each in mock_users){
-            if (mock_users[each]._id == userId){
-                mock_users.splice(each,1);
-            }
-        }
-        return mock_users;
+        return UserModel.remove({'_id': userId});
     }
 
     function updateUserById(userid, userObj){
