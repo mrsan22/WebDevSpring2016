@@ -12,8 +12,6 @@ module.exports = function(app, model){
     function createFormForUser(req, res){
         var userid = req.params.userId;
         var formObj = req.body;
-        //var form = model.createFormForUser(userid, formObj);
-        //res.json(form);
         model
             .findAllFormsForUser(userid)
             .then(function (userForms) {
@@ -38,8 +36,6 @@ module.exports = function(app, model){
 
     function findAllFormsForUser(req, res){
         var userid = req.params.userId;
-        //var forms = model.findAllFormsForUser(userid);
-        //res.send(forms);
         model
             .findAllFormsForUser(userid)
             .then(function (response) {
@@ -52,8 +48,21 @@ module.exports = function(app, model){
 
     function findFormById(req, res){
         var formid = req.params.formId;
-        var form = model.findFormById(formid);
-        res.json(form);
+        //var form = model.findFormById(formid);
+        //res.json(form);
+        model
+            .findFormById(formid)
+            .then(function (response) {
+                if(response != null) {
+                    res.json(response);
+                }
+                else{
+                    res.json(null);
+                }
+                },
+                function (error) {
+                    res.status (400).send ("Error in finding form by Id", error.statusText);
+                })
     }
 
     function updateFormById(req, res){
@@ -65,8 +74,14 @@ module.exports = function(app, model){
 
     function deleteFormById(req, res){
         var formid = req.params.formId;
-        var fields = model.deleteFormById(formid);
-        res.send(fields);
+        model
+            .deleteFormById(formid)
+            .then(function (response) {
+                    res.send(200);
+                },
+                function (error) {
+                    res.status (400).send ("Error in deleting form by Id", error.statusText);
+                })
     }
 
 };
