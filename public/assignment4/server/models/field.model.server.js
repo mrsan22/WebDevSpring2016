@@ -3,7 +3,13 @@
 //Making the mock data available in server side form model
 var mock_forms = require("./forms.mock.json");
 
-module.exports = function(uuid){
+module.exports = function(uuid, db, mongoose){
+
+    var FieldSchema = require("./field.schema.server.js")(mongoose);
+
+    //create low level mongoose form model
+    var FieldModel = mongoose.model('Field', FieldSchema);
+
     var api = {
         getFieldsForForm : getFieldsForForm,
         getFieldForForm: getFieldForForm,

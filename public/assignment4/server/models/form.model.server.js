@@ -3,13 +3,19 @@
 //Making the mock data available in server side form model
 var mock_forms = require("./forms.mock.json");
 
-module.exports = function(uuid){
+module.exports = function(uuid, db, mongoose){
+
+    var FormSchema = require("./form.schema.server.js")(mongoose);
+
+    //create low level mongoose form model
+    var FormModel = mongoose.model('Form', FormSchema);
+
     var api = {
         createFormForUser : createFormForUser,
         findAllFormsForUser : findAllFormsForUser,
         updateFormById : updateFormById,
         findFormById : findFormById,
-        deleteFormById : deleteFormById,
+        deleteFormById : deleteFormById
         //field model functions
         //getFieldsForForm : getFieldsForForm,
         //getFieldForForm: getFieldForForm,
@@ -22,33 +28,30 @@ module.exports = function(uuid){
     return api;
 
     function createFormForUser(userid, formObj){
-        var userForms = findAllFormsForUser(userid);
-        if (userForms) {
-            for (var i = 0; i < userForms.length; i++) {
-                if (userForms[i].title == formObj.title) {
-                    return null;
-                }
-            }
-        }
-        var id = uuid.v1();
-        var newForm = {
-            "_id" : id,
-            "userId" : userid,
-            "title" : formObj["title"],
-            "fields" : []
-        };
-        mock_forms.push(newForm);
-        return newForm;
+        //var userForms = findAllFormsForUser(userid);
+        //if (userForms) {
+        //    for (var i = 0; i < userForms.length; i++) {
+        //        if (userForms[i].title == formObj.title) {
+        //            return null;
+        //        }
+        //    }
+        //}
+        //var id = uuid.v1();
+        //var newForm = {
+        //    "_id" : id,
+        //    "userId" : userid,
+        //    "title" : formObj["title"],
+        //    "fields" : []
+        //};
+        //mock_forms.push(newForm);
+        //return newForm;
+        return FormModel.create(
+            {"userId": userid, "title":formObj.title, "fields":[], "created":Date.now(), "updated":Date.now()}
+        );
     }
 
     function findAllFormsForUser(userid){
-            var formsArray = [];
-            for (each in mock_forms){
-                if(mock_forms[each].userId == userid){
-                    formsArray.push(mock_forms[each]);
-                }
-            }
-        return formsArray;
+        return FormModel.find({'userId': userid});
     }
 
     function updateFormById(formid, formObj){

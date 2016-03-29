@@ -5,7 +5,7 @@
         .controller("FormController", FormController);
 
 
-    function FormController($location, FormService, UserService){
+    function FormController(FormService, UserService){
         var vm = this;
 
         //Event handler declaration
@@ -19,12 +19,13 @@
             UserService
                 .getCurrentUser()
                 .then(function(response){
+                        console.log(response.data);
                         vm.currentUser = response.data;
                         vm.userId = vm.currentUser._id;
                         FormService
                             .findAllFormsForUser(vm.userId)
                             .then(function (forms){
-                                //console.log("Forms",forms);
+                                console.log("Forms",forms);
                                 vm.forms = forms.data;
                             },
                             function(error){

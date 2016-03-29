@@ -5,9 +5,9 @@ module.exports = function(app, uuid, db, mongoose) {
     var model_user = require("./models/user.model.server.js")(uuid, db, mongoose);
     var service_user = require("./services/user.service.server.js")(app, model_user);
 
-    var model_form = require("./models/form.model.server.js")(uuid);
+    var model_form = require("./models/form.model.server.js")(uuid, db, mongoose);
     var service_forms  = require("./services/forms.service.server.js")(app, model_form);
 
-    var model_field = require("./models/field.model.server.js")(uuid);
+    var model_field = require("./models/field.model.server.js")(uuid, db, mongoose);
     var service_field = require("./services/field.service.server.js")(app, model_field);
 };
