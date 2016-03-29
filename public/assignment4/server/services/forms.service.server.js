@@ -48,8 +48,6 @@ module.exports = function(app, model){
 
     function findFormById(req, res){
         var formid = req.params.formId;
-        //var form = model.findFormById(formid);
-        //res.json(form);
         model
             .findFormById(formid)
             .then(function (response) {
@@ -68,8 +66,38 @@ module.exports = function(app, model){
     function updateFormById(req, res){
         var formid = req.params.formId;
         var formObj = req.body;
-        var form = model.updateFormById(formid, formObj);
-        res.send(form);
+        model
+            .findAllFormsForUser(formObj.userId)
+            .then(function (userForms) {
+                    for (var i = 0; i < userForms.length; i++) {
+                        if (userForms[i].title == formObj.title) {
+                            res.json(null);
+                            return;
+                        }
+                    }
+                    return model.updateFormById(formid, formObj);
+                },
+                function (error) {
+                    res.status (400).send ("Error in finding all forms for user", error.statusText);
+                })
+            .then(function (response) {
+                    return model.findFormById(formid);
+                },
+                function (error) {
+                    res.status (400).send ("Error in updating forms for user", error.statusText);
+                })
+            .then(function (response) {
+                    if(response != null) {
+                        res.json(response);
+                    }
+                    else{
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.status (400).send ("Error in finding form by Id", error.statusText);
+                })
+
     }
 
     function deleteFormById(req, res){

@@ -85,6 +85,7 @@
                 formObj._id,
                 formObj)
                 .then(function(response){
+                    console.log(response.data);
                     if (selectedFormIndex >= 0 && response.data) {
                         vm.forms[selectedFormIndex] = response.data;
                         vm.form = {};
@@ -103,7 +104,10 @@
                 "_id" : vm.forms[formIndex]._id,
                 "title" : vm.forms[formIndex].title,
                 "userId" : vm.forms[formIndex].userId,
-                "fields" : vm.forms[formIndex].fields
+                "created" : vm.forms[formIndex].created,
+                "updated" : vm.forms[formIndex].updated,
+                "fields" : vm.forms[formIndex].fields,
+                "__v" : vm.forms[formIndex].__v
             };
             vm.form = selectForm;
         }

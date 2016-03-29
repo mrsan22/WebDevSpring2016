@@ -38,28 +38,14 @@ module.exports = function(uuid, db, mongoose){
     }
 
     function updateFormById(formid, formObj){
-        var userForms = findAllFormsForUser(formObj.userId);
-        for (var i = 0; i < userForms.length; i++) {
-            if (userForms[i].title == formObj.title) {
-                return null;
-            }
-        }
-        for(var each in mock_forms){
-            if(mock_forms[each]._id == formid){
-                var formnew = {
-                    "_id" : formObj["_id"],
-                    "userId" : formObj["userId"],
-                    "title" : formObj["title"],
-                    "fields" : formObj["fields"]
-                };
-                mock_forms[each] = formnew;
-                return (mock_forms[each]);
-            }
-        }
+        return FormModel.update(
+            {'_id': formid},
+            {"userId": formObj.userId, "title":formObj.title,
+                "created": formObj.created, updated: Date.now(), "fields": formObj.fields, "__v": formObj.__v});
     }
 
     function findFormById(formid){
-        return FormModel.find({'_id': formid});
+        return FormModel.findById({'_id': formid});
     }
 
     function deleteFormById(formid){
