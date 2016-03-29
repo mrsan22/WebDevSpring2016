@@ -60,7 +60,9 @@ module.exports = function(uuid, db, mongoose) {
     function updateUserById(userid, userObj){
         return UserModel.update(
             {'_id' : userid},
-            {$set : userObj}
+            {"username": userObj.username, "password": userObj.password, "firstName": userObj.firstName,
+            "lastName" : userObj.lastName, "roles": userObj.roles, "phones": userObj.phones, "emails": userObj.emails,
+            "__v": userObj.__v}
         );
     }
 

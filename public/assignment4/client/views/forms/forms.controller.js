@@ -19,7 +19,6 @@
             UserService
                 .getCurrentUser()
                 .then(function(response){
-                        console.log(response.data);
                         vm.currentUser = response.data;
                         vm.userId = vm.currentUser._id;
                         FormService
@@ -50,7 +49,6 @@
                 vm.userId,
                 formObj)
                 .then(function(response){
-                    console.log(response);
                     if(response.data) {
                         FormService.findAllFormsForUser(
                             vm.userId)
@@ -85,7 +83,6 @@
                 formObj._id,
                 formObj)
                 .then(function(response){
-                    console.log(response.data);
                     if (selectedFormIndex >= 0 && response.data) {
                         vm.forms[selectedFormIndex] = response.data;
                         vm.form = {};

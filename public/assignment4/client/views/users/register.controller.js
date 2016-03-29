@@ -20,6 +20,7 @@
         function register(userObj) {
             vm.emails.push(userObj.emails);
             userObj.emails = vm.emails;
+            console.log(userObj);
             UserService
                 .createUser(userObj)
                 .then(function (response) {

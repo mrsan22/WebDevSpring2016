@@ -25,7 +25,7 @@
 
         function update(user){
             vm.emails.push(user.emails);
-            user.emails = vm.emails;
+            user.emails = vm.emails[0];
             UserService
                 .updateUserById(user._id,user)
                 .then(function (response) {
