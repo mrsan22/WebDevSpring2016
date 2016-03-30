@@ -83,7 +83,8 @@
                 center: myLatLng
             });
 
-            var contentString = "Restaurant";
+            var contentString = "<a target=_blank href=http://maps.google.com/maps?q=northeastern+university>" +
+                "View on Google Maps</a>";
             var infowindow = new google.maps.InfoWindow({
                 content: contentString
             });
