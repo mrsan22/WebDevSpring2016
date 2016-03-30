@@ -12,9 +12,10 @@
         return api;
 
         function findRestbyNameLocation(restname, location, callback){
-            if(!restname){
+            if(!restname || restname == undefined){
                 restname="";
             }
+            console.log("yelp service", restname, location);
             var accessor = {
                 consumerSecret: auth.consumerSecret,
                 tokenSecret: auth.accessTokenSecret

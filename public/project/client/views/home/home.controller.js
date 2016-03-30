@@ -14,8 +14,8 @@
             $('#myCarousel').carousel({
                 interval: 5000 //changes the speed
             });
-            var input = document.getElementById('loc');
-            var autocomplete = new google.maps.places.Autocomplete(input);
+            //var input = document.getElementById('loc');
+            //var autocomplete = new google.maps.places.Autocomplete(input);
         }
         init();
 
