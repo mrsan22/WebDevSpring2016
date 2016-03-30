@@ -56,6 +56,9 @@ module.exports = function(uuid, db, mongoose, form_model){
     function createFieldForForm(formId, field){
         return FormModel.findById(formId)
             .then(function (form) {
+                if(field._id){
+                    delete field._id;
+                }
                 form.fields.push(field);
                 return form.save();
             },
