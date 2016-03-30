@@ -50,7 +50,7 @@
                 //Date Field
                 {"label": "New Date Field", "type": "DATE"},
                 //DropDownField
-                {"_id": null, "label": "New Dropdown", "type": "OPTIONS", "options": [
+                {"label": "New Dropdown", "type": "OPTIONS", "options": [
                     {"label": "Option 1", "value": "OPTION_1"},
                     {"label": "Option 2", "value": "OPTION_2"},
                     {"label": "Option 3", "value": "OPTION_3"}
@@ -88,6 +88,7 @@
             FieldService
                 .deleteFieldFromForm(vm.formId, field._id)
                 .then(function (response) {
+                    console.log(response);
                     vm.fields = response.data;
                 }, function (error) {
                     console.log(error.statusText);

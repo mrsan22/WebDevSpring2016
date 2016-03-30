@@ -12,30 +12,38 @@ module.exports = function(app, model) {
     //Implementation
     function getFieldsForForm(req, res){
         var formId = req.params.formId;
-        var fields = model.getFieldsForForm(formId);
-        res.send(fields);
+        model
+            .getFieldsForForm(formId)
+            .then(function (form) {
+                res.json(form.fields);
+            },
+                function (error) {
+                    res.status (400).send ("Error in fetching fields for form", error.statusText);
+                })
 
     }
 
     function getFieldForForm(req, res){
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        var fieldObj = model.getFieldForForm(formId, fieldId);
-        res.json(fieldObj);
+        model
+            .getFieldForForm(formId, fieldId)
+            .then(function (field) {
+                    res.json(field);
+                },
+                function (error) {
+                    res.status (400).send ("Error in fetching single field for form", error.statusText);
+                })
 
     }
 
     function createFieldForForm(req, res){
         var formId = req.params.formId;
         var field = req.body;
-        console.log(formId, field);
-        //model.createFieldForForm(formId, field);
-        //var fields = model.getFieldsForForm(formId);
-        //res.json(fields);
         model
             .createFieldForForm(formId, field)
             .then(function (form) {
-                console.log(form);
+                //console.log(form);
                 res.json(form.fields);
             },
                 function (error) {
@@ -56,9 +64,14 @@ module.exports = function(app, model) {
     function deleteFieldFromForm(req, res){
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        model.deleteFieldFromForm(formId, fieldId);
-        var fields = model.getFieldsForForm(formId);
-        res.send(fields);
+        model
+            .deleteFieldFromForm(formId, fieldId)
+            .then(function (response) {
+                    res.json(response.fields);
+                },
+                function (error) {
+                    res.status (400).send ("Error in deleting fields from form", error.statusText);
+                });
     }
 
     function swapIndexOfFields(req, res){
