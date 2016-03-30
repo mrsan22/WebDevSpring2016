@@ -21,6 +21,7 @@
 
         //Implement event handler
         function callSearch(restname, location){
+            console.log(location);
             YelpService.findRestbyNameLocation(
                 restname,
                 location,

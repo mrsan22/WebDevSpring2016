@@ -3,12 +3,10 @@
 //Making the mock data available in server side form model
 var mock_forms = require("./forms.mock.json");
 
-module.exports = function(uuid, db, mongoose){
+module.exports = function(uuid, db, mongoose, form_model){
 
-    var FieldSchema = require("./field.schema.server.js")(mongoose);
-
-    //create low level mongoose form model
-    var FieldModel = mongoose.model('Field', FieldSchema);
+    //creating lowlevel mongoose FormModel
+    var FormModel = form_model.getMongooseModel();
 
     var api = {
         getFieldsForForm : getFieldsForForm,
@@ -48,13 +46,21 @@ module.exports = function(uuid, db, mongoose){
     }
 
     function createFieldForForm(formId, field){
-        for(var each in mock_forms){
-            if(mock_forms[each]._id == formId){
-                field._id = uuid.v1();
-                mock_forms[each].fields.push(field);
-                return;
-            }
-        }
+        //for(var each in mock_forms){
+        //    if(mock_forms[each]._id == formId){
+        //        field._id = uuid.v1();
+        //        mock_forms[each].fields.push(field);
+        //        return;
+        //    }
+        //}
+        return FormModel.findById(formId)
+            .then(function (form) {
+                form.fields.push(field);
+                return form.save();
+            },
+                function (error) {
+                    res.status (400).send ("Error in finding form by Id from field model", error.statusText);
+                })
     }
 
     function updateField(formId, fieldId, field){

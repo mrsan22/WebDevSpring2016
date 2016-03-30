@@ -6,6 +6,6 @@ module.exports = function(mongoose) {
         type: String, //TEXT, EMAIL, PASSWORD, OPTIONS, DATE, RADIOS, CHECKBOXES
         placeholder: String,
         options: [{label : String, value: String}]
-    }, {collection: 'field'});
+    });
     return FieldSchema;
 };

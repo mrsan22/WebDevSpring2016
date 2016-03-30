@@ -15,7 +15,8 @@ module.exports = function(uuid, db, mongoose){
         findAllFormsForUser : findAllFormsForUser,
         updateFormById : updateFormById,
         findFormById : findFormById,
-        deleteFormById : deleteFormById
+        deleteFormById : deleteFormById,
+        getMongooseModel : getMongooseModel
         //field model functions
         //getFieldsForForm : getFieldsForForm,
         //getFieldForForm: getFieldForForm,
@@ -26,6 +27,10 @@ module.exports = function(uuid, db, mongoose){
     };
 
     return api;
+
+    function getMongooseModel(){
+        return FormModel;
+    }
 
     function createFormForUser(userid, formObj){
         return FormModel.create(

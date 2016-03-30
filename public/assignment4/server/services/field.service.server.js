@@ -28,9 +28,20 @@ module.exports = function(app, model) {
     function createFieldForForm(req, res){
         var formId = req.params.formId;
         var field = req.body;
-        model.createFieldForForm(formId, field);
-        var fields = model.getFieldsForForm(formId);
-        res.json(fields);
+        console.log(formId, field);
+        //model.createFieldForForm(formId, field);
+        //var fields = model.getFieldsForForm(formId);
+        //res.json(fields);
+        model
+            .createFieldForForm(formId, field)
+            .then(function (form) {
+                console.log(form);
+                res.json(form.fields);
+            },
+                function (error) {
+                    res.status (400).send ("Error in creating fields for form", error.statusText);
+                })
+
     }
 
     function updateField(req, res){
