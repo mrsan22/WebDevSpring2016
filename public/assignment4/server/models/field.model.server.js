@@ -57,7 +57,7 @@ module.exports = function(uuid, db, mongoose, form_model){
             .then(function (form) {
                 var fieldDb = form.fields.id(fieldId);
                 fieldDb.label = field.label;
-                if(fieldDb.placeholder) {
+                if(fieldDb.placeholder || fieldDb.placeholder == "") {
                     fieldDb.placeholder = field.placeholder;
                 }
                 if(fieldDb.options.length > 0){
