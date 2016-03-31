@@ -14,7 +14,7 @@ module.exports = function(uuid, db, mongoose, form_model){
         createFieldForForm : createFieldForForm,
         updateField : updateField,
         deleteFieldFromForm : deleteFieldFromForm,
-        swapIndexOfFields : swapIndexOfFields
+        sortFields : sortFields
     };
 
     return api;
@@ -24,21 +24,6 @@ module.exports = function(uuid, db, mongoose, form_model){
     }
 
     function getFieldForForm(formId, fieldId){
-        //for(var each in mock_forms){
-        //    if(mock_forms[each]._id == formId){
-        //        for(var field in mock_forms[each].fields){
-        //            if(mock_forms[each].fields._id == fieldId){
-        //                return mock_forms[each].fields[field];
-        //            }
-        //            else{
-        //                return null;
-        //            }
-        //        }
-        //    }
-        //    else{
-        //        return null;
-        //    }
-        //}
         return FormModel.findById(formId)
             .then(function (form) {
                 if(form.fields) {
@@ -68,33 +53,26 @@ module.exports = function(uuid, db, mongoose, form_model){
     }
 
     function updateField(formId, fieldId, field){
-        for(var each in mock_forms){
-            if (mock_forms[each]._id == formId){
-                for(var f in mock_forms[each].fields){
-                    if(mock_forms[each].fields[f]._id == fieldId){
-                        mock_forms[each].fields[f] = field;
-                        return;
-                    }
-                    else{
-                        console.log("FieldId didn't match");
-                    }
+        return FormModel.findById(formId)
+            .then(function (form) {
+                var fieldDb = form.fields.id(fieldId);
+                fieldDb.label = field.label;
+                if(fieldDb.placeholder) {
+                    fieldDb.placeholder = field.placeholder;
                 }
-            }
+                if(fieldDb.options.length > 0){
+                    fieldDb.options = field.options;
+                }
+                return form.save();
 
-        }
+
+            },
+                function (error) {
+                    res.status (400).send ("Error in updating field from form in field model", error.statusText);
+                });
     }
 
     function deleteFieldFromForm(formid, fieldid){
-        //for(var each in mock_forms){
-        //    if(mock_forms[each]._id == formid){
-        //        for(var f in mock_forms[each].fields){
-        //            if(mock_forms[each].fields[f]._id == fieldid){
-        //                mock_forms[each].fields.splice(f,1);
-        //                return;
-        //            }
-        //        }
-        //    }
-        //}
         return FormModel.findById(formid)
             .then(function (form) {
                     form.fields.id(fieldid).remove();
@@ -105,16 +83,29 @@ module.exports = function(uuid, db, mongoose, form_model){
                 });
     }
 
-    function swapIndexOfFields(formId, start, end) {
-        for (var each in mock_forms){
-            if(mock_forms[each]._id == formId){
-                //var temp = mock_forms[each].fields[start];
-                //mock_forms[each].fields[start] = mock_forms[each].fields[end]
-                //mock_forms[each].fields[end] = temp
-                var fields = mock_forms[each].fields.splice(start, 1);
-                mock_forms[each].fields.splice(end, 0, fields[0]);
-            }
-        }
+    //function swapIndexOfFields(formId, start, end) {
+    //    for (var each in mock_forms){
+    //        if(mock_forms[each]._id == formId){
+    //            //var temp = mock_forms[each].fields[start];
+    //            //mock_forms[each].fields[start] = mock_forms[each].fields[end]
+    //            //mock_forms[each].fields[end] = temp
+    //            var fields = mock_forms[each].fields.splice(start, 1);
+    //            mock_forms[each].fields.splice(end, 0, fields[0]);
+    //        }
+    //    }
+    //}
+
+    function sortFields(formId, startIndex, endIndex){
+        return FormModel.findById(formId)
+            .then(function (form) {
+                form.fields.splice(endIndex, 0, form.fields.splice(startIndex, 1)[0]);
+                // notify mongoose 'pages' field changed
+                form.markModified("fields");
+                form.save();
+            },
+                function (error) {
+                    res.status (400).send ("Error in sorting field from form in field model", error.statusText);
+                })
     }
 
 };

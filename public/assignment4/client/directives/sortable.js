@@ -23,7 +23,7 @@
                     //scope.users[start] = scope.users[end];
                     //scope.users[end] = temp;
                     FieldService
-                        .swapIndexOfFields(formId, start, end)
+                        .sortFields(formId, start, end)
                         .then(function (response) {
 
                         },
