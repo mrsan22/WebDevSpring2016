@@ -82,9 +82,12 @@
                 zoom: 16,
                 center: myLatLng
             });
+            var url  = "http://maps.google.com/maps?q="+rest.name;
+            var contentString = rest.name +"<br/>"+rest.location.address[0]+"<br/>"+rest.location.city +"<br/>"+
+                "<a target=_blank id='link' href=''>View on Google Maps</a>";
 
-            var contentString = "<a target=_blank href=http://maps.google.com/maps?q=northeastern+university>" +
-                "View on Google Maps</a>";
+            document.getElementById('link').href = url;
+
             var infowindow = new google.maps.InfoWindow({
                 content: contentString
             });

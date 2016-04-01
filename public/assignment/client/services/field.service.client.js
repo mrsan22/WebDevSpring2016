@@ -13,7 +13,7 @@
             getFieldForForm : getFieldForForm,
             deleteFieldFromForm : deleteFieldFromForm,
             updateField : updateField,
-            swapIndexOfFields : swapIndexOfFields
+            sortFields : sortFields
         };
 
         return formServiceApi;
@@ -39,7 +39,7 @@
             return $http.put("/api/assignment/form/"+formId+"/field/"+fieldId, field);
         }
 
-        function swapIndexOfFields(formId, start, end){
+        function sortFields(formId, start, end){
             return $http.put("/api/assignment/form/"+formId+"/field/startIndex/"+start+"/endIndex/"+end);
         }
     }

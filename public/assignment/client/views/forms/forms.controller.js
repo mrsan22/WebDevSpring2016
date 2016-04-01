@@ -5,7 +5,7 @@
         .controller("FormController", FormController);
 
 
-    function FormController($location, FormService, UserService){
+    function FormController(FormService, UserService){
         var vm = this;
 
         //Event handler declaration
@@ -24,7 +24,7 @@
                         FormService
                             .findAllFormsForUser(vm.userId)
                             .then(function (forms){
-                                //console.log("Forms",forms);
+                                console.log("Forms",forms);
                                 vm.forms = forms.data;
                             },
                             function(error){
@@ -49,7 +49,6 @@
                 vm.userId,
                 formObj)
                 .then(function(response){
-                    console.log(response);
                     if(response.data) {
                         FormService.findAllFormsForUser(
                             vm.userId)
@@ -102,7 +101,10 @@
                 "_id" : vm.forms[formIndex]._id,
                 "title" : vm.forms[formIndex].title,
                 "userId" : vm.forms[formIndex].userId,
-                "fields" : vm.forms[formIndex].fields
+                "created" : vm.forms[formIndex].created,
+                "updated" : vm.forms[formIndex].updated,
+                "fields" : vm.forms[formIndex].fields,
+                "__v" : vm.forms[formIndex].__v
             };
             vm.form = selectForm;
         }
