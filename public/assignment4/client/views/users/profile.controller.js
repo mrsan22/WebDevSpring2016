@@ -27,6 +27,9 @@
             UserService
                 .updateUserById(user._id, user)
                 .then(function (response) {
+                    if(response.data){
+                        vm.show=true;
+                    }
                     },
                     function (error) {
                         console.log(error.statusText);

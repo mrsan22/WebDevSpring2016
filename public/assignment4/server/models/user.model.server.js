@@ -64,7 +64,9 @@ module.exports = function (uuid, db, mongoose) {
     function updateUserById(userid, userObj) {
         delete userObj._id;
         var emails = userObj.emails.toString().split(",");
+        var phones = userObj.phones.toString().split(",");
         userObj.emails = emails;
+        userObj.phones = phones;
         return UserModel.update(
             {'_id': userid},
             {
