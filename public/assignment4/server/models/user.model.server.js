@@ -3,7 +3,7 @@
 //Making the mock data available in server side user model
 //var mock_users = require("./user.mock.json");
 
-module.exports = function(uuid, db, mongoose) {
+module.exports = function (uuid, db, mongoose) {
 
     //load user schema
     var UserSchema = require("./user.schema.server.js")(mongoose);
@@ -13,56 +13,63 @@ module.exports = function(uuid, db, mongoose) {
 
     var api = {
         findUserByCredentials: findUserByCredentials,
-        loginUser : loginUser,
-        findUserByUsername : findUserByUsername,
-        createUser : createUser,
-        findAllUsers : findAllUsers,
-        findUserById : findUserById,
-        updateUserById : updateUserById,
-        deleteUserById : deleteUserById
+        loginUser: loginUser,
+        findUserByUsername: findUserByUsername,
+        createUser: createUser,
+        findAllUsers: findAllUsers,
+        findUserById: findUserById,
+        updateUserById: updateUserById,
+        deleteUserById: deleteUserById
     };
     return api;
 
     function findUserByCredentials(credentials) {
         return UserModel.findOne(
-            {'username': credentials.username,
-                'password' : credentials.password}
+            {
+                'username': credentials.username,
+                'password': credentials.password
+            }
         );
     }
 
     function loginUser(username, password) {
         return UserModel.findOne(
-            {'username': username,
-                'password' : password}
+            {
+                'username': username,
+                'password': password
+            }
         );
     }
 
-    function findUserByUsername(username){
-        return UserModel.findOne({'username' : username});
+    function findUserByUsername(username) {
+        return UserModel.findOne({'username': username});
     }
 
-    function createUser(user){
+    function createUser(user) {
         return UserModel.create(user);
     }
 
-    function findAllUsers(){
+    function findAllUsers() {
         return UserModel.find();
     }
 
-    function findUserById(userid){
+    function findUserById(userid) {
         return UserModel.findById({'_id': userid});
     }
 
-    function deleteUserById(userId){
+    function deleteUserById(userId) {
         return UserModel.remove({'_id': userId});
     }
 
-    function updateUserById(userid, userObj){
+    function updateUserById(userid, userObj) {
+        delete userObj._id;
+        var emails = userObj.emails.toString().split(",");
+        userObj.emails = emails;
         return UserModel.update(
-            {'_id' : userid},
-            {"username": userObj.username, "password": userObj.password, "firstName": userObj.firstName,
-            "lastName" : userObj.lastName, "roles": userObj.roles, "phones": userObj.phones, "emails": userObj.emails,
-            "__v": userObj.__v}
+            {'_id': userid},
+            {
+                $set: userObj
+            }
         );
     }
 

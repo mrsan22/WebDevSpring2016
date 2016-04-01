@@ -68,7 +68,11 @@
                     {"label": "Option Z", "value": "OPTION_Z"}
                 ]},
                 //Multi Line Text Field
-                {"label": "New Text Field", "type": "TEXTAREA", "placeholder": "New Field"}
+                {"label": "New Text Field", "type": "TEXTAREA", "placeholder": "New Field"},
+                //Email Text field
+                {"label": "New Email Field", "type": "EMAIL", "placeholder": "New Field"},
+                //Password field
+                {"label": "New Password Field", "type": "PASSWORD", "placeholder": "New Field"}
 
             ];
 
@@ -124,7 +128,7 @@
             //vm.fieldPlaceholder = field.placeholder;
             var options = [];
 
-            if(field.type == 'TEXT' || field.type == 'TEXTAREA'){
+            if(field.type == 'TEXT' || field.type == 'TEXTAREA'|| field.type == 'EMAIL' || field.type == 'PASSWORD'){
                 vm.showPlaceholder = true;
                 vm.showOptions = false;
                 vm.modalField.placeholder = field.placeholder;
