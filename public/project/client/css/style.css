@@ -207,6 +207,21 @@ footer {
 .map{
     height: 300px;
 }
+
+.rest-container{
+    margin-top: 10px;
+    height:400px
+}
+.rest-container img{
+    height: 300px !important;
+}
+
+/*.restdetails-container{*/
+    /*height: 400px !important;*/
+/*}*/
+/*.restdetails-container img{*/
+    /*max-height: 400px !important;*/
+/*}*/
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 @media only screen and (min-width: 480px) and (max-width: 767px) {

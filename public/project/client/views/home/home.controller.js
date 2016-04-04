@@ -21,13 +21,12 @@
 
         //Implement event handler
         function callSearch(restname, location){
-            console.log(location);
             YelpService.findRestbyNameLocation(
                 restname,
-                location,
+                location.formatted_address,
                 function(response){
                     vm.data = response;
-                    $location.url('/search/restname='+restname+'&location='+location);
+                    $location.url('/search/restname='+restname+'&location='+location.formatted_address);
                     $scope.$apply();
                 }
             )

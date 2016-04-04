@@ -81,12 +81,12 @@
            var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 16,
                 center: myLatLng
+               //scrollwheel: false
             });
-            var url  = "http://maps.google.com/maps?q="+rest.name;
             var contentString = rest.name +"<br/>"+rest.location.address[0]+"<br/>"+rest.location.city +"<br/>"+
-                "<a target=_blank id='link' href=''>View on Google Maps</a>";
+                "<a target=_blank id='link' href='http://maps.google.com/maps?q="+rest.name+"'>View on Google Maps</a>";
 
-            document.getElementById('link').href = url;
+            //document.getElementById('link').href = url;
 
             var infowindow = new google.maps.InfoWindow({
                 content: contentString

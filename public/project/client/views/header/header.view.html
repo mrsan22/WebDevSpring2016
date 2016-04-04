@@ -34,6 +34,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right margin-set1">
+                <li ng-if="currentUser">
+                    <a href="#/searchhome" class="margin-set2">Home</a>
+                </li>
                 <li ng-if="headerControllerModel.$location.url() == '/home'">
                    <a href="#/admin/user" class="margin-set2">Admin</a>
                 </li>
