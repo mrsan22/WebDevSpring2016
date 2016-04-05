@@ -80,9 +80,6 @@ module.exports = function (app, model_user) {
     function loginUser(req, res){
         var username = req.query.username;
         var password = req.query.password;
-        //var user = model_user.loginUser(username, password);
-        //req.session.currentUser = user;
-        //res.json(user);
         model_user
             .loginUser(username, password)
             .then(function (response) {
@@ -115,8 +112,6 @@ module.exports = function (app, model_user) {
     }
 
     function findAllUsers(req, res){
-        //var allUsers = model_user.findAllUsers();
-        //res.send(allUsers);
         model_user
             .findAllUsers()
             .then(function (response) {
@@ -135,8 +130,6 @@ module.exports = function (app, model_user) {
 
     function findUserById(req, res){
         var userId = req.params.userid;
-        //var user = model_user.findUserById(userId);
-        //res.json(user);
         model_user
             .findUserById(userId)
             .then(function (response) {
@@ -161,12 +154,6 @@ module.exports = function (app, model_user) {
     function updateUserById(req, res){
         var userid = req.params.userId;
         var userObj = req.body;
-        //model_user.updateUserById(userid, userObj);
-        //var user = model_user.findUserById(userid);
-        //if(req.session.currentUser._id == userid) {
-        //    req.session.currentUser = user;
-        //}
-        //res.send(user);
         model_user
             .updateUserById(userid, userObj)
             .then(function (response) {
@@ -197,9 +184,6 @@ module.exports = function (app, model_user) {
     function updateUserByIdNoSession(req, res){
         var userid = req.params.userId;
         var userObj = req.body;
-        //model_user.updateUserById(userid, userObj);
-        //var user = model_user.findUserById(userid);
-        //res.send(user);
         model_user
             .findUserByUsername(userObj.username)
             .then(function (response) {
@@ -241,9 +225,6 @@ module.exports = function (app, model_user) {
 
     function deleteUserById(req, res){
         var userId = req.params.userid;
-        //model_user.deleteUserById(userId);
-        //var users = model_user.findAllUsers();
-        //res.send(users);
         model_user
             .deleteUserById(userId)
             .then(function (response) {
@@ -269,11 +250,6 @@ module.exports = function (app, model_user) {
     }
 
     //For admin
-    //function createAndFindAllUsers(req, res){
-    //    user = req.body;
-    //    var users = model_user.createAndFindAllUsers(user);
-    //    res.send(users);
-    //}
     function createAndFindAllUsers(req, res){
         var user = req.body;
         //users = model.createAndFindAllUsers(user);
