@@ -80,9 +80,25 @@ module.exports = function (app, model_user) {
     function loginUser(req, res){
         var username = req.query.username;
         var password = req.query.password;
-        var user = model_user.loginUser(username, password);
-        req.session.currentUser = user;
-        res.json(user);
+        //var user = model_user.loginUser(username, password);
+        //req.session.currentUser = user;
+        //res.json(user);
+        model_user
+            .loginUser(username, password)
+            .then(function (response) {
+                    if(response != null) {
+                        req.session.currentUser = response;
+                        console.log("User exists, returning found user");
+                        res.json(response);
+                    }
+                    else{
+                        console.log("user does not exist, returning null");
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.status (400).send ("Error in loginUser function", error.statusText);
+                });
     }
 
     function findUserByUsername(req, res){
@@ -99,14 +115,42 @@ module.exports = function (app, model_user) {
     }
 
     function findAllUsers(req, res){
-        var allUsers = model_user.findAllUsers();
-        res.send(allUsers);
+        //var allUsers = model_user.findAllUsers();
+        //res.send(allUsers);
+        model_user
+            .findAllUsers()
+            .then(function (response) {
+                    if(response != null) {
+                        res.json(response);
+                    }
+                    else{
+                        console.log("User collection is empty");
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.status (400).send ("Error in findAllUsers function", error.statusText);
+                });
     }
 
     function findUserById(req, res){
         var userId = req.params.userid;
-        var user = model_user.findUserById(userId);
-        res.json(user);
+        //var user = model_user.findUserById(userId);
+        //res.json(user);
+        model_user
+            .findUserById(userId)
+            .then(function (response) {
+                    if(response != null) {
+                        res.json(response);
+                    }
+                    else{
+                        console.log("User not found by Id, returning null");
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.status (400).send ("Error in findUserById function", error.statusText);
+                });
     }
 
     function logout(req, res){
