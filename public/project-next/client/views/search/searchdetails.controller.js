@@ -16,13 +16,8 @@
         vm.findUserByReviewUserId = findUserByReviewUserId;
 
         vm.defaultReview = {
-                "title": "Rating 3",
                 "rating": 0,
-                "basedOn": 5,
-                "starsCount": 5,
-                "iconClass": "fa fa-star",
                 "editableRating": true,
-                "showGrade": false,
                 "createdOn" : Date.now()
             };
 
@@ -115,8 +110,7 @@
                     vm.reviews = response.data;
                     vm.findUserByReviewUserId(vm.reviews);
                     vm.selectedreview = -1;
-                    vm.defaultReview.rating = '';
-                    vm.defaultReview.review = '';
+                    vm.defaultReview = {};
                     restAvgRating();
 
                 },

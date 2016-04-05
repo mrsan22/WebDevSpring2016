@@ -31,7 +31,7 @@
             <img src={{detailsControllerModel.imageurl}} class="img-responsive"/>
             <!--<img src={{detailsControllerModel.rest.rating_img_url}} class="img-responsive"/>-->
             <ng-rating ng-model="detailsControllerModel.avgRating"
-                       editable="false">
+                       editable="false" show-grade="true">
             </ng-rating>
 
         </div>
@@ -84,26 +84,28 @@
                     <!-- Comments Form -->
                     <div class="well margin-well">
                         <h4>Start your review!</h4>
-                        <div ng-hide="detailsControllerModel.readonly"><ng-rating ng-model="detailsControllerModel.defaultReview.rating"
-                                   icon-class="detailsControllerModel.defaultReview.iconClass"
-                                   editable="detailsControllerModel.defaultReview.editableRating"
-                                   stars-count="detailsControllerModel.defaultReview.starsCount"
-                                   based-on="detailsControllerModel.defaultReview.basedOn"
-                                   show-grade="detailsControllerModel.defaultReview.showGrade">
+                        <div ng-hide="detailsControllerModel.readonly">
+                            <ng-rating ng-model="detailsControllerModel.defaultReview.rating"
+                                       editable="detailsControllerModel.defaultReview.editableRating">
                             </ng-rating>
                         </div>
-                        <div ng-if="detailsControllerModel.readonly"><ng-rating ng-model="detailsControllerModel.defaultReview.rating"
-                                   icon-class="detailsControllerModel.defaultReview.iconClass"
-                                   editable=false
-                                   stars-count="detailsControllerModel.defaultReview.starsCount"
-                                   based-on="detailsControllerModel.defaultReview.basedOn"
-                                   show-grade="detailsControllerModel.defaultReview.showGrade">
+                        <div ng-if="detailsControllerModel.readonly">
+                            <ng-rating ng-model="detailsControllerModel.defaultReview.rating"
+                                       editable=false>
                             </ng-rating>
                         </div>
                         <form role="form">
                             <div class="form-group">
-                                <textarea ng-readonly="detailsControllerModel.readonly" class="form-control"
-                                          ng-model="detailsControllerModel.defaultReview.review" rows="3"></textarea>
+                                <input type="text" class="form-control" placeholder="Please enter title of the review"
+                                       ng-model="detailsControllerModel.defaultReview.title"/>
+                            </div>
+                            <div class="form-group">
+                                <textarea ng-readonly="detailsControllerModel.readonly"
+                                          class="form-control"
+                                          ng-model="detailsControllerModel.defaultReview.review"
+                                          rows="3"
+                                          placeholder="Please enter description of the review">
+                                </textarea>
                             </div>
                             <button ng-disabled="detailsControllerModel.readonly"
                                     ng-click="detailsControllerModel.addReview(detailsControllerModel.defaultReview)"
@@ -119,9 +121,12 @@
                             <img class="media-object" src="http://placehold.it/64x64" alt="">
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading">{{review.userFirstName}}
+                            <h4 class="media-heading">{{review.title}}
                                 <i class="fa fa-check-circle"></i>
                                 <small>Follow</small>
+                            </h4>
+                            <h4 class="media-heading">
+                                <small>By <a href="">{{review.userFirstName}}</a> on {{review.createdOn | date}}</small>
                             </h4>
 
                             <p ng-hide="detailsControllerModel.selectedreview == $index">{{review.review}}</p>
