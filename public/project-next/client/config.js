@@ -56,7 +56,10 @@
             .when("/admin/user", {
                 templateUrl : "views/admin/admin.user.view.html",
                 controller : "AdminController",
-                controllerAs : "adminUserModel"
+                controllerAs : "adminUserModel",
+                resolve : {
+                    getLoggedIn : getLoggedIn
+                }
             })
             .when("/search", {
                 templateUrl : "views/search/searchresult.view.html",

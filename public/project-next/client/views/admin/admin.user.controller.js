@@ -17,8 +17,8 @@
         //Run this part as soon as controller loads
         function init(){
             vm.roles = [
-                {name: "user", value: "user"},
-                {name: "admin", value: "admin"}
+                {name: "User", value: "User"},
+                {name: "Admin", value: "Admin"}
             ];
             UserService
                 .findAllUsers()
@@ -34,7 +34,7 @@
 
         //Implementation of event handler
         function addUser(userObj){
-            if (!userObj || !userObj.username || !userObj.password || !userObj.roles){
+            if (!userObj || !userObj.username || !userObj.password || !userObj.role){
                 alert("Some field is missing value");
                 return;
             }
@@ -42,8 +42,13 @@
                 .createAndFindAllUsers(userObj)
                 .then(function (response) {
                     console.log("New user added",response.data);
-                    vm.users = response.data;
-                    vm.user = {};
+                    if (response.data != null) {
+                        vm.users = response.data;
+                        vm.user = {};
+                    }
+                    else{
+                        alert("Username already exists!");
+                    }
 
                 }, function (error) {
                    console.log(error.statusText);
@@ -51,17 +56,22 @@
         }
 
         function updateUser(userObj){
-            if(!userObj || !userObj.username || !userObj.password || !userObj.roles){
+            console.log(userObj);
+            if(!userObj || !userObj.username || !userObj.password || !userObj.role){
                 alert("Some field is missing value");
                 return;
             }
             UserService
-                .updateUserById(userObj._id, userObj)
+                .updateUserByIdNoSession(userObj._id, userObj)
                 .then(function (response) {
-                    if (selectedUserIndex >= 0) {
+                    console.log("Response",response.data);
+                    if (selectedUserIndex >= 0 && response.data != null) {
                         vm.users[selectedUserIndex] = response.data;
                         vm.user = {};
                         selectedUserIndex = -1;
+                    }
+                    else{
+                        alert("Username already exists. Please choose a different username!");
                     }
 
                 }, function (error) {

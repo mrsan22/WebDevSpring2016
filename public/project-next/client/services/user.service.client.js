@@ -19,7 +19,7 @@
             createAndFindAllUsers : createAndFindAllUsers,
             deleteUserById : deleteUserById,
             updateUserById : updateUserById,
-            //updateUserByIdNoSession: updateUserByIdNoSession,
+            updateUserByIdNoSession: updateUserByIdNoSession,
             logOut : logOut
         };
 
@@ -69,9 +69,9 @@
 
         }
 
-        //function updateUserByIdNoSession(userId, user){
-        //    return $http.put("/api/project/userupdate/"+userId, user);
-        //}
+        function updateUserByIdNoSession(userId, user){
+            return $http.put("/api/project/userupdate/"+userId, user);
+        }
 
         function logOut(){
             return $http.post("/api/project/logout");

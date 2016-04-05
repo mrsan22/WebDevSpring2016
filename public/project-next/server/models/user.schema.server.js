@@ -18,7 +18,7 @@ module.exports = function(mongoose) {
 
         profilePic:{ data: Buffer, contentType: String },
 
-        role: {type:String,enum:["USER","ADMIN"]},
+        role: {type:String,enum:["User","Admin"], default:"User"},
 
         followers:{type: [String], default: []},
 

@@ -30,16 +30,6 @@ module.exports = function(uuid,db, mongoose) {
     }
 
     function loginUser(username, password) {
-        //for(var u in mock_users){
-        //    if(mock_users[u].username == username &&
-        //        mock_users[u].password == password){
-        //        console.log("User exists, returning found user");
-        //        return mock_users[u];
-        //    }
-        //}
-        //// user not found
-        //console.log("user does not exist, returning null");
-        //return null;
         return UserModel.findOne(
             {
                 'username': username,
@@ -49,12 +39,6 @@ module.exports = function(uuid,db, mongoose) {
     }
 
     function updateUserById(userid, userObj){
-        //for (var each in mock_users){
-        //    if (mock_users[each]._id == userid){
-        //        mock_users[each] = userObj;
-        //        return;
-        //    }
-        //}
         delete userObj._id;
         return UserModel.update(
             {'_id': userid},
@@ -65,14 +49,6 @@ module.exports = function(uuid,db, mongoose) {
     }
 
     function findUserById(userid){
-        //for(var u in mock_users){
-        //    if(mock_users[u]._id == userid){
-        //        return mock_users[u];
-        //    }
-        //}
-        //// user not found
-        //console.log("user not found by Id, returning null");
-        //return null;
         return UserModel.findById({'_id': userid});
     }
 
@@ -80,18 +56,6 @@ module.exports = function(uuid,db, mongoose) {
         return UserModel.findOne({'username': username});
     }
 
-    //function findUserByCredentials(credentials) {
-    //    for(var u in mock_users){
-    //        if(mock_users[u].username == credentials.username &&
-    //            mock_users[u].password == credentials.password){
-    //            console.log("User exists, returning found user");
-    //            return mock_users[u];
-    //        }
-    //    }
-    //    // user not found
-    //    console.log("user does not exist, returning null");
-    //    return null;
-    //}
     function findUserByCredentials(credentials) {
         return UserModel.findOne(
             {
@@ -101,18 +65,11 @@ module.exports = function(uuid,db, mongoose) {
         );
     }
 
-
     function findAllUsers(){
         return UserModel.find();
     }
 
     function deleteUserById(userId){
-        //for (var each in mock_users){
-        //    if (mock_users[each]._id == userId){
-        //        mock_users.splice(each,1);
-        //        return;
-        //    }
-        //}
         return UserModel.remove({'_id': userId});
     }
     //

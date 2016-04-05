@@ -26,7 +26,7 @@
                                        placeholder="password"/>
                             </td>
                             <td>
-                                <select ng-model="adminUserModel.user.roles"
+                                <select ng-model="adminUserModel.user.role"
                                         class="form-control"
                                         ng-options="role.value as role.name for role in adminUserModel.roles">
                                 </select>
@@ -41,7 +41,7 @@
                         <tr ng-repeat="user in adminUserModel.users">
                             <td>{{user.username}}</td>
                             <td>*****</td>
-                            <td>{{user.roles}}</td>
+                            <td>{{user.role}}</td>
                             <td>
                                 <button ng-click="adminUserModel.deleteUser($index)"
                                         class="btn btn-sm btn-danger">Delete</button>
