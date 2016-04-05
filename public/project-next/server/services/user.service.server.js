@@ -237,7 +237,7 @@ module.exports = function (app, model_user) {
     //    var users = model_user.createAndFindAllUsers(user);
     //    res.send(users);
     //}
-    function createUser(req, res){
+    function createAndFindAllUsers(req, res){
         var user = req.body;
         //users = model.createAndFindAllUsers(user);
         //res.send(users);
