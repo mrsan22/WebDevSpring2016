@@ -19,8 +19,8 @@ module.exports = function(uuid,db, mongoose) {
         findUserByCredentials: findUserByCredentials,
         findAllUsers : findAllUsers,
         findUserByUsername : findUserByUsername,
-        deleteUserById : deleteUserById,
-        createAndFindAllUsers : createAndFindAllUsers
+        deleteUserById : deleteUserById
+        //createAndFindAllUsers : createAndFindAllUsers
     };
 
     return api;
@@ -49,12 +49,19 @@ module.exports = function(uuid,db, mongoose) {
     }
 
     function updateUserById(userid, userObj){
-        for (var each in mock_users){
-            if (mock_users[each]._id == userid){
-                mock_users[each] = userObj;
-                return;
+        //for (var each in mock_users){
+        //    if (mock_users[each]._id == userid){
+        //        mock_users[each] = userObj;
+        //        return;
+        //    }
+        //}
+        delete userObj._id;
+        return UserModel.update(
+            {'_id': userid},
+            {
+                $set: userObj
             }
-        }
+        );
     }
 
     function findUserById(userid){
@@ -100,23 +107,24 @@ module.exports = function(uuid,db, mongoose) {
     }
 
     function deleteUserById(userId){
-        for (var each in mock_users){
-            if (mock_users[each]._id == userId){
-                mock_users.splice(each,1);
-                return;
-            }
-        }
+        //for (var each in mock_users){
+        //    if (mock_users[each]._id == userId){
+        //        mock_users.splice(each,1);
+        //        return;
+        //    }
+        //}
+        return UserModel.remove({'_id': userId});
     }
-
-    function createAndFindAllUsers(user){
-        for(var i=0;i<mock_users.length;i++){
-            if (mock_users[i].username == user.username){
-                return null;
-            }
-        }
-        user["_id"] = uuid.v1();
-        mock_users.push(user);
-        return mock_users;
-    }
+    //
+    //function createAndFindAllUsers(user){
+    //    for(var i=0;i<mock_users.length;i++){
+    //        if (mock_users[i].username == user.username){
+    //            return null;
+    //        }
+    //    }
+    //    user["_id"] = uuid.v1();
+    //    mock_users.push(user);
+    //    return mock_users;
+    //}
 
 };

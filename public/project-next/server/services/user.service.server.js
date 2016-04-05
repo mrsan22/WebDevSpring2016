@@ -161,12 +161,37 @@ module.exports = function (app, model_user) {
     function updateUserById(req, res){
         var userid = req.params.userId;
         var userObj = req.body;
-        model_user.updateUserById(userid, userObj);
-        var user = model_user.findUserById(userid);
-        if(req.session.currentUser._id == userid) {
-            req.session.currentUser = user;
-        }
-        res.send(user);
+        //model_user.updateUserById(userid, userObj);
+        //var user = model_user.findUserById(userid);
+        //if(req.session.currentUser._id == userid) {
+        //    req.session.currentUser = user;
+        //}
+        //res.send(user);
+        model_user
+            .updateUserById(userid, userObj)
+            .then(function (response) {
+                    //console.log(response);
+                    //res.send(200);
+                    return model_user.findUserById(userid);
+                },
+                function (error) {
+                    res.status (400).send ("Error in updating user by Id", error.statusText);
+                })
+            .then(function (response) {
+                    if(response != null) {
+                        if(req.session.currentUser._id == userid) {
+                            req.session.currentUser = response;
+                        }
+                        res.json(response);
+                    }
+                    else{
+                        console.log("User not found by Id after updating the user, returning null");
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.status (400).send ("Error in findUserById function after updating the user", error.statusText);
+                });
     }
 
     //function updateUserByIdNoSession(req, res){
@@ -179,14 +204,76 @@ module.exports = function (app, model_user) {
 
     function deleteUserById(req, res){
         var userId = req.params.userid;
-        model_user.deleteUserById(userId);
-        var users = model_user.findAllUsers();
-        res.send(users);
+        //model_user.deleteUserById(userId);
+        //var users = model_user.findAllUsers();
+        //res.send(users);
+        model_user
+            .deleteUserById(userId)
+            .then(function (response) {
+                    //res.send(200);
+                    return model_user.findAllUsers();
+                },
+                function (error) {
+                    res.status (400).send ("Error in deleting user by Id", error.statusText);
+                })
+            //Accepting the response from model.findAllUsers to return remaining set of users.
+            .then(function (response) {
+                    if(response != null) {
+                        res.json(response);
+                    }
+                    else{
+                        console.log("User collection is empty");
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.status (400).send ("Error in findAllUsers function", error.statusText);
+                });
     }
 
-    function createAndFindAllUsers(req, res){
-        user = req.body;
-        var users = model_user.createAndFindAllUsers(user);
-        res.send(users);
+    //For admin
+    //function createAndFindAllUsers(req, res){
+    //    user = req.body;
+    //    var users = model_user.createAndFindAllUsers(user);
+    //    res.send(users);
+    //}
+    function createUser(req, res){
+        var user = req.body;
+        //users = model.createAndFindAllUsers(user);
+        //res.send(users);
+        model_user
+            .findUserByUsername(user.username)
+            .then(function (response) {
+                    if(response == null){
+                        return model_user.createUser(user);
+                    }
+                    else{
+                        console.log("username already exists");
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.send ("Error in finding user by username", error.statusText);
+                })
+            .then(function (response) {
+                    //req.session.currentUser = response;
+                    //res.json(response);
+                    return model_user.findAllUsers();
+                },
+                function (error) {
+                    res.status (400).send ("Error inserting User Info in database", error.statusText);
+                })
+            .then(function (response) {
+                    if(response != null) {
+                        res.json(response);
+                    }
+                    else{
+                        console.log("User collection is empty");
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.status (400).send ("Error in findAllUsers function", error.statusText);
+                });
     }
 };
