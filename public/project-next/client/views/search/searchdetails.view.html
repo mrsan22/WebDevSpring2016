@@ -1,0 +1,191 @@
+
+    <!--<div class="row">-->
+        <!--<div class="col-sm-4 col-xs-6 img-hover pad-left-right tmargin">-->
+            <!--<a href="#">-->
+                <!--<img class="img-responsive portfolio-item margin-bottom-zero" src="http://placehold.it/500x300" alt="">-->
+            <!--</a>-->
+        <!--</div>-->
+
+        <!--<div class="col-sm-4 col-xs-6 img-hover pad-left-right tmargin">-->
+            <!--<a href="#">-->
+                <!--<img class="img-responsive portfolio-item margin-bottom-zero" src="http://placehold.it/500x300" alt="">-->
+            <!--</a>-->
+        <!--</div>-->
+
+        <!--<div class="col-sm-4 col-xs-6 img-hover pad-left-right hidden-xs tmargin">-->
+            <!--<a href="#">-->
+                <!--<img class="img-responsive portfolio-item margin-bottom-zero" src="http://placehold.it/500x300" alt="">-->
+            <!--</a>-->
+        <!--</div>-->
+
+    <!--</div>-->
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>{{detailsControllerModel.rest.name}}</h2>
+            </div>
+
+        </div>
+    <div class="row">
+        <div class="col-sm-5 restdetails-container">
+            <img src={{detailsControllerModel.imageurl}} class="img-responsive"/>
+            <!--<img src={{detailsControllerModel.rest.rating_img_url}} class="img-responsive"/>-->
+            <ng-rating ng-model="detailsControllerModel.avgRating"
+                       editable="false">
+            </ng-rating>
+
+        </div>
+        <div class="col-sm-4">
+            <p>
+                {{detailsControllerModel.rest.snippet_text}}
+            </p>
+            <p>{{detailsControllerModel.rest.categories[0][0]}} ,
+                {{detailsControllerModel.rest.categories[1][0]}}</p>
+
+            <p>{{detailsControllerModel.rest.location.display_address[0]}},
+                {{detailsControllerModel.rest.location.display_address[1]}}
+                {{detailsControllerModel.rest.location.display_address[2]}}</p>
+
+            <p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+                 {{detailsControllerModel.rest.display_phone}}</p>
+            <hr>
+
+            <i class="fa fa-thumbs-o-up fa-lg"></i>Like &nbsp
+            <i class="fa fa-thumbs-o-down fa-lg"></i>Dislike &nbsp
+            <i class="fa fa-bookmark fa-lg"></i>Save
+            <hr>
+        </div>
+        <!--Map div-->
+        <div class="col-sm-3">
+            <div id="map" class="map"></div>
+            <!--<ng-map zoom="16" center="[{{detailsControllerModel.rest.location.coordinate.latitude}},-->
+            <!--{{detailsControllerModel.rest.location.coordinate.longitude}}]">-->
+                <!--<marker position="[{{detailsControllerModel.rest.location.coordinate.latitude}},-->
+                 <!--{{detailsControllerModel.rest.location.coordinate.longitude}}]"-->
+                <!--on-click = "click()" title="{{detailsControllerModel.rest.name}}"-->
+                        <!--centered="true"/>-->
+            <!--</ng-map>-->
+        </div>
+        <!--End Map div-->
+    </div>
+        <div ng-if="!currentUser" class="alert alert-info alert-dismissable">
+            <a class="panel-close close" data-dismiss="alert">×</a>
+            <i class="fa fa-info-circle"></i>
+            Please <strong>login</strong> to review your favorite restaurant!
+        </div>
+        <div class="panel panel-default margin-panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Reviews for {{detailsControllerModel.rest.name}}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <!-- Blog Comments -->
+
+                    <!-- Comments Form -->
+                    <div class="well margin-well">
+                        <h4>Start your review!</h4>
+                        <div ng-hide="detailsControllerModel.readonly"><ng-rating ng-model="detailsControllerModel.defaultReview.rating"
+                                   icon-class="detailsControllerModel.defaultReview.iconClass"
+                                   editable="detailsControllerModel.defaultReview.editableRating"
+                                   stars-count="detailsControllerModel.defaultReview.starsCount"
+                                   based-on="detailsControllerModel.defaultReview.basedOn"
+                                   show-grade="detailsControllerModel.defaultReview.showGrade">
+                            </ng-rating>
+                        </div>
+                        <div ng-if="detailsControllerModel.readonly"><ng-rating ng-model="detailsControllerModel.defaultReview.rating"
+                                   icon-class="detailsControllerModel.defaultReview.iconClass"
+                                   editable=false
+                                   stars-count="detailsControllerModel.defaultReview.starsCount"
+                                   based-on="detailsControllerModel.defaultReview.basedOn"
+                                   show-grade="detailsControllerModel.defaultReview.showGrade">
+                            </ng-rating>
+                        </div>
+                        <form role="form">
+                            <div class="form-group">
+                                <textarea ng-readonly="detailsControllerModel.readonly" class="form-control"
+                                          ng-model="detailsControllerModel.defaultReview.review" rows="3"></textarea>
+                            </div>
+                            <button ng-disabled="detailsControllerModel.readonly"
+                                    ng-click="detailsControllerModel.addReview(detailsControllerModel.defaultReview)"
+                                    class="btn btn-primary">Post Review</button>
+                        </form>
+                    </div>
+
+                    <!-- Posted Comments -->
+
+                    <!-- Comment -->
+                    <div class="media margin-well" ng-repeat="review in detailsControllerModel.reviews">
+                        <a class="pull-left" href="#">
+                            <img class="media-object" src="http://placehold.it/64x64" alt="">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{review.userFirstName}}
+                                <i class="fa fa-check-circle"></i>
+                                <small>Follow</small>
+                            </h4>
+
+                            <p ng-hide="detailsControllerModel.selectedreview == $index">{{review.review}}</p>
+                            <div ng-show="detailsControllerModel.selectedreview == $index">
+                                <textarea class="form-control" rows="3" type="text"
+                                          ng-model="detailsControllerModel.editablereview.review"></textarea>
+                                <!--<button class="btn btn-success" ng-click="save(editablereview,$index)">Save</button>-->
+
+                                <!--<button class="btn btn-danger" ng-click="disableEditor($index)">Cancel</button>-->
+                            </div>
+                            <a href="" ><i title="Report Review" class="fa fa-flag pull-right flag-hover"></i></a>
+                            <div class="row">
+                                <div class="col-xs-8" ng-hide="detailsControllerModel.selectedreview == $index">
+                                        <ng-rating ng-model="review.rating"
+                                               icon-class="review.iconClass"
+                                               editable="false"
+                                               stars-count="review.starsCount"
+                                               based-on="review.basedOn"
+                                               show-grade="review.showGrade">
+                                        </ng-rating>
+                                    {{review.createdOn | date}}
+                                </div>
+                                <!--Below div shows up in edit mode for star rating-->
+                                <div class="col-xs-8" ng-show="detailsControllerModel.selectedreview == $index">
+                                        <ng-rating ng-model="detailsControllerModel.editablereview.rating"
+                                               icon-class="review.iconClass"
+                                               editable="true"
+                                               stars-count="review.starsCount"
+                                               based-on="review.basedOn"
+                                               show-grade="review.showGrade">
+                                        </ng-rating>
+                                    {{review.createdOn | date}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div ng-hide="detailsControllerModel.selectedreview == $index"
+                                         class="btn-group pull-right">
+                                        <a class="btn btn-default"
+                                           ng-click="detailsControllerModel.editReview($index)"> Edit
+                                            <i title="Edit Review" class="fa fa-pencil-square-o"></i>
+                                        </a>
+                                        <a class="btn btn-default"
+                                           ng-click="detailsControllerModel.deleteReview($index)">Delete
+                                            <i title="Delete Review" class="fa fa-trash-o"></i>
+                                        </a>
+                                    </div>
+                                    <div ng-if="detailsControllerModel.selectedreview == $index" class="btn-group pull-right">
+                                        <a class="btn btn-default"
+                                           ng-click="detailsControllerModel.save(detailsControllerModel.editablereview, $index)">Save
+                                            <i title="Save Review" class="fa fa-floppy-o"></i>
+                                        </a>
+
+                                        <a class="btn btn-default"
+                                           ng-click="detailsControllerModel.disableEditor($index)">Cancel
+                                            <i title="Cancel" class="fa fa-times-circle"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

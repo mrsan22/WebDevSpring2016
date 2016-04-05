@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Eat'n'Review">
+<head>
+    <meta charset="UTF-8">
+    <!-- IE Edge Meta Tag -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Viewport : This is for the display on smaller devices such as mobile, tab etc.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Eat'n'Review</title>
+    <!-- Minified CSS through CDN-->
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!--<link href="https://rawgit.com/esleducation/ng-rating/master/css/ng-rating.css" rel="stylesheet"/>-->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/half-slider.css">
+    <link rel = "stylesheet" href = "css/style.css">
+    <link rel = "stylesheet" href = "css/ng-rating.css">
+    <link rel="stylesheet" href="./css/autocomplete.css">
+
+</head>
+
+<body ng-controller="MainController">
+<ng-include src = "'views/header/header.view.html'"></ng-include>
+<div class="container-fluid">
+    <div class="row">
+        <div ng-view></div>
+    </div>
+</div>
+
+<!-- FOOTER SECTION - Before closing </body> tag -->
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- Minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"></script>-->
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<script src="app.js"></script>
+<script src="config.js"></script>
+<script src="oauth.js"></script>
+<!--<script src="https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/scripts/ng-map.min.js"></script>-->
+<script src="views/main/main.controller.js"></script>
+<script src="views/header/header.controller.js"></script>
+<script src="views/home/home.controller.js"></script>
+<script src="views/search/searchresult.controller.js"></script>
+<script src="services/yelp.service.js"></script>
+<script src="services/foursquare.service.js"></script>
+<script src="views/search/searchdetails.controller.js"></script>
+<script src="views/users/login.controller.js"></script>
+<script src="services/user.service.client.js"></script>
+<script src="views/users/register.controller.js"></script>
+<script src="views/users/profile.controller.js"></script>
+<script src="views/users/reviews.controller.js"></script>
+<script src="views/admin/admin.user.controller.js"></script>
+<script src="services/reviews.service.client.js"></script>
+<script src="js/ng-rating.js"></script>
+<script src="views/search/searchhome.controller.js"></script>
+<script src="views/users/forgotpassword.controller.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en
+             &key=AIzaSyD6yjHV4sdczAoxcNo7Hva0gmBHM6RJrD8"></script>
+<script src="./js/autocomplete.js"></script>
+<script src="services/google.service.client.js"></script>
+</body>
+</html>

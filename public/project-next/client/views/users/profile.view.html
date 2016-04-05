@@ -1,0 +1,162 @@
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#/profile">My Profile</a>
+            </li>
+            <li>
+                <a href="#/profile/reviews">Overview</a>
+            </li>
+            <li>
+                <a href="">Favorite Places</a>
+            </li>
+            <li>
+                <a href="">Likes</a>
+            </li>
+            <li>
+                <a href="">Dislikes</a>
+            </li>
+            <li>
+                <a href="">Followers</a>
+            </li>
+            <li>
+                <a href="">Following</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <button ng-click="profileControllerModel.toggleMenu()"
+            class="btn btn-default"
+            id="menu-toggle">
+        <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+    </button>
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <h1>Edit Profile</h1>
+        <hr>
+        <div class="col-xs-12">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-3">
+                    <div class="text-center">
+                        <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+                        <h6>Upload a different photo...</h6>
+
+                        <input type="file" class="form-control">
+                    </div>
+                </div>
+                <!-- edit form column -->
+                <div class="col-md-9 personal-info">
+                    <div class="alert alert-info alert-dismissable">
+                        <a class="panel-close close" data-dismiss="alert">×</a>
+                        <i class="fa fa-coffee"></i>
+                        This is an <strong>.alert</strong>. Use this to show important messages to the user.
+                    </div>
+                    <h3>Personal info</h3>
+
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <div class="col-lg-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                    </span>
+                                    <input ng-model="profileControllerModel.currentUser.username"
+                                           type="text" ng-readonly="profileControllerModel.readonly"
+                                           class="form-control"
+                                           placeholder="Username"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                    </span>
+                                    <input ng-model="profileControllerModel.currentUser.firstName" type="text"
+                                           class="form-control" placeholder="First name"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                    </span>
+                                    <input ng-model="profileControllerModel.currentUser.lastName" type="text"
+                                           class="form-control"  placeholder="Last name"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-envelope"></i>
+                                    </span>
+                                    <input ng-model="profileControllerModel.currentUser.email "
+                                           type="email"
+                                           class="form-control" placeholder="Email"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-map-marker"></i>
+                                    </span>
+                                    <input ng-model="profileControllerModel.currentUser.city"
+                                           type="text"
+                                           class="form-control" placeholder="City"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-lock"></i>
+                                    </span>
+                                    <input ng-model="profileControllerModel.currentUser.password"
+                                           type="password"
+                                           class="form-control"
+                                           id="password" placeholder="Password"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-lock"></i>
+                                     </span>
+                                    <input ng-model="profileControllerModel.currentUser.vpassword"
+                                           type="password"
+                                           class="form-control"
+                                           id="vpassword" placeholder="Verify Password"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-8">
+                                <a href="" ng-click="profileControllerModel.update(profileControllerModel.currentUser)"
+                                   class="btn btn-primary">Save Changes</a>
+                                <span></span>
+                                <input type="reset" class="btn btn-default" value="Cancel">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
