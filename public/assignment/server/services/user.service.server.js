@@ -82,7 +82,7 @@ module.exports = function(app, model) {
     function findUserByUsername(req, res){
         var username  = req.query.username;
         model
-            .findUserByUsername()
+            .findUserByUsername(username)
             .then(function (response) {
                     res.json(response);
                 },

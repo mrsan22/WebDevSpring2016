@@ -3,7 +3,13 @@
 //Making the mock data available in server side user model
 var mock_users = require("./user.mock.json");
 
-module.exports = function(uuid) {
+module.exports = function(uuid,db, mongoose) {
+
+    //load user schema
+    var UserSchema = require("./user.schema.server.js")(mongoose);
+
+    //create low level mongoose user model
+    var UserModel = mongoose.model('EatnReview.user', UserSchema);
 
     var api = {
         createUser : createUser,
@@ -20,14 +26,7 @@ module.exports = function(uuid) {
     return api;
 
     function createUser(user){
-        for(var i=0;i<mock_users.length;i++){
-            if (mock_users[i].username == user.username){
-                return null;
-            }
-        }
-        user["_id"] = uuid.v1();
-        mock_users.push(user);
-        return user;
+        return UserModel.create(user);
     }
 
     function loginUser(username, password) {
@@ -63,28 +62,17 @@ module.exports = function(uuid) {
         return null;
     }
 
-    function findUserByUsername(username){
-        for(var u in mock_users){
-            if(mock_users[u].username == username){
-                return mock_users[u];
-            }
-        }
-        // user not found
-        console.log("user not found by username, returning null");
-        return null;
+    function findUserByUsername(username) {
+        return UserModel.findOne({'username': username});
     }
 
     function findUserByCredentials(credentials) {
-        for(var u in mock_users){
-            if(mock_users[u].username == credentials.username &&
-                mock_users[u].password == credentials.password){
-                console.log("User exists, returning found user");
-                return mock_users[u];
+        return UserModel.findOne(
+            {
+                'username': credentials.username,
+                'password': credentials.password
             }
-        }
-        // user not found
-        console.log("user does not exist, returning null");
-        return null;
+        );
     }
 
     function findAllUsers(){

@@ -31,16 +31,46 @@ module.exports = function (app, model_user) {
 
     function findUserByCredentials(req, res) {
         var credentials = req.body;
-        var user = model_user.findUserByCredentials(credentials);
-        req.session.currentUser = user;
-        res.json(user);
+        model_user
+            .findUserByCredentials(credentials)
+            .then(function (response) {
+                    if(response != null) {
+                        req.session.currentUser = response;
+                        res.json(response);
+                    }
+                    else{
+                        console.log("user does not exist, returning null");
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.status (400).send ("Error in finding user by credentials", error.statusText);
+                });
     }
 
     function register(req, res){
         var user = req.body;
-        user = model_user.createUser(user);
-        req.session.currentUser = user;
-        res.json(user);
+        model_user
+            .findUserByUsername(user.username)
+            .then(function (response) {
+                    if(response == null){
+                        return model_user.createUser(user);
+                    }
+                    else{
+                        console.log("username already exists");
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.send ("Error in finding user by username", error.statusText);
+                })
+            .then(function (response) {
+                    req.session.currentUser = response;
+                    res.json(response);
+                },
+                function (error) {
+                    res.status (400).send ("Error inserting User Info in database", error.statusText);
+                });
     }
 
     function loggedin(req, res){
@@ -58,8 +88,14 @@ module.exports = function (app, model_user) {
     function findUserByUsername(req, res){
         var username  = req.query.username;
         console.log(username);
-        var user = model_user.findUserByUsername(username);
-        res.json(user);
+        model_user
+            .findUserByUsername(username)
+            .then(function (response) {
+                    res.json(response);
+                },
+                function (error) {
+                    res.status (400).send ("Error in finding user by username", error.statusText);
+                });
     }
 
     function findAllUsers(req, res){
