@@ -16,6 +16,7 @@
         vm.findUserByReviewUserId = findUserByReviewUserId;
 
         vm.defaultReview = {
+                "title":"",
                 "rating": 0,
                 "editableRating": true,
                 "createdOn" : Date.now()
