@@ -216,12 +216,9 @@ footer {
     height: 300px !important;
 }
 
-/*.restdetails-container{*/
-    /*height: 400px !important;*/
-/*}*/
-/*.restdetails-container img{*/
-    /*max-height: 400px !important;*/
-/*}*/
+.fa-spinner{
+    font-size: 3em;
+}
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
