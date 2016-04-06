@@ -9,9 +9,11 @@
             <div class="col-sm-5 col-md-5">
                 <div class="input-group">
                             <span class="input-group-addon">
-                                <a ><i class="fa fa-location-arrow"></i></a>
+                                <a href="" title="Use Current Location" ng-click="searchControllerModel.getLocation()">
+                                    <i class="fa fa-location-arrow"></i></a>
                             </span>
                     <input ng-model="searchControllerModel.loc"
+                           g-places-autocomplete
                            class="form-control margin-searchbox"
                            placeholder="Boston"/>
                 </div>
