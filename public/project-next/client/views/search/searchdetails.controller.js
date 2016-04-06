@@ -59,12 +59,12 @@
                     console.log(response.data);
                     vm.reviews = response.data;
                     vm.findUserByReviewUserId(vm.reviews);
+                    restAvgRating(vm.reviews);
                 },
                     function (error) {
                        console.log("Error in calling 'findAllReviewsForRest'",error.statusText);
                     });
 
-            restAvgRating();
 
         }
         init();
@@ -80,7 +80,8 @@
                //scrollwheel: false
             });
             var contentString = rest.name +"<br/>"+rest.location.address[0]+"<br/>"+rest.location.city +"<br/>"+
-                "<a target=_blank id='link' href='http://maps.google.com/maps?q="+rest.name+"'>View on Google Maps</a>";
+                "<a target=_blank id='link' href='http://maps.google.com/maps?q="+rest.name+
+                rest.location.address[0]+rest.location.city +"'>View on Google Maps</a>";
 
             //document.getElementById('link').href = url;
 
@@ -91,7 +92,7 @@
             var marker = new google.maps.Marker({
                 position: myLatLng,
                 map: map,
-                title: 'Hello World!'
+                title: rest.name
             });
 
             bounds.extend(marker.getPosition());
@@ -112,7 +113,7 @@
                     vm.findUserByReviewUserId(vm.reviews);
                     vm.selectedreview = -1;
                     vm.defaultReview = {};
-                    restAvgRating();
+                    restAvgRating(vm.reviews);
 
                 },
                     function (error) {
@@ -125,7 +126,7 @@
                 .deleteReviewById( vm.restId, vm.reviews[ratingIndex]._id)
                 .then(function (response) {
                         vm.reviews = response.data;
-                        restAvgRating();
+                        restAvgRating(vm.reviews);
                     },
                     function (error) {
                         console.log(error.statusText);
@@ -159,7 +160,7 @@
                        vm.reviews = response.data;
                        vm.findUserByReviewUserId(vm.reviews);
                        vm.selectedreview = -1;
-                       restAvgRating();
+                       restAvgRating(vm.reviews);
                    },
                    function (error) {
                        console.log(error.statusText);
@@ -173,38 +174,29 @@
 
         }
 
-        function restAvgRating(){
-            ReviewService
-                .getAvgRatingRest(vm.restId)
-                .then(function (response) {
-                        vm.avgRating = response.data;
-
-                    },
-                    function (error) {
-                        console.log(error.statusText);
-                    });
+        function restAvgRating(reviews){
+            var avgRating = 0;
+            for(var each in reviews){
+                 avgRating += parseInt(reviews[each].rating);
+            }
+            vm.avgRating = avgRating / reviews.length;
+            if (isNaN(vm.avgRating)) {
+                vm.avgRating = 0;
+            }
         }
 
         function findUserByReviewUserId(reviews) {
-            var promiseArray = [];
-            var result = [];
-            for (var i = 0; i < reviews.length; i++) {
-                promiseArray
-                    .push(
-                        UserService.findUserById(reviews[i].userId)
-                            .then(function (response) {
-                                if (response.data) {
-                                    result.push(response.data);
-                                }
-                            }));
-            }
-
-            $q.all(promiseArray)
-                .then(function () {
-                    for (var i = 0; i < result.length; i++) {
-                        reviews[i].userFirstName = result[i].firstName;
-                    }
-                });
+            reviews.forEach(function (element, index, arr) {
+                UserService.findUserById(reviews[index].userId)
+                    .then(function (response) {
+                        if (response.data) {
+                            reviews[index].username=response.data.username;
+                        }
+                    },
+                        function (error) {
+                            console.log(error.statusText);
+                        });
+            })
         }
     }
 

@@ -13,7 +13,9 @@ module.exports = function (mongoose) {
 
         createdOn:{type:Date, default:Date.now},
 
-        updatedOn:{type:Date, default:Date.now}
+        updatedOn:{type:Date, default:Date.now},
+
+        flag:{type:Boolean, default:false}
 
     }, {collection:"EatnReview.review"});
     return ReviewSchema;

@@ -96,7 +96,10 @@
                         </div>
                         <form role="form">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Please enter title of the review"
+                                <input type="text"
+                                       ng-readonly="detailsControllerModel.readonly"
+                                       class="form-control"
+                                       placeholder="Please enter title of the review"
                                        ng-model="detailsControllerModel.defaultReview.title"/>
                             </div>
                             <div class="form-group">
@@ -121,15 +124,19 @@
                             <img class="media-object" src="http://placehold.it/64x64" alt="">
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading">{{review.title}}
+                            <h4 ng-hide="detailsControllerModel.selectedreview == $index"
+                                class="media-heading">{{review.title}}
                                 <i class="fa fa-check-circle"></i>
                                 <small>Follow</small>
                             </h4>
-                            <h4 class="media-heading">
-                                <small>By <a href="">{{review.userFirstName}}</a> on {{review.createdOn | date}}</small>
+                            <h4 ng-hide="detailsControllerModel.selectedreview == $index" class="media-heading">
+                                <small>By <a href="">{{review.username}}</a> on {{review.updatedOn | date}}</small>
                             </h4>
-
                             <p ng-hide="detailsControllerModel.selectedreview == $index">{{review.review}}</p>
+                            <div ng-show="detailsControllerModel.selectedreview == $index" class="form-group">
+                                <input type="text" class="form-control"
+                                       ng-model="detailsControllerModel.editablereview.title"/>
+                            </div>
                             <div ng-show="detailsControllerModel.selectedreview == $index">
                                 <textarea class="form-control" rows="3" type="text"
                                           ng-model="detailsControllerModel.editablereview.review"></textarea>
@@ -141,24 +148,16 @@
                             <div class="row">
                                 <div class="col-xs-8" ng-hide="detailsControllerModel.selectedreview == $index">
                                         <ng-rating ng-model="review.rating"
-                                               icon-class="review.iconClass"
-                                               editable="false"
-                                               stars-count="review.starsCount"
-                                               based-on="review.basedOn"
-                                               show-grade="review.showGrade">
+                                               editable="false">
                                         </ng-rating>
-                                    {{review.createdOn | date}}
+                                    <!--{{review.createdOn | date}}-->
                                 </div>
                                 <!--Below div shows up in edit mode for star rating-->
                                 <div class="col-xs-8" ng-show="detailsControllerModel.selectedreview == $index">
                                         <ng-rating ng-model="detailsControllerModel.editablereview.rating"
-                                               icon-class="review.iconClass"
-                                               editable="true"
-                                               stars-count="review.starsCount"
-                                               based-on="review.basedOn"
-                                               show-grade="review.showGrade">
+                                               editable="true">
                                         </ng-rating>
-                                    {{review.createdOn | date}}
+                                    <!--{{review.createdOn | date}}-->
                                 </div>
                             </div>
                             <div class="row">

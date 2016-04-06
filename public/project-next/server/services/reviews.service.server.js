@@ -6,14 +6,10 @@ module.exports = function (app, model_review) {
     app.post("/api/project/user/:userId/rest/:restId", addReview);
     app.delete("/api/project/rest/:restId/review/:reviewId",deleteReview);
     app.put("/api/project/rest/:restId/review/:reviewId", updateReviewById);
-    app.get("/api/project/restAvgRating/:restId", getAvgRatingRest);
-
 
     //Implementation
     function findAllReviewsForRest(req, res){
         var restId = req.params.restId;
-        //var reviews = model_review.findAllReviewsForRest(restId);
-        //res.json(reviews);
         model_review
             .findAllReviewsForRest(restId)
             .then(function (reviews) {
@@ -27,9 +23,6 @@ module.exports = function (app, model_review) {
         var userId = req.params.userId;
         var restId = req.params.restId;
         var review = req.body;
-        //model_review.addReview(userId, restId, review);
-        //var reviews = model_review.findAllReviewsForRest(restId);
-        //res.json(reviews);
         model_review
             .addReview(userId, restId, review)
             .then(function (response) {
@@ -47,9 +40,6 @@ module.exports = function (app, model_review) {
     function deleteReview(req, res){
         var restId = req.params.restId;
         var reviewId = req.params.reviewId;
-        //model_review.deleteReview(reviewId);
-        //var reviews = model_review.findAllReviewsForRest(restId);
-        //res.json(reviews);
         model_review
             .deleteReview(reviewId)
             .then(function (response) {
@@ -68,9 +58,6 @@ module.exports = function (app, model_review) {
         var restId = req.params.restId;
         var reviewId = req.params.reviewId;
         var review = req.body;
-        //model_review.updateReviewById(reviewId, review);
-        //var reviews = model_review.findAllReviewsForRest(restId);
-        //res.json(reviews);
         model_review
             .updateReviewById(reviewId, review)
             .then(function (response) {
@@ -85,9 +72,4 @@ module.exports = function (app, model_review) {
             });
     }
 
-    function getAvgRatingRest(req, res){
-        var restId = req.params.restId;
-        var avgRating = model_review.getAvgRatingRest(restId);
-        res.json(avgRating);
-    }
 };
