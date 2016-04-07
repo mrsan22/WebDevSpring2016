@@ -26,13 +26,14 @@
 <div class="container">
     <div class="row text-center">
         <div class="col-xs-6 col-sm-6">
-            <p class="lead">Best Restaurant in Boston</p>
+            <p class="lead">Browsing {{location}} food places</p>
         </div>
         <div class="col-xs-6 col-sm-6">
-            <p class="lead">Showing 1-10 of 100</p>
+            <p class="lead">Showing {{endIndex-10}}-{{totalResponse>10
+                ?endIndex-10-startIndex:totalResponse}} of {{totalResponse}}</p>
         </div>
     </div>
-    <div class="row" ng-repeat="rest in data.businesses" ng-if="$index >= 1">
+    <div class="row" ng-repeat="rest in data.businesses|limitTo:endIndex |limitTo:startIndex" ng-if="$index >= 1">
         <hr>
         <div class="col-xs-3 col-sm-2 text-center">
             <img ng-src="{{rest.image_url}}"/>
@@ -52,13 +53,27 @@
         </div>
     </div>
     <div class="row">
-        <hr>
-        <div class="col-xs-3">
-            <p>Page 1 of 10</p>
-        </div>
-        <div class="col-xs-9 text-right">
-            <p>1 2 3 4 5 6 Next ></p>
-        </div>
-        <hr>
+        <!--<hr>-->
+        <!--<div class="col-xs-3">-->
+            <!--<p>Page 1 of 10</p>-->
+        <!--</div>-->
+        <!--<div class="col-xs-9 text-right">-->
+            <!--<p>1 2 3 4 5 6 Next ></p>-->
+        <!--</div>-->
+        <!--<hr>-->
+        <nav>
+            <ul class="pager">
+                <li class="previous">
+                    <a href="" ng-disabled="showPrevious == false || totalResponse <= 10"
+                       ng-click="previousPage()">
+                        <span aria-hidden="true">&larr;</span>
+                        Previous</a></li>
+                <li class="next">
+                    <a href="" ng-disabled="showNext == false || totalResponse <= 10"
+                       ng-click="nextPage()">
+                        Next<span aria-hidden="true">&rarr;</span>
+                    </a></li>
+            </ul>
+        </nav>
     </div>
 </div>

@@ -23,7 +23,7 @@
             var parameters = [];
             parameters.push(['term', restname]);
             parameters.push(['location', location]);
-            parameters.push(['limit', 10]);
+            parameters.push(['limit', 20]);
             parameters.push(['category_filter', 'restaurants']);
             parameters.push(['callback', 'angular.callbacks._0']);
             parameters.push(['oauth_consumer_key', auth.consumerKey]);
