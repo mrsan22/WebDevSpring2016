@@ -15,6 +15,7 @@
         vm.restAvgRating = restAvgRating;
         vm.findUserByReviewUserId = findUserByReviewUserId;
         vm.likeRest = likeRest;
+        vm.undolikeRest = undolikeRest;
 
         vm.defaultReview = {
                 "title":"",
@@ -224,6 +225,19 @@
                     }
                 }, function (error) {
                     console.log("Error in retrieving restid from likes Array of current User", error.statusText);
+                })
+        }
+
+        function undolikeRest(restId){
+            UserService
+                .unLike(restId, vm.currentUser._id)
+                .then(function (response) {
+                    console.log(response);
+                    if(response.status == 200 && response.data.nModified == 1){
+                        vm.isliked = false;
+                    }
+                }, function (error) {
+                    console.log("Error in removing like for a Restaurant", error.statusText);
                 })
         }
     }

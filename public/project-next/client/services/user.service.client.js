@@ -22,7 +22,8 @@
             updateUserByIdNoSession: updateUserByIdNoSession,
             logOut : logOut,
             addLike: addLike,
-            isLiked: isLiked
+            isLiked: isLiked,
+            unLike: unLike
         };
 
         return userServiceApi;
@@ -89,6 +90,10 @@
 
         function isLiked(restId, userId){
             return $http.get("/api/project/user/"+userId+"/rest/"+restId+"/isLiked");
+        }
+
+        function unLike(restId, userId){
+            return $http.delete("/api/project/user/"+userId+"/rest/"+restId+"/unLike");
         }
 
     }

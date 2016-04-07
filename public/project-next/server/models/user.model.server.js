@@ -21,7 +21,8 @@ module.exports = function(uuid,db, mongoose) {
         findUserByUsername : findUserByUsername,
         deleteUserById : deleteUserById,
         addLike : addLike,
-        isLiked: isLiked
+        isLiked: isLiked,
+        unLike: unLike
     };
 
     return api;
@@ -85,6 +86,14 @@ module.exports = function(uuid,db, mongoose) {
 
     function isLiked(userId, restId){
         return UserModel.findOne({_id: userId, likes: {$in: [restId]}});
+    }
+    function unLike(userId, restId){
+        return UserModel.update(
+            {'_id':userId},
+            {
+                $pullAll: {likes: [restId]}
+            }
+        );
     }
 
 };

@@ -14,6 +14,7 @@ module.exports = function (app, model_user) {
     app.put("/api/project/userupdate/:userId",updateUserByIdNoSession);
     app.put("/api/project/user/:userId/rest/:restId/like", addLike);
     app.get("/api/project/user/:userId/rest/:restId/isLiked", isLiked);
+    app.delete("/api/project/user/:userId/rest/:restId/unLike", unLike);
 
     //Implementation
     //function to redirect call coming to '/api/project/user' path
@@ -272,6 +273,19 @@ module.exports = function (app, model_user) {
             .then(function (response) {
                 res.json(response);
             },
+                function (error) {
+                    res.status (400).send ("Error in retrieving liked rest by user", error.statusText);
+                })
+    }
+
+    function unLike(req, res){
+        var userId = req.params.userId;
+        var restId = req.params.restId;
+        model_user
+            .unLike(userId, restId)
+            .then(function (response) {
+                    res.json(response);
+                },
                 function (error) {
                     res.status (400).send ("Error in retrieving liked rest by user", error.statusText);
                 })
