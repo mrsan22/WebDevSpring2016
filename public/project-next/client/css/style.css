@@ -219,6 +219,9 @@ footer {
 .fa-spinner{
     font-size: 3em;
 }
+.orangecolor{
+    color: orangered;
+}
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 @media only screen and (min-width: 480px) and (max-width: 767px) {

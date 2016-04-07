@@ -12,6 +12,8 @@ module.exports = function (app, model_user) {
     app.delete("/api/project/user/:userid", deleteUserById);
     app.post("/api/project/admin-user", createAndFindAllUsers);
     app.put("/api/project/userupdate/:userId",updateUserByIdNoSession);
+    app.put("/api/project/user/:userId/rest/:restId/like", addLike);
+    app.get("/api/project/user/:userId/rest/:restId/isLiked", isLiked);
 
     //Implementation
     //function to redirect call coming to '/api/project/user' path
@@ -247,6 +249,32 @@ module.exports = function (app, model_user) {
                 function (error) {
                     res.status (400).send ("Error in findAllUsers function", error.statusText);
                 });
+    }
+
+    function addLike(req, res){
+        var userId = req.params.userId;
+        var restId = req.params.restId;
+        model_user
+            .addLike(userId, restId)
+            .then(function (response) {
+                res.json(200);
+
+            }, function (error) {
+                res.status (400).send ("Error in adding likes to User", error.statusText);
+            })
+    }
+
+    function isLiked(req, res){
+        var userId = req.params.userId;
+        var restId = req.params.restId;
+        model_user
+            .isLiked(userId, restId)
+            .then(function (response) {
+                res.json(response);
+            },
+                function (error) {
+                    res.status (400).send ("Error in retrieving liked rest by user", error.statusText);
+                })
     }
 
     //For admin

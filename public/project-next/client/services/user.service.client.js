@@ -20,7 +20,9 @@
             deleteUserById : deleteUserById,
             updateUserById : updateUserById,
             updateUserByIdNoSession: updateUserByIdNoSession,
-            logOut : logOut
+            logOut : logOut,
+            addLike: addLike,
+            isLiked: isLiked
         };
 
         return userServiceApi;
@@ -81,6 +83,13 @@
             return $http.post("/api/project/admin-user", user);
         }
 
+        function addLike(restId, userId){
+            return $http.put("/api/project/user/"+userId+"/rest/"+restId+"/like");
+        }
+
+        function isLiked(restId, userId){
+            return $http.get("/api/project/user/"+userId+"/rest/"+restId+"/isLiked");
+        }
 
     }
 

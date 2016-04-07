@@ -14,6 +14,7 @@
         vm.initMap = initMap;
         vm.restAvgRating = restAvgRating;
         vm.findUserByReviewUserId = findUserByReviewUserId;
+        vm.likeRest = likeRest;
 
         vm.defaultReview = {
                 "title":"",
@@ -44,6 +45,7 @@
                 .then(function (response) {
                     if (response.data) {
                         vm.currentUser = response.data;
+                        isliked();
                     }
                     else {
                         vm.readonly = true;
@@ -64,7 +66,6 @@
                     function (error) {
                        console.log("Error in calling 'findAllReviewsForRest'",error.statusText);
                     });
-
 
         }
         init();
@@ -197,6 +198,33 @@
                             console.log(error.statusText);
                         });
             })
+        }
+
+        function likeRest(restId){
+            UserService
+                .addLike(restId, vm.currentUser._id)
+                .then(function (response) {
+                    if(response.status == 200){
+                        vm.isliked = true;
+                    }
+                }, function (error) {
+                    console.log("Error in adding like for a Restaurant", error.statusText);
+                })
+        }
+
+        function isliked(){
+            UserService
+                .isLiked(vm.restId, vm.currentUser._id)
+                .then(function (response) {
+                    if(response.data){
+                        vm.isliked = true;
+                    }
+                    else{
+                        vm.isliked = false;
+                    }
+                }, function (error) {
+                    console.log("Error in retrieving restid from likes Array of current User", error.statusText);
+                })
         }
     }
 

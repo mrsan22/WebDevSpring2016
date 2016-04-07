@@ -19,7 +19,9 @@ module.exports = function(uuid,db, mongoose) {
         findUserByCredentials: findUserByCredentials,
         findAllUsers : findAllUsers,
         findUserByUsername : findUserByUsername,
-        deleteUserById : deleteUserById
+        deleteUserById : deleteUserById,
+        addLike : addLike,
+        isLiked: isLiked
     };
 
     return api;
@@ -70,6 +72,19 @@ module.exports = function(uuid,db, mongoose) {
 
     function deleteUserById(userId){
         return UserModel.remove({'_id': userId});
+    }
+
+    function addLike(userId, restId){
+        return UserModel.update(
+            {'_id': userId},
+            {
+                $addToSet :{'likes':restId}
+            }
+        );
+    }
+
+    function isLiked(userId, restId){
+        return UserModel.findOne({_id: userId, likes: {$in: [restId]}});
     }
 
 };
