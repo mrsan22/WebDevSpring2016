@@ -31,8 +31,10 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(multer());
-app.use(session({secret: 'ThisisSparta', resave: false, saveUninitialized: true}));
+app.use(session({secret: 'ThisisSparta', resave: true, saveUninitialized: true}));
 app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 //console.log(process.env.PASSPORT_SECRET);
 // With below syntax for ipaddress and port, the application can run both locally and on openshift.
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
