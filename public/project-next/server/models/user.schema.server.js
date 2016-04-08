@@ -20,9 +20,9 @@ module.exports = function(mongoose) {
 
         role: {type:String,enum:["User","Admin"], default:"User"},
 
-        followers:{type: [String], default: []},
+        followers:{type: [String], default: []},//Has userIds of those users which are followers of current user
 
-        following:{type: [String], default: []},
+        following:{type: [String], default: []},// Has userIds of those user that current user is following
 
         likes:{type: [String], default: []},
 

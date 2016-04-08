@@ -22,7 +22,10 @@ module.exports = function(uuid,db, mongoose) {
         deleteUserById : deleteUserById,
         addLike : addLike,
         isLiked: isLiked,
-        unLike: unLike
+        unLike: unLike,
+        followers: followers,
+        following: following,
+        isFollowed: isFollowed
     };
 
     return api;
@@ -95,5 +98,28 @@ module.exports = function(uuid,db, mongoose) {
             }
         );
     }
+
+    function followers(userId, currentUserId){
+        return UserModel.update(
+            {'_id': userId},
+            {
+                $addToSet :{'followers':currentUserId}
+            }
+        );
+    }
+
+    function following(userId, currentUserId){
+        return UserModel.update(
+            {'_id': currentUserId},
+            {
+                $addToSet :{'following':userId}
+            }
+        );
+    }
+
+    function isFollowed(userId, currentUserId){
+        return UserModel.findOne({_id: userId, followers: {$in: [currentUserId]}});
+    }
+
 
 };

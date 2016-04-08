@@ -15,6 +15,8 @@ module.exports = function (app, model_user) {
     app.put("/api/project/user/:userId/rest/:restId/like", addLike);
     app.get("/api/project/user/:userId/rest/:restId/isLiked", isLiked);
     app.delete("/api/project/user/:userId/rest/:restId/unLike", unLike);
+    app.put("/api/project/user/:currentUserId/follows/:userId", followUser);
+    app.get("/api/project/user/:userId/followedBy/:currentUserId",isFollowed);
 
     //Implementation
     //function to redirect call coming to '/api/project/user' path
@@ -289,6 +291,42 @@ module.exports = function (app, model_user) {
                 function (error) {
                     res.status (400).send ("Error in retrieving liked rest by user", error.statusText);
                 })
+    }
+
+    //Follow
+    function followUser(req, res){
+        var currentUserId = req.params.currentUserId;
+        var userId = req.params.userId;
+        model_user
+            .followers(userId, currentUserId)//Add currently loggedin user into userid(whose profile currently loggedin
+            //visits) followers list
+            .then(function (response) {
+                //res.json(200);
+                return model_user.following(userId, currentUserId);//Add userid of that user whom currently loggedin user
+                //is following
+            }, function (error) {
+                res.status (400).send ("Error in adding currently loggedin user into userid's follower list", error.statusText);
+            })
+            .then(function (response) {
+                res.json(200);
+            }, function (error) {
+                res.status (400).send ("Error in currently loggedin user into userid's follower list", error.statusText);
+            })
+
+
+
+    }
+    //Check followers of the userId, whose profile currently logged in user visits.
+    function isFollowed(req, res){
+        var currentUserId = req.params.currentUserId;
+        var userId = req.params.userId;
+        model_user
+            .isFollowed(userId, currentUserId)
+            .then(function (response) {
+                res.json(response);
+            }, function (error) {
+                res.status (400).send ("Error in checking if followers list has currently loggedin user's userId", error.statusText);
+            })
     }
 
     //For admin

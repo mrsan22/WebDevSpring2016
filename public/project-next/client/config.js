@@ -37,7 +37,7 @@
                 controller : "ForgotPasswordController",
                 controllerAs: "forgotPassModel"
             })
-            .when("/profile", {
+            .when("/:userId/profile", {
                 templateUrl : "views/users/profile.view.html",
                 controller : "ProfileController",
                 controllerAs: "profileControllerModel",
@@ -45,7 +45,7 @@
                     checkLoggedIn: checkLoggedIn
                 }
             })
-            .when("/profile/reviews", {
+            .when("/:userId/profile/reviews", {
                 templateUrl : "views/users/reviews.view.html",
                 controller : "ReviewController",
                 controllerAs:"reviewsControllerModel",
