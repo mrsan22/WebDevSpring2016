@@ -17,6 +17,7 @@ module.exports = function (app, model_user) {
     app.delete("/api/project/user/:userId/rest/:restId/unLike", unLike);
     app.put("/api/project/user/:currentUserId/follows/:userId", followUser);
     app.get("/api/project/user/:userId/followedBy/:currentUserId",isFollowed);
+    app.delete("/api/project/user/:currentUserId/unfollows/:userId", unFollowUser);
 
     //Implementation
     //function to redirect call coming to '/api/project/user' path
@@ -303,14 +304,14 @@ module.exports = function (app, model_user) {
             .then(function (response) {
                 //res.json(200);
                 return model_user.following(userId, currentUserId);//Add userid of that user whom currently loggedin user
-                //is following
+                //is following into currently loggedin user following list
             }, function (error) {
                 res.status (400).send ("Error in adding currently loggedin user into userid's follower list", error.statusText);
             })
             .then(function (response) {
                 res.json(200);
             }, function (error) {
-                res.status (400).send ("Error in currently loggedin user into userid's follower list", error.statusText);
+                res.status (400).send ("Error in adding currently loggedin user into userid's follower list", error.statusText);
             })
 
 
@@ -325,7 +326,30 @@ module.exports = function (app, model_user) {
             .then(function (response) {
                 res.json(response);
             }, function (error) {
-                res.status (400).send ("Error in checking if followers list has currently loggedin user's userId", error.statusText);
+                res.status (400).send ("Error in checking if followers list has currently " +
+                    "loggedin user's userId", error.statusText);
+            })
+    }
+
+    function unFollowUser(req, res){
+        var currentUserId = req.params.currentUserId;
+        var userId = req.params.userId;
+        model_user
+            .removeFromFollowers(userId, currentUserId)//Remove currently loggedin user from userid(whose profile currently loggedin
+        //visits) followers list
+            .then(function (response) {
+                //res.json(200);
+                return model_user.removeFromFollowing(userId, currentUserId);//Remove userid of that user whom currently loggedin user
+                //is following
+            }, function (error) {
+                res.status (400).send ("Error in removing currently loggedin user from " +
+                    "userid's follower list", error.statusText);
+            })
+            .then(function (response) {
+                res.json(response);
+            }, function (error) {
+                res.status (400).send ("Error in removing userId from currently " +
+                    "logged in user's following list", error.statusText);
             })
     }
 

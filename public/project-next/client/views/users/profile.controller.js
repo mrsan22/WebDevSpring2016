@@ -8,6 +8,7 @@
         vm.toggleMenu = toggleMenu;
         vm.update = update;
         vm.followUser = followUser;
+        vm.unFollowUser = unFollowUser;
 
         function init(){
             vm.userId = $routeParams.userId;
@@ -73,6 +74,19 @@
                     }
                 }, function (error) {
                     console.log("Error in retrieving restid from likes Array of current User", error.statusText);
+                })
+        }
+
+        function unFollowUser(userId){
+            UserService
+                .unFollowUser(userId, vm.currentUser._id)
+                .then(function (response) {
+                    console.log(response);
+                    if(response.status == 200 && response.data.nModified == 1){
+                        vm.isfollowed = false;
+                    }
+                }, function (error) {
+                    console.log("Error in unFollowing a user", error.statusText);
                 })
         }
 

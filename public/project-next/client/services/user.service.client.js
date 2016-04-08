@@ -25,7 +25,8 @@
             isLiked: isLiked,
             unLike: unLike,
             followUser: followUser,
-            isFollowed: isFollowed
+            isFollowed: isFollowed,
+            unFollowUser: unFollowUser
         };
 
         return userServiceApi;
@@ -106,6 +107,9 @@
             return $http.get("/api/project/user/"+userId+"/followedBy/"+currentUserId);
         }
 
+        function unFollowUser(userId, currentUserId){
+            return $http.delete("/api/project/user/"+currentUserId+"/unfollows/"+userId);
+        }
     }
 
 })();
