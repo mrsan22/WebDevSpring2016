@@ -85,7 +85,7 @@
                 "_id" : vm.users[userIndex]._id,
                 "username" : vm.users[userIndex].username,
                 "password" : vm.users[userIndex].password,
-                "roles" : vm.users[userIndex].roles
+                "role" : vm.users[userIndex].role
             };
             vm.user = selectUser;
         }

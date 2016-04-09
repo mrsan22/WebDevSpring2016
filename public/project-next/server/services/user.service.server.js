@@ -193,7 +193,7 @@ module.exports = function (app, model_user) {
         model_user
             .findUserByUsername(userObj.username)
             .then(function (response) {
-                    if(response == null){
+                    if(response == null|| response.username == userObj.username){
                         return model_user.updateUserById(userid, userObj);
                     }
                     else{

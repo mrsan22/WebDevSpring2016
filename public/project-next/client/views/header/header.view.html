@@ -42,7 +42,7 @@
                 <!--<li ng-if="currentUser">-->
                     <!--<a href="#/searchhome" class="margin-set2">Home</a>-->
                 <!--</li>-->
-                <li ng-if="headerControllerModel.$location.url() == '/home'">
+                <li ng-show="headerControllerModel.$location.url() == '/searchhome'&& currentUser.role == 'Admin'">
                    <a href="#/admin/user" class="margin-set2">Admin</a>
                 </li>
                 <li ng-hide="currentUser">
