@@ -7,7 +7,8 @@ module.exports = function (db, mongoose) {
     var RestModel = mongoose.model('EatnReview.restaurant', RestSchema);
 
     var api = {
-        addRest : addRest
+        addRest : addRest,
+        findRestById : findRestById
     };
 
     return api;
@@ -19,6 +20,10 @@ module.exports = function (db, mongoose) {
         };
 
         return RestModel.findOneAndUpdate({'_id':rest.id},restObj,{upsert:true});
+    }
+
+    function findRestById(restId){
+        return RestModel.findById(restId);
     }
 
 };
