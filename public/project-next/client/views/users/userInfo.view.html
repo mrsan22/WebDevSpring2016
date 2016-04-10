@@ -1,0 +1,56 @@
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#/{{UserInfoControllerModel.userId}}/profile">My Profile</a>
+            </li>
+            <li>
+                <a href="#/{{UserInfoControllerModel.userId}}/profile/reviews">Overview</a>
+            </li>
+            <li>
+                <a href="">Favorite Places</a>
+            </li>
+            <li>
+                <a href="">Likes</a>
+            </li>
+            <li>
+                <a href="">Followers</a>
+            </li>
+            <li>
+                <a href="">Following</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <button ng-click="UserInfoControllerModel.toggleMenu()"
+            class="btn btn-default"
+            id="menu-toggle">
+        <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+    </button>
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <h1>{{UserInfoControllerModel.profileUser.username}} Profile</h1>
+        <hr>
+        <div class="col-xs-12">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-3">
+                    <div class="text-center">
+                        <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+
+                        <a ng-hide="UserInfoControllerModel.isfollowed" href=""
+                           ng-click="UserInfoControllerModel.followUser(UserInfoControllerModel.userId)">
+                            <p>Follow</p>
+                        </a>
+                        <a ng-if="UserInfoControllerModel.isfollowed" href=""
+                           ng-click="UserInfoControllerModel.unFollowUser(UserInfoControllerModel.userId)">
+                            <p class="orangecolor">UnFollow</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

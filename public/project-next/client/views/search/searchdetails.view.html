@@ -135,7 +135,7 @@
                                 <small>Follow</small>
                             </h4>
                             <h4 ng-hide="detailsControllerModel.selectedreview == $index" class="media-heading">
-                                <small>By <a href="#/{{review.userId}}/profile">{{review.username}}</a> on {{review.updatedOn | date}}</small>
+                                <small>By <a href="#/{{review.userId}}/view/profile">{{review.username}}</a> on {{review.updatedOn | date}}</small>
                             </h4>
                             <p ng-hide="detailsControllerModel.selectedreview == $index">{{review.review}}</p>
                             <div ng-show="detailsControllerModel.selectedreview == $index" class="form-group">

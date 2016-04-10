@@ -45,6 +45,14 @@
                     checkLoggedIn: checkLoggedIn
                 }
             })
+            .when("/:userId/view/profile", {
+                templateUrl : "views/users/userInfo.view.html",
+                controller : "UserInfoController",
+                controllerAs: "UserInfoControllerModel",
+                resolve:{
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
             .when("/:userId/profile/reviews", {
                 templateUrl : "views/users/reviews.view.html",
                 controller : "ReviewController",
