@@ -6,7 +6,6 @@
     function userInfoController(UserService, $routeParams){
         var vm = this;
         vm.toggleMenu = toggleMenu;
-        vm.update = update;
         vm.followUser = followUser;
         vm.unFollowUser = unFollowUser;
 
@@ -19,9 +18,6 @@
                         console.log("loggedin",response.data);
                         vm.currentUser = response.data;
                         isFollowed();
-                        if(response.data != undefined){
-                            vm.readonly = true;
-                        }
                     },
                     function (error){
                         console.log(error.statusText)
@@ -45,17 +41,6 @@
             //$scope.$apply();
         }
 
-        function update(user){
-            UserService
-                .updateUserById(user._id, user)
-                .then(function (response) {
-                        console.log("User details updated", response.data)
-                        vm.currentUser = response.data;
-                    },
-                    function (error) {
-                        console.log(error.statusText);
-                    });
-        }
 
         function followUser(userId){
             console.log(userId);
