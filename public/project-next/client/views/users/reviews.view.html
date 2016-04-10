@@ -32,91 +32,23 @@
         <h1>Reviews</h1>
         <hr>
         <div class="col-xs-12">
-            <div class="row">
+            <div class="row" ng-repeat="review in reviewsControllerModel.reviews">
                 <div class="col-sm-3">
                     <div class="text-center">
-                        <img src="http://placehold.it/500x300" class="img-responsive" alt="restaurant"/>
-                        <a href="">Restaurant Name</a>
+                        <img ng-src="{{review.restaurant.imageUrl}}" class="img-responsive" alt="restaurant"/>
+                        <a href="#/detail/{{review.restaurant._id}}">{{review.restaurant.name}}</a>
                     </div>
                 </div>
                 <div class="col-sm-9">
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                    <p class="lead">{{review.title}}</p>
+                    <p>{{review.review}}</p>
                     <div class="row">
                         <div class="col-xs-8">
-                            <i class="fa fa-star fa-lg"></i>
-                            <i class="fa fa-star fa-lg"></i>
-                            <i class="fa fa-star fa-lg"></i>
-                            <i class="fa fa-star-o fa-lg"></i>
-                            <i class="fa fa-star-o fa-lg"></i>
+                            <ng-rating ng-model="review.rating"
+                                       editable="false">
+                            </ng-rating>
+                            {{review.updatedOn | date}}
                         </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="text-center">
-                        <img src="http://placehold.it/500x300" class="img-responsive" alt="restaurant"/>
-                        <a href="">Restaurant Name</a>
-                    </div>
-                </div>
-                <div class="col-sm-9">
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                    <div class="row">
-                        <div class="col-xs-8">
-                            <i class="fa fa-star fa-lg"></i>
-                            <i class="fa fa-star fa-lg"></i>
-                            <i class="fa fa-star fa-lg"></i>
-                            <i class="fa fa-star-o fa-lg"></i>
-                            <i class="fa fa-star-o fa-lg"></i>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="text-center">
-                        <img src="http://placehold.it/500x300" class="img-responsive" alt="restaurant"/>
-                        <a href="">Restaurant Name</a>
-                    </div>
-                </div>
-                <div class="col-sm-9">
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                    <div class="row">
-                        <div class="col-xs-8">
-                            <i class="fa fa-star fa-lg"></i>
-                            <i class="fa fa-star fa-lg"></i>
-                            <i class="fa fa-star fa-lg"></i>
-                            <i class="fa fa-star-o fa-lg"></i>
-                            <i class="fa fa-star-o fa-lg"></i>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="text-center">
-                        <img src="http://placehold.it/500x300" class="img-responsive" alt="restaurant"/>
-                        <a href="">Restaurant Name</a>
-                    </div>
-                </div>
-                <div class="col-sm-9">
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                    <div class="row">
-                        <div class="col-xs-8">
-                            <i class="fa fa-star fa-lg"></i>
-                            <i class="fa fa-star fa-lg"></i>
-                            <i class="fa fa-star fa-lg"></i>
-                            <i class="fa fa-star-o fa-lg"></i>
-                            <i class="fa fa-star-o fa-lg"></i>
-                        </div>
-
                     </div>
                 </div>
             </div>

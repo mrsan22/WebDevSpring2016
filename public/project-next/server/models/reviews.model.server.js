@@ -14,7 +14,8 @@ module.exports = function (uuid, mongoose) {
         findAllReviewsForRest : findAllReviewsForRest,
         addReview : addReview,
         deleteReview: deleteReview,
-        updateReviewById : updateReviewById
+        updateReviewById : updateReviewById,
+        findAllReviewsByUserId: findAllReviewsByUserId
     };
     return api;
 
@@ -36,5 +37,9 @@ module.exports = function (uuid, mongoose) {
         delete review._id;
         review.updatedOn = Date.now();
         return ReviewModel.update({'_id':reviewId},{$set: review});
+    }
+
+    function findAllReviewsByUserId(userId){
+        return ReviewModel.find({"userId":userId});
     }
 };

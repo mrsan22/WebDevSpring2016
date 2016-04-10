@@ -8,7 +8,7 @@
 
         //Declaration of interface
         var reviewsServiceApi = {
-          //findAllReviewsForUser : findAllReviewsForUser
+            findAllReviewsByUserId : findAllReviewsByUserId,
             findAllReviewsForRest : findAllReviewsForRest,
             addReview : addReview,
             deleteReviewById : deleteReviewById,
@@ -32,6 +32,11 @@
 
         function updateReviewById(restId, reviewId, review){
             return $http.put("/api/project/rest/"+restId+"/review/"+reviewId, review);
+        }
+
+        function findAllReviewsByUserId(userId){
+            console.log(userId);
+            return $http.get("/api/project/rest/getReviews/user"+userId);
         }
     }
 
