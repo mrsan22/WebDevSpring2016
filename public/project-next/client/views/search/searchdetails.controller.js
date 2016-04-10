@@ -4,7 +4,7 @@
         .module("Eat'n'Review")
         .controller("DetailController", DetailController);
 
-    function DetailController($scope, $routeParams, YelpService, ReviewService, UserService, $q){
+    function DetailController($scope, $routeParams, YelpService, ReviewService, UserService, $q, RestService){
         var vm = this;
         vm.addReview = addReview;
         vm.deleteReview = deleteReview;
@@ -116,6 +116,7 @@
                     vm.selectedreview = -1;
                     vm.defaultReview = {};
                     restAvgRating(vm.reviews);
+                    RestService.addRest(vm.rest);
 
                 },
                     function (error) {
@@ -207,6 +208,7 @@
                 .then(function (response) {
                     if(response.status == 200){
                         vm.isliked = true;
+                        RestService.addRest(vm.rest);
                     }
                 }, function (error) {
                     console.log("Error in adding like for a Restaurant", error.statusText);
