@@ -361,6 +361,9 @@ module.exports = function (app, model_user) {
             .findUserById(userId)
             .then(function (response) {
                     if(response != null) {
+                        //if(req.session.currentUser._id == userId) {
+                        //    req.session.currentUser = response;
+                        //}
                         return model_user.getFollowersDetails(response.followers);
                     }
                     else{

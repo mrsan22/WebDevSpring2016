@@ -37,15 +37,10 @@
             <div class="row" ng-repeat="following in followingControllerModel.following">
                 <div class="col-sm-3">
                     <p><img src="//placehold.it/100" class="avatar img-circle" alt="avatar"></p>
-
-                    <!--<a ng-hide="UserInfoControllerModel.isfollowed" href=""-->
-                    <!--ng-click="UserInfoControllerModel.followUser(UserInfoControllerModel.userId)">-->
-                    <!--<p>Follow</p>-->
-                    <!--</a>-->
-                    <!--<a ng-if="UserInfoControllerModel.isfollowed" href=""-->
-                    <!--ng-click="UserInfoControllerModel.unFollowUser(UserInfoControllerModel.userId)">-->
-                    <!--<p class="orangecolor">UnFollow</p>-->
-                    <!--</a>-->
+                    <a href=""
+                    ng-click="followingControllerModel.unFollowUser(following._id)">
+                    <p class="orangecolor">UnFollow</p>
+                    </a>
                 </div>
                 <div class="col-sm-6">
                     <p>{{following.firstName}}&nbsp{{following.lastName}}</p>
