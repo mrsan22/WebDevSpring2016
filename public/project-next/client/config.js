@@ -45,6 +45,30 @@
                     checkLoggedIn: checkLoggedIn
                 }
             })
+            .when("/:userId/profile/likes", {
+                templateUrl : "views/users/likes.view.html",
+                controller : "LikesController",
+                controllerAs: "likeControllerModel",
+                resolve:{
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
+            .when("/:userId/profile/followers", {
+                templateUrl : "views/users/followers.view.html",
+                controller : "FollowersController",
+                controllerAs: "followersControllerModel",
+                resolve:{
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
+            .when("/:userId/profile/following", {
+                templateUrl : "views/users/following.view.html",
+                controller : "FollowingController",
+                controllerAs: "followingControllerModel",
+                resolve:{
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
             .when("/:userId/view/profile", {
                 templateUrl : "views/users/userInfo.view.html",
                 controller : "UserInfoController",

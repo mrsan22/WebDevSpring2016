@@ -1,0 +1,47 @@
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#/{{followingControllerModel.userId}}/profile">My Profile</a>
+            </li>
+            <li>
+                <a href="#/{{followingControllerModel.userId}}/profile/reviews">Overview</a>
+            </li>
+            <li>
+                <a href="">Favorite Places</a>
+            </li>
+            <li>
+                <a href="#/{{followingControllerModel.userId}}/profile/likes">Likes</a>
+            </li>
+            <li>
+                <a href="#/{{followingControllerModel.userId}}/profile/followers">Followers</a>
+            </li>
+            <li>
+                <a href="#/{{followingControllerModel.userId}}/profile/following">Following</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <button ng-click="followingControllerModel.toggleMenu()"
+            class="btn btn-default"
+            id="menu-toggle">
+        <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+    </button>
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <h1>Following</h1>
+        <hr>
+        <div class="col-xs-12">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-3">
+                    <div class="text-center">
+                        <!--Content here-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
