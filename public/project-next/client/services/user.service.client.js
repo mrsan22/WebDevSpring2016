@@ -27,7 +27,8 @@
             followUser: followUser,
             isFollowed: isFollowed,
             unFollowUser: unFollowUser,
-            getFollowersDetails: getFollowersDetails
+            getFollowersDetails: getFollowersDetails,
+            getFollowingDetails: getFollowingDetails
         };
 
         return userServiceApi;
@@ -114,6 +115,10 @@
 
         function getFollowersDetails(userId){
             return $http.get("/api/project/user/getFollowersDetails/"+userId);
+        }
+
+        function getFollowingDetails(userId){
+            return $http.get("/api/project/user/getFollowingDetails/"+userId);
         }
     }
 

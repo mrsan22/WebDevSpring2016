@@ -28,7 +28,8 @@ module.exports = function(uuid,db, mongoose) {
         isFollowed: isFollowed,
         removeFromFollowers: removeFromFollowers,
         removeFromFollowing: removeFromFollowing,
-        getFollowersDetails: getFollowersDetails
+        getFollowersDetails: getFollowersDetails,
+        getFollowingDetails: getFollowingDetails
     };
 
     return api;
@@ -144,6 +145,10 @@ module.exports = function(uuid,db, mongoose) {
 
     function getFollowersDetails(followersList){
         return UserModel.find({'_id':{$in:followersList}});
+    }
+
+    function getFollowingDetails(followingList){
+        return UserModel.find({'_id':{$in:followingList}});
     }
 
 

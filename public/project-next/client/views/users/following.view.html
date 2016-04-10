@@ -34,12 +34,21 @@
         <h1>Following</h1>
         <hr>
         <div class="col-xs-12">
-            <div class="row">
-                <!-- left column -->
-                <div class="col-md-3">
-                    <div class="text-center">
-                        <!--Content here-->
-                    </div>
+            <div class="row" ng-repeat="following in followingControllerModel.following">
+                <div class="col-sm-3">
+                    <p><img src="//placehold.it/100" class="avatar img-circle" alt="avatar"></p>
+
+                    <!--<a ng-hide="UserInfoControllerModel.isfollowed" href=""-->
+                    <!--ng-click="UserInfoControllerModel.followUser(UserInfoControllerModel.userId)">-->
+                    <!--<p>Follow</p>-->
+                    <!--</a>-->
+                    <!--<a ng-if="UserInfoControllerModel.isfollowed" href=""-->
+                    <!--ng-click="UserInfoControllerModel.unFollowUser(UserInfoControllerModel.userId)">-->
+                    <!--<p class="orangecolor">UnFollow</p>-->
+                    <!--</a>-->
+                </div>
+                <div class="col-sm-6">
+                    <p>{{following.firstName}}&nbsp{{following.lastName}}</p>
                 </div>
             </div>
         </div>

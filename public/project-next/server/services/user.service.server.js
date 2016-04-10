@@ -19,6 +19,7 @@ module.exports = function (app, model_user) {
     app.get("/api/project/user/:userId/followedBy/:currentUserId",isFollowed);
     app.delete("/api/project/user/:currentUserId/unfollows/:userId", unFollowUser);
     app.get("/api/project/user/getFollowersDetails/:userId", getFollowersDetails);
+    app.get("/api/project/user/getFollowingDetails/:userId", getFollowingDetails);
 
     //Implementation
     //function to redirect call coming to '/api/project/user' path
@@ -374,6 +375,29 @@ module.exports = function (app, model_user) {
                 res.json(response);
             }, function (error) {
                 res.status(400).send("Error in getting followers list of currently logged in user", error.statusText);
+            })
+    }
+
+    function getFollowingDetails(req, res){
+        var userId = req.params.userId;
+        model_user
+            .findUserById(userId)
+            .then(function (response) {
+                    if(response != null) {
+                        return model_user.getFollowingDetails(response.following);
+                    }
+                    else{
+                        console.log("User not found by Id, returning null");
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.status (400).send ("Error in findUserById function", error.statusText);
+                })
+            .then(function (response) {
+                res.json(response);
+            }, function (error) {
+                res.status(400).send("Error in getting following list of currently logged in user", error.statusText);
             })
     }
 

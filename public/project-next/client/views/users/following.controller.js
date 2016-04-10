@@ -19,6 +19,7 @@
                     function (error){
                         console.log(error.statusText)
                     });
+            getFollowingDetails();
         }
         init();
 
@@ -26,6 +27,18 @@
             //preventDefault();
             $("#wrapper").toggleClass("toggled");
             //$scope.$apply();
+        }
+
+        function getFollowingDetails(){
+            UserService
+                .getFollowingDetails(vm.userId)
+                .then(function (response) {
+                    if(response.data){
+                        vm.following = response.data;
+                    }
+                }, function (error) {
+                    console.log("Error in getting users currently logged in user is following",error.statusText)
+                })
         }
 
 
