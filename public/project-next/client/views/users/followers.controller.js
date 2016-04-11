@@ -31,17 +31,6 @@
         }
 
         function getFollowersDetails(){
-            //UserService
-            //    .getFollowersDetails(vm.userId)
-            //    .then(function (response) {
-            //        console.log(response);
-            //        if(response.data){
-            //            vm.followers = response.data;
-            //            //isFollowed();
-            //        }
-            //    }, function (error) {
-            //        console.log("Error in getting the followers list of currently loggedin user",error.statusText)
-            //    })
             UserService
                 .findUserById(vm.currentUser._id)
                 .then(function (currentUser) {
@@ -56,11 +45,16 @@
                     vm.followers = response.data;
                     if(vm.currentUser){
                         response.data.forEach(function (element, index, arr) {
-                            if(vm.currentUser.following.indexOf(element._id)> -1){
-                                element.isFollowed = true;
+                            if(element._id != vm.currentUser._id) {
+                                if (vm.currentUser.following.indexOf(element._id) > -1) {
+                                    element.isFollowed = true;
+                                }
+                                else {
+                                    element.isFollowed = false;
+                                }
                             }
                             else{
-                                element.isFollowed = false;
+                                element.itsMe = true;
                             }
                         })
                     }

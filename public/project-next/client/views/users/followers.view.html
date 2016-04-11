@@ -38,17 +38,19 @@
                 <div class="col-sm-3">
                     <p><img src="//placehold.it/100" class="avatar img-circle" alt="avatar"></p>
 
-                    <a ng-hide="follower.isFollowed" href=""
-                       ng-click="followersControllerModel.followUser(follower)">
+                    <div ng-hide="follower.itsMe">
+                        <a ng-hide="follower.isFollowed" href=""
+                                                     ng-click="followersControllerModel.followUser(follower)">
                         <i title="Follow" class="fa fa-user-plus fa-lg"></i>
                     </a>
-                    <a ng-if="follower.isFollowed" href=""
-                       ng-click="followersControllerModel.unFollowUser(follower)">
-                        <i title="UnFollow" class="fa fa-user-plus fa-lg orangecolor"></i>
-                    </a>
+                        <a ng-if="follower.isFollowed" href=""
+                           ng-click="followersControllerModel.unFollowUser(follower)">
+                            <i title="UnFollow" class="fa fa-user-plus fa-lg orangecolor"></i>
+                        </a></div>
                 </div>
                 <div class="col-sm-6">
-                    <a href="#/{{follower._id}}/view/profile"><p>{{follower.firstName}}&nbsp{{follower.lastName}}</p></a>
+                    <a href="#/{{follower._id}}/view/profile"><p>{{follower.firstName}}&nbsp{{follower.lastName}}</p>
+                    </a>
                 </div>
             </div>
         </div>
