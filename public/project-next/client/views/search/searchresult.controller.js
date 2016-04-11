@@ -48,13 +48,13 @@
             //}
 
             function nextPage () {
-                console.log("next");
+                console.log($scope.endIndex, $scope.totalResponse);
                 if ($scope.endIndex < $scope.totalResponse)
                     $scope.endIndex = $scope.endIndex + 10;
                 if ($scope.endIndex > 10)
                     $scope.showPrevious = true;
 
-                if ($scope.endIndex > $scope.totalResponse && ($scope.totalResponse - $scope.endIndex) < 10) {
+                if ($scope.endIndex >= $scope.totalResponse && ($scope.totalResponse - $scope.endIndex) < 10) {
                     $scope.startIndex = 0 - ($scope.totalResponse - $scope.endIndex + 10);
                     $scope.showNext = false;
                 }
@@ -64,7 +64,6 @@
             }
 
             function previousPage () {
-                console.log("previous");
                 $scope.startIndex = -10;
                 $scope.showNext = true;
                 if ($scope.endIndex > 10) {
