@@ -167,7 +167,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div ng-hide="detailsControllerModel.selectedreview == $index"
+                                    <div ng-if="detailsControllerModel.selectedreview !== $index &&
+                                    detailsControllerModel.currentUser._id == review.userId"
                                          class="btn-group pull-right">
                                         <a class="btn btn-default"
                                            ng-click="detailsControllerModel.editReview($index)"> Edit
@@ -178,7 +179,8 @@
                                             <i title="Delete Review" class="fa fa-trash-o"></i>
                                         </a>
                                     </div>
-                                    <div ng-if="detailsControllerModel.selectedreview == $index" class="btn-group pull-right">
+                                    <div ng-if="detailsControllerModel.selectedreview == $index"
+                                         class="btn-group pull-right">
                                         <a class="btn btn-default"
                                            ng-click="detailsControllerModel.save(detailsControllerModel.editablereview, $index)">Save
                                             <i title="Save Review" class="fa fa-floppy-o"></i>
