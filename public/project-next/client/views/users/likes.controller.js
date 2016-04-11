@@ -78,7 +78,7 @@
             UserService
                 .unLike(rest._id, vm.currentUser._id)
                 .then(function (response) {
-                    if(response.status == 200 && response.data.nModified == 1){
+                    if(response.status == 200 && (response.data.nModified == 1 || response.data.n == 1)){
                         rest.isLiked = false;
                     }
                 }, function (error) {
