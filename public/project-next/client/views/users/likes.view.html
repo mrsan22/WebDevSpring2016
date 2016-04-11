@@ -34,11 +34,24 @@
         <h1>Liked Restaurants</h1>
         <hr>
         <div class="col-xs-12">
-            <div class="row">
-                <!-- left column -->
-                <div class="col-md-3">
+            <div class="row" ng-repeat="rest in likeControllerModel.restaurants">
+                <div class="col-sm-3">
                     <div class="text-center">
-                        <!--Content here-->
+                        <img ng-src="{{rest.imageUrl}}" class="img-responsive" alt="restaurant"/>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-sm-9">
+                    <p class="lead"><a href="#/detail/{{rest._id}}">{{rest.name}}</a></p>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <a ng-hide="rest.isLiked" href=""
+                               ng-click="likeControllerModel.likeRest(rest)">
+                                <i title="Like" class="fa fa-thumbs-o-up fa-lg"></i></a>
+                            <a ng-if="rest.isLiked" href=""
+                               ng-click="likeControllerModel.undolikeRest(rest)">
+                                <i title="Unlike" class="fa fa-thumbs-o-up fa-lg orangecolor"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>

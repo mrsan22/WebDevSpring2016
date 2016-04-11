@@ -7,6 +7,7 @@
         var vm = this;
         vm.toggleMenu = toggleMenu;
         vm.unFollowUser = unFollowUser;
+        vm.followUser = followUser;
 
         function init(){
             vm.userId = $routeParams.userId;
@@ -16,11 +17,12 @@
                 .then(function(response){
                         console.log(response.data);
                         vm.currentUser = response.data;
+                        getFollowingDetails();
                     },
                     function (error){
                         console.log(error.statusText)
                     });
-            getFollowingDetails();
+
         }
         init();
 
@@ -29,25 +31,64 @@
         }
 
         function getFollowingDetails(){
+            //UserService
+            //    .getFollowingDetails(vm.userId)
+            //    .then(function (response) {
+            //        if(response.data){
+            //            vm.following = response.data;
+            //        }
+            //    }, function (error) {
+            //        console.log("Error in getting users currently logged in user is following",error.statusText)
+            //    })
             UserService
-                .getFollowingDetails(vm.userId)
-                .then(function (response) {
-                    if(response.data){
-                        vm.following = response.data;
-                    }
+                .findUserById(vm.currentUser._id)
+                .then(function (currentUser) {
+                    vm.currentUser  = currentUser.data;
+                    console.log(vm.currentUser);
+                    return UserService.getFollowingDetails(vm.userId);
                 }, function (error) {
-                    console.log("Error in getting users currently logged in user is following",error.statusText)
+                    console.log("Error in finding current user By Id", error.statusText);
+                })
+                .then(function (response) {
+                    console.log(response);
+                    vm.following = response.data;
+                    if(vm.currentUser){
+                        response.data.forEach(function (element, index, arr) {
+                            if(vm.currentUser.following.indexOf(element._id)> -1){
+                                element.isFollowed = true;
+                            }
+                            else{
+                                element.isFollowed = false;
+                            }
+                        })
+                    }
+
+                }, function (error) {
+                    console.log("Error in getting likes for the routeparams user", error.statusText);
                 })
         }
 
-        function unFollowUser(userId){
-            console.log("userid",userId);
+        function followUser(user){
+            console.log(user);
             UserService
-                .unFollowUser(userId, vm.currentUser._id)
+                .followUser(user._id, vm.currentUser._id)
+                .then(function (response) {
+                    console.log(response);
+                    if(response.status == 200){
+                        user.isFollowed = true;
+                    }
+                }, function (error) {
+                    console.log("Error in following a user", error.statusText);
+                })
+        }
+
+        function unFollowUser(user){
+            UserService
+                .unFollowUser(user._id, vm.currentUser._id)
                 .then(function (response) {
                     console.log(response);
                     if(response.status == 200 && response.data.nModified == 1){
-                        getFollowingDetails()
+                        user.isFollowed = false;
                     }
                 }, function (error) {
                     console.log("Error in unFollowing a user", error.statusText);

@@ -41,6 +41,14 @@
                     <!--ng-click="followingControllerModel.unFollowUser(following._id)">-->
                     <!--<p class="orangecolor">UnFollow</p>-->
                     <!--</a>-->
+                    <a ng-hide="following.isFollowed" href=""
+                       ng-click="followingControllerModel.followUser(following)">
+                        <i title="Follow" class="fa fa-user-plus fa-lg"></i>
+                    </a>
+                    <a ng-if="following.isFollowed" href=""
+                       ng-click="followingControllerModel.unFollowUser(following)">
+                        <i title="UnFollow" class="fa fa-user-plus fa-lg orangecolor"></i>
+                    </a>
                 </div>
                 <div class="col-sm-6">
                     <a href="#/{{following._id}}/view/profile"><p>{{following.firstName}}&nbsp{{following.lastName}}</p></a>

@@ -28,7 +28,8 @@
             isFollowed: isFollowed,
             unFollowUser: unFollowUser,
             getFollowersDetails: getFollowersDetails,
-            getFollowingDetails: getFollowingDetails
+            getFollowingDetails: getFollowingDetails,
+            getLikesforUser: getLikesforUser
         };
 
         return userServiceApi;
@@ -119,6 +120,10 @@
 
         function getFollowingDetails(userId){
             return $http.get("/api/project/user/getFollowingDetails/"+userId);
+        }
+
+        function getLikesforUser(userId){
+            return $http.get("/api/project/user/getLikeDetails/"+userId);
         }
     }
 

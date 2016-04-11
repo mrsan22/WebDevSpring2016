@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function (app, model_user) {
+module.exports = function (app, model_user, model_rest) {
 
     //Declaration
     app.post("/api/project/register", register);
@@ -20,6 +20,7 @@ module.exports = function (app, model_user) {
     app.delete("/api/project/user/:currentUserId/unfollows/:userId", unFollowUser);
     app.get("/api/project/user/getFollowersDetails/:userId", getFollowersDetails);
     app.get("/api/project/user/getFollowingDetails/:userId", getFollowingDetails);
+    app.get("/api/project/user/getLikeDetails/:userId", getLikesforUser);
 
     //Implementation
     //function to redirect call coming to '/api/project/user' path
@@ -401,6 +402,26 @@ module.exports = function (app, model_user) {
                 res.json(response);
             }, function (error) {
                 res.status(400).send("Error in getting following list of currently logged in user", error.statusText);
+            })
+    }
+
+    function getLikesforUser(req, res){
+        var userId = req.params.userId;
+        model_user
+            .findUserById(userId)
+            .then(function (response) {
+                if(response != null){
+                    //console.log(response);
+                    return model_rest.findAllRest(response.likes);
+                }
+            }, function (error) {
+                res.status (400).send ("Error in findUserById function in getLikes function", error.statusText);
+            })
+            .then(function (response) {
+                console.log(response);
+                res.json(response);
+            }, function (error) {
+                res.status(400).send("Error in getting likes list for routeparams user", error.statusText);
             })
     }
 

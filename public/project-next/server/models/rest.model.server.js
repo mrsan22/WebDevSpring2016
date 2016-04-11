@@ -8,7 +8,8 @@ module.exports = function (db, mongoose) {
 
     var api = {
         addRest : addRest,
-        findRestById : findRestById
+        findRestById : findRestById,
+        findAllRest : findAllRest
     };
 
     return api;
@@ -24,6 +25,10 @@ module.exports = function (db, mongoose) {
 
     function findRestById(restId){
         return RestModel.findById(restId);
+    }
+
+    function findAllRest(likeList){
+        return RestModel.find({'_id':{$in:likeList}});
     }
 
 };
