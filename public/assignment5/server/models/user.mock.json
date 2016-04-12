@@ -1,0 +1,63 @@
+[
+  {
+    "_id": 123,
+    "firstName": "Alice",
+    "lastName": "Wonderland",
+    "username": "alice",
+    "password": "alice",
+    "phones": [],
+    "emails": ["alice@alice.com"],
+    "roles": [
+      "student"
+    ]
+  },
+  {
+    "_id": 234,
+    "firstName": "Bob",
+    "lastName": "Hope",
+    "username": "bob",
+    "password": "bob",
+    "phones": [],
+    "emails": ["bob@bob.com"],
+    "roles": [
+      "admin"
+    ]
+  },
+  {
+    "_id": 345,
+    "firstName": "Charlie",
+    "lastName": "Brown",
+    "username": "charlie",
+    "password": "charlie",
+    "phones": [],
+    "emails": ["charlie@charlie.com"],
+    "roles": [
+      "faculty"
+    ]
+  },
+  {
+    "_id": 456,
+    "firstName": "Dan",
+    "lastName": "Craig",
+    "username": "dan",
+    "password": "dan",
+    "phones": [],
+    "emails": ["dan@dan.com"],
+    "roles": [
+      "faculty",
+      "admin"
+    ]
+  },
+  {
+    "_id": 567,
+    "firstName": "Edward",
+    "lastName": "Norton",
+    "username": "ed",
+    "password": "ed",
+    "phones": [],
+    "emails": ["ed@ed.com"],
+    "roles": [
+      "student"
+    ]
+  }
+]
