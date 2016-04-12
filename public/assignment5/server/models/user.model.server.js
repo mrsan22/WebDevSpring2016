@@ -1,7 +1,6 @@
 // Model is the module that will receive the db instance and will make connection to databases to access the information
 
 //Making the mock data available in server side user model
-//var mock_users = require("./user.mock.json");
 
 module.exports = function (uuid, db, mongoose) {
 
@@ -19,9 +18,14 @@ module.exports = function (uuid, db, mongoose) {
         findAllUsers: findAllUsers,
         findUserById: findUserById,
         updateUserById: updateUserById,
-        deleteUserById: deleteUserById
+        deleteUserById: deleteUserById,
+        getMongooseModel:getMongooseModel
     };
     return api;
+
+    function getMongooseModel(){
+        return UserModel;
+    }
 
     function findUserByCredentials(credentials) {
         return UserModel.findOne(

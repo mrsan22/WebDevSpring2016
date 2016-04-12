@@ -1,5 +1,13 @@
 "use strict";
+
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var mongoose = require('mongoose');
+
 module.exports = function(app, model) {
+
+    var userModel = require('./user.model.server.js');
+    var UserModel = userModel.getMongooseModel();
 
     //Declaration
     app.post("/api/assignment/login", findUserByCredentials);
