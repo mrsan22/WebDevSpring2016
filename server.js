@@ -32,7 +32,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(multer());
-app.use(session({secret: 'ThisisSparta', resave: true, saveUninitialized: true}));
+app.use(session({secret: process.env.PASSPORT_SECRET, resave: true, saveUninitialized: true}));
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());

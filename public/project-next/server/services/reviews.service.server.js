@@ -76,7 +76,6 @@ module.exports = function (app, model_review, model_rest) {
 
     function findAllReviewsByUserId(req, res) {
         var userId = req.params.userId;
-        console.log(userId);
         model_review
             .findAllReviewsByUserId(userId)
             .then(function (reviews) {
@@ -92,7 +91,6 @@ module.exports = function (app, model_review, model_rest) {
                                     if (restaurant) {
                                         var review = JSON.parse(JSON.stringify(element));
                                         review.restaurant = restaurant;
-                                        console.log(review);
                                         result.push(review);
                                     }
                                 }, function (error) {

@@ -418,7 +418,6 @@ module.exports = function (app, model_user, model_rest) {
                 res.status (400).send ("Error in findUserById function in getLikes function", error.statusText);
             })
             .then(function (response) {
-                console.log(response);
                 res.json(response);
             }, function (error) {
                 res.status(400).send("Error in getting likes list for routeparams user", error.statusText);
