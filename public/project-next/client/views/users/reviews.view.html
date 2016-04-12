@@ -3,13 +3,11 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#/{{reviewsControllerModel.userId}}/profile">My Profile</a>
+                <a href="#/{{reviewsControllerModel.userId}}/profile">
+                    {{reviewsControllerModel.profileUser.username}} Profile</a>
             </li>
             <li>
-                <a href="#/{{reviewsControllerModel.userId}}/profile/reviews">Overview</a>
-            </li>
-            <li>
-                <a href="">Favorite Places</a>
+                <a href="#/{{reviewsControllerModel.userId}}/profile/reviews">Reviews</a>
             </li>
             <li>
                 <a href="#/{{reviewsControllerModel.userId}}/profile/likes">Likes</a>
@@ -35,8 +33,14 @@
             <div class="row" ng-repeat="review in reviewsControllerModel.reviews">
                 <div class="col-sm-3">
                     <div class="text-center">
-                        <img ng-src="{{review.restaurant.imageUrl}}" class="img-responsive" alt="restaurant"/>
-                        <a href="#/detail/{{review.restaurant._id}}">{{review.restaurant.name}}</a>
+                        <div class="thumbnail">
+                            <a href="#/detail/{{review.restaurant._id}}">
+                                <img class="img-responsive" ng-src="{{review.restaurant.imageUrl}}"/>
+                            </a>
+                            <div class="caption">
+                                <a href="#/detail/{{review.restaurant._id}}">{{review.restaurant.name}}</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-9">
@@ -44,10 +48,12 @@
                     <p>{{review.review}}</p>
                     <div class="row">
                         <div class="col-xs-8">
-                            <ng-rating ng-model="review.rating"
-                                       editable="false">
-                            </ng-rating>
-                            {{review.updatedOn | date}}
+                            <p>
+                                <ng-rating ng-model="review.rating"
+                                           editable="false">
+                                </ng-rating>
+                                on {{review.updatedOn | date}}
+                            </p>
                         </div>
                     </div>
                 </div>

@@ -3,12 +3,24 @@
         .module("Eat'n'Review")
         .controller("ReviewController", reviewController);
 
-    function reviewController($routeParams, ReviewService){
+    function reviewController($routeParams, ReviewService, UserService){
         var vm = this;
         vm.toggleMenu = toggleMenu;
 
         function init(){
             vm.userId = $routeParams.userId;
+
+            UserService
+                .findUserById(vm.userId)
+                .then(function (response) {
+                    console.log("Profile is of:", response.data);
+                    if(response.data){
+                        vm.profileUser = response.data;
+                    }
+                }, function (error) {
+                    console.log(error);
+                });
+
             getAllReviewsByUserId();
         }
         init();
