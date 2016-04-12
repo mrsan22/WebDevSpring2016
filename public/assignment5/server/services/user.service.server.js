@@ -2,18 +2,19 @@
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var mongoose = require('mongoose');
+//var mongoose = require('mongoose');
 
 module.exports = function(app, model) {
 
-    var userModel = require('./user.model.server.js');
-    var UserModel = userModel.getMongooseModel();
+    //var userModel = require('./user.model.server.js');
+    //var UserModel = userModel.getMongooseModel();
 
     //Declaration
+    var auth = authorized;
     app.post("/api/assignment/login", findUserByCredentials);
     //app.get("/api/assignment/user?[username=username&password=password]", loginUser);
     //app.get("/api/assignment/user?[username=username]", findUserByUsername);
-    app.get("/api/assignment/user",user);
+    app.get("/api/assignment/user",passport.authenticate('local'),user);
     app.get("/api/assignment/loggedin", loggedin);
     app.post("/api/assignment/logout", logout);
     app.post("/api/assignment/register", register);
@@ -26,13 +27,63 @@ module.exports = function(app, model) {
     // creates a new user and returns array of all users
     app.post("/api/assignment/user", createUser);
 
-    //Implementation
+    //Implementation of passport functions
+    passport.use(new LocalStrategy(localStrategy));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
+    function localStrategy(username, password, done){
+        model
+            .findUserByCredentials({username:username, password:password})
+            .then(function (user) {
+                console.log(user);
+                    if(!user) {
+                        return done(null, false);//done(error, user)
+                    }
+                    else{
+                        console.log("user found, logging in user");
+                        return done(null, user);
+                    }
+                },
+                function (error) {
+                    if(error){
+                        return done(error);
+                    }
+                });
+
+    }
+
+    function authorized (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else {
+            next();
+        }
+    }
+
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+    function deserializeUser(user, done) {
+        model
+            .findUserById(user._id)
+            .then(
+                function(user){
+                    done(null, user);
+                },
+                function(err){
+                    done(err, null);
+                }
+            );
+    }
 
     //function to redirect call coming to '/api/assignment/user' path
     function user(req, res) {
         var username = req.query.username;
         var password = req.query.password;
         if (username && password) {
+            console.log("loggin");
             loginUser(req, res);
         }
         else if (username) {
@@ -65,25 +116,27 @@ module.exports = function(app, model) {
     }
 
     function loginUser(req, res){
-        var username = req.query.username;
-        var password = req.query.password;
-        model
-            .loginUser(username, password)
-            .then(function (response) {
-                    if(response != null) {
-                        req.session.currentUser = response;
-                        console.log("User exists, returning found user");
-                        res.json(response);
-                    }
-                    else{
-                        console.log("user does not exist, returning null");
-                        res.json(null);
-                    }
-                },
-                function (error) {
-                    res.status (400).send ("Error in loginUser function", error.statusText);
-                });
-
+        //var username = req.query.username;
+        //var password = req.query.password;
+        //model
+        //    .loginUser(username, password)
+        //    .then(function (response) {
+        //            if(response != null) {
+        //                req.session.currentUser = response;
+        //                console.log("User exists, returning found user");
+        //                res.json(response);
+        //            }
+        //            else{
+        //                console.log("user does not exist, returning null");
+        //                res.json(null);
+        //            }
+        //        },
+        //        function (error) {
+        //            res.status (400).send ("Error in loginUser function", error.statusText);
+        //        });
+        var currentUser = req.user;
+        console.log("returning user");
+        res.json(currentUser);
     }
 
 
@@ -100,11 +153,14 @@ module.exports = function(app, model) {
     }
 
     function loggedin(req, res){
-        res.json(req.session.currentUser);
+        //res.json(req.session.currentUser);
+        res.send(req.isAuthenticated() ? req.user : null);
     }
 
     function logout(req, res){
-        req.session.destroy();
+        //req.session.destroy();
+        //res.send(200);
+        req.logOut();
         res.send(200);
     }
 

@@ -39,6 +39,7 @@
         }
 
         function loginUser(username, password){
+            console.log("login function");
             return $http.get('/api/assignment/user?username='+username+'&password='+password);
         }
 

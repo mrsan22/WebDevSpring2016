@@ -52,7 +52,7 @@ app.get('/hello', function(req, res){
 });
 
 //Define require for other modules
-require("./public/assignment/server/app.js")(app, uuid,db, mongoose);
+require("./public/assignment5/server/app.js")(app, uuid,db, mongoose);
 //For Project
 require("./public/project-next/server/app.js")(app, uuid,db, mongoose);
 
