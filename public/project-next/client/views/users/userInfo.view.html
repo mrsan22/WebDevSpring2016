@@ -3,13 +3,10 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#/{{UserInfoControllerModel.userId}}/profile">My Profile</a>
+                <a href="#/{{UserInfoControllerModel.userId}}/profile">{{UserInfoControllerModel.profileUser.username}} Profile</a>
             </li>
             <li>
-                <a href="#/{{UserInfoControllerModel.userId}}/profile/reviews">Overview</a>
-            </li>
-            <li>
-                <a href="">Favorite Places</a>
+                <a href="#/{{UserInfoControllerModel.userId}}/profile/reviews">Reviews</a>
             </li>
             <li>
                 <a href="#/{{UserInfoControllerModel.userId}}/profile/likes">Likes</a>

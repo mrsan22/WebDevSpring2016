@@ -22,6 +22,16 @@
                     function (error){
                         console.log(error.statusText)
                     });
+            UserService
+                .findUserById(vm.userId)
+                .then(function (response) {
+                    console.log("Profile is of:", response.data);
+                    if(response.data){
+                        vm.profileUser = response.data;
+                    }
+                }, function (error) {
+
+                });
         }
         init();
 
