@@ -3,11 +3,12 @@
         .module("Eat'n'Review")
         .controller("FollowingController", followingController);
 
-    function followingController(UserService, $routeParams){
+    function followingController(UserService, $routeParams, $location){
         var vm = this;
         vm.toggleMenu = toggleMenu;
         vm.unFollowUser = unFollowUser;
         vm.followUser = followUser;
+        vm.$location = $location;
 
         function init(){
             vm.userId = $routeParams.userId;

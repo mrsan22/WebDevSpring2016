@@ -3,12 +3,13 @@
         .module("Eat'n'Review")
         .controller("ReviewController", reviewController);
 
-    function reviewController($routeParams, ReviewService, UserService){
+    function reviewController($routeParams, ReviewService, UserService, $location){
         var vm = this;
         vm.toggleMenu = toggleMenu;
 
         function init(){
             vm.userId = $routeParams.userId;
+            vm.$location = $location;
 
             UserService
                 .findUserById(vm.userId)

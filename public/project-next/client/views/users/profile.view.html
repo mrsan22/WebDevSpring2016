@@ -2,20 +2,21 @@
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
-            <li class="sidebar-brand">
+            <li class="sidebar-brand"
+                ng-class="{'active': profileControllerModel.$location.url() == '/{{profileControllerModel.userId}}/profile'}">
                 <a href="#/{{profileControllerModel.userId}}/profile">
                     {{profileControllerModel.profileUser.username}} Profile</a>
             </li>
-            <li>
+            <li ng-class="{'active': profileControllerModel.$location.url() == '/{{profileControllerModel.userId}}/profile/review'}">
                 <a href="#/{{profileControllerModel.userId}}/profile/reviews">Reviews</a>
             </li>
-            <li>
+            <li ng-class="{'active': profileControllerModel.$location.url() == '/{{profileControllerModel.userId}}/profile/likes'}">
                 <a href="#/{{profileControllerModel.userId}}/profile/likes">Likes</a>
             </li>
-            <li>
+            <li ng-class="{'active': profileControllerModel.$location.url() == '/{{profileControllerModel.userId}}/profile/followers'}">
                 <a href="#/{{profileControllerModel.userId}}/profile/followers">Followers</a>
             </li>
-            <li>
+            <li ng-class="{'active': profileControllerModel.$location.url() == '/{{profileControllerModel.userId}}/profile/following'}">
                 <a href="#/{{profileControllerModel.userId}}/profile/following">Following</a>
             </li>
         </ul>

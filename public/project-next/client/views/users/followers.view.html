@@ -12,7 +12,7 @@
             <li>
                 <a href="#/{{followersControllerModel.userId}}/profile/likes">Likes</a>
             </li>
-            <li>
+            <li ng-class="{'active': followersControllerModel.$location.url() == '/{{followersControllerModel.userId}}/profile/followers'}">
                 <a href="#/{{followersControllerModel.userId}}/profile/followers">Followers</a>
             </li>
             <li>

@@ -3,11 +3,12 @@
         .module("Eat'n'Review")
         .controller("LikesController", likeController);
 
-    function likeController(UserService, $routeParams, RestService){
+    function likeController(UserService, $routeParams, RestService, $location){
         var vm = this;
         vm.toggleMenu = toggleMenu;
         vm.likeRest = likeRest;
         vm.undolikeRest=undolikeRest;
+        vm.$location = $location
 
         function init(){
             vm.userId = $routeParams.userId;

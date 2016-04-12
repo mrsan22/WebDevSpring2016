@@ -6,7 +6,7 @@
                 <a href="#/{{reviewsControllerModel.userId}}/profile">
                     {{reviewsControllerModel.profileUser.username}} Profile</a>
             </li>
-            <li>
+            <li ng-class="{'active': reviewsControllerModel.$location.url() == '/{{reviewsControllerModel.userId}}/profile/reviews'}">
                 <a href="#/{{reviewsControllerModel.userId}}/profile/reviews">Reviews</a>
             </li>
             <li>

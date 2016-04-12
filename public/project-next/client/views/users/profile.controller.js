@@ -3,12 +3,13 @@
         .module("Eat'n'Review")
         .controller("ProfileController", profileController);
 
-    function profileController(UserService, $routeParams){
+    function profileController(UserService, $routeParams, $location){
         var vm = this;
         vm.toggleMenu = toggleMenu;
         vm.update = update;
         vm.followUser = followUser;
         vm.unFollowUser = unFollowUser;
+        vm.$location = $location;
 
         function init(){
             vm.userId = $routeParams.userId;
