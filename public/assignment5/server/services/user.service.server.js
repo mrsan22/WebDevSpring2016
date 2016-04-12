@@ -14,7 +14,7 @@ module.exports = function(app, model) {
     app.post("/api/assignment/login", findUserByCredentials);
     //app.get("/api/assignment/user?[username=username&password=password]", loginUser);
     //app.get("/api/assignment/user?[username=username]", findUserByUsername);
-    app.get("/api/assignment/user",passport.authenticate('local'),user);
+    app.post("/api/assignment/user",passport.authenticate('local'),user);
     app.get("/api/assignment/loggedin", loggedin);
     app.post("/api/assignment/logout", logout);
     app.post("/api/assignment/register", register);
@@ -25,7 +25,7 @@ module.exports = function(app, model) {
 
     //new declaration
     // creates a new user and returns array of all users
-    app.post("/api/assignment/user", createUser);
+    app.post("/api/assignment/adminuser", createUser);
 
     //Implementation of passport functions
     passport.use(new LocalStrategy(localStrategy));
@@ -36,7 +36,6 @@ module.exports = function(app, model) {
         model
             .findUserByCredentials({username:username, password:password})
             .then(function (user) {
-                console.log(user);
                     if(!user) {
                         return done(null, false);//done(error, user)
                     }
@@ -61,10 +60,12 @@ module.exports = function(app, model) {
         }
     }
 
+    //encryption of cookie. What goes to client.
     function serializeUser(user, done) {
         done(null, user);
     }
 
+    //decrypt cookie info
     function deserializeUser(user, done) {
         model
             .findUserById(user._id)
@@ -83,7 +84,6 @@ module.exports = function(app, model) {
         var username = req.query.username;
         var password = req.query.password;
         if (username && password) {
-            console.log("loggin");
             loginUser(req, res);
         }
         else if (username) {
@@ -135,7 +135,6 @@ module.exports = function(app, model) {
         //            res.status (400).send ("Error in loginUser function", error.statusText);
         //        });
         var currentUser = req.user;
-        console.log("returning user");
         res.json(currentUser);
     }
 
@@ -153,13 +152,10 @@ module.exports = function(app, model) {
     }
 
     function loggedin(req, res){
-        //res.json(req.session.currentUser);
         res.send(req.isAuthenticated() ? req.user : null);
     }
 
     function logout(req, res){
-        //req.session.destroy();
-        //res.send(200);
         req.logOut();
         res.send(200);
     }

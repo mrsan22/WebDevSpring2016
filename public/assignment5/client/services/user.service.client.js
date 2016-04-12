@@ -39,8 +39,7 @@
         }
 
         function loginUser(username, password){
-            console.log("login function");
-            return $http.get('/api/assignment/user?username='+username+'&password='+password);
+            return $http.post('/api/assignment/user?username='+username+'&password='+password);
         }
 
         function findUserByUsername(username){
@@ -60,7 +59,7 @@
         }
 
         function createAndFindAllUsers(user){
-            return $http.post("/api/assignment/user", user);
+            return $http.post("/api/assignment/adminuser", user);
         }
 
         function findUserById(userid){
