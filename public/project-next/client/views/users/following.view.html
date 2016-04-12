@@ -35,26 +35,49 @@
         <hr>
         <div class="col-xs-12">
             <div class="row" ng-repeat="following in followingControllerModel.following">
-                <div class="col-sm-3">
-                    <p><img src="//placehold.it/100" class="avatar img-circle" alt="avatar"></p>
-                    <!--<a href=""-->
-                    <!--ng-click="followingControllerModel.unFollowUser(following._id)">-->
-                    <!--<p class="orangecolor">UnFollow</p>-->
-                    <!--</a>-->
-                    <div ng-hide="following.itsMe">
-                        <a ng-hide="following.isFollowed" href=""
-                           ng-click="followingControllerModel.followUser(following)">
-                            <i title="Follow" class="fa fa-user-plus fa-lg"></i>
-                        </a>
-                        <a ng-if="following.isFollowed" href=""
-                           ng-click="followingControllerModel.unFollowUser(following)">
-                            <i title="UnFollow" class="fa fa-user-plus fa-lg orangecolor"></i>
-                        </a>
+                <!--<div class="col-sm-3">-->
+                    <!--<p><img src="//placehold.it/100" class="avatar img-circle" alt="avatar"></p>-->
+                    <!--&lt;!&ndash;<a href=""&ndash;&gt;-->
+                    <!--&lt;!&ndash;ng-click="followingControllerModel.unFollowUser(following._id)">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<p class="orangecolor">UnFollow</p>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                    <!--<div ng-hide="following.itsMe">-->
+                        <!--<a ng-hide="following.isFollowed" href=""-->
+                           <!--ng-click="followingControllerModel.followUser(following)">-->
+                            <!--<i title="Follow" class="fa fa-user-plus fa-lg"></i>-->
+                        <!--</a>-->
+                        <!--<a ng-if="following.isFollowed" href=""-->
+                           <!--ng-click="followingControllerModel.unFollowUser(following)">-->
+                            <!--<i title="UnFollow" class="fa fa-user-plus fa-lg orangecolor"></i>-->
+                        <!--</a>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-sm-6">-->
+                    <!--<a href="#/{{following._id}}/view/profile"><p>{{following.firstName}}&nbsp{{following.lastName}}</p></a>-->
+                <!--</div>-->
+                <div class="media">
+                    <a class="media-left" href="#">
+                        <img class="media-object img-circle" src="//placehold.it/100" alt="Generic placeholder image">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <a href="#/{{following._id}}/view/profile">
+                                <p>{{following.firstName}}&nbsp{{following.lastName}}</p>
+                            </a>
+                        </h4>
+                        <div ng-hide="following.itsMe">
+                            <a ng-hide="following.isFollowed" href=""
+                               class="btn btn-sm btn-default"
+                               ng-click="followingControllerModel.followUser(following)">Follow
+                            </a>
+                            <a ng-if="following.isFollowed" href=""
+                               class="btn btn-sm btn-warning"
+                               ng-click="followingControllerModel.unFollowUser(following)">UnFollow
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <a href="#/{{following._id}}/view/profile"><p>{{following.firstName}}&nbsp{{following.lastName}}</p></a>
-                </div>
+                <hr>
             </div>
         </div>
     </div>
