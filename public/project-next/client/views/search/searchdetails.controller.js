@@ -35,7 +35,12 @@
                     imgurl_lst.splice(-1,1);
                     imgurl_lst.push('o.jpg');
                     vm.imageurl = imgurl_lst.join("/");
+                    console.log(response);
                     vm.rest = response;
+                    //vm.directionUrl = "https://www.google.com/maps?daddr="
+                    //    +vm.rest.location.coordinate.latitude +","+vm.rest.location.coordinate.longitude;
+                    vm.directionUrl =  vm.directionUrl = "https://www.google.com/maps?daddr="
+                        +vm.rest.name+vm.rest.location.address[0]+vm.rest.location.city;
                     initMap(vm.rest);
                     $scope.$apply();
                 }
