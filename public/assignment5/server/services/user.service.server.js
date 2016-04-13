@@ -225,20 +225,25 @@ module.exports = function(app, model) {
 
 
     function findAllUsers(req, res){
-        model
-            .findAllUsers()
-            .then(function (response) {
-                    if(response != null) {
-                        res.json(response);
-                    }
-                    else{
-                        console.log("User collection is empty");
-                        res.json(null);
-                    }
-                },
-                function (error) {
-                    res.status (400).send ("Error in findAllUsers function", error.statusText);
-                });
+        if(isAdmin(req.user)) {
+            model
+                .findAllUsers()
+                .then(function (response) {
+                        if (response != null) {
+                            res.json(response);
+                        }
+                        else {
+                            console.log("User collection is empty");
+                            res.json(null);
+                        }
+                    },
+                    function (error) {
+                        res.status(400).send("Error in findAllUsers function", error.statusText);
+                    });
+        }
+        else{
+            res.status(403).send("Not authorized to be admin", error.statusText);
+        }
     }
 
     function findUserById(req, res){
@@ -262,34 +267,52 @@ module.exports = function(app, model) {
 
     function deleteUserById(req, res){
         var userId = req.params.userid;
-        model
-            .deleteUserById(userId)
-            .then(function (response) {
-                    //res.send(200);
-                    return model.findAllUsers();
-                },
-                function (error) {
-                    res.status (400).send ("Error in deleting user by Id", error.statusText);
-                })
-            //Accepting the response from model.findAllUsers to return remaining set of users.
-            .then(function (response) {
-                        if(response != null) {
+        if(isAdmin(req.user)) {
+            model
+                .deleteUserById(userId)
+                .then(function (response) {
+                        return model.findAllUsers();
+                    },
+                    function (error) {
+                        res.status(400).send("Error in deleting user by Id", error.statusText);
+                    })
+                //Accepting the response from model.findAllUsers to return remaining set of users.
+                .then(function (response) {
+                        if (response != null) {
                             res.json(response);
                         }
-                        else{
+                        else {
                             console.log("User collection is empty");
                             res.json(null);
                         }
                     },
                     function (error) {
-                        res.status (400).send ("Error in findAllUsers function", error.statusText);
+                        res.status(400).send("Error in findAllUsers function", error.statusText);
                     });
+        }
+        else{
+            res.status(403).send("Not authorized to be admin", error.statusText);
+        }
 
     }
 
     function updateUserById(req, res){
         var userid = req.params.userId;
         var userObj = req.body;
+
+        //for posters/hackers
+        if(!isAdmin(req.user)) {
+            delete userObj.roles;
+        }
+        if(typeof userObj.roles == "string") {
+            userObj.roles = userObj.roles.split(",");
+        }
+        if(userObj.emails && typeof userObj.emails == "string") {
+            userObj.emails = userObj.emails.split(",");
+        }
+        if(userObj.phones && typeof userObj.phones == "string") {
+            userObj.phones = userObj.phones.split(",");
+        }
         model
             .updateUserById(userid, userObj)
             .then(function (response) {
@@ -315,11 +338,25 @@ module.exports = function(app, model) {
                 });
     }
 
+
+
+    function isAdmin(user){
+        if(user.roles.indexOf("admin") > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     //For admin
     function createUser(req, res){
         var user = req.body;
-        //users = model.createAndFindAllUsers(user);
-        //res.send(users);
+        if(user.roles && user.roles.length > 1) {
+            user.roles = user.roles.split(",");
+        } else {
+            user.roles = ["student"];
+        }
         model
             .findUserByUsername(user.username)
             .then(function (response) {
