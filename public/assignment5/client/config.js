@@ -36,7 +36,7 @@
                 controller: "AdminController",
                 controllerAs : "model",
                 resolve:{
-                    checkLoggedIn: checkLoggedIn
+                    checkAdmin: checkAdmin
                 }
             })
             .when("/forms", {
@@ -86,10 +86,30 @@
                     deferred.resolve();
                 } else {
                     deferred.reject();
-                    $location.url("/home");
+                    $location.url("/login");
                 }
             });
 
         return deferred.promise;
     }
+
+    var checkAdmin = function(UserService, $q, $location)
+    {
+        var deferred = $q.defer();
+        UserService
+            .getCurrentUser()
+            .then(function(response) {
+                var currentUser = response.data;
+                if(currentUser && currentUser.roles.indexOf('admin') != -1) {
+                    UserService.setCurrentUser(currentUser);
+                    deferred.resolve();
+                } else {
+                    deferred.reject();
+                    $location.url("/home");
+                }
+            });
+
+        return deferred.promise;
+    };
+
 })();
