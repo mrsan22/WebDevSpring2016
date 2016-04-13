@@ -37,14 +37,10 @@
                 <!-- left column -->
                 <div class="col-md-3">
                     <div class="text-center">
-                        <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
-                        <h6>Upload a different photo.</h6>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-camera"></i></span>
-                                <input type="file" class="form-control" name="profilePic" placeholder="Profile Photo">
-                            </div>
-                        </div>
+                        <img ng-src="{{profileControllerModel.currentUser.imgUrl}}"
+                             height="200" width="200"
+                             class="avatar img-circle"alt="avatar">
+                        <!--<h6>Upload a different photo.</h6>-->
                         <!--<a ng-hide="profileControllerModel.isfollowed" href=""-->
                            <!--ng-click="profileControllerModel.followUser(profileControllerModel.userId)">-->
                             <!--<i title="Follow" class="fa fa-user-plus fa-lg"></i>-->
@@ -64,7 +60,8 @@
                     </div>
                     <h3>Personal info</h3>
 
-                    <form class="form-horizontal" role="form">
+                    <form action="{{profileControllerModel.updateProfile}}" class="form-horizontal"
+                          role="form" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <div class="col-lg-8">
                                 <div class="input-group">
@@ -72,6 +69,7 @@
                                         <i class="glyphicon glyphicon-user"></i>
                                     </span>
                                     <input ng-model="profileControllerModel.currentUser.username"
+                                           name="username"
                                            type="text" ng-readonly="profileControllerModel.readonly"
                                            class="form-control"
                                            placeholder="Username"/>
@@ -84,8 +82,11 @@
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-user"></i>
                                     </span>
-                                    <input ng-model="profileControllerModel.currentUser.firstName" type="text"
-                                           class="form-control" placeholder="First name"/>
+                                    <input ng-model="profileControllerModel.currentUser.firstName"
+                                           type="text"
+                                           name="firstName"
+                                           class="form-control"
+                                           placeholder="First name"/>
                                 </div>
                             </div>
                         </div>
@@ -95,8 +96,11 @@
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-user"></i>
                                     </span>
-                                    <input ng-model="profileControllerModel.currentUser.lastName" type="text"
-                                           class="form-control"  placeholder="Last name"/>
+                                    <input ng-model="profileControllerModel.currentUser.lastName"
+                                           type="text"
+                                           name="lastName"
+                                           class="form-control"
+                                           placeholder="Last name"/>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +112,9 @@
                                     </span>
                                     <input ng-model="profileControllerModel.currentUser.email "
                                            type="email"
-                                           class="form-control" placeholder="Email"/>
+                                           name="email"
+                                           class="form-control"
+                                           placeholder="Email"/>
                                 </div>
                             </div>
                         </div>
@@ -120,6 +126,7 @@
                                     </span>
                                     <input ng-model="profileControllerModel.currentUser.city"
                                            type="text"
+                                           name="city"
                                            class="form-control" placeholder="City"/>
                                 </div>
                             </div>
@@ -132,6 +139,7 @@
                                     </span>
                                     <input ng-model="profileControllerModel.currentUser.password"
                                            type="password"
+                                           name="password"
                                            class="form-control"
                                            id="password" placeholder="Password"/>
                                 </div>
@@ -145,6 +153,7 @@
                                      </span>
                                     <input ng-model="profileControllerModel.currentUser.vpassword"
                                            type="password"
+                                           name="vpassword"
                                            class="form-control"
                                            id="vpassword" placeholder="Verify Password"/>
                                 </div>
@@ -152,10 +161,24 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-8">
-                                <a href="" ng-click="profileControllerModel.update(profileControllerModel.currentUser)"
-                                   class="btn btn-primary">Save Changes</a>
-                                <span></span>
-                                <input type="reset" class="btn btn-default" value="Cancel">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-camera"></i>
+                                    </span>
+                                    <input type="file"
+                                           class="form-control"
+                                           name="profilePic"
+                                           placeholder="Profile Photo"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-8">
+                                <!--<a href="" ng-click="profileControllerModel.update(profileControllerModel.currentUser)"-->
+                                   <!--class="btn btn-primary">Save Changes</a>-->
+                                <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                                <!--<span></span>-->
+                                <!--<input type="reset" class="btn btn-default" value="Cancel">-->
                             </div>
                         </div>
                     </form>

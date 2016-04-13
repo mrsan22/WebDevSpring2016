@@ -20,6 +20,7 @@
                     console.log(response.data);
                         vm.currentUser = response.data;
                         isFollowed();
+                        vm.updateProfile = "/api/project/user/"+vm.currentUser._id;
                         if(response.data != undefined){
                             vm.readonly = true;
                         }

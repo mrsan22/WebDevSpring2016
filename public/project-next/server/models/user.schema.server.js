@@ -16,7 +16,7 @@ module.exports = function(mongoose) {
 
         created:{type: Date, default: Date.now},
 
-        profilePic:{ data: Buffer, contentType: String },
+        imgUrl:{type:String},
 
         role: {type:String,enum:["User","Admin"], default:"User"},
 

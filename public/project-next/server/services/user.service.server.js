@@ -1,6 +1,9 @@
 "use strict";
 module.exports = function (app, model_user, model_rest) {
 
+    var multer = require('multer');
+    var upload = multer({ dest: __dirname+'/../../../../public/uploads' });
+
     //Declaration
     app.post("/api/project/register", register);
     app.get("/api/project/loggedin", loggedin);
@@ -21,6 +24,7 @@ module.exports = function (app, model_user, model_rest) {
     app.get("/api/project/user/getFollowersDetails/:userId", getFollowersDetails);
     app.get("/api/project/user/getFollowingDetails/:userId", getFollowingDetails);
     app.get("/api/project/user/getLikeDetails/:userId", getLikesforUser);
+    app.post("/api/project/user/:userId",upload.single('profilePic'), uploadUserImage);
 
     //Implementation
     //function to redirect call coming to '/api/project/user' path
@@ -177,6 +181,45 @@ module.exports = function (app, model_user, model_rest) {
                     if(response != null) {
                         req.session.currentUser = response;
                         res.json(response);
+                    }
+                    else{
+                        console.log("User not found by Id after updating the user, returning null");
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.status (400).send ("Error in findUserById function after updating the user", error.statusText);
+                });
+    }
+
+    function uploadUserImage(req, res){
+        var userId = req.params.userId;
+        var userObj = req.body;
+        var profilePic = req.file;
+
+        var destination   = profilePic.destination;
+        var path          = profilePic.path;
+        var originalname  = profilePic.originalname;
+        var size          = profilePic.size;
+        var mimetype      = profilePic.mimetype;
+        var filename      = profilePic.filename;
+
+        userObj.imgUrl = "/uploads/" + filename;
+        model_user
+            .updateUserById(userId, userObj)
+            .then(function (response) {
+                    //console.log(response);
+                    //res.send(200);
+                    return model_user.findUserById(userId);
+                },
+                function (error) {
+                    res.status (400).send ("Error in updating user by Id", error.statusText);
+                })
+            .then(function (response) {
+                    if(response != null) {
+                        req.session.currentUser = response;
+                        res.redirect(req.header('Referer') + "#/" + userId + "/profile");
+                        //res.json(response);
                     }
                     else{
                         console.log("User not found by Id after updating the user, returning null");
