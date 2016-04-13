@@ -19,14 +19,14 @@ module.exports = function(app, model) {
     app.get("/api/assignment/loggedin", loggedin);
     app.post("/api/assignment/logout", logout);
     app.post("/api/assignment/register", register);
-    //app.get("/api/assignment/user", findAllUsers);
-    app.get("/api/assignment/user/:userid", findUserById);
-    app.delete("/api/assignment/user/:userid", deleteUserById);
-    app.put("/api/assignment/user/:userId", updateUserById);
+    app.get("/api/assignment/user", auth, findAllUsers);
+    app.get("/api/assignment/user/:userid", auth, findUserById);
+    app.delete("/api/assignment/user/:userid", auth,deleteUserById);
+    app.put("/api/assignment/user/:userId", auth,updateUserById);
 
     //new declaration
     // creates a new user and returns array of all users
-    app.post("/api/assignment/adminuser", createUser);
+    app.post("/api/assignment/adminuser", auth,createUser);
 
     //Implementation of passport functions
     passport.use(new LocalStrategy(localStrategy));
@@ -92,9 +92,10 @@ module.exports = function(app, model) {
         else if (username) {
             findUserByUsername(req);
         }
-        else {
-            findAllUsers(req, res);
-        }
+        //else {
+        //    console.log("here");
+        //    findAllUsers(req, res);
+        //}
 
 
     }

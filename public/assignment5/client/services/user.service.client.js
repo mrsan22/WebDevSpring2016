@@ -43,7 +43,7 @@
         }
 
         function findUserByUsername(username){
-            return $http.get('/api/assignment/user?username='+username);
+            return $http.post('/api/assignment/user?username='+username);
         }
 
         function logOut(){
