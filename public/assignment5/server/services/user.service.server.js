@@ -19,14 +19,15 @@ module.exports = function(app, model) {
     app.get("/api/assignment/loggedin", loggedin);
     app.post("/api/assignment/logout", logout);
     app.post("/api/assignment/register", register);
-    app.get("/api/assignment/user", auth, findAllUsers);
+    app.get("/api/assignment/admin/user", auth, findAllUsers);
     app.get("/api/assignment/user/:userid", auth, findUserById);
-    app.delete("/api/assignment/user/:userid", auth,deleteUserById);
-    app.put("/api/assignment/user/:userId", auth,updateUserById);
+    app.get("/api/assignment/admin/user/:userid", auth, getUserById);
+    app.delete("/api/assignment/admin/user/:userid", auth,deleteUserById);
+    app.put("/api/assignment/admin/user/:userId", auth,updateUserById);
 
     //new declaration
     // creates a new user and returns array of all users
-    app.post("/api/assignment/adminuser", auth,createUser);
+    app.post("/api/assignment/admin/user", auth,createUser);
 
     //Implementation of passport functions
     passport.use(new LocalStrategy(localStrategy));
@@ -261,6 +262,25 @@ module.exports = function(app, model) {
                 },
                 function (error) {
                     res.status (400).send ("Error in findUserById function", error.statusText);
+                });
+
+    }
+
+    function getUserById(req, res){
+        var userId = req.params.userid;
+        model
+            .findUserById(userId)
+            .then(function (response) {
+                    if(response != null) {
+                        res.json(response);
+                    }
+                    else{
+                        console.log("User not found by Id, returning null");
+                        res.json(null);
+                    }
+                },
+                function (error) {
+                    res.status (400).send ("Error in getUserById function", error.statusText);
                 });
 
     }
