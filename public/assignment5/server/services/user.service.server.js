@@ -361,6 +361,7 @@ module.exports = function(app, model) {
             .findUserByUsername(user.username)
             .then(function (response) {
                     if(response == null){
+                        user.password = bcrypt.hashSync(user.password);
                         return model.createUser(user);
                     }
                     else{
