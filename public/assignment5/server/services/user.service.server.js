@@ -2,6 +2,7 @@
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var bcrypt = require('bcrypt-nodejs');
 //var mongoose = require('mongoose');
 
 module.exports = function(app, model) {
@@ -34,14 +35,16 @@ module.exports = function(app, model) {
 
     function localStrategy(username, password, done){
         model
-            .findUserByCredentials({username:username, password:password})
+            .findUserByUsername(username)
             .then(function (user) {
-                    if(!user) {
-                        return done(null, false);//done(error, user)
-                    }
-                    else{
+                    //If the user exists, compare passwords with bcrypt.comapreSync
+                    if(user && bcrypt.compareSync(password, user.password)) {
                         console.log("user found, logging in user");
                         return done(null, user);
+
+                    }
+                    else{
+                        return done(null, false);//done(error, user)
                     }
                 },
                 function (error) {
@@ -162,11 +165,34 @@ module.exports = function(app, model) {
 
 
     function register(req, res){
+        //var user = req.body;
+        //model
+        //    .findUserByUsername(user.username)
+        //    .then(function (response) {
+        //            if(response == null){
+        //                return model.createUser(user);
+        //            }
+        //            else{
+        //                console.log("username already exists");
+        //                res.json(null);
+        //            }
+        //        },
+        //        function (error) {
+        //            res.send ("Error in finding user by username", error.statusText);
+        //        })
+        //    .then(function (response) {
+        //            req.session.currentUser = response;
+        //            res.json(response);
+        //        },
+        //        function (error) {
+        //            res.status (400).send ("Error inserting User Info in database", error.statusText);
+        //        });
         var user = req.body;
-        model
-            .findUserByUsername(user.username)
+        user.roles = ['student'];
+        model.findUserByUsername(user.username)
             .then(function (response) {
                     if(response == null){
+                        user.password = bcrypt.hashSync(user.password);
                         return model.createUser(user);
                     }
                     else{
@@ -177,14 +203,25 @@ module.exports = function(app, model) {
                 function (error) {
                     res.send ("Error in finding user by username", error.statusText);
                 })
-            .then(function (response) {
-                    req.session.currentUser = response;
-                    res.json(response);
+            .then(function (user) {
+                    //req.session.currentUser = response;
+                    //res.json(response);
+                    if(user){
+                        req.login(user, function(err){
+                            if(err){
+                                res.status(400).send(err);
+                            }
+                            else{
+                                res.json(user);
+                            }
+                        });
+                    }
                 },
                 function (error) {
                     res.status (400).send ("Error inserting User Info in database", error.statusText);
                 });
     }
+
 
     function findAllUsers(req, res){
         model

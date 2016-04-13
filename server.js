@@ -7,7 +7,7 @@ var cookieParser = require('cookie-parser'); //Parsing cookies for session
 var session = require('express-session'); //For maintaining sessions
 var uuid = require('node-uuid'); //For generating _id
 var mongoose = require('mongoose'); //For accessing mongodb database
-var passport      = require('passport');
+var passport = require('passport');
 
 //Create a default session string
 var connectionString = 'mongodb://127.0.0.1:27017/formbuilder';
