@@ -222,6 +222,10 @@ footer {
 .orangecolor{
     color: orangered;
 }
+/*.rest-height{*/
+    /*height: 300px;*/
+    /*width:350px;*/
+/*}*/
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
