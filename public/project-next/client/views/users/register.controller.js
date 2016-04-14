@@ -34,7 +34,8 @@
                     var currentUser = response.data;
                     if(currentUser != null){
                         UserService.setCurrentUser(currentUser);
-                        vm.$location.url('/profile');
+                        //vm.$location.url('/currentUser._id/profile');
+                        vm.$location.url('/searchhome');
                     }
                     else{
                         //promise fullfilled, inpsite of getting a null response.

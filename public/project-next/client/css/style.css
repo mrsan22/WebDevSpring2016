@@ -234,6 +234,10 @@ footer {
     .margin-set1{
         margin-right: 15px;
     }
+
+    .carousel-caption{
+        margin-left: -3px;
+    }
 }
 
 @media only screen and (max-width: 479px) {
@@ -253,6 +257,9 @@ footer {
         float: right;
     }
 
+    .carousel-caption{
+        margin-left: -3px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -314,6 +321,10 @@ footer {
     .carousel-inner>.item>.img-carousel, .carousel-inner>.item>a>.img-carousel {
         max-width:inherit;
         height: 500px;
+    }
+
+    .carousel-caption{
+        margin-left: -3px;
     }
 
 }
