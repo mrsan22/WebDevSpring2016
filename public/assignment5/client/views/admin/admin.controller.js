@@ -11,7 +11,8 @@
         vm.selectUser = selectUser;
         vm.deleteUser = deleteUser;
         var selectedUserIndex = -1;
-
+        vm.predicate = 'username';
+        vm.reverse = true;
 
         function init(){
             UserService.getCurrentUser()
@@ -33,6 +34,10 @@
         }
         init();
 
+        vm.order = function (predicate) {
+            vm.reverse = (vm.predicate === predicate) ? !vm.reverse : false;
+            vm.predicate = predicate;
+        };
         function addUser(userObj){
             if (!userObj || !userObj.username || !userObj.password || !userObj.roles
                 || !userObj.firstName || !userObj.lastName){
