@@ -10,6 +10,8 @@
         //Declare Event handler
         vm.callToSearch = callToSearch;
         vm.logOut = logOut;
+        vm.toggleMenu = toggleMenu;
+
 
         function init(){
             vm.$location = $location;
@@ -38,6 +40,10 @@
                         console.log(error.statusText);
                     });
 
+        }
+
+        function toggleMenu() {
+            $("#wrapper").toggleClass("toggled");
         }
     }
 })();
