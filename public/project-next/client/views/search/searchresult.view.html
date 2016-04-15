@@ -33,25 +33,49 @@
                 ?endIndex-10-startIndex:totalResponse}} of {{totalResponse}}</p>
         </div>
     </div>
-    <div class="row" ng-repeat="rest in data.businesses|limitTo:endIndex |limitTo:startIndex">
-        <hr>
-        <div class="col-xs-3 col-sm-2 text-center">
-            <img ng-src="{{rest.image_url}}"/>
-        </div>
-        <div class="col-xs-6 col-sm-5 txtright">
-            <div class="row"><i class="fa fa-cutlery" aria-hidden="true"></i> <a href="#/detail/{{rest.id}}">{{rest.name}}</a></div>
-            <div class="row"><p><img ng-src="{{rest.rating_img_url}}"/> {{rest.review_count}} Reviews</p></div>
-            <div class="row"><p>{{rest.categories[0][0]}} | {{rest.categories[1][0]}}</p></div>
-            <div class="row visible-xs"><p>{{rest.location.address[0]}}, {{rest.location.city}}</p></div>
-            <div class="row"><i class="fa fa-bookmark"></i> Save</div>
-        </div>
-        <div class="hidinxs col-xs-3 col-sm-5 text-center">
-            <p>{{rest.location.neighborhoods[0]}}</p>
-            <p>{{rest.location.display_address[0]}}</p>
-            <p>{{rest.location.display_address[2]}}</p>
-            <p>{{rest.display_phone}}</p>
-        </div>
+    <!--<div class="row" ng-repeat="rest in data.businesses|limitTo:endIndex |limitTo:startIndex">-->
+        <!--<hr>-->
+        <!--<div class="col-xs-3 col-sm-2 text-center">-->
+            <!--<img ng-src="{{rest.image_url}}"/>-->
+        <!--</div>-->
+        <!--<div class="col-xs-6 col-sm-5 txtright">-->
+            <!--<div class="row"><i class="fa fa-cutlery" aria-hidden="true"></i> <a href="#/detail/{{rest.id}}">{{rest.name}}</a></div>-->
+            <!--<div class="row"><p><img ng-src="{{rest.rating_img_url}}"/> {{rest.review_count}} Reviews</p></div>-->
+            <!--<div class="row"><p>{{rest.categories[0][0]}} | {{rest.categories[1][0]}}</p></div>-->
+            <!--<div class="row visible-xs"><p>{{rest.location.address[0]}}, {{rest.location.city}}</p></div>-->
+            <!--<div class="row"><i class="fa fa-bookmark"></i> Save</div>-->
+        <!--</div>-->
+        <!--<div class="hidinxs col-xs-3 col-sm-5 text-center">-->
+            <!--<p>{{rest.location.neighborhoods[0]}}</p>-->
+            <!--<p>{{rest.location.display_address[0]}}</p>-->
+            <!--<p>{{rest.location.display_address[2]}}</p>-->
+            <!--<p>{{rest.display_phone}}</p>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="row">
+            <div class="col-sm-6" ng-repeat="rest in data.businesses|limitTo:endIndex |limitTo:startIndex">
+                <div class="row">
+                    <hr>
+                    <div class="col-xs-3 col-sm-3 text-center">
+                        <img ng-src="{{rest.image_url}}"/>
+                    </div>
+                    <div class="col-xs-6 col-sm-5 txtright fnt-sz">
+                        <div class="row mar-left-md"><i class="fa fa-cutlery" aria-hidden="true"></i> <a href="#/detail/{{rest.id}}">{{rest.name}}</a></div>
+                        <div class="row mar-left-md"><p><img ng-src="{{rest.rating_img_url}}"/> {{rest.review_count}} Reviews</p></div>
+                        <div class="row mar-left-md"><p>{{rest.categories[0][0]}} | {{rest.categories[1][0]}}</p></div>
+                        <div class="row mar-left-md visible-xs"><p>{{rest.location.address[0]}}, {{rest.location.city}}</p></div>
+                        <div class="row mar-left-md"><p>{{rest.display_phone}}</p></div>
+                    </div>
+                    <div class="hidinxs col-xs-3 col-sm-4">
+                        <p>{{rest.location.neighborhoods[0]}}</p>
+                        <p>{{rest.location.display_address[0]}}</p>
+                        <p>{{rest.location.display_address[2]}}</p>
+                    </div>
+                </div>
+            </div>
     </div>
+
     <div class="row">
         <hr>
        <div class="col-xs-6 col-sm-6">

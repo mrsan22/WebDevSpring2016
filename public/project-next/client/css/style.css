@@ -234,6 +234,10 @@ footer {
 .orangecolor{
     color: orangered;
 }
+
+.border-right{
+    border-right: 1px  #333;
+}
 /*.rest-height{*/
     /*height: 300px;*/
     /*width:350px;*/
@@ -270,7 +274,8 @@ footer {
     }
 
     .txtright{
-        float: right;
+        /*float: right;*/
+        margin-left: 40px;
     }
 
     .carousel-caption{
@@ -373,6 +378,13 @@ footer {
         font-size: 17px;
         line-height: 1.1;
         border-radius: 6px;
+    }
+    .mar-left-md{
+        margin-left: 18px;
+    }
+
+    .fnt-sz{
+        font-size: 12px;
     }
 
 }
