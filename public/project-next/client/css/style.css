@@ -130,6 +130,10 @@ body {
     margin-bottom: 25px;
 }
 
+.no-mar{
+    margin-top: 0;
+}
+
 footer {
     margin: 50px 0;
 }
@@ -243,10 +247,29 @@ footer {
     color: white;
     background-color: #222222;
 }
-/*.rest-height{*/
-    /*height: 300px;*/
-    /*width:350px;*/
-/*}*/
+.avg-rating{
+    background-color:#FAFAFA;
+    border-left:1px solid #EFEFEF;
+    padding:15px 15px 20px 15px;
+    border-radius:3px;
+}
+.title{
+    background-color:#FAFAFA;
+}
+
+.avgRate{
+    padding-bottom: 5px;
+    font-family: inherit;
+}
+
+.rest-detail-img{
+    text-align: center;
+    max-height: 350px;
+}
+.likeit{
+    margin-top: 36px;
+}
+
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
@@ -373,6 +396,10 @@ footer {
     .hideit{
         display: none;
     }
+
+    .mar-top-alert{
+        margin-top: 10px;
+    }
 }
 
 @media only screen and (min-width: 767px) and (max-width: 992px) {
@@ -403,6 +430,10 @@ footer {
         display: none;
     }
 
+    .mar-top-alert{
+        margin-top: 10px;
+    }
+
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -419,5 +450,9 @@ footer {
 
     .hideit{
         display: none;
+    }
+
+    .mar-top-alert{
+        margin-top: 10px;
     }
 }

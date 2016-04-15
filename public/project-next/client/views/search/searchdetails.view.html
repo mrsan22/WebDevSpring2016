@@ -1,83 +1,112 @@
 
-    <!--<div class="row">-->
-        <!--<div class="col-sm-4 col-xs-6 img-hover pad-left-right tmargin">-->
-            <!--<a href="#">-->
-                <!--<img class="img-responsive portfolio-item margin-bottom-zero" src="http://placehold.it/500x300" alt="">-->
-            <!--</a>-->
-        <!--</div>-->
-
-        <!--<div class="col-sm-4 col-xs-6 img-hover pad-left-right tmargin">-->
-            <!--<a href="#">-->
-                <!--<img class="img-responsive portfolio-item margin-bottom-zero" src="http://placehold.it/500x300" alt="">-->
-            <!--</a>-->
-        <!--</div>-->
-
-        <!--<div class="col-sm-4 col-xs-6 img-hover pad-left-right hidden-xs tmargin">-->
-            <!--<a href="#">-->
-                <!--<img class="img-responsive portfolio-item margin-bottom-zero" src="http://placehold.it/500x300" alt="">-->
-            <!--</a>-->
-        <!--</div>-->
-
-    <!--</div>-->
     <div class="col-xs-12">
         <div class="row">
             <div class="col-sm-6">
                 <h2>{{detailsControllerModel.rest.name}}</h2>
             </div>
-
         </div>
-    <div class="row">
-        <div class="col-sm-5 restdetails-container">
-            <img src={{detailsControllerModel.imageurl}} class="img-responsive"/>
-            <!--<img src={{detailsControllerModel.rest.rating_img_url}} class="img-responsive"/>-->
-            <ng-rating ng-model="detailsControllerModel.avgRating"
-                       editable="false" show-grade="true">
-            </ng-rating>
+        <div class="row">
+            <!--<div class="col-sm-1"></div>-->
+            <div class="col-sm-6">
+                <div class="thumbnail">
+                <img src={{detailsControllerModel.imageurl}} class="img-responsive rest-detail-img"/>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p class="lead"><i class="fa fa-cutlery" aria-hidden="true"></i>
+                            {{detailsControllerModel.rest.categories[0][0]}} ,
+                            {{detailsControllerModel.rest.categories[1][0]}}</p>
 
+                        <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{detailsControllerModel.rest.location.display_address[0]}},
+                            {{detailsControllerModel.rest.location.display_address[1]}}
+                            {{detailsControllerModel.rest.location.display_address[2]}}</p>
+
+                        <p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+                             {{detailsControllerModel.rest.display_phone}}</p>
+                        <p><i class="fa fa-map" aria-hidden="true"></i>
+                            <a target=_blank href="{{detailsControllerModel.directionUrl}}" >Directions</a>
+                        </p>
+                    </div>
+
+                    <div class="col-sm-6 text-center">
+                        <h4> Find us on Yelp!</h4>
+                        <a href="{{detailsControllerModel.rest.url}}" target="_blank">
+                            <img src="/project-next/client/images/yelp.jpg" alt="Find us on Yelp!"/>
+                        </a>
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-xs-6 text-center">
+                        <h4>Like Us:</h4>
+                        <div class="likeit">
+                            <div ng-if="detailsControllerModel.currentUser">
+                                <a ng-hide="detailsControllerModel.isliked" href=""
+                                   ng-click="detailsControllerModel.likeRest(detailsControllerModel.rest.id)">
+                                    <i title="Like" class="fa fa-thumbs-o-up fa-2x"></i></a>
+
+                                <a ng-if="detailsControllerModel.isliked" href=""
+                                   ng-click="detailsControllerModel.undolikeRest(detailsControllerModel.rest.id)">
+                                    <i title="Unlike" class="fa fa-thumbs-o-up fa-2x orangecolor"></i></a>
+                            </div>
+
+                            <div ng-if="!detailsControllerModel.currentUser">
+                                <a>
+                                    <i title="Please login to Like!" class="fa fa-thumbs-o-up fa-2x"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                          <h4>Average user rating:</h4>
+                        <h2 class="bold avgRate">
+                            {{detailsControllerModel.avgRating === 0 ? '-' :
+                            detailsControllerModel.avgRating}}
+                            <small>/ 5</small>
+                        </h2>
+                             <ng-rating ng-model="detailsControllerModel.avgRating"
+                                        editable="false">
+                            </ng-rating>
+                    </div>
+                </div>
+                <hr>
+            </div>
         </div>
-        <div class="col-sm-4">
-            <p>
-                {{detailsControllerModel.rest.snippet_text}}
-            </p>
-            <p>{{detailsControllerModel.rest.categories[0][0]}} ,
-                {{detailsControllerModel.rest.categories[1][0]}}</p>
 
-            <p>{{detailsControllerModel.rest.location.display_address[0]}},
-                {{detailsControllerModel.rest.location.display_address[1]}}
-                {{detailsControllerModel.rest.location.display_address[2]}}</p>
-
-            <p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
-                 {{detailsControllerModel.rest.display_phone}}</p>
-            <hr>
-
-            <a ng-hide="detailsControllerModel.isliked" href=""
-               ng-click="detailsControllerModel.likeRest(detailsControllerModel.rest.id)">
-                <i title="Like" class="fa fa-thumbs-o-up fa-lg"></i></a>
-            <a ng-if="detailsControllerModel.isliked" href=""
-               ng-click="detailsControllerModel.undolikeRest(detailsControllerModel.rest.id)">
-                <i title="Unlike" class="fa fa-thumbs-o-up fa-lg orangecolor"></i></a> &nbsp
-
-            <a target=_blank href="{{detailsControllerModel.directionUrl}}" >Get Directions</a>
-            <hr>
-        </div>
         <!--Map div-->
-        <div class="col-sm-3">
-            <div id="map" class="map"></div>
-            <!--<ng-map zoom="16" center="[{{detailsControllerModel.rest.location.coordinate.latitude}},-->
-            <!--{{detailsControllerModel.rest.location.coordinate.longitude}}]">-->
-                <!--<marker position="[{{detailsControllerModel.rest.location.coordinate.latitude}},-->
-                 <!--{{detailsControllerModel.rest.location.coordinate.longitude}}]"-->
-                <!--on-click = "click()" title="{{detailsControllerModel.rest.name}}"-->
-                        <!--centered="true"/>-->
-            <!--</ng-map>-->
+        <div class="row">
+            <div class="col-sm-6">
+                <div id="map" class="map"></div>
+                <!--<ng-map zoom="16" center="[{{detailsControllerModel.rest.location.coordinate.latitude}},-->
+                <!--{{detailsControllerModel.rest.location.coordinate.longitude}}]">-->
+                    <!--<marker position="[{{detailsControllerModel.rest.location.coordinate.latitude}},-->
+                     <!--{{detailsControllerModel.rest.location.coordinate.longitude}}]"-->
+                    <!--on-click = "click()" title="{{detailsControllerModel.rest.name}}"-->
+                            <!--centered="true"/>-->
+                <!--</ng-map>-->
+            </div>
+            <div class="col-sm-5">
+                <h5 class="bg-info"><i class="fa fa-info-circle" aria-hidden="true"></i> What you need to know...</h5>
+                <blockquote>
+                    <h4>
+                        {{detailsControllerModel.rest.snippet_text}}...
+                    </h4>
+                    <footer class="no-mar" >From Yelp website</footer>
+                </blockquote>
+            </div>
         </div>
-        <!--End Map div-->
-    </div>
-        <div ng-if="!currentUser" class="alert alert-info alert-dismissable">
-            <a class="panel-close close" data-dismiss="alert">×</a>
-            <i class="fa fa-info-circle"></i>
-            Please <strong>login</strong> to review your favorite restaurant!
-        </div>
+            <!--End Map div-->
+            <div ng-if="!currentUser" class="alert alert-info mar-top-alert">
+                <!--<a class="panel-close close" data-dismiss="alert">×</a>-->
+                <i class="fa fa-info-circle"></i>
+                Please <strong>login</strong> to review your favorite restaurant!
+            </div>
         <div class="panel panel-default margin-panel">
             <div class="panel-heading">
                 <h3 class="panel-title">Reviews for {{detailsControllerModel.rest.name}}</h3>
