@@ -17,6 +17,17 @@
                                class="form-control margin-searchbox auto-size"
                                placeholder="Boston"/>
                         </div>
+                        <div ng-if="homeControllerModel.showLocationWarning"
+                             role="alert"
+                             class="alert alert-warning alert-dismissible">
+                            <button type="button"
+                                    class="close btn-xs"
+                                    data-dismiss="alert"
+                                    aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <strong>Location!</strong> is required!.
+                        </div>
                     </div>
                 <div class="col-sm-2 col-md-2">
                     <button ng-click="homeControllerModel.callSearch(homeControllerModel.restname,homeControllerModel.loc)"

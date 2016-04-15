@@ -56,8 +56,8 @@
                             </div>
 
                             <div ng-if="!detailsControllerModel.currentUser">
-                                <a>
-                                    <i title="Please login to Like!" class="fa fa-thumbs-o-up fa-2x"></i>
+                                <a data-toggle="tooltip" data-placement="auto" title="Please login to Like!">
+                                    <i class="fa fa-thumbs-o-up fa-2x"></i>
                                 </a>
                             </div>
                         </div>
@@ -94,9 +94,9 @@
             <div class="col-sm-5">
                 <h5 class="bg-info"><i class="fa fa-info-circle" aria-hidden="true"></i> What you need to know...</h5>
                 <blockquote>
-                    <h4>
+                    <p>
                         {{detailsControllerModel.rest.snippet_text}}...
-                    </h4>
+                    </p>
                     <footer class="no-mar" >From Yelp website</footer>
                 </blockquote>
             </div>

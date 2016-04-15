@@ -8,6 +8,17 @@
                 ? endIndex-10-startIndex: totalResponse}} of {{totalResponse}}</p>
         </div>
     </div>
+    <div ng-if="showWarningMsg"
+         role="alert"
+         class="alert alert-warning alert-dismissible">
+        <button type="button"
+                class="close btn-xs"
+                data-dismiss="alert"
+                aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>No Results!</strong> Try changing food or restaurant name!.
+    </div>
     <div class="row">
             <div class="col-sm-6" ng-repeat="rest in data.businesses|limitTo:endIndex |limitTo:startIndex">
                 <div class="row">

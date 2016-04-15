@@ -28,7 +28,6 @@
             vm.restId = $routeParams.restId;
 
 
-
             YelpService.findRestDetailsbyId(
                 vm.restId,
                 function(response){
@@ -44,7 +43,7 @@
                     vm.directionUrl =  vm.directionUrl = "https://www.google.com/maps?daddr="
                         +vm.rest.name+vm.rest.location.address[0]+vm.rest.location.city;
                     initMap(vm.rest);
-                    $('[data-toggle="popover"]').popover();
+                    $('[data-toggle="tooltip"]').popover();
                     $scope.$apply();
                 }
             );

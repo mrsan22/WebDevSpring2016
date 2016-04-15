@@ -28,6 +28,9 @@
                     restname,
                     location,
                     function(response){
+                        if(response.businesses.length == 0 || response.total == 0){
+                            $scope.showWarningMsg = true;
+                        }
                         console.log(response);
                         $scope.totalResponse = response.businesses.length;
                         $scope.data = response;

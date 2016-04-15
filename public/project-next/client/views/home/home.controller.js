@@ -22,6 +22,10 @@
 
         //Implement event handler
         function callSearch(restname, location){
+            if(!location || location == null){
+                vm.showLocationWarning = true;
+                return;
+            }
             if(typeof location != 'string'){
                 YelpService.findRestbyNameLocation(
                     restname,
