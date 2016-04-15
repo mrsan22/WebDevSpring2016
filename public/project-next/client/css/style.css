@@ -238,6 +238,11 @@ footer {
 .border-right{
     border-right: 1px  #333;
 }
+
+.btn-color{
+    color: white;
+    background-color: #222222;
+}
 /*.rest-height{*/
     /*height: 300px;*/
     /*width:350px;*/
@@ -257,6 +262,10 @@ footer {
 
     .carousel-caption{
         margin-left: -3px;
+    }
+
+    .hideit{
+        display: none;
     }
 }
 
@@ -360,6 +369,10 @@ footer {
     .font-s{
         font-size: 27px;
     }
+
+    .hideit{
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 767px) and (max-width: 992px) {
@@ -386,6 +399,9 @@ footer {
     .fnt-sz{
         font-size: 12px;
     }
+    .hideit{
+        display: none;
+    }
 
 }
 
@@ -399,5 +415,9 @@ footer {
     }
     .font-s{
         font-size: 27px;
+    }
+
+    .hideit{
+        display: none;
     }
 }

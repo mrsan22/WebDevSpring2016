@@ -61,16 +61,20 @@
                         <img ng-src="{{rest.image_url}}"/>
                     </div>
                     <div class="col-xs-6 col-sm-5 txtright fnt-sz">
-                        <div class="row mar-left-md"><i class="fa fa-cutlery" aria-hidden="true"></i> <a href="#/detail/{{rest.id}}">{{rest.name}}</a></div>
-                        <div class="row mar-left-md"><p><img ng-src="{{rest.rating_img_url}}"/> {{rest.review_count}} Reviews</p></div>
-                        <div class="row mar-left-md"><p>{{rest.categories[0][0]}} | {{rest.categories[1][0]}}</p></div>
-                        <div class="row mar-left-md visible-xs"><p>{{rest.location.address[0]}}, {{rest.location.city}}</p></div>
-                        <div class="row mar-left-md"><p>{{rest.display_phone}}</p></div>
+                        <div class="row mar-left-md"><i class="fa fa-cutlery" aria-hidden="true"></i>
+                            <a href="#/detail/{{rest.id}}">{{rest.name}}</a></div>
+                        <div class="row mar-left-md"><p><img ng-src="{{rest.rating_img_url}}"/>
+                            {{rest.review_count}}</p></div>
+                        <div class="row mar-left-md">
+                            <p>{{rest.categories[0][0]}} | {{rest.categories[1][0]}}</p></div>
+                        <div class="row mar-left-md hideit">
+                            <p>{{rest.location.address[0]}}, {{rest.location.city}}</p></div>
+                        <!--<div class="row mar-left-md"><p>{{rest.display_phone}}</p></div>-->
                     </div>
-                    <div class="hidinxs col-xs-3 col-sm-4">
+                    <div class="hidinxs col-xs-3 col-sm-4 fnt-sz">
                         <p>{{rest.location.neighborhoods[0]}}</p>
                         <p>{{rest.location.display_address[0]}}</p>
-                        <p>{{rest.location.display_address[2]}}</p>
+                        <p>{{rest.location.city}},{{rest.location.state_code}}</p>
                     </div>
                 </div>
             </div>
@@ -79,14 +83,14 @@
     <div class="row">
         <hr>
        <div class="col-xs-6 col-sm-6">
-           <a class="btn btn-sm btn-info" href=""
+           <a class="btn btn-sm btn-default btn-color" href=""
             ng-click="previousPage()"
            ng-disabled="showPrevious == false || totalResponse <= 10">
             <i class="fa fa-long-arrow-left" aria-hidden="true"></i> Previous</a>
        </div>
 
         <div class="col-xs-6 col-sm-6">
-            <a class="btn btn-sm btn-info pull-right" href=""
+            <a class="btn btn-sm btn-default pull-right btn-color" href=""
            ng-click="nextPage()"
            ng-disabled="showNext == false || totalResponse <= 10">
             Next <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
