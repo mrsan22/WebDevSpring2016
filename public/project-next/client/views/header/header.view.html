@@ -27,8 +27,11 @@
             </div>
             <div class="col-sm-3 margin-lft-searchbox">
                 <div class="input-group">
-                    <input type="text" ng-model="headerControllerModel.location_header"
-                           class="form-control navsearch-margin" placeholder="Boston">
+                    <input type="text"
+                           ng-model="headerControllerModel.location_header"
+                           class="form-control navsearch-margin"
+                           g-places-autocomplete
+                           placeholder="Boston">
                     <div class="input-group-btn">
                         <button ng-click="headerControllerModel.callToSearch(headerControllerModel.restname_header,
                         headerControllerModel.location_header) "

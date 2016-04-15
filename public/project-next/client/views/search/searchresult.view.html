@@ -1,28 +1,3 @@
-<!--<div class="container">-->
-<!--<h3>Search Results</h3>-->
-<!--<div class="table-responsive" ng-controller="SearchController">-->
-<!--<table class="table table-striped">-->
-<!--<thead>-->
-<!--<tr>-->
-<!--<th>Restaurant ID</th>-->
-<!--<th>Name</th>-->
-<!--<th>Ratings</th>-->
-<!--<th>Image</th>-->
-<!--</tr>-->
-<!--</thead>-->
-<!--<tbody>-->
-<!--<tr ng-repeat="rest in data.businesses">-->
-<!--<td>{{rest.id}}</td>-->
-<!--<td>-->
-<!--<a href="#/detail/{{rest.id}}">{{rest.name}}</a>-->
-<!--</td>-->
-<!--<td><img ng-src="{{rest.rating_img_url}}"/></td>-->
-<!--<td><img ng-src="{{rest.image_url}}"/></td>-->
-<!--</tr>-->
-<!--</tbody>-->
-<!--</table>-->
-<!--</div>-->
-<!--</div>-->
 <div class="container">
     <div class="row text-center">
         <div class="col-xs-6 col-sm-6">
@@ -30,45 +5,33 @@
         </div>
         <div class="col-xs-6 col-sm-6">
             <p class="lead">Showing {{endIndex-10}}-{{totalResponse>10
-                ?endIndex-10-startIndex:totalResponse}} of {{totalResponse}}</p>
+                ? endIndex-10-startIndex: totalResponse}} of {{totalResponse}}</p>
         </div>
     </div>
-    <!--<div class="row" ng-repeat="rest in data.businesses|limitTo:endIndex |limitTo:startIndex">-->
-        <!--<hr>-->
-        <!--<div class="col-xs-3 col-sm-2 text-center">-->
-            <!--<img ng-src="{{rest.image_url}}"/>-->
-        <!--</div>-->
-        <!--<div class="col-xs-6 col-sm-5 txtright">-->
-            <!--<div class="row"><i class="fa fa-cutlery" aria-hidden="true"></i> <a href="#/detail/{{rest.id}}">{{rest.name}}</a></div>-->
-            <!--<div class="row"><p><img ng-src="{{rest.rating_img_url}}"/> {{rest.review_count}} Reviews</p></div>-->
-            <!--<div class="row"><p>{{rest.categories[0][0]}} | {{rest.categories[1][0]}}</p></div>-->
-            <!--<div class="row visible-xs"><p>{{rest.location.address[0]}}, {{rest.location.city}}</p></div>-->
-            <!--<div class="row"><i class="fa fa-bookmark"></i> Save</div>-->
-        <!--</div>-->
-        <!--<div class="hidinxs col-xs-3 col-sm-5 text-center">-->
-            <!--<p>{{rest.location.neighborhoods[0]}}</p>-->
-            <!--<p>{{rest.location.display_address[0]}}</p>-->
-            <!--<p>{{rest.location.display_address[2]}}</p>-->
-            <!--<p>{{rest.display_phone}}</p>-->
-        <!--</div>-->
-    <!--</div>-->
-
     <div class="row">
             <div class="col-sm-6" ng-repeat="rest in data.businesses|limitTo:endIndex |limitTo:startIndex">
                 <div class="row">
                     <hr>
                     <div class="col-xs-3 col-sm-3 text-center">
-                        <img ng-src="{{rest.image_url}}"/>
+                        <a href="#/detail/{{rest.id}}"><img ng-src="{{rest.image_url}}"/></a>
                     </div>
                     <div class="col-xs-6 col-sm-5 txtright fnt-sz">
-                        <div class="row mar-left-md"><i class="fa fa-cutlery" aria-hidden="true"></i>
-                            <a href="#/detail/{{rest.id}}">{{rest.name}}</a></div>
-                        <div class="row mar-left-md"><p><img ng-src="{{rest.rating_img_url}}"/>
-                            {{rest.review_count}}</p></div>
                         <div class="row mar-left-md">
-                            <p>{{rest.categories[0][0]}} | {{rest.categories[1][0]}}</p></div>
+                            <i class="fa fa-cutlery" aria-hidden="true"></i>
+                            <a href="#/detail/{{rest.id}}">{{rest.name}}</a>
+                        </div>
+                        <div class="row mar-left-md">
+                            <span><p>
+                            <img ng-src="{{rest.rating_img_url}}"/>
+                            {{rest.review_count}} Reviews
+                            </p></span>
+                        </div>
+                        <div class="row mar-left-md">
+                            <p>{{rest.categories[0][0]}} | {{rest.categories[1][0]}}</p>
+                        </div>
                         <div class="row mar-left-md hideit">
-                            <p>{{rest.location.address[0]}}, {{rest.location.city}}</p></div>
+                            <p>{{rest.location.address[0]}}, {{rest.location.city}}</p>
+                        </div>
                         <!--<div class="row mar-left-md"><p>{{rest.display_phone}}</p></div>-->
                     </div>
                     <div class="hidinxs col-xs-3 col-sm-4 fnt-sz">

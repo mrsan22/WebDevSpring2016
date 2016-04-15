@@ -86,8 +86,8 @@
 
            var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 16,
-                center: myLatLng
-               //scrollwheel: false
+                center: myLatLng,
+                scrollwheel: false
             });
             var contentString = rest.name +"<br/>"+rest.location.address[0]+"<br/>"+rest.location.city +"<br/>"+
                 "<a target=_blank id='link' href='http://maps.google.com/maps?q="+rest.name+

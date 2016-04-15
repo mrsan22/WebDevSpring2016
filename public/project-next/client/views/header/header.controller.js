@@ -20,10 +20,10 @@
         //Implement event handler
         function callToSearch(restname, location){
             if(!restname){
-                vm.$location.url('/search/location='+location);
+                vm.$location.url('/search/location='+location.formatted_address);
             }
             else{
-            vm.$location.url('/search/restname='+restname+'&location='+location);
+            vm.$location.url('/search/restname='+restname+'&location='+location.formatted_address);
             }
 
 
