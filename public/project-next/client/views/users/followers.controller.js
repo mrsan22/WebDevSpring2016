@@ -49,13 +49,14 @@
                 .findUserById(vm.currentUser._id)
                 .then(function (currentUser) {
                     vm.currentUser  = currentUser.data;
-                    console.log(vm.currentUser);
                     return UserService.getFollowersDetails(vm.userId);
                 }, function (error) {
                     console.log("Error in finding current user By Id", error.statusText);
                 })
                 .then(function (response) {
-                    console.log(response);
+                    if(response.data.length == 0){
+                        vm.noFollowers = true;
+                    }
                     vm.followers = response.data;
                     if(vm.currentUser){
                         response.data.forEach(function (element, index, arr) {

@@ -77,6 +77,11 @@
         </div>
         <hr>
         <div class="col-xs-12">
+            <div ng-if="followersControllerModel.noFollowers"
+                 role="alert"
+                 class="alert alert-warning">
+                <strong>No Followers!</strong> You do not have any followers yet!
+            </div>
             <div class="row" ng-repeat="follower in followersControllerModel.followers">
                 <!--<div class="col-sm-3">-->
                 <!--<p><img src="//placehold.it/100" class="avatar img-circle" alt="avatar"></p>-->

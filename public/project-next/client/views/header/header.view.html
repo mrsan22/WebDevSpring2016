@@ -46,20 +46,31 @@
                 <!--<li ng-if="currentUser">-->
                 <!--<a href="#/searchhome" class="margin-set2">Home</a>-->
                 <!--</li>-->
-                <li ng-show="headerControllerModel.$location.url() == '/searchhome'&& currentUser.role == 'Admin'">
-                    <a href="#/admin/user" class="margin-set2">Admin</a>
+                <li ng-show="headerControllerModel.$location.url() == '/searchhome'&& currentUser.role == 'admin'">
+                    <a href="#/admin/user" class="margin-set2"
+                       data-target="#navbar"
+                       data-toggle="collapse">Admin</a>
                 </li>
                 <li ng-hide="currentUser">
-                    <a href="#/register" class="margin-set2">Sign Up</a>
+                    <a href="#/register"
+                       class="margin-set2"
+                       data-target="#navbar"
+                       data-toggle="collapse">Sign Up</a>
                 </li>
                 <li ng-hide="currentUser">
-                    <a href="#/login" class="margin-set2">Login</a>
+                    <a href="#/login" class="margin-set2"
+                       data-target="#navbar"
+                       data-toggle="collapse">Login</a>
                 </li>
                 <li ng-show="currentUser">
                     <a href="#/{{currentUser._id}}/profile">{{currentUser.username}}</a>
+                </li>
                 <li ng-hide="!currentUser"
                     ng-click="headerControllerModel.logOut()">
-                    <a href="">Logout</a>
+                    <a href=""
+                       data-target="#navbar"
+                       data-toggle="collapse">Logout</a>
+                </li>
             </ul>
         </div>
     </div>

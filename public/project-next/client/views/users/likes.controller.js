@@ -49,15 +49,15 @@
             UserService
                 .findUserById(vm.currentUser._id)
                 .then(function (currentUser) {
-                    console.log(currentUser);
                     vm.currentUser  = currentUser.data;
-                    console.log(vm.currentUser);
                     return UserService.getLikesforUser(vm.userId);
                 }, function (error) {
                     console.log("Error in finding current user By Id", error.statusText);
                 })
                 .then(function (restaurants) {
-                    console.log(restaurants);
+                    if (restaurants.data.length == 0){
+                        vm.noLikedRest = true
+                    }
                     vm.restaurants = restaurants.data;
                     if(vm.currentUser){
                         restaurants.data.forEach(function (element, index, arr) {

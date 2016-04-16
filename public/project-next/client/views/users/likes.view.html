@@ -97,6 +97,11 @@
                 <!--</div>-->
                 <!--</div>-->
                 <!--</div>-->
+                <div ng-if="likeControllerModel.noLikedRest"
+                     role="alert"
+                     class="alert alert-warning">
+                    <strong>No Likes!</strong> Enjoyed eating somewhere... Like them on Eat'n'Review too!
+                </div>
                 <div class="col-sm-6 col-md-4 rest-container" ng-repeat="rest in likeControllerModel.restaurants">
                     <div class="thumbnail">
                         <a href="">

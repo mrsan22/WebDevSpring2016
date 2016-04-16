@@ -75,6 +75,12 @@
         </div>
         <hr>
         <div class="col-xs-12">
+            <div ng-if="reviewsControllerModel.noReviews"
+                 role="alert"
+                 class="alert alert-warning">
+                <strong>No Reviews!</strong> Have something to say about food.
+                <a href="#/searchhome" class="alert-link">Search and write reviews </a>now!
+            </div>
             <div class="row" ng-repeat="review in reviewsControllerModel.reviews">
                 <div class="col-sm-3">
                     <div class="text-center">

@@ -48,7 +48,9 @@
             ReviewService
                 .findAllReviewsByUserId(vm.userId)
                 .then(function (response) {
-                    console.log(response);
+                    if(response.data.length == 0){
+                        vm.noReviews = true;
+                    }
                     vm.reviews = response.data;
                     
                 }, function (error) {

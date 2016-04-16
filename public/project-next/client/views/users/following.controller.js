@@ -55,7 +55,9 @@
                     console.log("Error in finding current user By Id", error.statusText);
                 })
                 .then(function (response) {
-                    console.log(response);
+                    if(response.data.length == 0){
+                        vm.noFollowing  =true;
+                    }
                     vm.following = response.data;
                     if(vm.currentUser){
                         response.data.forEach(function (element, index, arr) {
