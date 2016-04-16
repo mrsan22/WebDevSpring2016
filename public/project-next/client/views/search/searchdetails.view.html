@@ -43,6 +43,18 @@
 
                 <div class="row">
                     <div class="col-xs-6 text-center">
+                        <h4>Average user rating:</h4>
+                        <h2 class="bold avgRate">
+                            {{detailsControllerModel.avgRating === 0 ? '-' :
+                            detailsControllerModel.avgRating}}
+                            <small>/ 5</small>
+                        </h2>
+                        <ng-rating ng-model="detailsControllerModel.avgRating"
+                                   editable="false">
+                        </ng-rating>
+                    </div>
+
+                    <div class="col-xs-6">
                         <h4>Like Us:</h4>
                         <div class="likeit">
                             <div ng-if="detailsControllerModel.currentUser">
@@ -61,18 +73,6 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-xs-6">
-                          <h4>Average user rating:</h4>
-                        <h2 class="bold avgRate">
-                            {{detailsControllerModel.avgRating === 0 ? '-' :
-                            detailsControllerModel.avgRating}}
-                            <small>/ 5</small>
-                        </h2>
-                             <ng-rating ng-model="detailsControllerModel.avgRating"
-                                        editable="false">
-                            </ng-rating>
                     </div>
                 </div>
                 <hr>
@@ -178,7 +178,7 @@
 
                                 <!--<button class="btn btn-danger" ng-click="disableEditor($index)">Cancel</button>-->
                             </div>
-                            <a href="" ><i title="Report Review" class="fa fa-flag pull-right flag-hover"></i></a>
+                            <!--<a href="" ><i title="Report Review" class="fa fa-flag pull-right flag-hover"></i></a>-->
                             <div class="row">
                                 <div class="col-xs-8" ng-hide="detailsControllerModel.selectedreview == $index">
                                         <ng-rating ng-model="review.rating"

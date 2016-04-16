@@ -84,7 +84,7 @@
             var myLatLng = {lat:rest.location.coordinate.latitude, lng:rest.location.coordinate.longitude};
 
            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 16,
+                zoom: 14,
                 center: myLatLng,
                 scrollwheel: false
             });
