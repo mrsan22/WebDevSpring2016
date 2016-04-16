@@ -3,7 +3,10 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#/{{reviewsControllerModel.userId}}/profile">
+                <a ng-if="reviewsControllerModel.currentUser._id != reviewsControllerModel.profileUser._id">
+                    {{reviewsControllerModel.profileUser.username}} Profile</a>
+                <a ng-if="reviewsControllerModel.currentUser._id == reviewsControllerModel.profileUser._id"
+                   href="#/{{reviewsControllerModel.userId}}/profile">
                     {{reviewsControllerModel.profileUser.username}} Profile</a>
             </li>
             <li ng-class="{'active': reviewsControllerModel.$location.url() == '/{{reviewsControllerModel.userId}}/profile/reviews'}">
@@ -23,64 +26,82 @@
     <!-- /#sidebar-wrapper -->
 
     <!--<button ng-click="reviewsControllerModel.toggleMenu()" class="btn btn-default" id="menu-toggle">-->
-        <!--<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>-->
+    <!--<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>-->
     <!--</button>-->
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <!--<h1>Reviews</h1>-->
         <div class="row">
             <div class="col-xs-6">
-                <h2>Reviews</h2>
+                <h1>Reviews</h1>
             </div>
-            <div class="col-xs-2 text-center">
-                <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
-            </div>
-            <div class="col-xs-3">
-                <div class="row mar-user-top">
-                   <p class="lead">Username:{{reviewsControllerModel.profileUser.username }}</p>
+            <div ng-if="reviewsControllerModel.currentUser._id != reviewsControllerModel.profileUser._id">
+                <div class="col-xs-3 img-center col-sm-2 text-center">
+                    <img src="//placehold.it/100" class="avatar img-circle hidden-sm hidden-xs" alt="avatar">
+                    <img src="//placehold.it/80" class="avatar img-circle visible-sm" alt="avatar">
+                    <img src="//placehold.it/70" class="avatar img-circle visible-xs" alt="avatar">
                 </div>
-                <div class="row">
-                    <a ng-hide="reviewsControllerModel.isfollowed" href=""
-                       class="btn btn-sm btn-default text-center"
-                       ng-click="reviewsControllerModel.followUser(reviewsControllerModel.userId)">Follow
-                    </a>
-                    <a ng-if="reviewsControllerModel.isfollowed" href=""
-                       class="btn btn-sm btn-warning"
-                       ng-click="reviewsControllerModel.unFollowUser(reviewsControllerModel.userId)">UnFollow
-                    </a>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="col-xs-12">
-            <div class="row" ng-repeat="review in reviewsControllerModel.reviews">
-                <div class="col-sm-3">
-                    <div class="text-center">
-                        <div class="thumbnail">
-                            <a href="#/detail/{{review.restaurant._id}}">
-                                <img class="img-responsive" ng-src="{{review.restaurant.imageUrl}}"/>
+                <div class="col-xs-3">
+                    <div class="row mar-user-top hidden-xs hidden-sm">
+                        <p class="lead">User:{{reviewsControllerModel.profileUser.username }}</p>
+                    </div>
+                    <div class="row visible-xs visible-sm">
+                        <p class="lead">User:{{reviewsControllerModel.profileUser.username }}</p>
+                    </div>
+                    <div class="row">
+                        <div class="hidden-xs">
+                            <a ng-hide="reviewsControllerModel.isfollowed" href=""
+                               class="btn btn-sm btn-default text-center"
+                               ng-click="reviewsControllerModel.followUser(reviewsControllerModel.userId)">Follow
                             </a>
-                            <div class="caption">
-                                <a href="#/detail/{{review.restaurant._id}}">{{review.restaurant.name}}</a>
-                            </div>
+                            <a ng-if="reviewsControllerModel.isfollowed" href=""
+                               class="btn btn-sm btn-warning"
+                               ng-click="reviewsControllerModel.unFollowUser(reviewsControllerModel.userId)">UnFollow
+                            </a>
+                        </div>
+                        <div class="visible-xs">
+                            <a ng-hide="reviewsControllerModel.isfollowed" href=""
+                               class="btn btn-xs btn-default text-center"
+                               ng-click="reviewsControllerModel.followUser(reviewsControllerModel.userId)">Follow
+                            </a>
+                            <a ng-if="reviewsControllerModel.isfollowed" href=""
+                               class="btn btn-xs btn-warning"
+                               ng-click="reviewsControllerModel.unFollowUser(reviewsControllerModel.userId)">UnFollow
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-9">
-                    <p class="lead">{{review.title}}</p>
-                    <p>{{review.review}}</p>
-                    <div class="row">
-                        <div class="col-xs-8">
-                            <p>
-                                <ng-rating ng-model="review.rating"
-                                           editable="false">
-                                </ng-rating>
-                                on {{review.updatedOn | date}}
-                            </p>
+            </div>
+            <hr>
+            <div class="col-xs-12">
+                <div class="row" ng-repeat="review in reviewsControllerModel.reviews">
+                    <div class="col-sm-3">
+                        <div class="text-center">
+                            <div class="thumbnail">
+                                <a href="#/detail/{{review.restaurant._id}}">
+                                    <img class="img-responsive" ng-src="{{review.restaurant.imageUrl}}"/>
+                                </a>
+                                <div class="caption">
+                                    <a href="#/detail/{{review.restaurant._id}}">{{review.restaurant.name}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="lead">{{review.title}}</p>
+                        <p>{{review.review}}</p>
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <p>
+                                    <ng-rating ng-model="review.rating"
+                                               editable="false">
+                                    </ng-rating>
+                                    on {{review.updatedOn | date}}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

@@ -308,6 +308,11 @@ footer {
     .hideit{
         display: none;
     }
+
+    .img-center{
+        padding-left: 50px;
+        text-align: center;
+    }
 }
 
 @media only screen and (max-width: 479px) {
@@ -451,6 +456,11 @@ footer {
     .mar-top-alert{
         margin-top: 10px;
     }
+
+    .img-center{
+        text-align: center;
+    }
+
 
 }
 
