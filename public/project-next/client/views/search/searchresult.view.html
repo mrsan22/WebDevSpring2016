@@ -32,13 +32,16 @@
                             <a href="#/detail/{{rest.id}}">{{rest.name}}</a>
                         </div>
                         <div class="row mar-left-md">
-                            <span><p>
+                            <p>
                             <img ng-src="{{rest.rating_img_url}}"/>
-                            {{rest.review_count}} Reviews
-                            </p></span>
+                            <!--{{rest.review_count}} Reviews-->
+                            </p>
+                        <!--<div class="row mar-left-md">-->
+                            <!--{{rest.review_count}} Reviews-->
+                        <!--</div>-->
                         </div>
                         <div class="row mar-left-md">
-                            <p>{{rest.categories[0][0]}} | {{rest.categories[1][0]}}</p>
+                            <p class="nowrap">{{rest.categories[0][0]}} | {{rest.categories[1][0]}}</p>
                         </div>
                         <div class="row mar-left-md hideit">
                             <p>{{rest.location.address[0]}}, {{rest.location.city}}</p>
@@ -47,7 +50,7 @@
                     </div>
                     <div class="hidinxs col-xs-3 col-sm-4 fnt-sz">
                         <p>{{rest.location.neighborhoods[0]}}</p>
-                        <p>{{rest.location.display_address[0]}}</p>
+                        <p class="nowrap">{{rest.location.display_address[0]}}</p>
                         <p>{{rest.location.city}},{{rest.location.state_code}}</p>
                     </div>
                 </div>

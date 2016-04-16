@@ -275,6 +275,15 @@ footer {
     margin-top: 5px;
 }
 
+.margin-as-h3{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
