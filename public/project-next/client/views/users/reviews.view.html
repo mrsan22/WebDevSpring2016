@@ -27,7 +27,30 @@
     <!--</button>-->
     <!-- Page Content -->
     <div id="page-content-wrapper">
-        <h1>Reviews</h1>
+        <!--<h1>Reviews</h1>-->
+        <div class="row">
+            <div class="col-xs-6">
+                <h2>Reviews</h2>
+            </div>
+            <div class="col-xs-2 text-center">
+                <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+            </div>
+            <div class="col-xs-3">
+                <div class="row mar-user-top">
+                   <p class="lead">Username:{{reviewsControllerModel.profileUser.username }}</p>
+                </div>
+                <div class="row">
+                    <a ng-hide="reviewsControllerModel.isfollowed" href=""
+                       class="btn btn-sm btn-default text-center"
+                       ng-click="reviewsControllerModel.followUser(reviewsControllerModel.userId)">Follow
+                    </a>
+                    <a ng-if="reviewsControllerModel.isfollowed" href=""
+                       class="btn btn-sm btn-warning"
+                       ng-click="reviewsControllerModel.unFollowUser(reviewsControllerModel.userId)">UnFollow
+                    </a>
+                </div>
+            </div>
+        </div>
         <hr>
         <div class="col-xs-12">
             <div class="row" ng-repeat="review in reviewsControllerModel.reviews">
