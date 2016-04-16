@@ -3,7 +3,10 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#/{{followersControllerModel.userId}}/profile">
+                <a ng-if="followersControllerModel.currentUser._id != followersControllerModel.profileUser._id">
+                    {{followersControllerModel.profileUser.username}} Profile</a>
+                <a ng-if="followersControllerModel.currentUser._id == followersControllerModel.profileUser._id"
+                   href="#/{{followersControllerModel.userId}}/profile">
                     {{followersControllerModel.profileUser.username}} Profile</a>
             </li>
             <li>
@@ -23,32 +26,74 @@
     <!-- /#sidebar-wrapper -->
 
     <!--<button ng-click="followersControllerModel.toggleMenu()"-->
-            <!--class="btn btn-default"-->
-            <!--id="menu-toggle">-->
-        <!--<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>-->
+    <!--class="btn btn-default"-->
+    <!--id="menu-toggle">-->
+    <!--<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>-->
     <!--</button>-->
     <!-- Page Content -->
     <div id="page-content-wrapper">
-        <h1>Followers</h1>
+        <!--<h1>Followers</h1>-->
+        <div class="row">
+            <div class="col-xs-6">
+                <h1>Followers</h1>
+            </div>
+            <div ng-if="followersControllerModel.currentUser._id != followersControllerModel.profileUser._id">
+                <div class="col-xs-3 img-center col-sm-2 text-center">
+                    <img src="//placehold.it/100" class="avatar img-circle hidden-sm hidden-xs" alt="avatar">
+                    <img src="//placehold.it/80" class="avatar img-circle visible-sm" alt="avatar">
+                    <img src="//placehold.it/70" class="avatar img-circle visible-xs" alt="avatar">
+                </div>
+                <div class="col-xs-3">
+                    <div class="row mar-user-top hidden-xs hidden-sm">
+                        <p class="lead">User:{{followersControllerModel.profileUser.username }}</p>
+                    </div>
+                    <div class="row visible-xs visible-sm">
+                        <p class="lead">User:{{followersControllerModel.profileUser.username }}</p>
+                    </div>
+                    <div class="row">
+                        <div class="hidden-xs">
+                            <a ng-hide="followersControllerModel.isfollowed" href=""
+                               class="btn btn-sm btn-default text-center"
+                               ng-click="followersControllerModel.followUser1(followersControllerModel.userId)">Follow
+                            </a>
+                            <a ng-if="followersControllerModel.isfollowed" href=""
+                               class="btn btn-sm btn-warning"
+                               ng-click="followersControllerModel.unFollowUser1(followersControllerModel.userId)">UnFollow
+                            </a>
+                        </div>
+                        <div class="visible-xs">
+                            <a ng-hide="followersControllerModel.isfollowed" href=""
+                               class="btn btn-xs btn-default text-center"
+                               ng-click="followersControllerModel.followUser1(followersControllerModel.userId)">Follow
+                            </a>
+                            <a ng-if="followersControllerModel.isfollowed" href=""
+                               class="btn btn-xs btn-warning"
+                               ng-click="followersControllerModel.unFollowUser1(followersControllerModel.userId)">UnFollow
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <hr>
         <div class="col-xs-12">
             <div class="row" ng-repeat="follower in followersControllerModel.followers">
                 <!--<div class="col-sm-3">-->
-                    <!--<p><img src="//placehold.it/100" class="avatar img-circle" alt="avatar"></p>-->
+                <!--<p><img src="//placehold.it/100" class="avatar img-circle" alt="avatar"></p>-->
 
-                    <!--<div ng-hide="follower.itsMe">-->
-                        <!--<a ng-hide="follower.isFollowed" href=""-->
-                                                     <!--ng-click="followersControllerModel.followUser(follower)">-->
-                        <!--<i title="Follow" class="fa fa-user-plus fa-lg"></i>-->
-                    <!--</a>-->
-                        <!--<a ng-if="follower.isFollowed" href=""-->
-                           <!--ng-click="followersControllerModel.unFollowUser(follower)">-->
-                            <!--<i title="UnFollow" class="fa fa-user-plus fa-lg orangecolor"></i>-->
-                        <!--</a></div>-->
+                <!--<div ng-hide="follower.itsMe">-->
+                <!--<a ng-hide="follower.isFollowed" href=""-->
+                <!--ng-click="followersControllerModel.followUser(follower)">-->
+                <!--<i title="Follow" class="fa fa-user-plus fa-lg"></i>-->
+                <!--</a>-->
+                <!--<a ng-if="follower.isFollowed" href=""-->
+                <!--ng-click="followersControllerModel.unFollowUser(follower)">-->
+                <!--<i title="UnFollow" class="fa fa-user-plus fa-lg orangecolor"></i>-->
+                <!--</a></div>-->
                 <!--</div>-->
                 <!--<div class="col-sm-6">-->
-                    <!--<a href="#/{{follower._id}}/view/profile"><p>{{follower.firstName}}&nbsp{{follower.lastName}}</p>-->
-                    <!--</a>-->
+                <!--<a href="#/{{follower._id}}/view/profile"><p>{{follower.firstName}}&nbsp{{follower.lastName}}</p>-->
+                <!--</a>-->
                 <!--</div>-->
                 <div class="media">
                     <a class="media-left" href="#">
@@ -56,7 +101,7 @@
                     </a>
                     <div class="media-body">
                         <h4 class="media-heading">
-                            <a href="#/{{follower._id}}/view/profile">
+                            <a href="#/{{follower._id}}/profile/reviews">
                                 <p>{{follower.firstName}}&nbsp{{follower.lastName}}</p>
                             </a>
                         </h4>
