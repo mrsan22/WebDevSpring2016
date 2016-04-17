@@ -11,6 +11,7 @@
             $scope.nextPage = nextPage;
             $scope.endIndex = 10;
             $scope.startIndex = -10;
+            $scope.hideButton = true;
 
             //
             if($scope.location){
@@ -30,6 +31,7 @@
                     function(response){
                         if(response.businesses.length == 0 || response.total == 0){
                             $scope.showWarningMsg = true;
+                            $scope.hideButton = true
                         }
                         console.log(response);
                         $scope.totalResponse = response.businesses.length;
@@ -37,18 +39,12 @@
                         if ($scope.totalResponse > 0) {
                             $scope.showNext = true;
                             $scope.showPrevious = false;
+                            $scope.hideButton = false;
                         }
                         $scope.$apply();
                     }
                 )
             }
-
-            //function clearVariables () {
-            //    $scope.endIndex = 10;
-            //    $scope.startIndex = -10;
-            //    $scope.showNext = true;
-            //    $scope.showPrevious = false;
-            //}
 
             function nextPage () {
                 console.log($scope.endIndex, $scope.totalResponse);
