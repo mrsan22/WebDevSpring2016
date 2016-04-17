@@ -201,6 +201,7 @@
                     .then(function (response) {
                         if (response.data) {
                             reviews[index].username=response.data.username;
+                            reviews[index].imgUrl = response.data.imgUrl;
                         }
                     },
                         function (error) {
