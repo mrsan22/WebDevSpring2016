@@ -11,19 +11,19 @@
             </li>
             <li>
                 <a href="#/{{followingControllerModel.userId}}/profile/reviews">
-                    <i class="fa fa-comments" aria-hidden="true"></i>Reviews</a>
+                    <i class="fa fa-comments" aria-hidden="true"></i> Reviews</a>
             </li>
             <li>
                 <a href="#/{{followingControllerModel.userId}}/profile/likes">
-                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>Likes</a>
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i> Likes</a>
             </li>
             <li>
                 <a href="#/{{followingControllerModel.userId}}/profile/followers">
-                    <i class="fa fa-users" aria-hidden="true"></i>Followers</a>
+                    <i class="fa fa-users" aria-hidden="true"></i> Followers</a>
             </li>
             <li ng-class="{'active': followingControllerModel.$location.url() == '/{{followingControllerModel.userId}}/profile/following'}">
                 <a href="#/{{followingControllerModel.userId}}/profile/following">
-                    <i class="fa fa-users" aria-hidden="true"></i>Following</a>
+                    <i class="fa fa-users" aria-hidden="true"></i> Following</a>
             </li>
         </ul>
     </div>
@@ -43,9 +43,15 @@
             </div>
             <div ng-if="followingControllerModel.currentUser._id != followingControllerModel.profileUser._id">
                 <div class="col-xs-3 img-center col-sm-2 text-center">
-                    <img src="//placehold.it/100" class="avatar img-circle hidden-sm hidden-xs" alt="avatar">
-                    <img src="//placehold.it/80" class="avatar img-circle visible-sm" alt="avatar">
-                    <img src="//placehold.it/70" class="avatar img-circle visible-xs" alt="avatar">
+                    <img ng-src="{{followingControllerModel.profileUser.imgUrl}}" 
+                         height="100" width="100"
+                         class="avatar img-circle hidden-sm hidden-xs" alt="avatar">
+                    <img ng-src="{{followingControllerModel.profileUser.imgUrl}}" 
+                         height="80" width="80"
+                         class="avatar img-circle visible-sm" alt="avatar">
+                    <img ng-src="{{followingControllerModel.profileUser.imgUrl}}"
+                         height="70" width="70"
+                         class="avatar img-circle visible-xs" alt="avatar">
                 </div>
                 <div class="col-xs-3">
                     <div class="row mar-user-top hidden-xs hidden-sm">
@@ -109,7 +115,10 @@
                 <!--</div>-->
                 <div class="media">
                     <a class="media-left" href="#">
-                        <img class="media-object img-circle" src="//placehold.it/100" alt="Generic placeholder image">
+                        <img class="media-object img-circle" 
+                             ng-src="{{following.imgUrl}}"
+                             height="100" width="100"
+                             alt="Generic placeholder image">
                     </a>
                     <div class="media-body">
                         <h4 class="media-heading">
