@@ -51,9 +51,14 @@ app.get('/hello', function(req, res){
   res.send('Hello World!');
 });
 
+var userModelAssignment = require("./public/assignment5/server/models/user.model.server.js")(uuid, db, mongoose);
+var userModelProject = require("./public/project-next/server/models/user.model.server.js")(uuid, db, mongoose);
+
+var securityService = require("./public/Common-service/security.js")(userModelAssignment, userModelProject);
+
 //Define require for other modules
-require("./public/assignment5/server/app.js")(app, uuid,db, mongoose);
+require("./public/assignment5/server/app.js")(app, uuid,db, mongoose, userModelAssignment, securityService);
 //For Project
-require("./public/project-next/server/app.js")(app, uuid,db, mongoose);
+require("./public/project-next/server/app.js")(app, uuid,db, mongoose, userModelProject, securityService);
 
 app.listen(port, ipaddress);

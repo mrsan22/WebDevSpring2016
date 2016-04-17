@@ -1,21 +1,23 @@
 "use strict";
 
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+//var passport = require('passport');
+//var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt-nodejs');
 //var mongoose = require('mongoose');
 
-module.exports = function(app, model) {
+module.exports = function(app, model, securityService) {
 
     //var userModel = require('./user.model.server.js');
     //var UserModel = userModel.getMongooseModel();
+
+    var passport = securityService.getPassport();
 
     //Declaration
     var auth = authorized;
     app.post("/api/assignment/login", findUserByCredentials);
     //app.get("/api/assignment/user?[username=username&password=password]", loginUser);
     //app.get("/api/assignment/user?[username=username]", findUserByUsername);
-    app.post("/api/assignment/user",passport.authenticate('local'),user);
+    app.post("/api/assignment/user",passport.authenticate('assignment'),user);
     app.get("/api/assignment/loggedin", loggedin);
     app.post("/api/assignment/logout", logout);
     app.post("/api/assignment/register", register);
@@ -30,32 +32,32 @@ module.exports = function(app, model) {
     app.post("/api/assignment/admin/user", auth,createUser);
 
     //Implementation of passport functions
-    passport.use(new LocalStrategy(localStrategy));
-    passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
-
-    function localStrategy(username, password, done){
-        model
-            .findUserByUsername(username)
-            .then(function (user) {
-                    //If the user exists, compare passwords with bcrypt.comapreSync
-                    if(user && bcrypt.compareSync(password, user.password)) {
-                        console.log("user found, logging in user");
-                        return done(null, user);
-
-                    }
-                    else{
-                        return done(null, false);//done(error, user)
-                    }
-                },
-                function (error) {
-                    if(error){
-                        return done(error);
-                    }
-                });
-
-    }
-
+    //passport.use(new LocalStrategy(localStrategy));
+    //passport.serializeUser(serializeUser);
+    //passport.deserializeUser(deserializeUser);
+    //
+    //function localStrategy(username, password, done){
+    //    model
+    //        .findUserByUsername(username)
+    //        .then(function (user) {
+    //                //If the user exists, compare passwords with bcrypt.comapreSync
+    //                if(user && bcrypt.compareSync(password, user.password)) {
+    //                    console.log("user found, logging in user");
+    //                    return done(null, user);
+    //
+    //                }
+    //                else{
+    //                    return done(null, false);//done(error, user)
+    //                }
+    //            },
+    //            function (error) {
+    //                if(error){
+    //                    return done(error);
+    //                }
+    //            });
+    //
+    //}
+    //
     function authorized (req, res, next) {
         if (!req.isAuthenticated()) {
             res.send(401);
@@ -63,25 +65,25 @@ module.exports = function(app, model) {
             next();
         }
     }
-
-    //encryption of cookie. What goes to client.
-    function serializeUser(user, done) {
-        done(null, user);
-    }
-
-    //decrypt cookie info
-    function deserializeUser(user, done) {
-        model
-            .findUserById(user._id)
-            .then(
-                function(user){
-                    done(null, user);
-                },
-                function(err){
-                    done(err, null);
-                }
-            );
-    }
+    //
+    ////encryption of cookie. What goes to client.
+    //function serializeUser(user, done) {
+    //    done(null, user);
+    //}
+    //
+    ////decrypt cookie info
+    //function deserializeUser(user, done) {
+    //    model
+    //        .findUserById(user._id)
+    //        .then(
+    //            function(user){
+    //                done(null, user);
+    //            },
+    //            function(err){
+    //                done(err, null);
+    //            }
+    //        );
+    //}
 
     //function to redirect call coming to '/api/assignment/user' path
     function user(req, res) {
@@ -157,7 +159,7 @@ module.exports = function(app, model) {
     }
 
     function loggedin(req, res){
-        res.send(req.isAuthenticated() ? req.user : null);
+        res.send(req.isAuthenticated() && req.user.type == 'assignment'? req.user : null);
     }
 
     function logout(req, res){

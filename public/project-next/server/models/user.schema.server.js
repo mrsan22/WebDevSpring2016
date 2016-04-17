@@ -18,6 +18,8 @@ module.exports = function(mongoose) {
 
         imgUrl:{type:String},
 
+        type:{type:String, default:"project"},
+
         role: {type:String,enum:["User","Admin"], default:"User"},
 
         followers:{type: [String], default: []},//Has userIds of those users which are followers of current user

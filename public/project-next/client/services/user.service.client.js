@@ -48,10 +48,14 @@
             return $http.post('/api/project/login', credentials);
         }
 
-
         function loginUser(username, password){
-            return $http.get('/api/project/user?username='+username+'&password='+password);
+            return $http.post("/api/project/user/login",{username:username, password:password});
         }
+
+
+        //function loginUser(username, password){
+        //    return $http.get('/api/project/user?username='+username+'&password='+password);
+        //}
 
         function findAllUsers(){
             return $http.get("/api/project/user");

@@ -155,6 +155,7 @@
         UserService
             .getCurrentUser()
             .then(function(response) {
+                console.log("User",response);
                 var currentUser = response.data;
                 if(currentUser) {
                     UserService.setCurrentUser(currentUser);

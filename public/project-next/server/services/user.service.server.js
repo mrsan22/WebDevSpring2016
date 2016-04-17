@@ -1,13 +1,18 @@
 "use strict";
-module.exports = function (app, model_user, model_rest) {
+module.exports = function (app, model_user, model_rest, securityService) {
 
     var multer = require('multer');
     var upload = multer({ dest: __dirname+'/../../../../public/uploads' });
+    var bcrypt = require('bcrypt-nodejs');
+
+    //var securityService = require("../../../Common-service/security.js")(model_user);
+    var passport = securityService.getPassport();
 
     //Declaration
     app.post("/api/project/register", register);
     app.get("/api/project/loggedin", loggedin);
     app.get("/api/project/user",user);
+    app.post("/api/project/user/login", passport.authenticate('project'),login);
     app.post("/api/project/login", findUserByCredentials);
     app.post("/api/project/logout", logout);
     app.put("/api/project/user/:userId", updateUserById);
@@ -42,6 +47,13 @@ module.exports = function (app, model_user, model_rest) {
         }
     }
 
+    function login(req, res){
+        var currentUser = req.user;
+        console.log("loggin in");
+        console.log(currentUser);
+        res.json(currentUser);
+    }
+
     function findUserByCredentials(req, res) {
         var credentials = req.body;
         model_user
@@ -63,10 +75,32 @@ module.exports = function (app, model_user, model_rest) {
 
     function register(req, res){
         var user = req.body;
-        model_user
-            .findUserByUsername(user.username)
+        console.log(user);
+        //model_user
+        //    .findUserByUsername(user.username)
+        //    .then(function (response) {
+        //            if(response == null){
+        //                return model_user.createUser(user);
+        //            }
+        //            else{
+        //                console.log("username already exists");
+        //                res.json(null);
+        //            }
+        //        },
+        //        function (error) {
+        //            res.send ("Error in finding user by username", error.statusText);
+        //        })
+        //    .then(function (response) {
+        //            req.session.currentUser = response;
+        //            res.json(response);
+        //        },
+        //        function (error) {
+        //            res.status (400).send ("Error inserting User Info in database", error.statusText);
+        //        });
+        model_user.findUserByUsername(user.username)
             .then(function (response) {
                     if(response == null){
+                        user.password = bcrypt.hashSync(user.password);
                         return model_user.createUser(user);
                     }
                     else{
@@ -77,9 +111,19 @@ module.exports = function (app, model_user, model_rest) {
                 function (error) {
                     res.send ("Error in finding user by username", error.statusText);
                 })
-            .then(function (response) {
-                    req.session.currentUser = response;
-                    res.json(response);
+            .then(function (user) {
+                    //req.session.currentUser = response;
+                    //res.json(response);
+                    if(user){
+                        req.login(user, function(err){
+                            if(err){
+                                res.status(400).send(err);
+                            }
+                            else{
+                                res.json(user);
+                            }
+                        });
+                    }
                 },
                 function (error) {
                     res.status (400).send ("Error inserting User Info in database", error.statusText);
@@ -87,7 +131,10 @@ module.exports = function (app, model_user, model_rest) {
     }
 
     function loggedin(req, res){
-        res.json(req.session.currentUser);
+        //res.json(req.session.currentUser);
+        console.log("loggedin");
+        console.log(req.user);
+        res.send(req.isAuthenticated() && req.user.type == 'project'? req.user : null);
     }
 
     function loginUser(req, res){
@@ -160,7 +207,7 @@ module.exports = function (app, model_user, model_rest) {
     }
 
     function logout(req, res){
-        req.session.destroy();
+        req.logOut();
         res.send(200);
     }
 
