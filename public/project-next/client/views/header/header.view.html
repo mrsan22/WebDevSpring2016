@@ -13,8 +13,12 @@
                ng-if="isProfile">
                 <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
             </a>
-            <a ng-if="currentUser" class="navbar-brand margin-set" href="#/searchhome">Eat'n'Review</a>
-            <a ng-if="!currentUser" class="navbar-brand margin-set" href="#/home">Eat'n'Review</a>
+            <a ng-if="currentUser"
+               class="navbar-brand margin-set"
+               href="#/searchhome"><i class="fa fa-cutlery" aria-hidden="true"></i> Eat'n'Review</a>
+            <a ng-if="!currentUser"
+               class="navbar-brand margin-set"
+               href="#/home"><i class="fa fa-cutlery" aria-hidden="true"></i> Eat'n'Review</a>
         </div>
         <div ng-hide="headerControllerModel.$location.url() == '/home' ||
                        headerControllerModel.$location.url() == '/admin/user' ||
@@ -47,29 +51,48 @@
                 <!--<a href="#/searchhome" class="margin-set2">Home</a>-->
                 <!--</li>-->
                 <li ng-show="headerControllerModel.$location.url() == '/searchhome'&& currentUser.role == 'admin'">
-                    <a href="#/admin/user" class="margin-set2"
+                    <a href="#/admin/user" class="margin-set2 hidden-xs">
+                        <i class="fa fa-user-secret" aria-hidden="true"></i>Admin</a>
+
+                    <a href="#/admin/user" class="margin-set2 visible-xs"
                        data-target="#navbar"
-                       data-toggle="collapse">Admin</a>
+                       data-toggle="collapse"><i class="fa fa-user-secret" aria-hidden="true"></i>Admin</a>
                 </li>
                 <li ng-hide="currentUser">
                     <a href="#/register"
-                       class="margin-set2"
+                       class="margin-set2 hidden-xs"><i class="fa fa-user-plus" aria-hidden="true"></i>Sign Up</a>
+
+                    <a href="#/register"
+                       class="margin-set2 visible-xs"
                        data-target="#navbar"
-                       data-toggle="collapse">Sign Up</a>
+                       data-toggle="collapse"><i class="fa fa-user-plus" aria-hidden="true"></i>Sign Up</a>
                 </li>
                 <li ng-hide="currentUser">
-                    <a href="#/login" class="margin-set2"
+                    <a href="#/login" class="margin-set2 hidden-xs">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i>Login</a>
+
+                    <a href="#/login" class="margin-set2 visible-xs"
                        data-target="#navbar"
-                       data-toggle="collapse">Login</a>
+                       data-toggle="collapse">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i>Login</a>
                 </li>
                 <li ng-show="currentUser">
-                    <a href="#/{{currentUser._id}}/profile">{{currentUser.username}}</a>
+                    <a href="#/{{currentUser._id}}/profile"
+                       data-target="#navbar"><i class="fa fa-user" aria-hidden="true"></i>{{currentUser.username}}</a>
+
+                    <a href="#/{{currentUser._id}}/profile"
+                       data-target="#navbar"
+                       class="visible-xs"
+                       data-toggle="collapse"><i class="fa fa-user" aria-hidden="true"></i>{{currentUser.username}}</a>
                 </li>
                 <li ng-hide="!currentUser"
                     ng-click="headerControllerModel.logOut()">
                     <a href=""
+                       class="hidden-xs"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
+                    <a href=""
+                       class="visible-xs"
                        data-target="#navbar"
-                       data-toggle="collapse">Logout</a>
+                       data-toggle="collapse"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
                 </li>
             </ul>
         </div>

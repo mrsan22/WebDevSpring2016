@@ -8,16 +8,20 @@
                     {{profileControllerModel.profileUser.username}} Profile</a>
             </li>
             <li ng-class="{'active': profileControllerModel.$location.url() == '/{{profileControllerModel.userId}}/profile/review'}">
-                <a href="#/{{profileControllerModel.userId}}/profile/reviews">Reviews</a>
+                <a href="#/{{profileControllerModel.userId}}/profile/reviews">
+                    <i class="fa fa-comments" aria-hidden="true"></i>Reviews</a>
             </li>
             <li ng-class="{'active': profileControllerModel.$location.url() == '/{{profileControllerModel.userId}}/profile/likes'}">
-                <a href="#/{{profileControllerModel.userId}}/profile/likes">Likes</a>
+                <a href="#/{{profileControllerModel.userId}}/profile/likes">
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>Likes</a>
             </li>
             <li ng-class="{'active': profileControllerModel.$location.url() == '/{{profileControllerModel.userId}}/profile/followers'}">
-                <a href="#/{{profileControllerModel.userId}}/profile/followers">Followers</a>
+                <a href="#/{{profileControllerModel.userId}}/profile/followers">
+                    <i class="fa fa-users" aria-hidden="true"></i>Followers</a>
             </li>
             <li ng-class="{'active': profileControllerModel.$location.url() == '/{{profileControllerModel.userId}}/profile/following'}">
-                <a href="#/{{profileControllerModel.userId}}/profile/following">Following</a>
+                <a href="#/{{profileControllerModel.userId}}/profile/following">
+                    <i class="fa fa-users" aria-hidden="true"></i>Following</a>
             </li>
         </ul>
     </div>
@@ -36,12 +40,14 @@
             </div>
             <div class="col-xs-3 text-center">
                 <a href="#/{{profileControllerModel.userId}}/profile/followers">
-                    <p class="lead follow-container">Follower</p></a>
+                    <p class="lead follow-container">
+                        <i class="fa fa-users" aria-hidden="true"></i>Follower</p></a>
                 <span>{{profileControllerModel.profileUser.followers.length}}</span>
             </div>
             <div class="col-xs-3 text-center">
                 <a href="#/{{profileControllerModel.userId}}/profile/following">
-                    <p class="lead follow-container">Following</p></a>
+                    <p class="lead follow-container">
+                        <i class="fa fa-users" aria-hidden="true"></i>Following</p></a>
                 <span>{{profileControllerModel.profileUser.following.length}}</span>
             </div>
         </div>

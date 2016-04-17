@@ -10,16 +10,20 @@
                     {{likeControllerModel.profileUser.username}} Profile</a>
             </li>
             <li>
-                <a href="#/{{likeControllerModel.userId}}/profile/reviews">Reviews</a>
+                <a href="#/{{likeControllerModel.userId}}/profile/reviews">
+                    <i class="fa fa-comments" aria-hidden="true"></i>Reviews</a>
             </li>
             <li ng-class="{'active': likeControllerModel.$location.url() == '/{{likeControllerModel.userId}}/profile/likes'}">
-                <a href="#/{{likeControllerModel.userId}}/profile/likes">Likes</a>
+                <a href="#/{{likeControllerModel.userId}}/profile/likes">
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>Likes</a>
             </li>
             <li>
-                <a href="#/{{likeControllerModel.userId}}/profile/followers">Followers</a>
+                <a href="#/{{likeControllerModel.userId}}/profile/followers">
+                    <i class="fa fa-users" aria-hidden="true"></i>Followers</a>
             </li>
             <li>
-                <a href="#/{{likeControllerModel.userId}}/profile/following">Following</a>
+                <a href="#/{{likeControllerModel.userId}}/profile/following">
+                    <i class="fa fa-users" aria-hidden="true"></i>Following</a>
             </li>
         </ul>
     </div>
