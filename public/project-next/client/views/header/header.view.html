@@ -26,20 +26,20 @@
              class="hidden-sm hidden-xs">
             <div class="col-sm-3 col-sm-offset-2">
                 <input ng-model="headerControllerModel.restname_header"
-                       class="form-control navsearch-margin margin-lft-searchbox"
+                       class="form-control input-sm navsearch-margin margin-lft-searchbox"
                        placeholder="Dosa Factory, Qdoba...(optional)">
             </div>
             <div class="col-sm-3 margin-lft-searchbox">
                 <div class="input-group">
                     <input type="text"
                            ng-model="headerControllerModel.location_header"
-                           class="form-control navsearch-margin"
+                           class="form-control input-sm navsearch-margin"
                            g-places-autocomplete
                            placeholder="Boston">
                     <div class="input-group-btn">
                         <button ng-click="headerControllerModel.callToSearch(headerControllerModel.restname_header,
                         headerControllerModel.location_header) "
-                                class="btn btn-primary navsearch-margin" type="button">
+                                class="btn btn-primary btn-sm navsearch-margin" type="button">
                             <i class="glyphicon glyphicon-search"></i></button>
                     </div>
                 </div>

@@ -67,8 +67,8 @@
                                     <i title="Unlike" class="fa fa-thumbs-o-up fa-2x orangecolor"></i></a>
                             </div>
 
-                            <div ng-if="!detailsControllerModel.currentUser">
-                                <a data-toggle="tooltip" data-placement="auto" title="Please login to Like!">
+                            <div ng-show="!detailsControllerModel.currentUser">
+                                <a data-toggle="tooltip" title="Please login to Like!">
                                     <i class="fa fa-thumbs-o-up fa-2x"></i>
                                 </a>
                             </div>

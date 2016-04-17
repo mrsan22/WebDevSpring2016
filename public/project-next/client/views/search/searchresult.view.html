@@ -26,31 +26,31 @@
                     <div class="col-xs-3 col-sm-3 text-center">
                         <a href="#/detail/{{rest.id}}"><img ng-src="{{rest.image_url}}"/></a>
                     </div>
-                    <div class="col-xs-6 col-sm-5 txtright fnt-sz">
+                    <div class="col-xs-6 col-sm-4 txtright fnt-sz">
                         <div class="row mar-left-md">
                             <i class="fa fa-cutlery" aria-hidden="true"></i>
                             <a href="#/detail/{{rest.id}}">{{rest.name}}</a>
                         </div>
-                        <div class="row mar-left-md">
-                            <p>
-                            <img ng-src="{{rest.rating_img_url}}"/>
-                            <!--{{rest.review_count}} Reviews-->
-                            </p>
                         <!--<div class="row mar-left-md">-->
-                            <!--{{rest.review_count}} Reviews-->
+                            <!--<p>-->
+                            <!--<img ng-src="{{rest.rating_img_url}}"/>-->
+                            <!--&lt;!&ndash;{{rest.review_count}} Reviews&ndash;&gt;-->
+                            <!--</p>-->
+                        <!--&lt;!&ndash;<div class="row mar-left-md">&ndash;&gt;-->
+                            <!--&lt;!&ndash;{{rest.review_count}} Reviews&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
                         <!--</div>-->
-                        </div>
                         <div class="row mar-left-md">
-                            <p class="nowrap">{{rest.categories[0][0]}} | {{rest.categories[1][0]}}</p>
+                            <small>{{rest.categories[0][0]}} | {{rest.categories[1][0]}}</small>
                         </div>
                         <div class="row mar-left-md hideit">
                             <p>{{rest.location.address[0]}}, {{rest.location.city}}</p>
                         </div>
-                        <!--<div class="row mar-left-md"><p>{{rest.display_phone}}</p></div>-->
+                        <div class="row mar-left-md"><small>{{rest.display_phone}}</small>></div>
                     </div>
-                    <div class="hidinxs col-xs-3 col-sm-4 fnt-sz">
+                    <div class="hidinxs col-xs-3 col-sm-5 fnt-sz">
                         <p>{{rest.location.neighborhoods[0]}}</p>
-                        <p class="nowrap">{{rest.location.display_address[0]}}</p>
+                        <p>{{rest.location.display_address[0]}}</p>
                         <p>{{rest.location.city}},{{rest.location.state_code}}</p>
                     </div>
                 </div>
