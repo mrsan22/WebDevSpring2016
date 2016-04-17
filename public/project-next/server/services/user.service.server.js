@@ -197,14 +197,16 @@ module.exports = function (app, model_user, model_rest) {
         var userObj = req.body;
         var profilePic = req.file;
 
-        var destination   = profilePic.destination;
-        var path          = profilePic.path;
-        var originalname  = profilePic.originalname;
-        var size          = profilePic.size;
-        var mimetype      = profilePic.mimetype;
-        var filename      = profilePic.filename;
+        if(profilePic) {
 
-        userObj.imgUrl = "/uploads/" + filename;
+            var destination = profilePic.destination;
+            var path = profilePic.path;
+            var originalname = profilePic.originalname;
+            var size = profilePic.size;
+            var mimetype = profilePic.mimetype;
+            var filename = profilePic.filename;
+            userObj.imgUrl = "/uploads/" + filename;
+        }
         model_user
             .updateUserById(userId, userObj)
             .then(function (response) {
