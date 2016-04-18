@@ -61,17 +61,19 @@
                 });
         }
 
-        function selectUser(userIndex){
-            selectedUserIndex = userIndex;
-            var selectUser = {
-                "_id" : vm.users[userIndex]._id,
-                "username" : vm.users[userIndex].username,
-                "password" : vm.users[userIndex].password,
-                "firstName": vm.users[userIndex].firstName,
-                "lastName": vm.users[userIndex].lastName,
-                "roles" : vm.users[userIndex].roles
-            };
-            vm.user = selectUser;
+        function selectUser(user){
+            //selectedUserIndex = userIndex;
+            //var selectUser = {
+            //    "_id" : vm.users[userIndex]._id,
+            //    "username" : vm.users[userIndex].username,
+            //    "password" : vm.users[userIndex].password,
+            //    "firstName": vm.users[userIndex].firstName,
+            //    "lastName": vm.users[userIndex].lastName,
+            //    "roles" : vm.users[userIndex].roles
+            //};
+            //vm.user = selectUser;
+            var editUser = angular.copy(user);
+            vm.user = editUser;
         }
 
         function updateUser(userObj){
@@ -80,7 +82,7 @@
                 .updateUserById(userObj._id, userObj)
                 .then(function (response) {
                     console.log("Response",response.data);
-                    if (selectedUserIndex >= 0 && response.data != null) {
+                    if (response.data != null) {
                         vm.users[selectedUserIndex] = response.data;
                         vm.user = {};
                         selectedUserIndex = -1;
@@ -94,9 +96,9 @@
                 });
         }
 
-        function deleteUser(userIndex){
+        function deleteUser(user){
             UserService
-                .deleteUserById(vm.users[userIndex]._id)
+                .deleteUserById(user._id)
                 .then(function (response) {
                     vm.users = response.data;
 

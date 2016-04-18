@@ -39,12 +39,10 @@ module.exports = function (userAssignmentModel, userProjectModel) {
 
     function projectStrategy(username, password, done) {
         userProjectModel
-            .findUserByUsername(username)
+            .findUserByCredentials({username:username, password:password})
             .then(
                 function (user) {
-                    if (user && bcrypt.compareSync(password, user.password)) {
-                        console.log("I am here project");
-                        console.log(user);
+                    if (user) {
                         return done(null, user);
                     } else {
                         return done(null, false);
@@ -58,18 +56,18 @@ module.exports = function (userAssignmentModel, userProjectModel) {
             );
     }
 
+    //encrypt user. What goes to client
     function serializeUser(user, done) {
         done(null, user);
     }
 
+    //decrypt. what comes from client
     function deserializeUser(user, done) {
         if(user.type === 'assignment'){
             userAssignmentModel
                 .findUserById(user._id)
                 .then(
                     function (user) {
-                        console.log("desearliaze assignment user");
-                        console.log(user);
                         done(null, user);
                     },
                     function (err) {
@@ -83,8 +81,6 @@ module.exports = function (userAssignmentModel, userProjectModel) {
                 .findUserById(user._id)
                 .then(
                     function (user) {
-                        console.log("desearliaze projecr user");
-                        console.log(user);
                         done(null, user);
                     },
                     function (err) {

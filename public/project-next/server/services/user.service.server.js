@@ -100,7 +100,7 @@ module.exports = function (app, model_user, model_rest, securityService) {
         model_user.findUserByUsername(user.username)
             .then(function (response) {
                     if(response == null){
-                        user.password = bcrypt.hashSync(user.password);
+                        //user.password = bcrypt.hashSync(user.password);
                         return model_user.createUser(user);
                     }
                     else{
