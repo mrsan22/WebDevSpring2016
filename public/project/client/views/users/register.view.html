@@ -1,6 +1,18 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-11 col-md-offset-0">
+            <div class="errorBox text-center">
+                <div ng-if="registerControllerModel.showError"
+                     role="alert"
+                     class="alert alert-danger">
+                    <strong>Username already exists/Few fields are empty!</strong> Please choose different username.
+                </div>
+                <div ng-if="registerControllerModel.showGenralError"
+                     role="alert"
+                     class="alert alert-danger">
+                    <strong>Ohh...Snap!!</strong> Something went wrong...Try registering again.
+                </div>
+            </div>
             <h2 class="page-header col-sm-offset-1 col-sm-10 text-center"> Create your Account</h2>
             <p class="col-sm-offset-1 col-sm-10 text-center lead">Eat'n'Review leads you to places you'll love</p>
             <form class="form-horizontal">
@@ -111,28 +123,6 @@
                     </div>
                 </div>
             </form>
-            <div ng-if="registerControllerModel.showError"
-                 role="alert"
-                 class="alert alert-danger alert-dismissible">
-                <button type="button"
-                        class="close btn-xs"
-                        data-dismiss="alert"
-                        aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <strong>Username already exists/Few fields are empty!</strong> Please choose different username.
-            </div>
-            <div ng-if="registerControllerModel.showGenralError"
-                 role="alert"
-                 class="alert alert-danger alert-dismissible">
-                <button type="button"
-                        class="close btn-xs"
-                        data-dismiss="alert"
-                        aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <strong>Ohh...Snap!!</strong> Something went wrong...Try registering again.
-            </div>
         </div>
     </div>
 </div>

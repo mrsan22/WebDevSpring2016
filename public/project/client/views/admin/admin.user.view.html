@@ -1,101 +1,107 @@
- <div class="col-sm-10 col-sm-offset-1 col-md-11 main col-md-offset-1">
-            <h1 class="page-header">User Admin</h1>
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Password</th>
-                            <th>FirstName</th>
-                            <th>LastName</th>
-                            <th>Email</th>
-                            <th> Role</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <input type="text"
-                                       ng-disabled="adminUserModel.disableUsername"
-                                       ng-model = "adminUserModel.user.username"
-                                       class="form-control text"
-                                       placeholder="username"/>
-                            </td>
-                            <td>
-                                <input type="password"
-                                       ng-model = "adminUserModel.user.password"
-                                       class="form-control"
-                                       placeholder="password"/>
-                            </td>
-                            <td>
-                                <input type="text"
-                                       ng-model = "adminUserModel.user.firstName"
-                                       class="form-control"
-                                       placeholder="firstname"/>
-                            </td>
-                            <td>
-                                <input type="text"
-                                       ng-model = "adminUserModel.user.lastName"
-                                       class="form-control"
-                                       placeholder="lastname"/>
-                            </td>
-                            <td>
-                                <input type="text"
-                                       ng-model = "adminUserModel.user.email"
-                                       class="form-control"
-                                       placeholder="email"/>
-                            </td>
-                            <td>
-                                <select ng-model="adminUserModel.user.role"
-                                        class="form-control"
-                                        ng-options="role.value as role.name for role in adminUserModel.roles">
-                                </select>
-                            </td>
-                            <td class="nowrap">
-                                <button ng-click="adminUserModel.addUser(adminUserModel.user)"
-                                        class="btn btn-sm btn-success">Add</button>
-                                <button ng-click="adminUserModel.updateUser(adminUserModel.user)"
-                                        class="btn btn-sm btn-primary">Update</button>
-                            </td>
-                        </tr>
-                        <tr ng-repeat="user in adminUserModel.users">
-                            <td>{{user.username}}</td>
-                            <td>*****</td>
-                            <td>{{user.firstName}}</td>
-                            <td>{{user.lastName}}</td>
-                            <td>{{user.email}}</td>
-                            <td>{{user.role}}</td>
-                            <td class="nowrap">
-                                <button ng-click="adminUserModel.deleteUser($index)"
-                                        class="btn btn-sm btn-danger">Delete</button>
-                                <button ng-click="adminUserModel.selectUser($index)"
-                                        class="btn btn-sm btn-info">Select</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div ng-if="adminUserModel.userError"
-                     role="alert"
-                     class="alert alert-danger alert-dismissible">
-                    <button type="button"
-                            class="close btn-xs"
-                            data-dismiss="alert"
-                            aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+<div class="col-sm-10 col-sm-offset-1 col-md-11 main col-md-offset-1">
+    <div class="errorBox text-center">
+        <div ng-if="adminUserModel.userError"
+             role="alert"
+             class="alert alert-danger alert-dismissible">
+            <button type="button"
+                    class="close btn-xs"
+                    data-dismiss="alert"
+                    aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Username already present!</strong> Please choose a different username.
+        </div>
+        <div ng-if="adminUserModel.createUserError"
+             role="alert"
+             class="alert alert-danger alert-dismissible">
+            <button type="button"
+                    class="close btn-xs"
+                    data-dismiss="alert"
+                    aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Required fields are missing values.</strong> Username, password and role are required fields.
+        </div>
+    </div>
+    <h1 class="page-header">User Admin</h1>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>Password</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th> Role</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <input type="text"
+                           ng-disabled="adminUserModel.disableUsername"
+                           ng-model="adminUserModel.user.username"
+                           class="form-control text"
+                           placeholder="username"/>
+                </td>
+                <td>
+                    <input type="password"
+                           ng-model="adminUserModel.user.password"
+                           class="form-control"
+                           placeholder="password"/>
+                </td>
+                <td>
+                    <input type="text"
+                           ng-model="adminUserModel.user.firstName"
+                           class="form-control"
+                           placeholder="firstname"/>
+                </td>
+                <td>
+                    <input type="text"
+                           ng-model="adminUserModel.user.lastName"
+                           class="form-control"
+                           placeholder="lastname"/>
+                </td>
+                <td>
+                    <input type="text"
+                           ng-model="adminUserModel.user.email"
+                           class="form-control"
+                           placeholder="email"/>
+                </td>
+                <td>
+                    <select ng-model="adminUserModel.user.role"
+                            class="form-control"
+                            ng-options="role.value as role.name for role in adminUserModel.roles">
+                    </select>
+                </td>
+                <td class="nowrap">
+                    <button ng-click="adminUserModel.addUser(adminUserModel.user)"
+                            class="btn btn-sm btn-success">Add
                     </button>
-                    <strong>Username already present!</strong> Please choose a different username.
-                </div>
-                <div ng-if="adminUserModel.createUserError"
-                     role="alert"
-                     class="alert alert-danger alert-dismissible">
-                    <button type="button"
-                            class="close btn-xs"
-                            data-dismiss="alert"
-                            aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button ng-click="adminUserModel.updateUser(adminUserModel.user)"
+                            class="btn btn-sm btn-primary">Update
                     </button>
-                    <strong>Required fields are missing values.</strong> Username, password and role are required fields.
-                </div>
-            </div>
- </div>
+                </td>
+            </tr>
+            <tr ng-repeat="user in adminUserModel.users">
+                <td>{{user.username}}</td>
+                <td>*****</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.role}}</td>
+                <td class="nowrap">
+                    <button ng-click="adminUserModel.deleteUser($index)"
+                            class="btn btn-sm btn-danger">Delete
+                    </button>
+                    <button ng-click="adminUserModel.selectUser($index)"
+                            class="btn btn-sm btn-info">Select
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

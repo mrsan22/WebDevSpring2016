@@ -288,6 +288,9 @@ footer {
     margin-top: 10px;
 }
 
+.errorBox{
+    padding-top: 5px;
+}
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 @media only screen and (min-width: 480px) and (max-width: 767px) {

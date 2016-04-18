@@ -28,14 +28,15 @@
         //}
         function register(userObj){
             if(!validateUser(userObj)){
+                console.log("user non valid");
                 vm.showGenralError = true;
                 return;
             }
-            vm.showGenralError=false;
             UserService
                 .createUser(userObj)
                 .then(function (response) {
                     var currentUser = response.data;
+                    console.log(response.data);
                     if(currentUser != null){
                         vm.showError = false;
                         UserService.setCurrentUser(currentUser);
