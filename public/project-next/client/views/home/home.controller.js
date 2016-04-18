@@ -11,6 +11,7 @@
         vm.getLocation = getLocation;
         vm.showPosition = showPosition;
         vm.showError = showError;
+        vm.errorShow = false;
 
         //Contains code that we want to execute as soon as the controller loads
         function init(){
@@ -30,10 +31,12 @@
                 YelpService.findRestbyNameLocation(
                     restname,
                     location.formatted_address,
-                    function(response){
-                        vm.data = response;
-                        $location.url('/search/restname='+restname+'&location='+location.formatted_address);
-                        $scope.$apply();
+                    function(response) {
+                        if (response) {
+                            vm.data = response;
+                            $location.url('/search/restname=' + restname + '&location=' + location.formatted_address);
+                            $scope.$apply();
+                        }
                     }
                 )
             }

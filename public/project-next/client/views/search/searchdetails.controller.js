@@ -28,6 +28,11 @@
             vm.restId = $routeParams.restId;
             $('[data-toggle="tooltip"]').tooltip();
 
+            $scope.$on('$stateChangeSuccess', function () {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            });
+
             YelpService.findRestDetailsbyId(
                 vm.restId,
                 function(response){
