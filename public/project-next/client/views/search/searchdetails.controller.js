@@ -4,7 +4,7 @@
         .module("Eat'n'Review")
         .controller("DetailController", DetailController);
 
-    function DetailController($scope, $routeParams, YelpService, ReviewService, UserService, $q, RestService){
+    function DetailController($scope, $routeParams, YelpService, ReviewService, UserService, $rootScope, RestService){
         var vm = this;
         vm.addReview = addReview;
         vm.deleteReview = deleteReview;
@@ -28,9 +28,8 @@
             vm.restId = $routeParams.restId;
             $('[data-toggle="tooltip"]').tooltip();
 
-            $scope.$on('$stateChangeSuccess', function () {
-                document.body.scrollTop = 0;
-                document.documentElement.scrollTop = 0;
+            $rootScope.$on("$routeChangeSuccess", function(){
+                window.scrollTo(0,0);
             });
 
             YelpService.findRestDetailsbyId(
