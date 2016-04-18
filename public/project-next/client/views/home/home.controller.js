@@ -32,6 +32,7 @@
                     restname,
                     location.formatted_address,
                     function(response) {
+                        console.log(response);
                         if (response) {
                             vm.data = response;
                             $location.url('/search/restname=' + restname + '&location=' + location.formatted_address);

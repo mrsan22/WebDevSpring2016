@@ -31,7 +31,7 @@
                     function(response){
                         if(response.businesses.length == 0 || response.total == 0){
                             $scope.showWarningMsg = true;
-                            $scope.hideButton = true
+                            $scope.hideButton = true;
                         }
                         console.log(response);
                         $scope.totalResponse = response.businesses.length;

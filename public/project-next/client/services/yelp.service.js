@@ -52,7 +52,8 @@
                 'dataType': 'jsonp',
                 'jsonpCallback': 'cb',
                 success: callback,
-                error:function(){
+                error:function(textStatus){
+                    console.log(textStatus);
                     console.log("Error when search with YelpService.findRestByLocation");
                 }
             });
