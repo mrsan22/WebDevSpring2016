@@ -11,6 +11,7 @@
         vm.getLocation = getLocation;
         vm.showPosition = showPosition;
         vm.showError = showError;
+        vm.errorShow = false;
 
         //Contains code that we want to execute as soon as the controller loads
         function init(){
@@ -22,14 +23,21 @@
 
         //Implement event handler
         function callSearch(restname, location){
+            if(!location || location == null){
+                vm.showLocationWarning = true;
+                return;
+            }
             if(typeof location != 'string'){
                 YelpService.findRestbyNameLocation(
                     restname,
                     location.formatted_address,
-                    function(response){
-                        vm.data = response;
-                        $location.url('/search/restname='+restname+'&location='+location.formatted_address);
-                        $scope.$apply();
+                    function(response) {
+                        console.log(response);
+                        if (response) {
+                            vm.data = response;
+                            $location.url('/search/restname=' + restname + '&location=' + location.formatted_address);
+                            $scope.$apply();
+                        }
                     }
                 )
             }

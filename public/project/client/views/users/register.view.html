@@ -111,6 +111,21 @@
                     </div>
                 </div>
             </form>
+            <div ng-if="registerControllerModel.showError"
+                 role="alert"
+                 class="alert alert-danger">
+                <strong>Username already exists/Few fields are empty!</strong>Please choose different username.
+            </div>
+            <div ng-if="registerControllerModel.showError"
+                 role="alert"
+                 class="alert alert-danger">
+                <strong>Username already exists/Few fields are empty!</strong>Please choose different username.
+            </div>
+            <div ng-if="registerControllerModel.showGenralError"
+                 role="alert"
+                 class="alert alert-danger">
+                <strong>Ohh...Snap!!</strong>Something went wrong...Try registering again.
+            </div>
         </div>
     </div>
 </div>

@@ -23,7 +23,7 @@
             var parameters = [];
             parameters.push(['term', restname]);
             parameters.push(['location', location]);
-            parameters.push(['limit', 10]);
+            parameters.push(['limit', 20]);
             parameters.push(['category_filter', 'restaurants']);
             parameters.push(['callback', 'angular.callbacks._0']);
             parameters.push(['oauth_consumer_key', auth.consumerKey]);
@@ -52,7 +52,8 @@
                 'dataType': 'jsonp',
                 'jsonpCallback': 'cb',
                 success: callback,
-                error:function(){
+                error:function(textStatus){
+                    console.log(textStatus);
                     console.log("Error when search with YelpService.findRestByLocation");
                 }
             });
@@ -71,7 +72,7 @@
             parameters.push(['oauth_token', auth.accessToken]);
             parameters.push(['oauth_signature_method', 'HMAC-SHA1']);
             var message = {
-                'action': 'http://api.yelp.com/v2/business/'+restId,
+                'action': encodeURI('http://api.yelp.com/v2/business/'+restId),
                 'method': 'GET',
                 'parameters': parameters
             };

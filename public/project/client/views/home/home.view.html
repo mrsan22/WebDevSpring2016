@@ -3,7 +3,7 @@
             <div class="row col-xs-12 searchbox width-colxs12 widthxsscreen">
                 <div class="col-sm-5 col-md-5">
                     <input ng-model="homeControllerModel.restname" type="text"
-                           class="form-control margin-searchbox"
+                           class="form-control margin-searchbox auto-size"
                            placeholder="Food (optional)"/>
                 </div>
                     <div class="col-sm-5 col-md-5">
@@ -14,17 +14,30 @@
                             </span>
                         <input ng-model="homeControllerModel.loc"
                                g-places-autocomplete
-                               class="form-control margin-searchbox"
+                               class="form-control margin-searchbox auto-size"
                                placeholder="Boston"/>
+                        </div>
+                        <div ng-if="homeControllerModel.showLocationWarning"
+                             role="alert"
+                             class="alert alert-warning alert-dismissible">
+                            <button type="button"
+                                    class="close btn-xs"
+                                    data-dismiss="alert"
+                                    aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <strong>Location!</strong> is required!.
                         </div>
                     </div>
                 <div class="col-sm-2 col-md-2">
                     <button ng-click="homeControllerModel.callSearch(homeControllerModel.restname,homeControllerModel.loc)"
-                            class="btn btn-info btn-block">Find</button>
+                            class="btn btn-info btn-block find-btn auto-size">Find</button>
                 </div>
             </div>
+        <!--<div class=" row col-lg-offset-2 col-lg-12  col-md-12 col-md-offset-1 col-sm-12 col-sm-offset-1 small-caption">-->
+            <!--<h4 class="lead">One place for best food reviews on local flavors!</h4>-->
+        <!--</div>-->
     </div>
-
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -36,34 +49,39 @@
         <div class="item active">
             <img class="banner1" src="/project/client/images/food_1920x800.jpg" alt="Slide 1" />
             <div class="carousel-caption">
-                <h3>Search favorite food place in your neighborhood</h3>
+                <h3 class="font-s">Search favorite food place in your neighborhood</h3>
             </div>
         </div>
         <div class="item">
             <img class="banner2" src="/project/client/images/taco_1920x800.jpg" alt="Slide 2" />
             <div class="carousel-caption">
-                <h3>Search favorite food place in your neighborhood</h3>
+                <h3 class="font-s">Search favorite food place in your neighborhood</h3>
             </div>
         </div>
         <div class="item">
-            <img class="banner3" src="/project/client/images/banner3.jpg" alt="Slide 3" />
+            <img class="banner3" src="/project/client/images/coffee_1920x1080.jpg" alt="Slide 3" />
             <div class="carousel-caption">
-                <h3>Search favorite food place in your neighborhood</h3>
+                <h3 class="font-s">Search favorite food place in your neighborhood</h3>
             </div>
         </div>
     </div>
+</div>
+<div ng-if="homeControllerModel.errorShow"
+     role="alert"
+     class="alert alert-warning">
+    <strong>Ohh..Snap..No Response!</strong>Try changing food/place name.
 </div>
 
 <div class="container">
     <div class="row">
         <div class="col-lg-12 text-center home-pad">
-            <h3 class="page-header lead">Browse by popular cuisine</h3>
+            <h3 class="page-header marg-top lead">Browse by popular cuisine</h3>
         </div>
 
         <div class="col-sm-3 col-xs-6 img-hover">
             <a href="#/search/restname=Thai&location=Boston">
-                <img class="img-responsive portfolio-item" src="http://lorempixel.com/500/300/food/1/" alt="">
-                <div class="carousel-caption">
+                <img class="img-responsive portfolio-item" src="/project/client/images/thai1.jpg" alt="">
+                <div class="carousel-caption no-margin-left">
                     <h4>Thai</h4>
                 </div>
             </a>
@@ -71,8 +89,8 @@
 
         <div class="col-sm-3 col-xs-6 img-hover">
             <a href="#/search/restname=Chinese&location=Boston">
-                <img class="img-responsive portfolio-item" src="http://lorempixel.com/500/300/food/8/" alt="">
-                <div class="carousel-caption">
+                <img class="img-responsive portfolio-item" src="/project/client/images/chinese.jpg" alt="">
+                <div class="carousel-caption no-margin-left">
                     <h4 class="txtcolor">Chinese</h4>
                 </div>
             </a>
@@ -80,8 +98,8 @@
 
         <div class="col-sm-3 col-xs-6 img-hover">
             <a href="#/search/restname=Mexican&location=Boston">
-                <img class="img-responsive portfolio-item" src="http://lorempixel.com/500/300/food/3/" alt="">
-                <div class="carousel-caption">
+                <img class="img-responsive portfolio-item" src="/project/client/images/taco.jpg" alt="">
+                <div class="carousel-caption no-margin-left">
                     <h4>Mexican</h4>
                 </div>
             </a>
@@ -89,8 +107,8 @@
 
         <div class="col-sm-3 col-xs-6 img-hover">
             <a href="#/search/restname=Indian&location=Boston">
-                <img class="img-responsive portfolio-item" src="http://lorempixel.com/500/300/food/5/" alt="">
-                <div class="carousel-caption">
+                <img class="img-responsive portfolio-item" src="/project/client/images/indian.JPG" alt="">
+                <div class="carousel-caption no-margin-left">
                     <h4>Indian</h4>
                 </div>
             </a>
@@ -108,8 +126,8 @@
 
         <div class="col-sm-3 col-xs-6 img-hover">
             <a href="#/search/location=San Fransisco">
-                <img class="img-responsive portfolio-item" src="http://lorempixel.com/500/300/city/9/" alt="">
-                <div class="carousel-caption">
+                <img class="img-responsive portfolio-item" src="/project/client/images/SFO.jpg" alt="">
+                <div class="carousel-caption no-margin-left">
                     <h4>San Fransisco</h4>
                 </div>
             </a>
@@ -117,8 +135,8 @@
 
         <div class="col-sm-3 col-xs-6 img-hover">
             <a href="#/search/location=New York">
-                <img class="img-responsive portfolio-item" src="http://lorempixel.com/500/300/city/3/" alt="">
-                <div class="carousel-caption">
+                <img class="img-responsive portfolio-item" src="/project/client/images/NY.jpg" alt="">
+                <div class="carousel-caption no-margin-left">
                     <h4>New York</h4>
                 </div>
             </a>
@@ -126,8 +144,8 @@
 
         <div class="col-sm-3 col-xs-6 img-hover">
             <a href="#/search/location=Los Angeles">
-                <img class="img-responsive portfolio-item" src="http://lorempixel.com/500/300/city/2/" alt="">
-                <div class="carousel-caption">
+                <img class="img-responsive portfolio-item" src="/project/client/images/LA.jpg" alt="">
+                <div class="carousel-caption no-margin-left">
                     <h4>Los Angeles</h4>
                 </div>
             </a>
@@ -135,8 +153,8 @@
 
         <div class="col-sm-3 col-xs-6 img-hover">
             <a href="#/search/location=Chicago">
-                <img class="img-responsive portfolio-item" src="http://lorempixel.com/500/300/city/4/" alt="">
-                <div class="carousel-caption">
+                <img class="img-responsive portfolio-item" src="/project/client/images/chicago.jpg" alt="">
+                <div class="carousel-caption no-margin-left">
                     <h4>Chicago</h4>
                 </div>
             </a>

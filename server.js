@@ -52,13 +52,13 @@ app.get('/hello', function(req, res){
 });
 
 var userModelAssignment = require("./public/assignment5/server/models/user.model.server.js")(uuid, db, mongoose);
-var userModelProject = require("./public/project-next/server/models/user.model.server.js")(uuid, db, mongoose);
+var userModelProject = require("./public/project/server/models/user.model.server.js")(uuid, db, mongoose);
 
 var securityService = require("./public/Common-service/security.js")(userModelAssignment, userModelProject);
 
 //Define require for other modules
 require("./public/assignment5/server/app.js")(app, uuid,db, mongoose, userModelAssignment, securityService);
 //For Project
-require("./public/project-next/server/app.js")(app, uuid,db, mongoose, userModelProject, securityService);
+require("./public/project/server/app.js")(app, uuid,db, mongoose, userModelProject, securityService);
 
 app.listen(port, ipaddress);

@@ -12,19 +12,24 @@
 
 
         var api = {
-            findPopularRestByLocation: findPopularRestByLocation
+            findPopularRestByLocation: findPopularRestByLocation,
+            findPopularRestDefault: findPopularRestDefault
         };
         return api;
 
-        function findPopularRestByLocation(callback){
-            var apiUrl = "https://api.foursquare.com/v2/venues/explore?client_id="+client_id+"&client_secret="+client_secret+"" +
-                "&v=20130815&ll=40.7,-74&section=food&limit=6&venuePhotos=1";
+        function findPopularRestByLocation(latlon){
+            var apiUrl = "https://api.foursquare.com/v2/venues/explore?client_id=" +
+                ""+client_id+"&client_secret="+client_secret+"" +
+                "&v=20130815&ll="+latlon+"&section=food&limit=6&venuePhotos=1";
+            return $http.get(apiUrl);
 
-            $http.get(apiUrl)
-                .success(callback)
-                .error(function(){
-                   console.log("Error from foursquare API");
-                });
+        }
+
+        function findPopularRestDefault(){
+            var apiUrl = "https://api.foursquare.com/v2/venues/explore?client_id=" +
+                ""+client_id+"&client_secret="+client_secret+"" +
+                "&v=20130815&ll=42.33,-71.15&section=food&limit=6&venuePhotos=1";
+            return $http.get(apiUrl);
 
         }
     }

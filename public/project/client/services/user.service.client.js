@@ -19,8 +19,17 @@
             createAndFindAllUsers : createAndFindAllUsers,
             deleteUserById : deleteUserById,
             updateUserById : updateUserById,
-            //updateUserByIdNoSession: updateUserByIdNoSession,
-            logOut : logOut
+            updateUserByIdNoSession: updateUserByIdNoSession,
+            logOut : logOut,
+            addLike: addLike,
+            isLiked: isLiked,
+            unLike: unLike,
+            followUser: followUser,
+            isFollowed: isFollowed,
+            unFollowUser: unFollowUser,
+            getFollowersDetails: getFollowersDetails,
+            getFollowingDetails: getFollowingDetails,
+            getLikesforUser: getLikesforUser
         };
 
         return userServiceApi;
@@ -39,10 +48,14 @@
             return $http.post('/api/project/login', credentials);
         }
 
-
         function loginUser(username, password){
-            return $http.get('/api/project/user?username='+username+'&password='+password);
+            return $http.post("/api/project/user/login",{username:username, password:password});
         }
+
+
+        //function loginUser(username, password){
+        //    return $http.get('/api/project/user?username='+username+'&password='+password);
+        //}
 
         function findAllUsers(){
             return $http.get("/api/project/user");
@@ -69,9 +82,9 @@
 
         }
 
-        //function updateUserByIdNoSession(userId, user){
-        //    return $http.put("/api/project/userupdate/"+userId, user);
-        //}
+        function updateUserByIdNoSession(userId, user){
+            return $http.put("/api/project/userupdate/"+userId, user);
+        }
 
         function logOut(){
             return $http.post("/api/project/logout");
@@ -81,7 +94,41 @@
             return $http.post("/api/project/admin-user", user);
         }
 
+        function addLike(restId, userId){
+            return $http.put("/api/project/user/"+userId+"/rest/"+restId+"/like");
+        }
 
+        function isLiked(restId, userId){
+            return $http.get("/api/project/user/"+userId+"/rest/"+restId+"/isLiked");
+        }
+
+        function unLike(restId, userId){
+            return $http.delete("/api/project/user/"+userId+"/rest/"+restId+"/unLike");
+        }
+
+        function followUser(userId, currentUserId){
+            return $http.put("/api/project/user/"+currentUserId+"/follows/"+userId);
+        }
+
+        function isFollowed(userId, currentUserId){
+            return $http.get("/api/project/user/"+userId+"/followedBy/"+currentUserId);
+        }
+
+        function unFollowUser(userId, currentUserId){
+            return $http.delete("/api/project/user/"+currentUserId+"/unfollows/"+userId);
+        }
+
+        function getFollowersDetails(userId){
+            return $http.get("/api/project/user/getFollowersDetails/"+userId);
+        }
+
+        function getFollowingDetails(userId){
+            return $http.get("/api/project/user/getFollowingDetails/"+userId);
+        }
+
+        function getLikesforUser(userId){
+            return $http.get("/api/project/user/getLikeDetails/"+userId);
+        }
     }
 
 })();

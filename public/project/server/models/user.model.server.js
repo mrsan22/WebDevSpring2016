@@ -1,9 +1,15 @@
 // Model is the module that will receive the db instance and will make connection to databases to access the information
 
 //Making the mock data available in server side user model
-var mock_users = require("./user.mock.json");
+//var mock_users = require("./user.mock.json");
 
-module.exports = function(uuid) {
+module.exports = function(uuid,db, mongoose) {
+
+    //load user schema
+    var UserSchema = require("./user.schema.server.js")(mongoose);
+
+    //create low level mongoose user model
+    var UserModel = mongoose.model('EatnReview.user', UserSchema);
 
     var api = {
         createUser : createUser,
@@ -14,101 +20,136 @@ module.exports = function(uuid) {
         findAllUsers : findAllUsers,
         findUserByUsername : findUserByUsername,
         deleteUserById : deleteUserById,
-        createAndFindAllUsers : createAndFindAllUsers
+        addLike : addLike,
+        isLiked: isLiked,
+        unLike: unLike,
+        followers: followers,
+        following: following,
+        isFollowed: isFollowed,
+        removeFromFollowers: removeFromFollowers,
+        removeFromFollowing: removeFromFollowing,
+        getFollowersDetails: getFollowersDetails,
+        getFollowingDetails: getFollowingDetails
     };
 
     return api;
 
     function createUser(user){
-        for(var i=0;i<mock_users.length;i++){
-            if (mock_users[i].username == user.username){
-                return null;
-            }
-        }
-        user["_id"] = uuid.v1();
-        mock_users.push(user);
-        return user;
+        return UserModel.create(user);
     }
 
     function loginUser(username, password) {
-        for(var u in mock_users){
-            if(mock_users[u].username == username &&
-                mock_users[u].password == password){
-                console.log("User exists, returning found user");
-                return mock_users[u];
+        return UserModel.findOne(
+            {
+                'username': username,
+                'password': password
             }
-        }
-        // user not found
-        console.log("user does not exist, returning null");
-        return null;
+        );
     }
 
     function updateUserById(userid, userObj){
-        for (var each in mock_users){
-            if (mock_users[each]._id == userid){
-                mock_users[each] = userObj;
-                return;
+        delete userObj._id;
+        return UserModel.update(
+            {'_id': userid},
+            {
+                $set: userObj
             }
-        }
+        );
     }
 
     function findUserById(userid){
-        for(var u in mock_users){
-            if(mock_users[u]._id == userid){
-                return mock_users[u];
-            }
-        }
-        // user not found
-        console.log("user not found by Id, returning null");
-        return null;
+        return UserModel.findById({'_id': userid});
     }
 
-    function findUserByUsername(username){
-        for(var u in mock_users){
-            if(mock_users[u].username == username){
-                return mock_users[u];
-            }
-        }
-        // user not found
-        console.log("user not found by username, returning null");
-        return null;
+    function findUserByUsername(username) {
+        return UserModel.findOne({'username': username});
     }
 
     function findUserByCredentials(credentials) {
-        for(var u in mock_users){
-            if(mock_users[u].username == credentials.username &&
-                mock_users[u].password == credentials.password){
-                console.log("User exists, returning found user");
-                return mock_users[u];
+        return UserModel.findOne(
+            {
+                'username': credentials.username,
+                'password': credentials.password
             }
-        }
-        // user not found
-        console.log("user does not exist, returning null");
-        return null;
+        );
     }
 
     function findAllUsers(){
-        return mock_users;
+        return UserModel.find();
     }
 
     function deleteUserById(userId){
-        for (var each in mock_users){
-            if (mock_users[each]._id == userId){
-                mock_users.splice(each,1);
-                return;
-            }
-        }
+        return UserModel.remove({'_id': userId});
     }
 
-    function createAndFindAllUsers(user){
-        for(var i=0;i<mock_users.length;i++){
-            if (mock_users[i].username == user.username){
-                return null;
+    function addLike(userId, restId){
+        return UserModel.update(
+            {'_id': userId},
+            {
+                $addToSet :{'likes':restId}
             }
-        }
-        user["_id"] = uuid.v1();
-        mock_users.push(user);
-        return mock_users;
+        );
     }
+
+    function isLiked(userId, restId){
+        return UserModel.findOne({_id: userId, likes: {$in: [restId]}});
+    }
+    function unLike(userId, restId){
+        return UserModel.update(
+            {'_id':userId},
+            {
+                $pullAll: {likes: [restId]}
+            }
+        );
+    }
+
+    function followers(userId, currentUserId){
+        return UserModel.update(
+            {'_id': userId},
+            {
+                $addToSet :{'followers':currentUserId}
+            }
+        );
+    }
+
+    function following(userId, currentUserId){
+        return UserModel.update(
+            {'_id': currentUserId},
+            {
+                $addToSet :{'following':userId}
+            }
+        );
+    }
+
+    function isFollowed(userId, currentUserId){
+        return UserModel.findOne({_id: userId, followers: {$in: [currentUserId]}});
+    }
+
+    function removeFromFollowers(userId, currentUserId){
+        return UserModel.update(
+            {'_id':userId},
+            {
+                $pullAll: {followers: [currentUserId]}
+            }
+        );
+    }
+
+    function removeFromFollowing(userId, currentUserId){
+        return UserModel.update(
+            {'_id':currentUserId},
+            {
+                $pullAll: {following: [userId]}
+            }
+        );
+    }
+
+    function getFollowersDetails(followersList){
+        return UserModel.find({'_id':{$in:followersList}});
+    }
+
+    function getFollowingDetails(followingList){
+        return UserModel.find({'_id':{$in:followingList}});
+    }
+
 
 };

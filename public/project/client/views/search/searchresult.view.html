@@ -1,64 +1,80 @@
-<!--<div class="container">-->
-    <!--<h3>Search Results</h3>-->
-    <!--<div class="table-responsive" ng-controller="SearchController">-->
-        <!--<table class="table table-striped">-->
-            <!--<thead>-->
-            <!--<tr>-->
-                <!--<th>Restaurant ID</th>-->
-                <!--<th>Name</th>-->
-                <!--<th>Ratings</th>-->
-                <!--<th>Image</th>-->
-            <!--</tr>-->
-            <!--</thead>-->
-            <!--<tbody>-->
-            <!--<tr ng-repeat="rest in data.businesses">-->
-                <!--<td>{{rest.id}}</td>-->
-                <!--<td>-->
-                    <!--<a href="#/detail/{{rest.id}}">{{rest.name}}</a>-->
-                <!--</td>-->
-                <!--<td><img ng-src="{{rest.rating_img_url}}"/></td>-->
-                <!--<td><img ng-src="{{rest.image_url}}"/></td>-->
-            <!--</tr>-->
-            <!--</tbody>-->
-        <!--</table>-->
-    <!--</div>-->
-<!--</div>-->
 <div class="container">
     <div class="row text-center">
         <div class="col-xs-6 col-sm-6">
-            <p class="lead">Best Restaurant in Boston</p>
+            <p class="lead">Browsing {{location}} food places</p>
         </div>
         <div class="col-xs-6 col-sm-6">
-            <p class="lead">Showing 1-10 of 100</p>
+            <p class="lead">Showing {{endIndex-9}}-{{totalResponse>10
+                ? endIndex-10-startIndex: totalResponse}} of {{totalResponse}}</p>
         </div>
     </div>
-    <div class="row" ng-repeat="rest in data.businesses" ng-if="$index >= 1">
-        <hr>
-        <div class="col-xs-3 col-sm-2 text-center">
-            <img ng-src="{{rest.image_url}}"/>
-        </div>
-        <div class="col-xs-6 col-sm-5 txtright">
-            <div class="row">{{$index}}. <a href="#/detail/{{rest.id}}">{{rest.name}}</a></div>
-            <div class="row"><p><img ng-src="{{rest.rating_img_url}}"/> {{rest.review_count}} Reviews</p></div>
-            <div class="row"><p>{{rest.categories[0][0]}} | {{rest.categories[1][0]}}</p></div>
-            <div class="row visible-xs"><p>{{rest.location.address[0]}}, {{rest.location.city}}</p></div>
-            <div class="row"><i class="fa fa-bookmark"></i> Save</div>
-        </div>
-        <div class="hidinxs col-xs-3 col-sm-5 text-center">
-            <p>{{rest.location.neighborhoods[0]}}</p>
-            <p>{{rest.location.display_address[0]}}</p>
-            <p>{{rest.location.display_address[2]}}</p>
-            <p>{{rest.display_phone}}</p>
-        </div>
+    <div ng-if="showWarningMsg"
+         role="alert"
+         class="alert alert-warning alert-dismissible">
+        <button type="button"
+                class="close btn-xs"
+                data-dismiss="alert"
+                aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>No Results!</strong> Try changing food or restaurant name!
     </div>
     <div class="row">
-        <hr>
-        <div class="col-xs-3">
-            <p>Page 1 of 10</p>
+        <div class="col-sm-6" ng-repeat="rest in data.businesses|limitTo:endIndex |limitTo:startIndex">
+            <div class="row">
+                <hr>
+                <div class="col-xs-3 col-sm-3 text-center">
+                    <a href="#/detail/{{rest.id}}"><img ng-src="{{rest.image_url}}"/></a>
+                </div>
+                <div class="col-xs-6 col-sm-4 txtright fnt-sz">
+                    <div class="row mar-left-md">
+                        <i class="fa fa-cutlery" aria-hidden="true"></i>
+                        <a href="#/detail/{{rest.id}}">{{rest.name}}</a>
+                    </div>
+                    <!--<div class="row mar-left-md">-->
+                    <!--<p>-->
+                    <!--<img ng-src="{{rest.rating_img_url}}"/>-->
+                    <!--&lt;!&ndash;{{rest.review_count}} Reviews&ndash;&gt;-->
+                    <!--</p>-->
+                    <!--&lt;!&ndash;<div class="row mar-left-md">&ndash;&gt;-->
+                    <!--&lt;!&ndash;{{rest.review_count}} Reviews&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--</div>-->
+                    <div class="row mar-left-md">
+                        <small>{{rest.categories[0][0]}}</small>
+                    </div>
+                    <div class="row mar-left-md hideit">
+                        <p>{{rest.location.address[0]}}, {{rest.location.city}}</p>
+                    </div>
+                    <div class="row mar-left-md">
+                        <small>{{rest.display_phone}}</small>
+                    </div>
+                </div>
+                <div class="hidinxs col-xs-3 col-sm-5 fnt-sz">
+                    <p>{{rest.location.neighborhoods[0]}}</p>
+                    <p>{{rest.location.display_address[0]}}</p>
+                    <p>{{rest.location.city}},{{rest.location.state_code}}</p>
+                </div>
+            </div>
         </div>
-        <div class="col-xs-9 text-right">
-            <p>1 2 3 4 5 6 Next ></p>
-        </div>
+    </div>
+
+    <div class="row">
         <hr>
+        <div ng-hide="hideButton">
+            <div class="col-xs-6 col-sm-6">
+                <a class="btn btn-sm btn-default btn-color" href=""
+                   ng-click="previousPage()"
+                   ng-disabled="showPrevious == false || totalResponse <= 10">
+                    <i class="fa fa-long-arrow-left" aria-hidden="true"></i> Previous</a>
+            </div>
+
+            <div class="col-xs-6 col-sm-6">
+                <a class="btn btn-sm btn-default pull-right btn-color" href=""
+                   ng-click="nextPage()"
+                   ng-disabled="showNext == false || totalResponse <= 10">
+                    Next <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+            </div>
+        </div>
     </div>
 </div>
