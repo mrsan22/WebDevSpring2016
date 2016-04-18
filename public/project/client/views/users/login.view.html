@@ -44,7 +44,13 @@
             </form>
             <div ng-if="loginControllerModel.showError"
                  role="alert"
-                 class="alert alert-danger">
+                 class="alert alert-danger alert-dismissible">
+                <button type="button"
+                        class="close btn-xs"
+                        data-dismiss="alert"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 <strong>Incorrect username/password!</strong>Try entering correct userid/password.
             </div>
         </div>

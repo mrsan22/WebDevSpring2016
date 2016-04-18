@@ -15,9 +15,10 @@
 
         function login(user){
             if(!user){
+                vm.showError=true;
                 return;
             }
-            console.log(user);
+            vm.showError=false;
             UserService
                 .loginUser(user.username, user.password)
                 //response is a promise returned by the client user service. promise is fullfilled,

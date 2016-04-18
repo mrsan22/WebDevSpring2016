@@ -36,19 +36,22 @@
         //Implementation of event handler
         function addUser(userObj){
             if (!userObj || !userObj.username || !userObj.password || !userObj.role){
-                alert("Some field is missing value");
+                //alert("Some field is missing value");
+                vm.createUserError = true;
                 return;
             }
+            vm.createUserError = false;
             UserService
                 .createAndFindAllUsers(userObj)
                 .then(function (response) {
-                    console.log("New user added",response.data);
                     if (response.data != null) {
                         vm.users = response.data;
                         vm.user = {};
+                        vm.userError = false;
                     }
                     else{
-                        alert("Username already exists!");
+                        //alert("Username already exists!");
+                        vm.userError = true;
                     }
 
                 }, function (error) {
@@ -59,20 +62,19 @@
         function updateUser(userObj){
             console.log(userObj);
             if(!userObj || !userObj.username || !userObj.password || !userObj.role){
-                alert("Some field is missing value");
                 return;
             }
+            vm.disableUsername = false;
             UserService
                 .updateUserByIdNoSession(userObj._id, userObj)
                 .then(function (response) {
-                    console.log("Response",response.data);
                     if (selectedUserIndex >= 0 && response.data != null) {
                         vm.users[selectedUserIndex] = response.data;
                         vm.user = {};
                         selectedUserIndex = -1;
                     }
                     else{
-                        alert("Username already exists. Please choose a different username!");
+                        //alert("Username already exists. Please choose a different username!");
                     }
 
                 }, function (error) {

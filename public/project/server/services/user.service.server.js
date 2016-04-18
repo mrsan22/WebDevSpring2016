@@ -291,9 +291,10 @@ module.exports = function (app, model_user, model_rest, securityService) {
                     })
                 .then(function (response) {
                         if (response != null) {
-                            if (req.session.currentUser._id == userid) {
-                                req.session.currentUser = response;
-                            }
+                            //if (req.session.currentUser._id == userid) {
+                            //    req.session.currentUser = response;
+                            //}
+                            console.log(response);
                             res.json(response);
                         }
                         else {
@@ -508,8 +509,8 @@ module.exports = function (app, model_user, model_rest, securityService) {
     }
 
     function isAdmin(user){
-        if(user.roles.indexOf("admin") > -1){
-            console.log(user);
+        if(user.role == 'Admin'){
+
             return true;
         }
         else{

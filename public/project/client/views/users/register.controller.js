@@ -35,10 +35,9 @@
             UserService
                 .createUser(userObj)
                 .then(function (response) {
-                    console.log(response);
                     var currentUser = response.data;
-                    console.log("dsfawefsd",currentUser);
                     if(currentUser != null){
+                        vm.showError = false;
                         UserService.setCurrentUser(currentUser);
                         //vm.$location.url('/currentUser._id/profile');
                         vm.$location.url('/searchhome');
@@ -61,7 +60,6 @@
                 flag = flag && user.username;
                 flag = flag && user.password;
                 flag = flag && user.firstName;
-                flag = flag && user.city;
                 flag = flag && user.lastName;
                 flag = flag && user.email;
 

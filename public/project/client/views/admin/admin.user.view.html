@@ -75,5 +75,27 @@
                         </tr>
                     </tbody>
                 </table>
+                <div ng-if="adminUserModel.userError"
+                     role="alert"
+                     class="alert alert-danger alert-dismissible">
+                    <button type="button"
+                            class="close btn-xs"
+                            data-dismiss="alert"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Username already present!</strong> Please choose a different username.
+                </div>
+                <div ng-if="adminUserModel.createUserError"
+                     role="alert"
+                     class="alert alert-danger alert-dismissible">
+                    <button type="button"
+                            class="close btn-xs"
+                            data-dismiss="alert"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Required fields are missing values.</strong> Username, password and role are required fields.
+                </div>
             </div>
  </div>
