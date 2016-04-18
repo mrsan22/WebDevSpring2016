@@ -50,7 +50,7 @@
                 <!--<li ng-if="currentUser">-->
                 <!--<a href="#/searchhome" class="margin-set2">Home</a>-->
                 <!--</li>-->
-                <li ng-show="headerControllerModel.$location.url() == '/searchhome'&& currentUser.role == 'Admin'">
+                <li ng-show="currentUser.role == 'Admin'">
                     <a href="#/admin/user" class="margin-set2 hidden-xs">
                         <i class="fa fa-wrench" aria-hidden="true"></i> Admin</a>
 

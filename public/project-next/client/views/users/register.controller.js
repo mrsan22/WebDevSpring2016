@@ -27,6 +27,11 @@
         //        })
         //}
         function register(userObj){
+            if(!validateUser(userObj)){
+                vm.showGenralError = true;
+                return;
+            }
+            vm.showGenralError=false;
             UserService
                 .createUser(userObj)
                 .then(function (response) {
@@ -47,6 +52,29 @@
                     function (error) {
                         console.log(error.statusText);
                     })
+        }
+
+        function validateUser(user) {
+            var flag = true;
+
+            if (user) {
+                flag = flag && user.username;
+                flag = flag && user.password;
+                flag = flag && user.firstName;
+                flag = flag && user.city;
+                flag = flag && user.lastName;
+                flag = flag && user.email;
+
+                if (user.password == user.vpassword)
+                    flag = flag && true;
+                else
+                    flag = flag && false;
+            }
+            else {
+                flag = flag && false;
+            }
+
+            return flag;
         }
     }
 })();
