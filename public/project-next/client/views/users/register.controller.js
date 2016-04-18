@@ -32,6 +32,7 @@
                 .then(function (response) {
                     console.log(response);
                     var currentUser = response.data;
+                    console.log("dsfawefsd",currentUser);
                     if(currentUser != null){
                         UserService.setCurrentUser(currentUser);
                         //vm.$location.url('/currentUser._id/profile');
@@ -39,6 +40,7 @@
                     }
                     else{
                         //promise fullfilled, inpsite of getting a null response.
+                        vm.showError = true;
                     }
 
                 },

@@ -22,8 +22,6 @@ module.exports = function (userAssignmentModel, userProjectModel) {
             .then(
                 function (user) {
                     if (user && bcrypt.compareSync(password, user.password)) {
-                        console.log("I am here assignment");
-                        console.log(user);
                         return done(null, user);
                     } else {
                         return done(null, false);

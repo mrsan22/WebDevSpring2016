@@ -35,6 +35,7 @@
                     }
                 },  //called if promise fails
                     function (error) {
+                        vm.showError = true;
                         console.log(error.statusText);
                     });
         }

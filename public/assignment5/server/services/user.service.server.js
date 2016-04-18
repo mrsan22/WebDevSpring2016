@@ -262,7 +262,7 @@ module.exports = function(app, model, securityService) {
                     });
         }
         else{
-            res.status(403).send("Not authorized to be admin", error.statusText);
+            res.status(403).send("Not authorized to be admin");
         }
 
     }

@@ -9,17 +9,18 @@ module.exports = function (app, model_user, model_rest, securityService) {
     var passport = securityService.getPassport();
 
     //Declaration
+    var auth  = authorized;
     app.post("/api/project/register", register);
     app.get("/api/project/loggedin", loggedin);
-    app.get("/api/project/user",user);
+    app.get("/api/project/user",auth, user);
     app.post("/api/project/user/login", passport.authenticate('project'),login);
     app.post("/api/project/login", findUserByCredentials);
     app.post("/api/project/logout", logout);
     app.put("/api/project/user/:userId", updateUserById);
     app.get("/api/project/user/:userid", findUserById);
-    app.delete("/api/project/user/:userid", deleteUserById);
-    app.post("/api/project/admin-user", createAndFindAllUsers);
-    app.put("/api/project/userupdate/:userId",updateUserByIdNoSession);
+    app.delete("/api/project/user/:userid", auth, deleteUserById);
+    app.post("/api/project/admin-user", auth, createAndFindAllUsers);
+    app.put("/api/project/userupdate/:userId",auth, updateUserByIdNoSession);
     app.put("/api/project/user/:userId/rest/:restId/like", addLike);
     app.get("/api/project/user/:userId/rest/:restId/isLiked", isLiked);
     app.delete("/api/project/user/:userId/rest/:restId/unLike", unLike);
@@ -47,10 +48,16 @@ module.exports = function (app, model_user, model_rest, securityService) {
         }
     }
 
+    function authorized (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else {
+            next();
+        }
+    }
+
     function login(req, res){
         var currentUser = req.user;
-        console.log("loggin in");
-        console.log(currentUser);
         res.json(currentUser);
     }
 
@@ -76,35 +83,12 @@ module.exports = function (app, model_user, model_rest, securityService) {
     function register(req, res){
         var user = req.body;
         console.log(user);
-        //model_user
-        //    .findUserByUsername(user.username)
-        //    .then(function (response) {
-        //            if(response == null){
-        //                return model_user.createUser(user);
-        //            }
-        //            else{
-        //                console.log("username already exists");
-        //                res.json(null);
-        //            }
-        //        },
-        //        function (error) {
-        //            res.send ("Error in finding user by username", error.statusText);
-        //        })
-        //    .then(function (response) {
-        //            req.session.currentUser = response;
-        //            res.json(response);
-        //        },
-        //        function (error) {
-        //            res.status (400).send ("Error inserting User Info in database", error.statusText);
-        //        });
         model_user.findUserByUsername(user.username)
             .then(function (response) {
                     if(response == null){
-                        //user.password = bcrypt.hashSync(user.password);
                         return model_user.createUser(user);
                     }
                     else{
-                        console.log("username already exists");
                         res.json(null);
                     }
                 },
@@ -131,9 +115,6 @@ module.exports = function (app, model_user, model_rest, securityService) {
     }
 
     function loggedin(req, res){
-        //res.json(req.session.currentUser);
-        console.log("loggedin");
-        console.log(req.user);
         res.send(req.isAuthenticated() && req.user.type == 'project'? req.user : null);
     }
 
@@ -226,7 +207,7 @@ module.exports = function (app, model_user, model_rest, securityService) {
                 })
             .then(function (response) {
                     if(response != null) {
-                        req.session.currentUser = response;
+                        //req.session.currentUser = response;
                         res.json(response);
                     }
                     else{
@@ -283,71 +264,81 @@ module.exports = function (app, model_user, model_rest, securityService) {
 
     //For admin
     function updateUserByIdNoSession(req, res){
-        var userid = req.params.userId;
-        var userObj = req.body;
-        model_user
-            .findUserByUsername(userObj.username)
-            .then(function (response) {
-                    if(response == null|| response.username == userObj.username){
-                        return model_user.updateUserById(userid, userObj);
-                    }
-                    else{
-                        console.log("username already exists");
-                        res.json(null);
-                    }
-                },
-                function (error) {
-                    res.send ("Error in finding user by username", error.statusText);
-                })
-            .then(function (response) {
-                    //console.log(response);
-                    //res.send(200);
-                    return model_user.findUserById(userid);
-                },
-                function (error) {
-                    res.status (400).send ("Error in updating user by Id", error.statusText);
-                })
-            .then(function (response) {
-                    if(response != null) {
-                        if(req.session.currentUser._id == userid) {
-                            req.session.currentUser = response;
+        if(isAdmin(req.user)) {
+            var userid = req.params.userId;
+            var userObj = req.body;
+            model_user
+                .findUserByUsername(userObj.username)
+                .then(function (response) {
+                        if (response == null || response.username == userObj.username) {
+                            return model_user.updateUserById(userid, userObj);
                         }
-                        res.json(response);
-                    }
-                    else{
-                        console.log("User not found by Id after updating the user, returning null");
-                        res.json(null);
-                    }
-                },
-                function (error) {
-                    res.status (400).send ("Error in findUserById function after updating the user", error.statusText);
-                });
+                        else {
+                            console.log("username already exists");
+                            res.json(null);
+                        }
+                    },
+                    function (error) {
+                        res.send("Error in finding user by username", error.statusText);
+                    })
+                .then(function (response) {
+                        //console.log(response);
+                        //res.send(200);
+                        return model_user.findUserById(userid);
+                    },
+                    function (error) {
+                        res.status(400).send("Error in updating user by Id", error.statusText);
+                    })
+                .then(function (response) {
+                        if (response != null) {
+                            if (req.session.currentUser._id == userid) {
+                                req.session.currentUser = response;
+                            }
+                            res.json(response);
+                        }
+                        else {
+                            console.log("User not found by Id after updating the user, returning null");
+                            res.json(null);
+                        }
+                    },
+                    function (error) {
+                        res.status(400).send("Error in findUserById function after updating the user", error.statusText);
+                    });
+        }
+        else{
+            res.status(403).send("Not authorized to be admin");
+        }
     }
 
     function deleteUserById(req, res){
-        var userId = req.params.userid;
-        model_user
-            .deleteUserById(userId)
-            .then(function (response) {
-                    //res.send(200);
-                    return model_user.findAllUsers();
-                },
-                function (error) {
-                    res.status (400).send ("Error in deleting user by Id", error.statusText);
-                })
-            //Accepting the response from model.findAllUsers to return remaining set of users.
-            .then(function (response) {
-                    if(response != null) {
-                        res.json(response);
-                    }
-                    else{
-                        console.log("User collection is empty");
-                        res.json(null);
-                    }
-                },
-                function (error) {
-                    res.status (400).send ("Error in findAllUsers function", error.statusText);
-                });
+        if(isAdmin(req.user)) {
+            var userId = req.params.userid;
+            model_user
+                .deleteUserById(userId)
+                .then(function (response) {
+                        //res.send(200);
+                        return model_user.findAllUsers();
+                    },
+                    function (error) {
+                        res.status(400).send("Error in deleting user by Id", error.statusText);
+                    })
+                //Accepting the response from model.findAllUsers to return remaining set of users.
+                .then(function (response) {
+                        if (response != null) {
+                            res.json(response);
+                        }
+                        else {
+                            console.log("User collection is empty");
+                            res.json(null);
+                        }
+                    },
+                    function (error) {
+                        res.status(400).send("Error in findAllUsers function", error.statusText);
+                    });
+        }
+        else{
+            res.status(403).send("Not authorized to be admin");
+        }
     }
 
     function addLike(req, res){
@@ -516,44 +507,55 @@ module.exports = function (app, model_user, model_rest, securityService) {
             })
     }
 
+    function isAdmin(user){
+        if(user.roles.indexOf("admin") > -1){
+            console.log(user);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     //For admin
     function createAndFindAllUsers(req, res){
         var user = req.body;
-        //users = model.createAndFindAllUsers(user);
-        //res.send(users);
-        model_user
-            .findUserByUsername(user.username)
-            .then(function (response) {
-                    if(response == null){
-                        return model_user.createUser(user);
-                    }
-                    else{
-                        console.log("username already exists");
-                        res.json(null);
-                    }
-                },
-                function (error) {
-                    res.send ("Error in finding user by username", error.statusText);
-                })
-            .then(function (response) {
-                    //req.session.currentUser = response;
-                    //res.json(response);
-                    return model_user.findAllUsers();
-                },
-                function (error) {
-                    res.status (400).send ("Error inserting User Info in database", error.statusText);
-                })
-            .then(function (response) {
-                    if(response != null) {
-                        res.json(response);
-                    }
-                    else{
-                        console.log("User collection is empty");
-                        res.json(null);
-                    }
-                },
-                function (error) {
-                    res.status (400).send ("Error in findAllUsers function", error.statusText);
-                });
+        if(isAdmin(req.user)) {
+            model_user
+                .findUserByUsername(user.username)
+                .then(function (response) {
+                        if (response == null) {
+                            return model_user.createUser(user);
+                        }
+                        else {
+                            console.log("username already exists");
+                            res.json(null);
+                        }
+                    },
+                    function (error) {
+                        res.send("Error in finding user by username", error.statusText);
+                    })
+                .then(function (response) {
+                        return model_user.findAllUsers();
+                    },
+                    function (error) {
+                        res.status(400).send("Error inserting User Info in database", error.statusText);
+                    })
+                .then(function (response) {
+                        if (response != null) {
+                            res.json(response);
+                        }
+                        else {
+                            console.log("User collection is empty");
+                            res.json(null);
+                        }
+                    },
+                    function (error) {
+                        res.status(400).send("Error in findAllUsers function", error.statusText);
+                    });
+        }
+        else{
+            res.status(403).send("Not authorized to be admin");
+        }
     }
 };

@@ -52,11 +52,11 @@
                 <!--</li>-->
                 <li ng-show="headerControllerModel.$location.url() == '/searchhome'&& currentUser.role == 'Admin'">
                     <a href="#/admin/user" class="margin-set2 hidden-xs">
-                        <i class="fa fa-user-secret" aria-hidden="true"></i> Admin</a>
+                        <i class="fa fa-wrench" aria-hidden="true"></i> Admin</a>
 
                     <a href="#/admin/user" class="margin-set2 visible-xs"
                        data-target="#navbar"
-                       data-toggle="collapse"><i class="fa fa-user-secret" aria-hidden="true"></i> Admin</a>
+                       data-toggle="collapse"><i class="fa fa-wrench" aria-hidden="true"></i> Admin</a>
                 </li>
                 <li ng-hide="currentUser">
                     <a href="#/register"
@@ -78,6 +78,7 @@
                 </li>
                 <li ng-show="currentUser">
                     <a href="#/{{currentUser._id}}/profile"
+                       class="hidden-xs"
                        data-target="#navbar"><i class="fa fa-user" aria-hidden="true"></i> {{currentUser.username}}</a>
 
                     <a href="#/{{currentUser._id}}/profile"

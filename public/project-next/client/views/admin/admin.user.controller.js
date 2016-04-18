@@ -24,6 +24,7 @@
                 .findAllUsers()
                 .then(function (response) {
                     vm.users = response.data;
+                    console.log(vm.users);
                 },
                     function (error) {
                         console.log(error.statusText);
@@ -80,11 +81,15 @@
         }
 
         function selectUser(userIndex){
+            vm.disableUsername = true;
             selectedUserIndex = userIndex;
             var selectUser = {
                 "_id" : vm.users[userIndex]._id,
                 "username" : vm.users[userIndex].username,
                 "password" : vm.users[userIndex].password,
+                "firstName" : vm.users[userIndex].firstName,
+                "lastName" : vm.users[userIndex].lastName,
+                "email" : vm.users[userIndex].email,
                 "role" : vm.users[userIndex].role
             };
             vm.user = selectUser;

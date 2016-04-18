@@ -98,7 +98,7 @@
                 controller : "AdminController",
                 controllerAs : "adminUserModel",
                 resolve : {
-                    getLoggedIn : getLoggedIn,
+                    checkAdmin : checkAdmin,
                     checkPage: checkPage
                 }
             })
@@ -185,4 +185,23 @@
 
         return deferred.promise;
     }
+
+    var checkAdmin = function(UserService, $q, $location)
+    {
+        var deferred = $q.defer();
+        UserService
+            .getCurrentUser()
+            .then(function(response) {
+                var currentUser = response.data;
+                if(currentUser && currentUser.role == 'Admin') {
+                    UserService.setCurrentUser(currentUser);
+                    deferred.resolve();
+                } else {
+                    deferred.reject();
+                    $location.url("/home");
+                }
+            });
+
+        return deferred.promise;
+    };
 })();
