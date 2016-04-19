@@ -1,233 +1,241 @@
-
-    <div class="col-xs-12">
-        <div class="row">
-            <div class="col-sm-6">
-                <h2>{{detailsControllerModel.rest.name}}</h2>
+<div class="col-xs-12">
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>{{detailsControllerModel.rest.name}}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <!--<div class="col-sm-1"></div>-->
+        <div class="col-sm-6">
+            <div class="thumbnail">
+                <img src={{detailsControllerModel.imageurl}} class="img-responsive rest-detail-img"/>
             </div>
         </div>
-        <div class="row">
-            <!--<div class="col-sm-1"></div>-->
-            <div class="col-sm-6">
-                <div class="thumbnail">
-                <img src={{detailsControllerModel.imageurl}} class="img-responsive rest-detail-img"/>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p class="lead"><i class="fa fa-cutlery" aria-hidden="true"></i>
+                        {{detailsControllerModel.rest.categories[0][0]}}
+                        {{detailsControllerModel.rest.categories[1][0]}}</p>
+
+                    <p><i class="fa fa-map-marker" aria-hidden="true"></i>
+                        {{detailsControllerModel.rest.location.display_address[0]}},
+                        {{detailsControllerModel.rest.location.display_address[1]}}
+                        {{detailsControllerModel.rest.location.display_address[2]}}</p>
+
+                    <p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+                        {{detailsControllerModel.rest.display_phone}}</p>
+                    <p><i class="fa fa-map" aria-hidden="true"></i>
+                        <a target=_blank href="{{detailsControllerModel.directionUrl}}">Directions</a>
+                    </p>
+                </div>
+
+                <div class="col-sm-6 text-center">
+                    <h4> Find us on Yelp!</h4>
+                    <a href="{{detailsControllerModel.rest.url}}" target="_blank">
+                        <img src="/project/client/images/yelp.jpg" alt="Find us on Yelp!"/>
+                    </a>
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-xs-6 text-center">
+                    <h4>Average user rating:</h4>
+                    <h2 class="bold avgRate">
+                        {{detailsControllerModel.avgRating === 0 ? '-' :
+                        detailsControllerModel.avgRating}}
+                        <small>/ 5</small>
+                    </h2>
+                    <ng-rating ng-model="detailsControllerModel.avgRating"
+                               editable="false">
+                    </ng-rating>
+                </div>
+
+                <div class="col-xs-6 text-center">
+                    <h4>Like Us:</h4>
+                    <div class="likeit">
+                        <div ng-if="detailsControllerModel.currentUser">
+                            <a ng-hide="detailsControllerModel.isliked" href=""
+                               ng-click="detailsControllerModel.likeRest(detailsControllerModel.rest.id)">
+                                <i title="Like" class="fa fa-thumbs-o-up fa-2x"></i></a>
+
+                            <a ng-if="detailsControllerModel.isliked" href=""
+                               ng-click="detailsControllerModel.undolikeRest(detailsControllerModel.rest.id)">
+                                <i title="Unlike" class="fa fa-thumbs-o-up fa-2x orangecolor"></i></a>
+                        </div>
+
+                        <div ng-show="!detailsControllerModel.currentUser">
+                            <a data-toggle="tooltip" title="Please login to Like!">
+                                <i class="fa fa-thumbs-o-up fa-2x"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <p class="lead"><i class="fa fa-cutlery" aria-hidden="true"></i>
-                            {{detailsControllerModel.rest.categories[0][0]}}
-                            {{detailsControllerModel.rest.categories[1][0]}}</p>
+            <hr>
+        </div>
+    </div>
 
-                        <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{detailsControllerModel.rest.location.display_address[0]}},
-                            {{detailsControllerModel.rest.location.display_address[1]}}
-                            {{detailsControllerModel.rest.location.display_address[2]}}</p>
+    <!--Map div-->
+    <div class="row">
+        <div class="col-sm-6">
+            <div id="map" class="map"></div>
+            <!--<ng-map zoom="16" center="[{{detailsControllerModel.rest.location.coordinate.latitude}},-->
+            <!--{{detailsControllerModel.rest.location.coordinate.longitude}}]">-->
+            <!--<marker position="[{{detailsControllerModel.rest.location.coordinate.latitude}},-->
+            <!--{{detailsControllerModel.rest.location.coordinate.longitude}}]"-->
+            <!--on-click = "click()" title="{{detailsControllerModel.rest.name}}"-->
+            <!--centered="true"/>-->
+            <!--</ng-map>-->
+        </div>
+        <div class="col-sm-5">
+            <h5 class="bg-info"><i class="fa fa-info-circle" aria-hidden="true"></i> What you need to know...</h5>
+            <blockquote>
+                <p>
+                    {{detailsControllerModel.rest.snippet_text}}...
+                </p>
+                <footer class="no-mar">From Yelp website</footer>
+            </blockquote>
+        </div>
+    </div>
+    <!--End Map div-->
+    <div ng-if="!currentUser" class="alert alert-info mar-top-alert">
+        <!--<a class="panel-close close" data-dismiss="alert">×</a>-->
+        <i class="fa fa-info-circle"></i>
+        Please <strong>login</strong> to review your favorite restaurant!
+    </div>
+    <div class="panel panel-default margin-panel">
+        <div class="panel-heading">
+            <h3 class="panel-title">Reviews for {{detailsControllerModel.rest.name}}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <!-- Blog Comments -->
 
-                        <p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
-                             {{detailsControllerModel.rest.display_phone}}</p>
-                        <p><i class="fa fa-map" aria-hidden="true"></i>
-                            <a target=_blank href="{{detailsControllerModel.directionUrl}}" >Directions</a>
-                        </p>
-                    </div>
-
-                    <div class="col-sm-6 text-center">
-                        <h4> Find us on Yelp!</h4>
-                        <a href="{{detailsControllerModel.rest.url}}" target="_blank">
-                            <img src="/project/client/images/yelp.jpg" alt="Find us on Yelp!"/>
-                        </a>
-                    </div>
-
-                </div>
-
-                <hr>
-
-                <div class="row">
-                    <div class="col-xs-6 text-center">
-                        <h4>Average user rating:</h4>
-                        <h2 class="bold avgRate">
-                            {{detailsControllerModel.avgRating === 0 ? '-' :
-                            detailsControllerModel.avgRating}}
-                            <small>/ 5</small>
-                        </h2>
-                        <ng-rating ng-model="detailsControllerModel.avgRating"
-                                   editable="false">
+                <!-- Comments Form -->
+                <div class="well margin-well">
+                    <h4>Start your review!</h4>
+                    <div ng-hide="detailsControllerModel.readonly">
+                        <ng-rating ng-model="detailsControllerModel.defaultReview.rating"
+                                   editable="detailsControllerModel.defaultReview.editableRating">
                         </ng-rating>
                     </div>
-
-                    <div class="col-xs-6 text-center">
-                        <h4>Like Us:</h4>
-                        <div class="likeit">
-                            <div ng-if="detailsControllerModel.currentUser">
-                                <a ng-hide="detailsControllerModel.isliked" href=""
-                                   ng-click="detailsControllerModel.likeRest(detailsControllerModel.rest.id)">
-                                    <i title="Like" class="fa fa-thumbs-o-up fa-2x"></i></a>
-
-                                <a ng-if="detailsControllerModel.isliked" href=""
-                                   ng-click="detailsControllerModel.undolikeRest(detailsControllerModel.rest.id)">
-                                    <i title="Unlike" class="fa fa-thumbs-o-up fa-2x orangecolor"></i></a>
-                            </div>
-
-                            <div ng-show="!detailsControllerModel.currentUser">
-                                <a data-toggle="tooltip" title="Please login to Like!">
-                                    <i class="fa fa-thumbs-o-up fa-2x"></i>
-                                </a>
-                            </div>
-                        </div>
+                    <div ng-if="detailsControllerModel.readonly">
+                        <ng-rating ng-model="detailsControllerModel.defaultReview.rating"
+                                   editable=false>
+                        </ng-rating>
                     </div>
-                </div>
-                <hr>
-            </div>
-        </div>
-
-        <!--Map div-->
-        <div class="row">
-            <div class="col-sm-6">
-                <div id="map" class="map"></div>
-                <!--<ng-map zoom="16" center="[{{detailsControllerModel.rest.location.coordinate.latitude}},-->
-                <!--{{detailsControllerModel.rest.location.coordinate.longitude}}]">-->
-                    <!--<marker position="[{{detailsControllerModel.rest.location.coordinate.latitude}},-->
-                     <!--{{detailsControllerModel.rest.location.coordinate.longitude}}]"-->
-                    <!--on-click = "click()" title="{{detailsControllerModel.rest.name}}"-->
-                            <!--centered="true"/>-->
-                <!--</ng-map>-->
-            </div>
-            <div class="col-sm-5">
-                <h5 class="bg-info"><i class="fa fa-info-circle" aria-hidden="true"></i> What you need to know...</h5>
-                <blockquote>
-                    <p>
-                        {{detailsControllerModel.rest.snippet_text}}...
-                    </p>
-                    <footer class="no-mar" >From Yelp website</footer>
-                </blockquote>
-            </div>
-        </div>
-            <!--End Map div-->
-            <div ng-if="!currentUser" class="alert alert-info mar-top-alert">
-                <!--<a class="panel-close close" data-dismiss="alert">×</a>-->
-                <i class="fa fa-info-circle"></i>
-                Please <strong>login</strong> to review your favorite restaurant!
-            </div>
-        <div class="panel panel-default margin-panel">
-            <div class="panel-heading">
-                <h3 class="panel-title">Reviews for {{detailsControllerModel.rest.name}}</h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <!-- Blog Comments -->
-
-                    <!-- Comments Form -->
-                    <div class="well margin-well">
-                        <h4>Start your review!</h4>
-                        <div ng-hide="detailsControllerModel.readonly">
-                            <ng-rating ng-model="detailsControllerModel.defaultReview.rating"
-                                       editable="detailsControllerModel.defaultReview.editableRating">
-                            </ng-rating>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text"
+                                   ng-readonly="detailsControllerModel.readonly"
+                                   class="form-control"
+                                   placeholder="Please enter title of the review"
+                                   ng-model="detailsControllerModel.defaultReview.title"/>
                         </div>
-                        <div ng-if="detailsControllerModel.readonly">
-                            <ng-rating ng-model="detailsControllerModel.defaultReview.rating"
-                                       editable=false>
-                            </ng-rating>
-                        </div>
-                        <form role="form">
-                            <div class="form-group">
-                                <input type="text"
-                                       ng-readonly="detailsControllerModel.readonly"
-                                       class="form-control"
-                                       placeholder="Please enter title of the review"
-                                       ng-model="detailsControllerModel.defaultReview.title"/>
-                            </div>
-                            <div class="form-group">
+                        <div class="form-group">
                                 <textarea ng-readonly="detailsControllerModel.readonly"
                                           class="form-control"
                                           ng-model="detailsControllerModel.defaultReview.review"
                                           rows="3"
                                           placeholder="Please enter description of the review">
                                 </textarea>
-                            </div>
-                            <button ng-disabled="detailsControllerModel.readonly"
-                                    ng-click="detailsControllerModel.addReview(detailsControllerModel.defaultReview)"
-                                    class="btn btn-primary">Post Review</button>
-                        </form>
-                    </div>
+                        </div>
+                        <button ng-disabled="detailsControllerModel.readonly"
+                                ng-click="detailsControllerModel.addReview(detailsControllerModel.defaultReview)"
+                                class="btn btn-primary">Post Review
+                        </button>
+                    </form>
+                </div>
 
-                    <!-- Posted Comments -->
+                <!-- Posted Comments -->
 
-                    <!-- Comment -->
-                    <div class="media margin-well" ng-repeat="review in detailsControllerModel.reviews">
-                        <a class="pull-left" href="#">
-                            <img class="media-object img-thumbnail"
-                                 ng-src={{review.imgUrl}}
-                                 height="64" width="64"
-                                 alt=" User Image">
-                        </a>
-                        <div class="media-body">
-                            <h4 ng-hide="detailsControllerModel.selectedreview == $index"
-                                class="media-heading">{{review.title}}
-                            </h4>
-                            <h4 ng-hide="detailsControllerModel.selectedreview == $index" class="media-heading">
-                                <small>By <a href="#/{{review.userId}}/profile/reviews">{{review.username}}</a> on {{review.updatedOn | date}}</small>
-                            </h4>
-                            <p ng-hide="detailsControllerModel.selectedreview == $index">{{review.review}}</p>
-                            <div ng-show="detailsControllerModel.selectedreview == $index" class="form-group">
-                                <input type="text" class="form-control"
-                                       ng-model="detailsControllerModel.editablereview.title"/>
-                            </div>
-                            <div ng-show="detailsControllerModel.selectedreview == $index">
+                <!-- Comment -->
+                <div class="media margin-well" ng-repeat="review in detailsControllerModel.reviews">
+                    <a class="pull-left" href="#">
+                        <img class="media-object img-thumbnail"
+                             ng-src={{review.imgUrl}}
+                             height="64" width="64"
+                             alt=" User Image">
+                    </a>
+                    <div class="media-body">
+                        <h4 ng-hide="detailsControllerModel.selectedreview == $index"
+                            class="media-heading">{{review.title}}
+                        </h4>
+                        <h4 ng-hide="detailsControllerModel.selectedreview == $index || !detailsControllerModel.currentUser" class="media-heading">
+                            <small>By <a href="#/{{review.userId}}/profile/reviews">{{review.username}}</a> on
+                                {{review.updatedOn | date}}
+                            </small>
+                        </h4>
+                        <h4 ng-show="!detailsControllerModel.currentUser" class="media-heading">
+                            <small>By <a href="" data-toggle="tooltip" title="Please login to visit profile!">{{review.username}}</a> on
+                                {{review.updatedOn | date}}
+                            </small>
+                        </h4>
+                        <p ng-hide="detailsControllerModel.selectedreview == $index">{{review.review}}</p>
+                        <div ng-show="detailsControllerModel.selectedreview == $index" class="form-group">
+                            <input type="text" class="form-control"
+                                   ng-model="detailsControllerModel.editablereview.title"/>
+                        </div>
+                        <div ng-show="detailsControllerModel.selectedreview == $index">
                                 <textarea class="form-control" rows="3" type="text"
                                           ng-model="detailsControllerModel.editablereview.review"></textarea>
-                                <!--<button class="btn btn-success" ng-click="save(editablereview,$index)">Save</button>-->
+                            <!--<button class="btn btn-success" ng-click="save(editablereview,$index)">Save</button>-->
 
-                                <!--<button class="btn btn-danger" ng-click="disableEditor($index)">Cancel</button>-->
+                            <!--<button class="btn btn-danger" ng-click="disableEditor($index)">Cancel</button>-->
+                        </div>
+                        <!--<a href="" ><i title="Report Review" class="fa fa-flag pull-right flag-hover"></i></a>-->
+                        <div class="row">
+                            <div class="col-xs-8" ng-hide="detailsControllerModel.selectedreview == $index">
+                                <ng-rating ng-model="review.rating"
+                                           editable="false">
+                                </ng-rating>
+                                <!--{{review.createdOn | date}}-->
                             </div>
-                            <!--<a href="" ><i title="Report Review" class="fa fa-flag pull-right flag-hover"></i></a>-->
-                            <div class="row">
-                                <div class="col-xs-8" ng-hide="detailsControllerModel.selectedreview == $index">
-                                        <ng-rating ng-model="review.rating"
-                                               editable="false">
-                                        </ng-rating>
-                                    <!--{{review.createdOn | date}}-->
-                                </div>
-                                <!--Below div shows up in edit mode for star rating-->
-                                <div class="col-xs-8" ng-show="detailsControllerModel.selectedreview == $index">
-                                        <ng-rating ng-model="detailsControllerModel.editablereview.rating"
-                                               editable="true">
-                                        </ng-rating>
-                                    <!--{{review.createdOn | date}}-->
-                                </div>
+                            <!--Below div shows up in edit mode for star rating-->
+                            <div class="col-xs-8" ng-show="detailsControllerModel.selectedreview == $index">
+                                <ng-rating ng-model="detailsControllerModel.editablereview.rating"
+                                           editable="true">
+                                </ng-rating>
+                                <!--{{review.createdOn | date}}-->
                             </div>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div ng-if="detailsControllerModel.selectedreview !== $index &&
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div ng-if="detailsControllerModel.selectedreview !== $index &&
                                     detailsControllerModel.currentUser._id == review.userId"
-                                         class="btn-group-sm pull-right">
-                                        <a class="btn btn-warning"
-                                           ng-click="detailsControllerModel.editReview($index)">
-                                            <i title="Edit Review" class="fa fa-pencil-square-o"></i> Edit
-                                        </a>
-                                        <a class="btn btn-danger"
-                                           ng-click="detailsControllerModel.deleteReview($index)">
-                                            <i title="Delete Review" class="fa fa-trash-o"></i> Delete
-                                        </a>
-                                    </div>
-                                    <div ng-if="detailsControllerModel.selectedreview == $index"
-                                         class="btn-group-sm pull-right">
-                                        <a class="btn btn-success"
-                                           ng-click="detailsControllerModel.save(detailsControllerModel.editablereview, $index)">
-                                            <i title="Save Review" class="fa fa-floppy-o"></i> Save
+                                     class="btn-group-sm pull-right">
+                                    <a class="btn btn-warning"
+                                       ng-click="detailsControllerModel.editReview($index)">
+                                        <i title="Edit Review" class="fa fa-pencil-square-o"></i> Edit
+                                    </a>
+                                    <a class="btn btn-danger"
+                                       ng-click="detailsControllerModel.deleteReview($index)">
+                                        <i title="Delete Review" class="fa fa-trash-o"></i> Delete
+                                    </a>
+                                </div>
+                                <div ng-if="detailsControllerModel.selectedreview == $index"
+                                     class="btn-group-sm pull-right">
+                                    <a class="btn btn-success"
+                                       ng-click="detailsControllerModel.save(detailsControllerModel.editablereview, $index)">
+                                        <i title="Save Review" class="fa fa-floppy-o"></i> Save
 
-                                        </a>
+                                    </a>
 
-                                        <a class="btn btn-info"
-                                           ng-click="detailsControllerModel.disableEditor($index)">
-                                            <i title="Cancel" class="fa fa-times-circle"></i> Cancel
-                                        </a>
-                                    </div>
+                                    <a class="btn btn-info"
+                                       ng-click="detailsControllerModel.disableEditor($index)">
+                                        <i title="Cancel" class="fa fa-times-circle"></i> Cancel
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <hr>
                     </div>
+                    <hr>
                 </div>
             </div>
         </div>
     </div>
+</div>

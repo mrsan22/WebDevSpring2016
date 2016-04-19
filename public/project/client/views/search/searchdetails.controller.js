@@ -65,7 +65,7 @@
                     console.log("Error in calling 'getCurrentUser'", error.statusText);
                 });
 
-
+            $('[data-toggle="tooltip"]').tooltip();
             ReviewService
                 .findAllReviewsForRest(vm.restId)
                 .then(function (response) {
