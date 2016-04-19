@@ -28,6 +28,7 @@
                 return;
             }
             if(typeof location != 'string'){
+                vm.showLocationWarning= false;
                 YelpService.findRestbyNameLocation(
                     restname,
                     location.formatted_address,
@@ -42,6 +43,7 @@
                 )
             }
             else{
+                vm.showLocationWarning= false;
                 YelpService.findRestbyNameLocation(
                     restname,
                     location,
