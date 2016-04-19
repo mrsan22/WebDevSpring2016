@@ -6,6 +6,7 @@ module.exports = function(mongoose) {
         password: String,
         firstName: String,
         lastName: String,
+        type:{type:String, default:"assignment"},
         emails: [String],
         phones: [String],
         roles: [String]

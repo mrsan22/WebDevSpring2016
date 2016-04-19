@@ -17,6 +17,7 @@
             createAndFindAllUsers : createAndFindAllUsers,
             findAllUsers : findAllUsers,
             findUserById : findUserById,
+            getUserById: getUserById,
             deleteUserById : deleteUserById,
             updateUserById : updateUserById,
             logOut : logOut
@@ -39,11 +40,11 @@
         }
 
         function loginUser(username, password){
-            return $http.get('/api/assignment/user?username='+username+'&password='+password);
+            return $http.post('/api/assignment/user?username='+username+'&password='+password);
         }
 
         function findUserByUsername(username){
-            return $http.get('/api/assignment/user?username='+username);
+            return $http.post('/api/assignment/user?username='+username);
         }
 
         function logOut(){
@@ -51,7 +52,7 @@
         }
 
         function findAllUsers(){
-            return $http.get("/api/assignment/user");
+            return $http.get("/api/assignment/admin/user");
         }
 
         function createUser(user){
@@ -59,19 +60,23 @@
         }
 
         function createAndFindAllUsers(user){
-            return $http.post("/api/assignment/user", user);
+            return $http.post("/api/assignment/admin/user", user);
         }
 
         function findUserById(userid){
             return $http.get("/api/assignment/user/" + userid);
         }
 
+        function getUserById(userid){
+            return $http.get("/api/assignment/admin/user/" + userid);
+        }
+
         function deleteUserById(userId){
-            return $http.delete("/api/assignment/user/"+userId);
+            return $http.delete("/api/assignment/admin/user/"+userId);
         }
 
         function updateUserById(userId, user){
-            return $http.put("/api/assignment/user/"+userId, user);
+            return $http.put("/api/assignment/admin/user/"+userId, user);
 
         }
 

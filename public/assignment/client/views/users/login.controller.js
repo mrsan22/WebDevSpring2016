@@ -38,6 +38,7 @@
                     },      //called if promise fails
                     function (error) {
                         //handle error here
+                        vm.showAlert = true;
                         console.log(error.statusText);
                     });
         }

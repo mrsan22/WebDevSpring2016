@@ -47,17 +47,17 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 //    res.sendfile('home.view.html');
 //});
 
-app.get('/hello', function(req, res){
-  res.send('Hello World!');
-});
+//app.get('/hello', function(req, res){
+//  res.send('Hello World!');
+//});
 
-var userModelAssignment = require("./public/assignment5/server/models/user.model.server.js")(uuid, db, mongoose);
+var userModelAssignment = require("./public/assignment/server/models/user.model.server.js")(uuid, db, mongoose);
 var userModelProject = require("./public/project/server/models/user.model.server.js")(uuid, db, mongoose);
 
 var securityService = require("./public/Common-service/security.js")(userModelAssignment, userModelProject);
 
 //Define require for other modules
-require("./public/assignment5/server/app.js")(app, uuid,db, mongoose, userModelAssignment, securityService);
+require("./public/assignment/server/app.js")(app, uuid,db, mongoose, userModelAssignment, securityService);
 //For Project
 require("./public/project/server/app.js")(app, uuid,db, mongoose, userModelProject, securityService);
 

@@ -15,12 +15,9 @@
         init();
 
         function logOut(){
-            //delete $rootScope.user;
-            //UserService.setCurrentUser(null);
-            //$location.url('/home');
             UserService
                 .logOut()
-                .then(function () {
+                .then(function (response) {
                     UserService.setCurrentUser(null);
                     $location.url('/home');
                 },
