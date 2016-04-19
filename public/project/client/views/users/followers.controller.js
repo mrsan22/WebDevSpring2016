@@ -98,7 +98,7 @@
                 .unFollowUser(user._id, vm.currentUser._id)
                 .then(function (response) {
                     console.log(response);
-                    if(response.status == 200 && response.data.nModified == 1){
+                    if(response.status == 200 && (response.data.nModified == 1 || response.data.n == 1)){
                         user.isFollowed = false;
                     }
                 }, function (error) {
@@ -142,7 +142,7 @@
                 .unFollowUser(userId, vm.currentUser._id)
                 .then(function (response) {
                     console.log(response);
-                    if(response.status == 200 && response.data.nModified == 1){
+                    if(response.status == 200 && (response.data.nModified == 1 || response.data.n == 1)){
                         vm.isfollowed = false;
                     }
                 }, function (error) {
