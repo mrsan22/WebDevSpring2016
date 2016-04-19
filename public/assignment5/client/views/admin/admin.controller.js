@@ -10,7 +10,7 @@
         vm.updateUser = updateUser;
         vm.selectUser = selectUser;
         vm.deleteUser = deleteUser;
-        var selectedUserIndex = -1;
+        //var selectedUserIndex = -1;
         vm.predicate = 'username';
         vm.reverse = true;
 
@@ -39,8 +39,7 @@
             vm.predicate = predicate;
         };
         function addUser(userObj){
-            if (!userObj || !userObj.username || !userObj.password || !userObj.roles
-                || !userObj.firstName || !userObj.lastName){
+            if (!userObj || !userObj.username || !userObj.password || !userObj.roles){
                 alert("Some field is missing value");
                 return;
             }
@@ -83,9 +82,7 @@
                 .then(function (response) {
                     console.log("Response",response.data);
                     if (response.data != null) {
-                        vm.users[selectedUserIndex] = response.data;
-                        vm.user = {};
-                        selectedUserIndex = -1;
+                        return UserService.findAllUsers();
                     }
                     else{
                         alert("Username already exists. Please choose a different username!");
@@ -93,7 +90,15 @@
 
                 }, function (error) {
                     console.log(error.statusText);
-                });
+                })
+                .then(function (users) {
+                    if(users){
+                        vm.users = users.data;
+                        vm.user = {};
+                    }
+                }, function (error) {
+                    console.log("Unable to fetch all users");
+                })
         }
 
         function deleteUser(user){
