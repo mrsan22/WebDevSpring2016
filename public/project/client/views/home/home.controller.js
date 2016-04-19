@@ -64,13 +64,10 @@
         }
 
         function showPosition(position){
-            console.log("Latitude:" + position.coords.latitude+"<br>Longitude: " + position.coords.longitude);
             var latlon = position.coords.latitude + "," + position.coords.longitude;
             GoogleService
                 .findAddressByLatLong(latlon)
                 .then(function (place) {
-                    console.log(place);
-                    console.log(place.data.results[0].formatted_address);
                     vm.loc = place.data.results[0].formatted_address;
                 },
                     function (error) {

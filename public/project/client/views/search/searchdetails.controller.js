@@ -41,7 +41,6 @@
                     imgurl_lst.splice(-1, 1);
                     imgurl_lst.push('o.jpg');
                     vm.imageurl = imgurl_lst.join("/");
-                    console.log(response);
                     vm.rest = response;
                     //vm.directionUrl = "https://www.google.com/maps?daddr="
                     //    +vm.rest.location.coordinate.latitude +","+vm.rest.location.coordinate.longitude;
@@ -70,7 +69,6 @@
             ReviewService
                 .findAllReviewsForRest(vm.restId)
                 .then(function (response) {
-                        console.log(response.data);
                         vm.reviews = response.data;
                         vm.findUserByReviewUserId(vm.reviews);
                         restAvgRating(vm.reviews);
@@ -117,11 +115,9 @@
         }
 
         function addReview(review) {
-            console.log(review);
             ReviewService
                 .addReview(vm.restId, vm.currentUser._id, review)
                 .then(function (response) {
-                        console.log(response.data);
                         vm.selectedIndex = -1;
                         vm.reviews = response.data;
                         vm.findUserByReviewUserId(vm.reviews);
@@ -150,7 +146,6 @@
 
         function editReview(ratingIndex) {
             vm.selectedreview = ratingIndex;
-            console.log(vm.selectedreview);
             //vm.editablereview = vm.reviews[ratingIndex].review;
             var editablereview = {
                 "_id": vm.reviews[ratingIndex]["_id"],
@@ -167,11 +162,9 @@
         }
 
         function save(review, ratingIndex) {
-            console.log(review);
             ReviewService
                 .updateReviewById(vm.restId, vm.reviews[ratingIndex]._id, review)
                 .then(function (response) {
-                        console.log(response.data);
                         vm.reviews = response.data;
                         vm.findUserByReviewUserId(vm.reviews);
                         vm.selectedreview = -1;
@@ -247,7 +240,6 @@
             UserService
                 .unLike(restId, vm.currentUser._id)
                 .then(function (response) {
-                    console.log(response);
                     if (response.status == 200 && (response.data.nModified == 1 || response.data.n == 1)) {
                         vm.isliked = false;
                     }

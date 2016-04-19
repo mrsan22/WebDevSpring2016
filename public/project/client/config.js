@@ -173,12 +173,10 @@
         var deferred = $q.defer();
         var loc = $location.url().toString();
         if(loc.indexOf("profile") > -1){
-            console.log("In config.js true",loc);
             $rootScope.isProfile = true;
             deferred.resolve();
         }
         else{
-            console.log("In config.js false",loc);
             $rootScope.isProfile = false;
             deferred.resolve();
         }

@@ -15,7 +15,6 @@
 
             //
             if($scope.location){
-                console.log("I am here", $routeParams.restname, " ", $routeParams.location);
                 search($routeParams.restname, $routeParams.location);
 
 
@@ -33,7 +32,6 @@
                             $scope.showWarningMsg = true;
                             $scope.hideButton = true;
                         }
-                        console.log(response);
                         $scope.totalResponse = response.businesses.length;
                         $scope.data = response;
                         if ($scope.totalResponse > 0) {
@@ -47,7 +45,6 @@
             }
 
             function nextPage () {
-                console.log($scope.endIndex, $scope.totalResponse);
                 if ($scope.endIndex < $scope.totalResponse)
                     $scope.endIndex = $scope.endIndex + 10;
                 if ($scope.endIndex > 10)
