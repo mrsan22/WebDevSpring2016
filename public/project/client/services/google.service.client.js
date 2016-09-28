@@ -12,7 +12,7 @@
         return api;
 
         function findAddressByLatLong(latlon){
-            var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+latlon;
+            var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+latlon;
             return $http.get(url);
         }
     }
